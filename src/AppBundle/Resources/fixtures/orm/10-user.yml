@@ -1,0 +1,7 @@
+\AppBundle\Entity\User:
+  user_sergio:
+    username: sergio
+    email: sergio@uco.es
+    plainPassword: secret
+    enabled: true
+    roles: ['ROLE_SUPER_ADMIN']
