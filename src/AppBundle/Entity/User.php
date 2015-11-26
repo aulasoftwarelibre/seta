@@ -45,5 +45,28 @@ class User extends BaseUser
     {
         return $this->id;
     }
-}
 
+    /**
+     * Set locker
+     *
+     * @param \AppBundle\Entity\Locker $locker
+     *
+     * @return User
+     */
+    public function setLocker(\AppBundle\Entity\Locker $locker = null)
+    {
+        $this->locker = $locker;
+
+        return $this;
+    }
+
+    /**
+     * Get locker
+     *
+     * @return \AppBundle\Entity\Locker
+     */
+    public function getLocker()
+    {
+        return $this->locker;
+    }
+}

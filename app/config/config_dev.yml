@@ -44,5 +44,6 @@ monolog:
 assetic:
     use_controller: true
 
-#swiftmailer:
+swiftmailer:
+    port: 1025
 #    delivery_address: me@example.com

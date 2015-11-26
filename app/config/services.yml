@@ -7,3 +7,8 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    app.event_listener.mailer_listener:
+        class: AppBundle\EventListener\MailerListener
+        arguments: [ @mailer ]
+        tags:
+            - { name: kernel.event_subscriber }

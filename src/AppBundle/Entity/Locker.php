@@ -3,12 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Locker
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @UniqueEntity("user")
  */
 class Locker
 {
@@ -25,6 +29,8 @@ class Locker
      * @var string
      *
      * @ORM\Column(name="number", type="string", length=255)
+     * @Assert\Length(min="1", max="10")
+     * @Assert\NotBlank()
      */
     private $number;
 
@@ -98,5 +104,28 @@ class Locker
     {
         return $this->isEnabled;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Locker
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}
