@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Locker
  *
  * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\LockerRepository")
  * @UniqueEntity("user")
  */
 class Locker
