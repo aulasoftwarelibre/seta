@@ -1,0 +1,9 @@
+default:
+    extensions:
+        Behat\Symfony2Extension: ~
+    suites:
+        rent_a_locker:
+            contexts:
+                - AppBundle\Behat\DefaultContext
+                - Ceeps\UserBundle\Behat\UserContext
+                - Ceeps\LockerBundle\Behat\LockerContext

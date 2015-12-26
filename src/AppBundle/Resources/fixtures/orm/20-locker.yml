@@ -1,4 +1,0 @@
-\AppBundle\Entity\Locker:
-  locker_{1..100}:
-    number: <current()>
-    isEnabled: true

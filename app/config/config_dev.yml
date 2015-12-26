@@ -41,9 +41,9 @@ monolog:
         #    type:   chromephp
         #    level:  info
 
-assetic:
-    use_controller: true
-
-swiftmailer:
-    port: 1025
+#swiftmailer:
 #    delivery_address: me@example.com
+
+doctrine:
+    dbal:
+        dbname:   "%database_name%_dev"

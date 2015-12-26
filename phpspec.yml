@@ -1,0 +1,29 @@
+formatter.name: pretty
+extensions:
+    - PhpSpec\Extension\CodeCoverageExtension
+suites:
+    LockerBundle:
+        namespace: Ceeps\LockerBundle
+        psr4_prefix: Ceeps\LockerBundle
+        spec_path: src/Ceeps/LockerBundle
+        src_path: src/Ceeps/LockerBundle
+    PenaltyBundle:
+        namespace: Ceeps\PenaltyBundle
+        psr4_prefix: Ceeps\PenaltyBundle
+        spec_path: src/Ceeps/PenaltyBundle
+        src_path: src/Ceeps/PenaltyBundle
+    RentalBundle:
+        namespace: Ceeps\RentalBundle
+        psr4_prefix: Ceeps\RentalBundle
+        spec_path: src/Ceeps/RentalBundle
+        src_path: src/Ceeps/RentalBundle
+    ResourceBundle:
+        namespace: Ceeps\ResourceBundle
+        psr4_prefix: Ceeps\ResourceBundle
+        spec_path: src/Ceeps/ResourceBundle
+        src_path: src/Ceeps/ResourceBundle
+    UserBundle:
+        namespace: Ceeps\UserBundle
+        psr4_prefix: Ceeps\UserBundle
+        spec_path: src/Ceeps/UserBundle
+        src_path: src/Ceeps/UserBundle

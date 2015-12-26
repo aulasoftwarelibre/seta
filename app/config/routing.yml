@@ -1,10 +1,27 @@
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
-easy_admin_bundle:
-    resource: "@EasyAdminBundle/Controller/"
+ceeps_penalty:
+    resource: "@CeepsPenaltyBundle/Controller/"
     type:     annotation
-    prefix:   /admin
+    prefix:   /
+
+ceeps_resource:
+    resource: "@CeepsResourceBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+rental:
+    resource: "@CeepsRentalBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+locker:
+    resource: "@CeepsLockerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+ceeps_user:
+    resource: "@CeepsUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
 
 app:
     resource: "@AppBundle/Controller/"
