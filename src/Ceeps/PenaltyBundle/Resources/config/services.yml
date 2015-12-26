@@ -1,0 +1,11 @@
+services:
+#    ceeps_penalty.example:
+#        class: Ceeps\PenaltyBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    tuconsigna.repository.penalty:
+        class: Ceeps\PenaltyBundle\Repository\PenaltyRepository
+        arguments: [ CeepsPenaltyBundle:Penalty ]
+        factory: [ @doctrine, getRepository ]
+    tuconsigna.service.penalty:
+        class: Ceeps\PenaltyBundle\Business\PenaltyService
+        arguments: [ @doctrine.orm.default_entity_manager, @tuconsigna.repository.penalty ]

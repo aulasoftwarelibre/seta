@@ -1,0 +1,22 @@
+services:
+#    rental.example:
+#        class: Ceeps\RentalBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    tuconsigna.repository.queue:
+        class: Ceeps\RentalBundle\Repository\QueueRepository
+        arguments: [ CeepsRentalBundle:Queue ]
+        factory: [ @doctrine, getRepository ]
+
+    tuconsigna.repository.rental:
+        class: Ceeps\RentalBundle\Repository\RentalRepository
+        arguments: [ CeepsRentalBundle:Rental ]
+        factory: [ @doctrine, getRepository ]
+
+    tuconsigna.rental.service:
+        class: Ceeps\RentalBundle\Business\RentalService
+        arguments:
+            - @doctrine.orm.default_entity_manager
+            - @tuconsigna.repository.rental
+            - @tuconsigna.repository.locker
+            - @tuconsigna.repository.queue

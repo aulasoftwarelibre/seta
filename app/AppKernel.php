@@ -19,6 +19,11 @@ class AppKernel extends Kernel
             new \FOS\UserBundle\FOSUserBundle(),
 
             new AppBundle\AppBundle(),
+            new Ceeps\UserBundle\CeepsUserBundle(),
+            new Ceeps\LockerBundle\CeepsLockerBundle(),
+            new Ceeps\RentalBundle\CeepsRentalBundle(),
+            new Ceeps\ResourceBundle\CeepsResourceBundle(),
+            new Ceeps\PenaltyBundle\CeepsPenaltyBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
