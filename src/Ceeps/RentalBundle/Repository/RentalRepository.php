@@ -2,6 +2,7 @@
 
 namespace Ceeps\RentalBundle\Repository;
 
+use Ceeps\LockerBundle\Entity\Locker;
 use Ceeps\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -14,4 +15,19 @@ use Ceeps\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class RentalRepository extends EntityRepository
 {
+    public function getCurrentRental(Locker $locker)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('o.user', ':user'))
+            ->andWhere($queryBuilder->expr()->eq('o.locker', ':locker'))
+            ->andWhere($queryBuilder->expr()->isNull('o.returnAt'))
+            ->setParameter('user', $locker->getOwner())
+            ->setParameter('locker', $locker)
+        ;
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
+
+    }
 }

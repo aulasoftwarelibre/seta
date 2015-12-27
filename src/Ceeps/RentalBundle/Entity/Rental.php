@@ -126,6 +126,7 @@ class Rental
      */
     public function setEndAt($endAt)
     {
+        $endAt->setTime(23, 59, 59);
         $this->endAt = $endAt;
 
         return $this;

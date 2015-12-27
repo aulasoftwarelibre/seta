@@ -61,6 +61,14 @@ class Penalty
     private $rental;
 
     /**
+     * Penalty constructor.
+     */
+    public function __construct()
+    {
+        $this->startAt = new \DateTime('now');
+    }
+
+    /**
      * Get id
      *
      * @return int

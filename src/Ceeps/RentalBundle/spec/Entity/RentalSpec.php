@@ -5,6 +5,7 @@ namespace spec\Ceeps\RentalBundle\Entity;
 use Ceeps\LockerBundle\Entity\Locker;
 use Ceeps\PenaltyBundle\Entity\Penalty;
 use Ceeps\UserBundle\Entity\User;
+use Faker\Provider\tr_TR\DateTime;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -39,9 +40,9 @@ class RentalSpec extends ObjectBehavior
 
     function its_end_date_is_mutable()
     {
-        $now = new \DateTime('now');
-        $this->setEndAt($now);
-        $this->getEndAt()->shouldBeLike($now);
+        $end = new \DateTime('midnight');
+        $this->setEndAt($end);
+        $this->getEndAt()->shouldBeLike(new \DateTime('today 23:59:59'));
     }
     
     function it_has_no_return_date_by_default()

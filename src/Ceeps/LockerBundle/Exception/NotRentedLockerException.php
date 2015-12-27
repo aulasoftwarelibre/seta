@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: sergio
- * Date: 26/12/15
- * Time: 06:31
+ * Date: 27/12/15
+ * Time: 11:08
  */
 
 namespace Ceeps\LockerBundle\Exception;
 
 
-class NoFreeLockerException extends \RuntimeException
+class NotRentedLockerException extends \RuntimeException
 {
 
 }

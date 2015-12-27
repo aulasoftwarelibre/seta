@@ -14,9 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Locker
 {
-    const ENABLED = 'locker.enabled';
+    const AVAILABLE = 'locker.available';
 
-    const DISABLED = 'locker.disabled';
+    const UNAVAILABLE = 'locker.unavailable';
 
     const RENTED = 'locker.rented';
 
@@ -64,7 +64,7 @@ class Locker
     public function __construct()
     {
         $this->rentals = new ArrayCollection();
-        $this->status = Locker::ENABLED;
+        $this->status = Locker::AVAILABLE;
     }
 
 

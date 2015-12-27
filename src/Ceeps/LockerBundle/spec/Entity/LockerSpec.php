@@ -33,13 +33,13 @@ class LockerSpec extends ObjectBehavior
     
     function it_has_enabled_status_by_default()
     {
-        $this->getStatus()->shouldReturn(Locker::ENABLED);
+        $this->getStatus()->shouldReturn(Locker::AVAILABLE);
     }
 
     function its_status_is_mutable()
     {
-        $this->setStatus(Locker::DISABLED);
-        $this->getStatus()->shouldReturn(Locker::DISABLED);
+        $this->setStatus(Locker::UNAVAILABLE);
+        $this->getStatus()->shouldReturn(Locker::UNAVAILABLE);
     }
 
     function it_has_no_rentals_by_default()

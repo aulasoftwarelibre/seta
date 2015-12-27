@@ -20,3 +20,4 @@ services:
             - @tuconsigna.repository.rental
             - @tuconsigna.repository.locker
             - @tuconsigna.repository.queue
+            - @tuconsigna.service.penalty

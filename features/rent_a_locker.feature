@@ -1,4 +1,5 @@
 #language: es
+@rent
 Característica: Alquilar taquillas
 
   Reglas:

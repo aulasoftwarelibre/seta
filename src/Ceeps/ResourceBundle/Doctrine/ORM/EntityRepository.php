@@ -25,4 +25,24 @@ class EntityRepository extends BaseEntityRepository
 
         return new $className();
     }
+
+    /**
+     * Return QueryBuilder
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getQueryBuilder()
+    {
+        return $this->createQueryBuilder($this->getAlias());
+    }
+
+    /**
+     * Return Alias
+     *
+     * @return string
+     */
+    protected function getAlias()
+    {
+        return 'o';
+    }
 }

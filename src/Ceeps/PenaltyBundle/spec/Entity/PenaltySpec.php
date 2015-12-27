@@ -19,9 +19,9 @@ class PenaltySpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_no_start_date_by_default()
+    function it_has_start_date_by_default()
     {
-        $this->getStartAt()->shouldReturn(null);
+        $this->getStartAt()->shouldBeAnInstanceOf(\DateTime::class);
     }
 
     function its_start_date_is_mutable()

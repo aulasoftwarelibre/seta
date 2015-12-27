@@ -13,11 +13,13 @@ use AppBundle\Behat\DefaultContext;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Ceeps\LockerBundle\Entity\Locker;
-use Ceeps\LockerBundle\Exception\NoFreeLockerException;
+use Ceeps\LockerBundle\Exception\NotFreeLockerException;
 use Ceeps\RentalBundle\Entity\Rental;
 use Ceeps\UserBundle\Entity\User;
 
 /**
+ * Class LockerContext
+ * @package Ceeps\LockerBundle\Behat
  * @codeCoverageIgnore
  */
 class LockerContext extends DefaultContext
@@ -26,8 +28,8 @@ class LockerContext extends DefaultContext
     private $current_user;
 
     private $status = [
-        'disponible' => Locker::ENABLED,
-        'no disponible' => Locker::DISABLED,
+        'disponible' => Locker::AVAILABLE,
+        'no disponible' => Locker::UNAVAILABLE,
         'alquilada' => Locker::RENTED,
     ];
 
@@ -37,11 +39,10 @@ class LockerContext extends DefaultContext
     public function lasSiguientesTaquillas(TableNode $table)
     {
         foreach ($table->getHash() as $item) {
+            /** @var Locker $locker */
             $locker = $this->getRepository('locker')->createNew();
             $locker->setCode($item['código']);
             $locker->setStatus($this->status[$item['estado']]);
-            $this->getEntityManager()->persist($locker);
-            $this->getEntityManager()->flush();
 
             if ($item['alquilada_a']) {
                 $username = $item['alquilada_a'];
@@ -50,10 +51,23 @@ class LockerContext extends DefaultContext
                     throw new \Exception('User not found: ' . $username);
                 }
 
-                $this->getService('tuconsigna.rental.service')->rentLocker($user, $locker);
-            }
+                $start = new \DateTime($item['desde'] . ' days');
+                $end = new \DateTime($item['hasta'] . ' days');
+                /** @var Rental $rental */
+                $rental = $this->getRepository('rental')->createNew();
+                $rental->setStartAt($start);
+                $rental->setEndAt($end);
+                $rental->setUser($user);
+                $rental->setLocker($locker);
 
+                $locker->setOwner($user);
+                $locker->setStatus(Locker::RENTED);
+
+                $this->getEntityManager()->persist($rental);
+            }
+            $this->getEntityManager()->persist($locker);
         }
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -145,7 +159,7 @@ class LockerContext extends DefaultContext
     {
         try {
             $this->getService('tuconsigna.rental.service')->rentLocker($this->current_user);
-        } catch (NoFreeLockerException $e) {
+        } catch (NotFreeLockerException $e) {
         }
     }
 
@@ -157,7 +171,7 @@ class LockerContext extends DefaultContext
         $qb = $this->getRepository('locker')->createQueryBuilder('l');
         $qb->update('CeepsLockerBundle:Locker', 'l')
             ->set('l.status', ':disabled')
-            ->setParameter('disabled', Locker::DISABLED)
+            ->setParameter('disabled', Locker::UNAVAILABLE)
             ->getQuery()->execute()
             ;
     }

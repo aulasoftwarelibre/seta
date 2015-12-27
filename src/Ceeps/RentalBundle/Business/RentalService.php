@@ -11,11 +11,16 @@ namespace Ceeps\RentalBundle\Business;
 
 use Ceeps\LockerBundle\Entity\Locker;
 use Ceeps\LockerBundle\Exception\BusyLockerException;
-use Ceeps\LockerBundle\Exception\NoFreeLockerException;
+use Ceeps\LockerBundle\Exception\NotFreeLockerException;
+use Ceeps\LockerBundle\Exception\NotRentedLockerException;
+use Ceeps\LockerBundle\Exception\NotFoundLockerException;
 use Ceeps\LockerBundle\Repository\LockerRepository;
+use Ceeps\PenaltyBundle\Business\PenaltyService;
 use Ceeps\PenaltyBundle\Exception\PenalizedUserException;
 use Ceeps\PenaltyBundle\Exception\TooManyLockersRentedException;
 use Ceeps\RentalBundle\Entity\Queue;
+use Ceeps\RentalBundle\Entity\Rental;
+use Ceeps\RentalBundle\Exception\NotFoundRentalException;
 use Ceeps\RentalBundle\Repository\QueueRepository;
 use Ceeps\RentalBundle\Repository\RentalRepository;
 use Ceeps\UserBundle\Entity\User;
@@ -39,18 +44,24 @@ class RentalService
      * @var QueueRepository
      */
     private $queueRepository;
+    /**
+     * @var PenaltyService
+     */
+    private $penaltyService;
 
     public function __construct(
         EntityManagerInterface $manager,
         RentalRepository $rentalRepository,
         LockerRepository $lockerRepository,
-        QueueRepository $queueRepository
+        QueueRepository $queueRepository,
+        PenaltyService $penaltyService
     )
     {
         $this->manager = $manager;
         $this->rentalRepository = $rentalRepository;
         $this->lockerRepository = $lockerRepository;
         $this->queueRepository = $queueRepository;
+        $this->penaltyService = $penaltyService;
     }
 
     public function rentLocker(User $user, Locker $locker = null)
@@ -82,7 +93,7 @@ class RentalService
             $this->manager->persist($queue);
             $this->manager->flush();
 
-            throw new NoFreeLockerException();
+            throw new NotFreeLockerException();
         }
 
         $rental = $this->rentalRepository->createNew();
@@ -98,6 +109,32 @@ class RentalService
         $this->manager->persist($locker);
         $this->manager->persist($rental);
 
+        $this->manager->flush();
+    }
+
+    public function returnLocker(Locker $locker)
+    {
+        if ($locker->getStatus() !== Locker::RENTED) {
+            throw new NotRentedLockerException;
+        }
+
+        /** @var Rental $rental */
+        $rental = $this->rentalRepository->getCurrentRental($locker);
+        if (!$rental) {
+            throw new NotFoundRentalException;
+        }
+
+        $now = new \DateTime('now');
+        if ($rental->getEndAt() < $now) {
+            $this->penaltyService->penalizeRental($rental);
+        }
+
+        $rental->setReturnAt($now);
+        $locker->setOwner(null);
+        $locker->setStatus(Locker::AVAILABLE);
+
+        $this->manager->persist($rental);
+        $this->manager->persist($locker);
         $this->manager->flush();
     }
 }

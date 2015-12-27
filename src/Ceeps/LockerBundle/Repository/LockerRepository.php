@@ -19,7 +19,7 @@ class LockerRepository extends EntityRepository
 
         $qb
             ->andWhere($qb->expr()->eq('l.status', ':enabled'))
-            ->setParameter('enabled', Locker::ENABLED)
+            ->setParameter('enabled', Locker::AVAILABLE)
             ->setMaxResults(1)
         ;
 
