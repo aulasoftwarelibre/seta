@@ -9,6 +9,10 @@
 namespace Ceeps\LockerBundle\Exception;
 
 
+/**
+ * Class BusyLockerException
+ * @package Ceeps\LockerBundle\Exception
+ */
 class BusyLockerException extends \RuntimeException
 {
 

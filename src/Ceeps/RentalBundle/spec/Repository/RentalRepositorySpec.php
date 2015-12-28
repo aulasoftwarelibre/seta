@@ -58,7 +58,7 @@ class RentalRepositorySpec extends ObjectBehavior
         $builder->setParameter('locker', $locker)->shouldBeCalled()->willReturn($builder);
 
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
-        $query->getOneOrNullResult()->shouldBeCalled();
+        $query->getOneOrNullResult()->shouldBeCalled()->willReturn($rental);
 
         $this->getCurrentRental($locker);
     }

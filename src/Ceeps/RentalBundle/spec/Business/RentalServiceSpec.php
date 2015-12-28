@@ -27,13 +27,12 @@ class RentalServiceSpec extends ObjectBehavior
         RentalRepository $rentalRepository,
         LockerRepository $lockerRepository,
         QueueRepository $queueRepository,
-        PenaltyService $penaltyService,
         User $user,
         Rental $rental,
         Locker $locker
     )
     {
-        $this->beConstructedWith($manager, $rentalRepository, $lockerRepository, $queueRepository, $penaltyService);
+        $this->beConstructedWith($manager, $rentalRepository, $lockerRepository, $queueRepository);
         $user->getLockers()->willReturn(new ArrayCollection());
         $user->getIsPenalized()->willReturn(false);
         $user->getQueue()->willReturn(null);
@@ -42,7 +41,7 @@ class RentalServiceSpec extends ObjectBehavior
         $locker->getStatus()->willReturn(Locker::RENTED);
 
         $rentalRepository->getCurrentRental($locker)->willReturn($rental);
-
+        $rental->getIsRenewable()->willReturn(true);
     }
 
     function it_is_initializable()
@@ -62,7 +61,6 @@ class RentalServiceSpec extends ObjectBehavior
 
         $rental->setUser($user)->shouldBeCalled();
         $rental->setLocker($locker)->shouldBeCalled();
-        $rental->setStartAt(Argument::any())->shouldBeCalled();
         $rental->setEndAt(Argument::any())->shouldBeCalled();
 
         $locker->setStatus(Locker::RENTED)->shouldBeCalled();
@@ -89,7 +87,6 @@ class RentalServiceSpec extends ObjectBehavior
 
         $rental->setUser($user)->shouldBeCalled();
         $rental->setLocker($locker)->shouldBeCalled();
-        $rental->setStartAt(Argument::any())->shouldBeCalled();
         $rental->setEndAt(Argument::any())->shouldBeCalled();
 
         $locker->setStatus(Locker::RENTED)->shouldBeCalled();
@@ -99,7 +96,7 @@ class RentalServiceSpec extends ObjectBehavior
         $manager->persist($rental)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 
-        $this->rentLocker($user);
+        $this->rentFirstFreeLocker($user);
     }
 
     function it_cannot_rent_busy_locker(
@@ -120,14 +117,9 @@ class RentalServiceSpec extends ObjectBehavior
         QueueRepository $queueRepository
     )
     {
-        $lockerRepository->findOneFreeLocker()->shouldBeCalled()->willReturn(null);
+        $lockerRepository->findOneFreeLocker()->shouldBeCalled()->willThrow(NotFreeLockerException::class);
 
-        $queueRepository->createNew()->shouldBeCalled()->willReturn($queue);
-        $queue->setUser($user)->shouldBeCalled();
-        $manager->persist($queue)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
-
-        $this->shouldThrow(NotFreeLockerException::class)->duringRentLocker($user);
+        $this->shouldThrow(NotFreeLockerException::class)->duringRentFirstFreeLocker($user);
     }
 
     function it_cannot_rent_to_penalized_users(
@@ -150,55 +142,5 @@ class RentalServiceSpec extends ObjectBehavior
         $collection->count()->willReturn(1);
 
         $this->shouldThrow(TooManyLockersRentedException::class)->duringRentLocker($user, $locker);
-    }
-
-    function it_can_return_a_locker_before_due_date(
-        Locker $locker,
-        Rental $rental,
-        EntityManager $manager
-    )
-    {
-        $rental->getEndAt()->shouldBeCalled()->willReturn(new \DateTime('tomorrow'));
-        $rental->setReturnAt(Argument::type(\DateTime::class))->shouldBeCalled();
-
-        $locker->setOwner(null)->shouldBeCalled();
-        $locker->setStatus(Locker::AVAILABLE)->shouldBeCalled();
-
-        $manager->persist($rental)->shouldBeCalled();
-        $manager->persist($locker)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
-
-        $this->returnLocker($locker);
-    }
-
-    function it_cannot_return_a_not_rented_locker(
-        Locker $locker
-    )
-    {
-        $locker->getStatus()->shouldBeCalled()->willReturn(Locker::AVAILABLE);
-        
-        $this->shouldThrow(NotRentedLockerException::class)->duringReturnLocker($locker);
-    }
-
-    function it_can_return_a_locker_after_due_date(
-        Locker $locker,
-        Rental $rental,
-        EntityManager $manager,
-        PenaltyService $penaltyService
-    )
-    {
-        $rental->getEndAt()->shouldBeCalled()->willReturn(new \DateTime('yesterday'));
-        $rental->setReturnAt(Argument::type(\DateTime::class))->shouldBeCalled();
-
-        $locker->setOwner(null)->shouldBeCalled();
-        $locker->setStatus(Locker::AVAILABLE)->shouldBeCalled();
-
-        $penaltyService->penalizeRental($rental)->shouldBeCalled();
-
-        $manager->persist($rental)->shouldBeCalled();
-        $manager->persist($locker)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
-
-        $this->returnLocker($locker);
     }
 }

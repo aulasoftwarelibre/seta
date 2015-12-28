@@ -78,9 +78,7 @@ class DefaultContext implements Context, KernelAwareContext
     /**
      * Get service by id.
      *
-     * @param string $id
-     *
-     * @return object
+     * @return object The associated service
      */
     protected function getService($id)
     {

@@ -13,11 +13,18 @@ services:
         arguments: [ CeepsRentalBundle:Rental ]
         factory: [ @doctrine, getRepository ]
 
-    tuconsigna.rental.service:
+    tuconsigna.service.rental:
         class: Ceeps\RentalBundle\Business\RentalService
         arguments:
             - @doctrine.orm.default_entity_manager
             - @tuconsigna.repository.rental
             - @tuconsigna.repository.locker
             - @tuconsigna.repository.queue
-            - @tuconsigna.service.penalty
+
+    tuconsigna.service.renew:
+        class: Ceeps\RentalBundle\Business\RenewService
+        arguments: [ @doctrine.orm.default_entity_manager, @tuconsigna.repository.rental ]
+
+    tuconsigna.service.return:
+        class: Ceeps\RentalBundle\Business\ReturnService
+        arguments: [ @doctrine.orm.default_entity_manager, @tuconsigna.service.penalty, @tuconsigna.repository.rental ]

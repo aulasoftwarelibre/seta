@@ -15,7 +15,7 @@ use Ceeps\RentalBundle\Entity\Rental;
 use Ceeps\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 
-class PenaltyService
+class PenaltyService implements PenaltyServiceInterface
 {
     /**
      * @var EntityManager

@@ -8,7 +8,10 @@
 
 namespace Ceeps\LockerBundle\Exception;
 
-
+/**
+ * Class NotRentedLockerException
+ * @package Ceeps\LockerBundle\Exception
+ */
 class NotRentedLockerException extends \RuntimeException
 {
 

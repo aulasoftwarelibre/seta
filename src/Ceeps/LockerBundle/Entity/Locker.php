@@ -15,9 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Locker
 {
     const AVAILABLE = 'locker.available';
-
     const UNAVAILABLE = 'locker.unavailable';
-
     const RENTED = 'locker.rented';
 
     /**

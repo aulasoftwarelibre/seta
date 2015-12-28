@@ -29,6 +29,12 @@ class User extends BaseUser
     private $isPenalized;
 
     /**
+     * @var string
+     * @ORM\Column(name="nic", type="string", length=255, nullable=false)
+     */
+    private $nic;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Ceeps\RentalBundle\Entity\Rental", mappedBy="user")
@@ -217,5 +223,29 @@ class User extends BaseUser
     public function getQueue()
     {
         return $this->queue;
+    }
+
+    /**
+     * Set nic
+     *
+     * @param string $nic
+     *
+     * @return User
+     */
+    public function setNic($nic)
+    {
+        $this->nic = $nic;
+
+        return $this;
+    }
+
+    /**
+     * Get nic
+     *
+     * @return string
+     */
+    public function getNic()
+    {
+        return $this->nic;
     }
 }

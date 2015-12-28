@@ -81,6 +81,7 @@ class Rental
     public function __construct()
     {
         $this->isRenewable = true;
+        $this->startAt = new \DateTime('now');
     }
 
     /**
@@ -140,6 +141,22 @@ class Rental
     public function getEndAt()
     {
         return $this->endAt;
+    }
+
+    /**
+     * Get days left
+     *
+     * @return int
+     */
+    public function getDaysLeft()
+    {
+        $now = new \DateTime('now');
+
+        if ($now > $this->getEndAt()) {
+            return 0;
+        }
+
+        return $now->diff($this->getEndAt())->days;
     }
 
     /**

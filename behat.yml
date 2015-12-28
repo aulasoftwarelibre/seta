@@ -9,7 +9,7 @@ default:
                 - Ceeps\LockerBundle\Behat\LockerContext
                 - Ceeps\RentalBundle\Behat\RentalContext
             filters:
-                tags: "@rent"
+                tags: "@rent_a_locker"
         return_a_locker:
             contexts:
                 - AppBundle\Behat\DefaultContext
@@ -18,4 +18,13 @@ default:
                 - Ceeps\PenaltyBundle\Behat\PenaltyContext
                 - Ceeps\RentalBundle\Behat\RentalContext
             filters:
-                tags: "@return"
+                tags: "@return_a_locker"
+        renew_a_rent:
+            contexts:
+                - AppBundle\Behat\DefaultContext
+                - Ceeps\UserBundle\Behat\UserContext
+                - Ceeps\LockerBundle\Behat\LockerContext
+                - Ceeps\PenaltyBundle\Behat\PenaltyContext
+                - Ceeps\RentalBundle\Behat\RentalContext
+            filters:
+                tags: "@renew_a_rent"

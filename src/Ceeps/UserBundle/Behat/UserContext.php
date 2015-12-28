@@ -30,6 +30,7 @@ class UserContext extends DefaultContext
             $user->setUsername($row['email']);
             $user->setEmail($row['email']);
             $user->setPlainPassword('secret');
+            $user->setNic($this->faker->unique()->bothify("########?"));
             if ($row['dias_sancion']) {
                 $start = new \DateTime('now');
                 $end = new \DateTime($row['dias_sancion'].' days 23:59:59');

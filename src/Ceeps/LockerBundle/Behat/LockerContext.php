@@ -104,7 +104,7 @@ class LockerContext extends DefaultContext
         }
 
         try {
-            $this->getService('tuconsigna.rental.service')->rentLocker($this->current_user, $locker);
+            $this->getContainer()->get('tuconsigna.service.rental')->rentLocker($this->current_user, $locker);
         } catch(\Exception $e) {
         }
     }
@@ -158,7 +158,7 @@ class LockerContext extends DefaultContext
     public function seLeAsignaUnaTaquillaLibre()
     {
         try {
-            $this->getService('tuconsigna.rental.service')->rentLocker($this->current_user);
+            $this->getContainer()->get('tuconsigna.service.rental')->rentFirstFreeLocker($this->current_user);
         } catch (NotFreeLockerException $e) {
         }
     }
@@ -188,5 +188,19 @@ class LockerContext extends DefaultContext
         }
 
         \PHPUnit_Framework_Assert::assertNotEmpty($user->getQueue());
+    }
+
+    /**
+     * @When /^el usuario "([^"]*)" no tiene ninguna taquilla asignada$/
+     */
+    public function elUsuarioNoTieneNingunaTaquillaAsignada($username)
+    {
+        /** @var User $user */
+        $user = $this->getRepository('user')->findOneBy(['username' => $username]);
+        if (!$user) {
+            throw new \Exception('User not found: ' . $username);
+        }
+
+        \PHPUnit_Framework_Assert::assertEquals(0, $user->getLockers()->count());
     }
 }

@@ -1,5 +1,5 @@
 #language: es
-@return
+@return_a_locker
 Característica: Devolver una taquilla
 
   Reglas:

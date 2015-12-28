@@ -1,5 +1,5 @@
 #language: es
-@rent
+@rent_a_locker
 Característica: Alquilar taquillas
 
   Reglas:
@@ -50,4 +50,4 @@ Característica: Alquilar taquillas
     Dado que no hay taquillas libres
     Y que "john@gmail.com" quiere alquilar una taquilla
     Cuando se le asigna una taquilla libre
-    Entonces el usuario "john@gmail.com" está en la lista de espera
+    Entonces el usuario "john@gmail.com" no tiene ninguna taquilla asignada

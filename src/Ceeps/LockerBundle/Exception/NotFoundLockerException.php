@@ -8,7 +8,10 @@
 
 namespace Ceeps\LockerBundle\Exception;
 
-
+/**
+ * Class NotFoundLockerException
+ * @package Ceeps\LockerBundle\Exception
+ */
 class NotFoundLockerException extends \RuntimeException
 {
 

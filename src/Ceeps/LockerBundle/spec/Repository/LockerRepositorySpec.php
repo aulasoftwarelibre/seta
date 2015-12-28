@@ -29,10 +29,11 @@ class LockerRepositorySpec extends ObjectBehavior
     }
     
     function it_finds_a_free_locker(
-        EntityManager $manager, 
-        QueryBuilder $builder,
         AbstractQuery $query,
-        Expr $expr
+        EntityManager $manager,
+        Expr $expr,
+        Locker $locker,
+        QueryBuilder $builder
     )
     {
         $manager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
@@ -46,7 +47,7 @@ class LockerRepositorySpec extends ObjectBehavior
         $builder->setMaxResults(1)->shouldBeCalled()->willReturn($builder);
 
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
-        $query->getOneOrNullResult()->shouldBeCalled();
+        $query->getOneOrNullResult()->shouldBeCalled()->willReturn($locker);
 
         $this->findOneFreeLocker();
     }

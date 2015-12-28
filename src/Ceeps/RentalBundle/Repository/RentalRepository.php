@@ -3,6 +3,7 @@
 namespace Ceeps\RentalBundle\Repository;
 
 use Ceeps\LockerBundle\Entity\Locker;
+use Ceeps\RentalBundle\Exception\NotFoundRentalException;
 use Ceeps\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 /**
@@ -13,7 +14,7 @@ use Ceeps\ResourceBundle\Doctrine\ORM\EntityRepository;
  *
  * @codeCoverageIgnore
  */
-class RentalRepository extends EntityRepository
+class RentalRepository extends EntityRepository implements RentalRepositoryInterface
 {
     public function getCurrentRental(Locker $locker)
     {
@@ -27,7 +28,12 @@ class RentalRepository extends EntityRepository
             ->setParameter('locker', $locker)
         ;
 
-        return $queryBuilder->getQuery()->getOneOrNullResult();
+        $rental = $queryBuilder->getQuery()->getOneOrNullResult();
 
+        if (!$rental) {
+            throw new NotFoundRentalException;
+        }
+
+        return $rental;
     }
 }

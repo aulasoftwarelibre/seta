@@ -101,4 +101,15 @@ class UserSpec extends ObjectBehavior
         $this->setQueue($queue);
         $this->getQueue()->shouldReturn($queue);
     }
+    
+    function it_has_no_default_nic()
+    {
+        $this->getNic()->shouldReturn(null);
+    }
+
+    function its_nic_is_mutable()
+    {
+        $this->setNic("12345678A");
+        $this->getNic()->shouldReturn("12345678A");
+    }
 }
