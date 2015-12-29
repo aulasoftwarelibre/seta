@@ -3,32 +3,32 @@ extensions:
     - PhpSpec\Extension\CodeCoverageExtension
 suites:
     CoreBundle:
-        namespace: Ceeps\CoreBundle
-        psr4_prefix: Ceeps\CoreBundle
-        spec_path: src/Ceeps/CoreBundle
-        src_path: src/Ceeps/CoreBundle
+        namespace: Seta\CoreBundle
+        psr4_prefix: Seta\CoreBundle
+        spec_path: src/Seta/CoreBundle
+        src_path: src/Seta/CoreBundle
     LockerBundle:
-        namespace: Ceeps\LockerBundle
-        psr4_prefix: Ceeps\LockerBundle
-        spec_path: src/Ceeps/LockerBundle
-        src_path: src/Ceeps/LockerBundle
+        namespace: Seta\LockerBundle
+        psr4_prefix: Seta\LockerBundle
+        spec_path: src/Seta/LockerBundle
+        src_path: src/Seta/LockerBundle
     PenaltyBundle:
-        namespace: Ceeps\PenaltyBundle
-        psr4_prefix: Ceeps\PenaltyBundle
-        spec_path: src/Ceeps/PenaltyBundle
-        src_path: src/Ceeps/PenaltyBundle
+        namespace: Seta\PenaltyBundle
+        psr4_prefix: Seta\PenaltyBundle
+        spec_path: src/Seta/PenaltyBundle
+        src_path: src/Seta/PenaltyBundle
     RentalBundle:
-        namespace: Ceeps\RentalBundle
-        psr4_prefix: Ceeps\RentalBundle
-        spec_path: src/Ceeps/RentalBundle
-        src_path: src/Ceeps/RentalBundle
+        namespace: Seta\RentalBundle
+        psr4_prefix: Seta\RentalBundle
+        spec_path: src/Seta/RentalBundle
+        src_path: src/Seta/RentalBundle
     ResourceBundle:
-        namespace: Ceeps\ResourceBundle
-        psr4_prefix: Ceeps\ResourceBundle
-        spec_path: src/Ceeps/ResourceBundle
-        src_path: src/Ceeps/ResourceBundle
+        namespace: Seta\ResourceBundle
+        psr4_prefix: Seta\ResourceBundle
+        spec_path: src/Seta/ResourceBundle
+        src_path: src/Seta/ResourceBundle
     UserBundle:
-        namespace: Ceeps\UserBundle
-        psr4_prefix: Ceeps\UserBundle
-        spec_path: src/Ceeps/UserBundle
-        src_path: src/Ceeps/UserBundle
+        namespace: Seta\UserBundle
+        psr4_prefix: Seta\UserBundle
+        spec_path: src/Seta/UserBundle
+        src_path: src/Seta/UserBundle

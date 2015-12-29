@@ -1,8 +1,0 @@
-services:
-#    ceeps_user.example:
-#        class: Ceeps\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
-    tuconsigna.repository.user:
-        class: Ceeps\UserBundle\Repository\UserRepository
-        arguments: [ CeepsUserBundle:User ]
-        factory: [ @doctrine, getRepository ]

@@ -1,0 +1,19 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: sergio
+ * Date: 26/12/15
+ * Time: 07:28
+ */
+
+namespace Seta\LockerBundle\Exception;
+
+
+/**
+ * Class BusyLockerException
+ * @package Seta\LockerBundle\Exception
+ */
+class BusyLockerException extends \RuntimeException
+{
+
+}

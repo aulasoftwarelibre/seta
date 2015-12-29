@@ -1,0 +1,30 @@
+services:
+#    rental.example:
+#        class: Seta\RentalBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    seta.repository.queue:
+        class: Seta\RentalBundle\Repository\QueueRepository
+        arguments: [ SetaRentalBundle:Queue ]
+        factory: [ @doctrine, getRepository ]
+
+    seta.repository.rental:
+        class: Seta\RentalBundle\Repository\RentalRepository
+        arguments: [ SetaRentalBundle:Rental ]
+        factory: [ @doctrine, getRepository ]
+
+    seta.service.rental:
+        class: Seta\RentalBundle\Business\RentalService
+        arguments:
+            - @doctrine.orm.default_entity_manager
+            - @seta.repository.rental
+            - @seta.repository.locker
+            - @seta.repository.queue
+
+    seta.service.renew:
+        class: Seta\RentalBundle\Business\RenewService
+        arguments: [ @doctrine.orm.default_entity_manager, @seta.repository.rental ]
+
+    seta.service.return:
+        class: Seta\RentalBundle\Business\ReturnService
+        arguments: [ @doctrine.orm.default_entity_manager, @seta.service.penalty, @seta.repository.rental ]

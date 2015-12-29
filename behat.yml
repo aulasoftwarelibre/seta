@@ -7,36 +7,36 @@ default:
     suites:
         rental:
             contexts:
-                - Ceeps\CoreBundle\Behat\HookContext
-                - Ceeps\UserBundle\Behat\UserContext
-                - Ceeps\LockerBundle\Behat\LockerContext
-                - Ceeps\RentalBundle\Behat\RentalContext
-                - Ceeps\RentalBundle\Behat\SearchRentalContext
+                - Seta\CoreBundle\Behat\HookContext
+                - Seta\UserBundle\Behat\UserContext
+                - Seta\LockerBundle\Behat\LockerContext
+                - Seta\RentalBundle\Behat\RentalContext
+                - Seta\RentalBundle\Behat\SearchRentalContext
             filters:
                 tags: "@rental"
         rent_a_locker:
             contexts:
-                - Ceeps\CoreBundle\Behat\HookContext
-                - Ceeps\UserBundle\Behat\UserContext
-                - Ceeps\LockerBundle\Behat\LockerContext
-                - Ceeps\RentalBundle\Behat\RentalContext
+                - Seta\CoreBundle\Behat\HookContext
+                - Seta\UserBundle\Behat\UserContext
+                - Seta\LockerBundle\Behat\LockerContext
+                - Seta\RentalBundle\Behat\RentalContext
             filters:
                 tags: "@rent_a_locker"
         return_a_locker:
             contexts:
-                - Ceeps\CoreBundle\Behat\HookContext
-                - Ceeps\UserBundle\Behat\UserContext
-                - Ceeps\LockerBundle\Behat\LockerContext
-                - Ceeps\PenaltyBundle\Behat\PenaltyContext
-                - Ceeps\RentalBundle\Behat\RentalContext
+                - Seta\CoreBundle\Behat\HookContext
+                - Seta\UserBundle\Behat\UserContext
+                - Seta\LockerBundle\Behat\LockerContext
+                - Seta\PenaltyBundle\Behat\PenaltyContext
+                - Seta\RentalBundle\Behat\RentalContext
             filters:
                 tags: "@return_a_locker"
         renew_a_rent:
             contexts:
-                - Ceeps\CoreBundle\Behat\HookContext
-                - Ceeps\UserBundle\Behat\UserContext
-                - Ceeps\LockerBundle\Behat\LockerContext
-                - Ceeps\PenaltyBundle\Behat\PenaltyContext
-                - Ceeps\RentalBundle\Behat\RentalContext
+                - Seta\CoreBundle\Behat\HookContext
+                - Seta\UserBundle\Behat\UserContext
+                - Seta\LockerBundle\Behat\LockerContext
+                - Seta\PenaltyBundle\Behat\PenaltyContext
+                - Seta\RentalBundle\Behat\RentalContext
             filters:
                 tags: "@renew_a_rent"

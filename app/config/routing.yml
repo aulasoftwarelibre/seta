@@ -1,35 +1,35 @@
 ceeps_core:
-    resource: "@CeepsCoreBundle/Controller/"
+    resource: "@SetaCoreBundle/Controller/"
     type:     annotation
     prefix:   /
 
 ceeps_mailer:
-    resource: "@CeepsMailerBundle/Controller/"
+    resource: "@SetaMailerBundle/Controller/"
     type:     annotation
     prefix:   /
 
 ceeps_penalty:
-    resource: "@CeepsPenaltyBundle/Controller/"
+    resource: "@SetaPenaltyBundle/Controller/"
     type:     annotation
     prefix:   /
 
 ceeps_resource:
-    resource: "@CeepsResourceBundle/Controller/"
+    resource: "@SetaResourceBundle/Controller/"
     type:     annotation
     prefix:   /
 
 rental:
-    resource: "@CeepsRentalBundle/Controller/"
+    resource: "@SetaRentalBundle/Controller/"
     type:     annotation
     prefix:   /
 
 locker:
-    resource: "@CeepsLockerBundle/Controller/"
+    resource: "@SetaLockerBundle/Controller/"
     type:     annotation
     prefix:   /
 
 ceeps_user:
-    resource: "@CeepsUserBundle/Controller/"
+    resource: "@SetaUserBundle/Controller/"
     type:     annotation
     prefix:   /
 

@@ -1,4 +1,10 @@
-tUCOnsigna
-==========
+Servicio Electrónico de Taquillas en Alquiler
+=============================================
 
-A Symfony project created on December 19, 2015, 12:28 am.
+El Servicio Electrónico de Taquillas en Alquiler (SETA) es una aplicación para la gestión
+de las taquillas del Campus de Rabanales.
+
+Desarrollado por el [Aula de Software Libre](https://www.uco.es/aulasoftwarelibre) en colaboración con el
+[CEEPS](http://consejo-eps.uco.es).
+
+**En desarrollo**

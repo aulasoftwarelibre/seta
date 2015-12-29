@@ -20,13 +20,13 @@ class AppKernel extends Kernel
             new Hautzi\SystemMailBundle\HautziSystemMailBundle(),
 
             new AppBundle\AppBundle(),
-            new Ceeps\UserBundle\CeepsUserBundle(),
-            new Ceeps\LockerBundle\CeepsLockerBundle(),
-            new Ceeps\RentalBundle\CeepsRentalBundle(),
-            new Ceeps\ResourceBundle\CeepsResourceBundle(),
-            new Ceeps\PenaltyBundle\CeepsPenaltyBundle(),
-            new Ceeps\MailerBundle\CeepsMailerBundle(),
-            new Ceeps\CoreBundle\CeepsCoreBundle(),
+            new Seta\UserBundle\SetaUserBundle(),
+            new Seta\LockerBundle\SetaLockerBundle(),
+            new Seta\RentalBundle\SetaRentalBundle(),
+            new Seta\ResourceBundle\SetaResourceBundle(),
+            new Seta\PenaltyBundle\SetaPenaltyBundle(),
+            new Seta\MailerBundle\SetaMailerBundle(),
+            new Seta\CoreBundle\SetaCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

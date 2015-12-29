@@ -1,0 +1,7 @@
+services:
+#    seta_mailer.example:
+#        class: Seta\MailerBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    seta_mailing:
+        class: Seta\MailerBundle\Business\MailService
+        arguments: [ @system_mailer ]
