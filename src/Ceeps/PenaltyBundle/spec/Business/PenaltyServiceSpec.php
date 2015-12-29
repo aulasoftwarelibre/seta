@@ -16,11 +16,17 @@ class PenaltyServiceSpec extends ObjectBehavior
     function let(
         EntityManager $manager,
         PenaltyRepository $penaltyRepository,
-        Penalty $penalty
+        Locker $locker,
+        Rental $rental,
+        User $user
     )
     {
         $this->beConstructedWith($manager, $penaltyRepository);
-        $penaltyRepository->createNew()->willReturn($penalty);
+
+        $locker->getCode()->willReturn("100");
+        
+        $rental->getUser()->willReturn($user);
+        $rental->getLocker()->willReturn($locker);
     }
 
     function it_is_initializable()
@@ -35,39 +41,55 @@ class PenaltyServiceSpec extends ObjectBehavior
         PenaltyRepository $penaltyRepository
     )
     {
-
         $end = new \DateTime('+7 days');
         $comment = "Test";
 
-        $penalty->setEndAt($end)->shouldBeCalled();
-        $penalty->setComment($comment)->shouldBeCalled();
-        $penalty->setUser($user)->shouldBeCalled();
-
         $user->setIsPenalized(true)->shouldBeCalled();
 
-        $manager->persist($penalty)->shouldBeCalled();
+        $penaltyRepository->createFromData($user, $end, $comment)->willReturn($penalty);
+
         $manager->persist($user)->shouldBeCalled();
+        $manager->persist($penalty)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 
         $this->penalizeUser($user, $end, $comment);
     }
 
     function it_can_add_a_penalty_from_a_rent(
+        EntityManager $manager,
         Locker $locker,
+        Penalty $penalty,
+        PenaltyRepository $penaltyRepository,
         Rental $rental,
         User $user
     )
     {
-        $rental->getUser()->shouldBeCalled()->willReturn($user);
-        $rental->getLocker()->shouldBeCalled()->willReturn($locker);
-        $rental->getEndAt()->shouldBeCalled()->willReturn(new \DateTime("-2 days"));
-        $locker->getCode()->shouldBeCalled()->willReturn("100");
+        $rental->getEndAt()->willReturn(new \DateTime('-1 days 23:59:59'));
+        $end = $this->calculatePenalty($rental);
 
-        $end = new \DateTime("+14 days 23:59:59");
+        $rental->getLocker()->shouldBeCalled();
+        $locker->getCode()->shouldBeCalled();
         $comment = "Bloqueo automático por retraso al entregar la taquilla 100";
 
-        $this->penalizeUser($user, $end, $comment)->shouldBe(null);
+        $rental->getUser()->shouldBeCalled();
+        $user->setIsPenalized(true)->shouldBeCalled();
+
+        $penaltyRepository->createFromData($user, $end, $comment, $rental)->shouldBeCalled()->willReturn($penalty);
+
+        $manager->persist($user)->shouldBeCalled();
+        $manager->persist($penalty)->shouldBeCalled();
+        $manager->flush()->shouldBeCalled();
 
         $this->penalizeRental($rental);
+    }
+
+    function it_can_calculate_penalty(
+        Rental $rental
+    )
+    {
+        $end = new \DateTime('-1 days 23:59:59');
+        $rental->getEndAt()->shouldBeCalled()->willReturn($end);
+
+        $this->calculatePenalty($rental)->shouldBeLike(new \DateTime('7 days midnight'));
     }
 }

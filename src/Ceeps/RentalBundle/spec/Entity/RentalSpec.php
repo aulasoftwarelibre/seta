@@ -100,4 +100,12 @@ class RentalSpec extends ObjectBehavior
         
         $this->getDaysLeft()->shouldReturn($days);
     }
+    
+    function it_get_zero_days()
+    {
+        $end = new \DateTime('-5 days');
+        $this->setEndAt($end);
+        
+        $this->getDaysLeft()->shouldReturn(0);
+    }
 }

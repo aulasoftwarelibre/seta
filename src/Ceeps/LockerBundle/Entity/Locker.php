@@ -17,6 +17,7 @@ class Locker
     const AVAILABLE = 'locker.available';
     const UNAVAILABLE = 'locker.unavailable';
     const RENTED = 'locker.rented';
+    const RESERVED = 'locker.reserved';
 
     /**
      * @var int

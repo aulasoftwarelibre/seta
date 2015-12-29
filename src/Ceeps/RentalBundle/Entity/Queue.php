@@ -2,6 +2,7 @@
 
 namespace Ceeps\RentalBundle\Entity;
 
+use Ceeps\LockerBundle\Entity\Locker;
 use Ceeps\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,6 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Queue
 {
+    const CREATED = 'queue.created';
+    const CONFIRMED = 'queue.confirmed';
+
     /**
      * @var int
      *
@@ -30,12 +34,34 @@ class Queue
     private $createdAt;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="confirmed_at", type="datetime", nullable=true)
+     */
+    private $confirmedAt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string")
+     */
+    private $status;
+
+    /**
      * @var User
      *
      * @ORM\OneToOne(targetEntity="Ceeps\UserBundle\Entity\User", inversedBy="queue")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @var Locker
+     *
+     * @ORM\OneToOne(targetEntity="Ceeps\LockerBundle\Entity\Locker", inversedBy="queue")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $locker;
 
     /**
      * Queue constructor.

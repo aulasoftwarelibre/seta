@@ -60,9 +60,6 @@ class ReturnService
 
         /** @var Rental $rental */
         $rental = $this->rentalRepository->getCurrentRental($locker);
-        if (!$rental) {
-            throw new NotFoundRentalException;
-        }
 
         $now = new \DateTime('now');
         if ($rental->getEndAt() < $now) {

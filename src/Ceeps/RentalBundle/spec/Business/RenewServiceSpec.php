@@ -3,6 +3,7 @@
 namespace spec\Ceeps\RentalBundle\Business;
 
 use Ceeps\LockerBundle\Entity\Locker;
+use Ceeps\LockerBundle\Exception\NotRentedLockerException;
 use Ceeps\RentalBundle\Entity\Rental;
 use Ceeps\RentalBundle\Exception\ExpiredRentalException;
 use Ceeps\RentalBundle\Exception\NotRenewableRentalException;
@@ -51,6 +52,15 @@ class RenewServiceSpec extends ObjectBehavior
         $manager->flush()->shouldBeCalled();
 
         $this->renewLocker($locker);
+    }
+    
+    function it_cannot_renew_a_not_rented_locker(
+        Locker $locker
+    )
+    {
+        $locker->getStatus()->shouldBeCalled()->willReturn(Locker::AVAILABLE);
+        
+        $this->shouldThrow(NotRentedLockerException::class)->duringRenewLocker($locker);
     }
 
     function it_cannot_renew_a_rental_too_early(

@@ -2,7 +2,10 @@
 
 namespace Ceeps\PenaltyBundle\Repository;
 
+use Ceeps\PenaltyBundle\Entity\Penalty;
+use Ceeps\RentalBundle\Entity\Rental;
 use Ceeps\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Ceeps\UserBundle\Entity\User;
 
 /**
  * PenaltyRepository
@@ -12,4 +15,26 @@ use Ceeps\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class PenaltyRepository extends EntityRepository
 {
+    /**
+     * Crea una nueva instancia de sanción
+     *
+     * @param User $user
+     * @param \DateTime $end
+     * @param $comment
+     * @param Rental|null $rental
+     * @return Penalty
+     */
+    public function createFromData(User $user, \DateTime $end, $comment, Rental $rental = null)
+    {
+        /** @var Penalty $penalty */
+        $penalty = $this->createNew();
+        $penalty->setComment($comment);
+        $penalty->setEndAt($end);
+        $penalty->setUser($user);
+        if ($rental) {
+            $penalty->setRental($rental);
+        }
+
+        return $penalty;
+    }
 }
