@@ -128,4 +128,76 @@ class Queue
     {
         return $this->user;
     }
+
+    /**
+     * Set confirmedAt
+     *
+     * @param \DateTime $confirmedAt
+     *
+     * @return Queue
+     */
+    public function setConfirmedAt($confirmedAt)
+    {
+        $this->confirmedAt = $confirmedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get confirmedAt
+     *
+     * @return \DateTime
+     */
+    public function getConfirmedAt()
+    {
+        return $this->confirmedAt;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Queue
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set locker
+     *
+     * @param \Ceeps\LockerBundle\Entity\Locker $locker
+     *
+     * @return Queue
+     */
+    public function setLocker(\Ceeps\LockerBundle\Entity\Locker $locker = null)
+    {
+        $this->locker = $locker;
+
+        return $this;
+    }
+
+    /**
+     * Get locker
+     *
+     * @return \Ceeps\LockerBundle\Entity\Locker
+     */
+    public function getLocker()
+    {
+        return $this->locker;
+    }
 }

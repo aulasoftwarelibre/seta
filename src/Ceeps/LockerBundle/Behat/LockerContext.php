@@ -9,9 +9,8 @@
 namespace Ceeps\LockerBundle\Behat;
 
 
-use AppBundle\Behat\DefaultContext;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
+use Ceeps\CoreBundle\Behat\DefaultContext;
 use Ceeps\LockerBundle\Entity\Locker;
 use Ceeps\LockerBundle\Exception\NotFreeLockerException;
 use Ceeps\RentalBundle\Entity\Rental;

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Behat;
+namespace Ceeps\CoreBundle\Behat;
 
 
 use Behat\Behat\Context\Context;
@@ -47,14 +47,6 @@ class DefaultContext implements Context, KernelAwareContext
     public function setKernel(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
-    }
-
-    /**
-     * @BeforeScenario
-     */
-    public function purgeDatabase(BeforeScenarioScope $scope)
-    {
-        $this->getService('knp_rad_fixtures_load.reset_schema_processor')->resetDoctrineSchema();
     }
 
     /**

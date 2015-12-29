@@ -53,6 +53,13 @@ class Rental
     private $isRenewable;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="renew_code", type="string")
+     */
+    private $renewCode;
+
+    /**
      * @var Locker
      *
      * @ORM\ManyToOne(targetEntity="Ceeps\LockerBundle\Entity\Locker", inversedBy="rentals")
@@ -82,6 +89,7 @@ class Rental
     {
         $this->isRenewable = true;
         $this->startAt = new \DateTime('now');
+        $this->generateNewCode();
     }
 
     /**
@@ -277,5 +285,41 @@ class Rental
     public function getPenalty()
     {
         return $this->penalty;
+    }
+
+    /**
+     * Genera un nuevo código de renovación
+     *
+     * @return Rental
+     */
+    private function generateNewCode()
+    {
+        $this->renewCode = preg_replace("#[+/]#", "-", base64_encode(openssl_random_pseudo_bytes(30)));
+
+        return $this;
+    }
+
+    /**
+     * Set renewCode
+     *
+     * @param string $renewCode
+     *
+     * @return Rental
+     */
+    public function setRenewCode($renewCode)
+    {
+        $this->renewCode = $renewCode;
+
+        return $this;
+    }
+
+    /**
+     * Get renewCode
+     *
+     * @return string
+     */
+    public function getRenewCode()
+    {
+        return $this->renewCode;
     }
 }

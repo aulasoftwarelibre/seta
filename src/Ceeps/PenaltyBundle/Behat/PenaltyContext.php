@@ -9,7 +9,7 @@
 namespace Ceeps\PenaltyBundle\Behat;
 
 
-use AppBundle\Behat\DefaultContext;
+use Ceeps\CoreBundle\Behat\DefaultContext;
 use Ceeps\PenaltyBundle\Entity\Penalty;
 use Ceeps\UserBundle\Entity\User;
 

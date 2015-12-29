@@ -2,6 +2,11 @@ formatter.name: pretty
 extensions:
     - PhpSpec\Extension\CodeCoverageExtension
 suites:
+    CoreBundle:
+        namespace: Ceeps\CoreBundle
+        psr4_prefix: Ceeps\CoreBundle
+        spec_path: src/Ceeps/CoreBundle
+        src_path: src/Ceeps/CoreBundle
     LockerBundle:
         namespace: Ceeps\LockerBundle
         psr4_prefix: Ceeps\LockerBundle

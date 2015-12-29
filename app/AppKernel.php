@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Ceeps\ResourceBundle\CeepsResourceBundle(),
             new Ceeps\PenaltyBundle\CeepsPenaltyBundle(),
             new Ceeps\MailerBundle\CeepsMailerBundle(),
+            new Ceeps\CoreBundle\CeepsCoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

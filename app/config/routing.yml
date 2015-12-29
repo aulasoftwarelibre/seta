@@ -1,3 +1,8 @@
+ceeps_core:
+    resource: "@CeepsCoreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 ceeps_mailer:
     resource: "@CeepsMailerBundle/Controller/"
     type:     annotation

@@ -9,10 +9,8 @@
 namespace Ceeps\UserBundle\Behat;
 
 
-use AppBundle\Behat\DefaultContext;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
-use Ceeps\PenaltyBundle\Entity\Penalty;
+use Ceeps\CoreBundle\Behat\DefaultContext;
 use Ceeps\UserBundle\Entity\User;
 
 /**

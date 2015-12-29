@@ -36,4 +36,23 @@ class RentalRepository extends EntityRepository implements RentalRepositoryInter
 
         return $rental;
     }
+
+    public function getExpireOnDateRentals(\DateTime $on)
+    {
+        $start = clone $on;
+        $end = clone $on;
+        $start->setTime(0,0,0);
+        $end->setTime(23,59,59);
+
+        $queryBuilder = $this->getQueryBuilder();
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->between('o.endAt', ':start', ':end'))
+            ->andWhere($queryBuilder->expr()->isNull('o.returnAt'))
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bbe840fd46d7bbe875e5b0c4ad3bd157",
-    "content-hash": "f878b0f1fc3866dd97db2d48cd05e63c",
+    "hash": "b14e57b51d036b711acda516adae7eb1",
+    "content-hash": "4ea7d839f6f85169a2ef0e6e26969cda",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2164,6 +2164,44 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "alexandresalome/mailcatcher",
+            "version": "v1.0.2",
+            "target-dir": "Alex/MailCatcher",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexandresalome/mailcatcher.git",
+                "reference": "09276e4f0b0bf4f6efd101fb300ad7d3433bfd91"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexandresalome/mailcatcher/zipball/09276e4f0b0bf4f6efd101fb300ad7d3433bfd91",
+                "reference": "09276e4f0b0bf4f6efd101fb300ad7d3433bfd91",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/dom-crawler": "~2.3"
+            },
+            "require-dev": {
+                "behat/behat": "~3.0",
+                "behat/mink-extension": "~2.0",
+                "phpunit/phpunit": "~4.6",
+                "swiftmailer/swiftmailer": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Alex\\MailCatcher": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A library to access MailCatcher",
+            "time": "2015-10-13 08:13:42"
+        },
         {
             "name": "behat/behat",
             "version": "v3.0.15",

@@ -34,7 +34,8 @@
         "knplabs/rad-fixtures-load": "^1.3",
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "^5.1",
-        "henrikbjorn/phpspec-code-coverage": "^2.0"
+        "henrikbjorn/phpspec-code-coverage": "^2.0",
+        "alexandresalome/mailcatcher": "~1.0"
     },
     "scripts": {
         "post-install-cmd": [

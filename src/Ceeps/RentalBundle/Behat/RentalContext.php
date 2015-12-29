@@ -9,7 +9,7 @@
 namespace Ceeps\RentalBundle\Behat;
 
 
-use AppBundle\Behat\DefaultContext;
+use Ceeps\CoreBundle\Behat\DefaultContext;
 use Ceeps\LockerBundle\Entity\Locker;
 use Ceeps\RentalBundle\Entity\Rental;
 use Ceeps\RentalBundle\Exception\ExpiredRentalException;

@@ -5,6 +5,7 @@ namespace spec\Ceeps\RentalBundle\Repository;
 use Ceeps\LockerBundle\Entity\Locker;
 use Ceeps\RentalBundle\Entity\Rental;
 use Ceeps\UserBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -63,5 +64,33 @@ class RentalRepositorySpec extends ObjectBehavior
         $this->getCurrentRental($locker);
     }
 
+    function it_finds_expire_on_rentals(
+        ArrayCollection $rentals,
+        EntityManager $manager,
+        QueryBuilder $builder,
+        AbstractQuery $query,
+        Expr $expr
+    )
+    {
+        $on = new \DateTime('now');
+
+        $manager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
+        $builder->expr()->shouldBeCalled()->willReturn($expr);
+
+        $builder->select('o')->shouldBeCalled()->willReturn($builder);
+        $builder->from(Argument::any(), 'o', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $expr->between('o.getEnd', ':start', ':end')->shouldBeCalled()->willReturn($expr);
+        $builder->andWhere($expr)->shouldBeCalled()->willReturn($builder);
+        $expr->isNull('o.returnAt')->shouldBeCalled()->willReturn($expr);
+        $builder->andWhere($expr)->shouldBeCalled()->willReturn($builder);
+
+        $builder->setParameter('start', Argument::type(\DateTime::class))->shouldBeCalled()->willReturn($builder);
+        $builder->setParameter('end', Argument::type(\DateTime::class))->shouldBeCalled()->willReturn($builder);
+
+        $builder->getQuery()->shouldBeCalled()->willReturn($query);
+        $query->getResult()->shouldBeCalled()->willReturn($rentals);
+
+        $this->getExpireOnDateRentals($on);
+    }
 
 }

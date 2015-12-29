@@ -95,10 +95,8 @@ class RentalSpec extends ObjectBehavior
     {
         $end = new \DateTime('5 days');
         $this->setEndAt($end);
-        $now = new \DateTime('now');
-        $days = $now->diff($end)->days;
-        
-        $this->getDaysLeft()->shouldReturn($days);
+
+        $this->getDaysLeft()->shouldReturn(5);
     }
     
     function it_get_zero_days()
@@ -107,5 +105,16 @@ class RentalSpec extends ObjectBehavior
         $this->setEndAt($end);
         
         $this->getDaysLeft()->shouldReturn(0);
+    }
+
+    function it_has_default_renew_code()
+    {
+        $this->getRenewCode()->shouldBeString();
+    }
+    
+    function its_renew_code_is_mutable()
+    {
+        $this->setDaysLeft("CODE");
+        $this->getRenewCode()->shouldBeEqualTo("CODE");
     }
 }

@@ -1,0 +1,5 @@
+ceeps_core:
+    notifications:
+        renovation: 1 week
+        suspension: 1 week
+        reminder: 3 days
