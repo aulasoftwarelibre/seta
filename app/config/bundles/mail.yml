@@ -1,0 +1,16 @@
+hautzi_system_mail:
+    defaults:
+        subject:   ~
+        replyTo:   noreply@consejo-eps.uco.es
+        from:
+            email: seta@consejo-eps.uco.es
+            name:  "Servicio Electrónico de Taquillas"
+        to:
+            email: ~
+            name:  ~
+        cc:
+            email: ~
+            name:  ~
+        bcc:
+            email: ~
+            name:  ~

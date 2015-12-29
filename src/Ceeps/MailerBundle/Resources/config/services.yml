@@ -1,0 +1,7 @@
+services:
+#    ceeps_mailer.example:
+#        class: Ceeps\MailerBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    ceeps_mailer.business.mail_service:
+        class: Ceeps\MailerBundle\Business\MailService
+        arguments: [ @system_mailer ]

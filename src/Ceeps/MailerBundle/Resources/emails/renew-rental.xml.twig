@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<email xmlns="http://christoph-hautzinger.de/schema/system-mail-bundle"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://christoph-hautzinger.de/schema/system-mail-bundle http://christoph-hautzinger.de/schema/system-mail-bundle/email-1.0.xsd">
+    <to name="{{ rental.user.fullname }}">{{ rental.user.email }}</to>
+    <subject locale="es">[SETA] Aviso de renovación de préstamo de la taquilla {{ rental.locker.code }}</subject>
+    <messageText locale="es" removeIndent="true"><![CDATA[
+        Hola {{ rental.user.username }},
+
+        Este correo es un recordatorio de la taquilla cuyo préstamo acabas de renovar:
+
+        - Número de taquilla: {{ rental.locker.code }}
+        - Nuevo fin de préstamo: {{ rental.rental.getEnd }}
+
+        Las condiciones del préstamo son:
+
+        - Las taquillas deben devolverse antes de la fecha de finalización. Ojo con los festivos.
+        - Los préstamos pueden renovarse siempre que no haya exceso de demanda.
+        - Cada día de retraso conlleva una penalización de una semana sin poder volver a reservar.
+        - Si el retraso supera la semana, la penalización será por todo el curso y la taquilla será
+          desalojada, tal y como indican las condiciones de uso que has firmado.
+
+        Para facilitarte la renovación, siempre que sea posible, te enviaremos un correo cuando
+        queden 48 horas para la finalización del alquiler con instrucciones para hacerlo de forma
+        electrónica, sin tener que pasar por el CEEPS.
+    ]]></messageText>
+</email>

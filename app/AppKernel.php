@@ -16,7 +16,8 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
-            new \FOS\UserBundle\FOSUserBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Hautzi\SystemMailBundle\HautziSystemMailBundle(),
 
             new AppBundle\AppBundle(),
             new Ceeps\UserBundle\CeepsUserBundle(),
@@ -24,6 +25,7 @@ class AppKernel extends Kernel
             new Ceeps\RentalBundle\CeepsRentalBundle(),
             new Ceeps\ResourceBundle\CeepsResourceBundle(),
             new Ceeps\PenaltyBundle\CeepsPenaltyBundle(),
+            new Ceeps\MailerBundle\CeepsMailerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
