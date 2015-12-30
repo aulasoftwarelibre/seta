@@ -1,4 +1,8 @@
 default:
+    formatters:
+        pretty:
+            output_styles:
+                comment: [ 'magenta' ]
     extensions:
         Behat\Symfony2Extension: ~
         Alex\MailCatcher\Behat\MailCatcherExtension\Extension:

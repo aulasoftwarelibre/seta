@@ -79,7 +79,7 @@ class RentalRepositorySpec extends ObjectBehavior
 
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'o', Argument::any())->shouldBeCalled()->willReturn($builder);
-        $expr->between('o.getEnd', ':start', ':end')->shouldBeCalled()->willReturn($expr);
+        $expr->between('o.endAt', ':start', ':end')->shouldBeCalled()->willReturn($expr);
         $builder->andWhere($expr)->shouldBeCalled()->willReturn($builder);
         $expr->isNull('o.returnAt')->shouldBeCalled()->willReturn($expr);
         $builder->andWhere($expr)->shouldBeCalled()->willReturn($builder);

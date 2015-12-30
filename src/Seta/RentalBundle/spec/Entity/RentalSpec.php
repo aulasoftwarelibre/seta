@@ -114,7 +114,7 @@ class RentalSpec extends ObjectBehavior
     
     function its_renew_code_is_mutable()
     {
-        $this->setDaysLeft("CODE");
+        $this->setRenewCode("CODE");
         $this->getRenewCode()->shouldBeEqualTo("CODE");
     }
 }

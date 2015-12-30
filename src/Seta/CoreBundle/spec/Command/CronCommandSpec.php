@@ -56,8 +56,9 @@ class CronCommandSpec extends ObjectBehavior
         RentalRepository $rentalRepository
     )
     {
-        $container->get('seta.repository.rental')->willReturn($rentalRepository);
-        $container->get('seta_mailing')->willReturn($mailer);
+        $container->getParameter('seta_core.notifications.reminder')->shouldBeCalled();
+        $container->get('seta.repository.rental')->shouldBeCalled()->willReturn($rentalRepository);
+        $container->get('seta_mailing')->shouldBeCalled()->willReturn($mailer);
 
         $rentalRepository
             ->getExpireOnDateRentals(Argument::type(\DateTime::class))

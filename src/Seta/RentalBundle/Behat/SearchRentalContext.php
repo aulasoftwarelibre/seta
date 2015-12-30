@@ -30,7 +30,7 @@ class SearchRentalContext extends DefaultContext
     /**
      * @When /^buscamos los alquileres que van a caducar dentro de (.*) días$/
      */
-    public function buscamosLosAlquileresQueVanACaducarDentroDeDías($days)
+    public function buscamosLosAlquileresQueVanACaducarDentroDeDias($days)
     {
         $on = new \DateTime($days.' days');
 
@@ -44,6 +44,4 @@ class SearchRentalContext extends DefaultContext
     {
         \PHPUnit_Framework_Assert::assertEquals($total, count($this->rentals));
     }
-
-
 }
