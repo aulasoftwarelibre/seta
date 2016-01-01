@@ -10,7 +10,7 @@
         Este correo es un recordatorio de la taquilla que acabas de tomar en préstamo:
 
         - Número de taquilla: {{ rental.locker.code }}
-        - Fin de préstamo: {{ rental.getEnd }}
+        - Fin de préstamo: {{ rental.endAt | date('d/m/y') }}
 
         Las condiciones del préstamo son:
 

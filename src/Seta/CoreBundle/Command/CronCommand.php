@@ -9,6 +9,7 @@
 namespace Seta\CoreBundle\Command;
 
 
+use Seta\MailerBundle\Business\Message;
 use Seta\RentalBundle\Entity\Rental;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,21 +27,32 @@ class CronCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->write("Enviando mensajes de renovación a los mensajes del ");
-        $this->sendReminderEmail($output);
-        $output->writeln(". Hecho.");
+        $time = $this->getContainer()->getParameter('seta_core.notifications.reminder');
+        $on = new \DateTime($time);
+        $output->write("Enviando mensajes de renovación... ");
+        $total = $this->sendReminderEmail(Message::RENEW_WARNING_MESSAGE, $on);
+        $output->writeln("Hecho: [${total}].");
+
+        $on = new \DateTime("yesterday");
+        $output->write("Enviando mensajes de caducidad... ");
+        $total = $this->sendReminderEmail(Message::PENALTY_WARNING_MESSAGE, $on);
+        $output->writeln("Hecho: [${total}].");
+
+        $time = $this->getContainer()->getParameter('seta_core.notifications.suspension');
+        $on = new \DateTime("-".$time);
+        $output->write("Enviando mensajes de suspensión... ");
+        $this->sendReminderEmail(Message::SUSPENSION_WARNING_MESSAGE, $on);
+        $output->writeln("Hecho: [${total}].");
     }
 
-    private function sendReminderEmail(OutputInterface $output)
+    private function sendReminderEmail($type, $on)
     {
-        $days = $this->getContainer()->getParameter('seta_core.notifications.reminder');
-        $on = new \DateTime($days);
-        $output->write($on->format('d/m/y'));
-
         $rentals = $this->getContainer()->get('seta.repository.rental')->getExpireOnDateRentals($on);
         /** @var Rental $rental */
         foreach ($rentals as $rental) {
-            $this->getContainer()->get('seta_mailing')->sendRenewWarningEmail($rental);
+            $this->getContainer()->get('seta_mailing')->sendEmail($rental, $type);
         }
+
+        return count($rentals);
     }
 }

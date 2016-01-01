@@ -12,6 +12,11 @@ suites:
         psr4_prefix: Seta\LockerBundle
         spec_path: src/Seta/LockerBundle
         src_path: src/Seta/LockerBundle
+    MailerBundle:
+        namespace: Seta\MailerBundle
+        psr4_prefix: Seta\MailerBundle
+        spec_path: src/Seta/MailerBundle
+        src_path: src/Seta/MailerBundle
     PenaltyBundle:
         namespace: Seta\PenaltyBundle
         psr4_prefix: Seta\PenaltyBundle

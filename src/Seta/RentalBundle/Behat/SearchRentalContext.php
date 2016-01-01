@@ -12,6 +12,11 @@ namespace Seta\RentalBundle\Behat;
 use Seta\CoreBundle\Behat\DefaultContext;
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * Class SearchRentalContext
+ * @package Seta\RentalBundle\Behat
+ * @codeCoverageIgnore
+ */
 class SearchRentalContext extends DefaultContext
 {
     /**

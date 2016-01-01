@@ -15,6 +15,11 @@ use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
+/**
+ * Class HookContext
+ * @package Seta\CoreBundle\Behat
+ * @codeCoverageIgnore
+ */
 class HookContext implements Context, KernelAwareContext
 {
     /**

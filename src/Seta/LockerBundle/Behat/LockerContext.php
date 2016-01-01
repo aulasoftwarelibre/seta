@@ -52,12 +52,14 @@ class LockerContext extends DefaultContext
 
                 $start = new \DateTime($item['desde'] . ' days');
                 $end = new \DateTime($item['hasta'] . ' days');
+                $renewable = $item['renovable'] ?? 'sí';
                 /** @var Rental $rental */
                 $rental = $this->getRepository('rental')->createNew();
                 $rental->setStartAt($start);
                 $rental->setEndAt($end);
                 $rental->setUser($user);
                 $rental->setLocker($locker);
+                $rental->setIsRenewable($renewable === 'sí');
 
                 $locker->setOwner($user);
                 $locker->setStatus(Locker::RENTED);

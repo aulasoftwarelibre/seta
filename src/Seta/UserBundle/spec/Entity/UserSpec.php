@@ -112,4 +112,15 @@ class UserSpec extends ObjectBehavior
         $this->setNic("12345678A");
         $this->getNic()->shouldReturn("12345678A");
     }
+    
+    function it_has_no_fullname_by_default()
+    {
+        $this->getFullname()->shouldBe(null);
+    }
+    
+    function its_fullname_is_mutable()
+    {
+        $this->setFullname('John Doe');
+        $this->getFullname()->shouldBe('John Doe');
+    }
 }

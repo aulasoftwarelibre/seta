@@ -22,7 +22,9 @@ class RenewServiceSpec extends ObjectBehavior
         Locker $locker
     )
     {
-        $this->beConstructedWith($manager, $rentalRepository);
+        $reminder = '2 days';
+        $renovation = '1 week';
+        $this->beConstructedWith($manager, $rentalRepository, $reminder, $renovation);
 
         $locker->getStatus()->willReturn(Locker::RENTED);
 

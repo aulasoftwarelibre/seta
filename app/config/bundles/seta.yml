@@ -1,5 +1,5 @@
 seta_core:
     notifications:
         renovation: 1 week
-        suspension: 1 week
-        reminder: 3 days
+        suspension: 8 days
+        reminder: 2 days

@@ -28,17 +28,23 @@ class RenewService
      * @var EntityManagerInterface
      */
     private $manager;
+    private $reminder;
+    private $renovation;
 
     /**
      * RenewService constructor.
      */
     public function __construct(
         EntityManagerInterface $manager,
-        RentalRepositoryInterface $rentalRepository
+        RentalRepositoryInterface $rentalRepository,
+        $reminder,
+        $renovation
     )
     {
         $this->manager = $manager;
         $this->rentalRepository = $rentalRepository;
+        $this->reminder = $reminder;
+        $this->renovation = $renovation;
     }
 
     /**
@@ -57,7 +63,8 @@ class RenewService
 
         $this->checkExpiration($rental);
 
-        $newend = $rental->getEndAt()->add(new \DateInterval("P7D"));
+        $interval = \DateInterval::createFromDateString($this->renovation);
+        $newend = $rental->getEndAt()->add($interval);
         $rental->setEndAt($newend);
 
         $this->manager->persist($rental);
@@ -84,7 +91,8 @@ class RenewService
             throw new ExpiredRentalException;
         }
 
-        if ($limit->diff($rental->getEndAt())->days >= 2) {
+        $limit = new \DateTime($this->reminder);
+        if ($rental->getEndAt() > $limit) {
             throw new TooEarlyRenovationException;
         }
 

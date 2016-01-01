@@ -31,7 +31,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('renovation')->defaultValue('1 week')->end()
                         ->scalarNode('reminder')->defaultValue('2 days')->end()
-                        ->scalarNode('suspension')->defaultValue('1 week')->end()
+                        ->scalarNode('suspension')->defaultValue('8 days')->end()
                     ->end()
                 ->end() // notifications
             ->end()

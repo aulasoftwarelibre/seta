@@ -27,33 +27,8 @@ class MailService
         $this->systemMailer = $systemMailer;
     }
 
-    public function sendNewRentalEmail(Rental $rental)
+    public function sendEmail(Rental $rental, $message, $locale = 'es')
     {
-        $this->systemMailer->send('MailerBundle:new-rental', ['rental' => $rental]);
-    }
-
-    public function sendNoRenewRentalEmail(Rental $rental)
-    {
-        $this->systemMailer->send('MailerBundle:no-renew-rental', ['rental' => $rental]);
-    }
-
-    public function sendPenaltyWarning(Rental $rental)
-    {
-        $this->systemMailer->send('MailerBundle:penalty-warning', ['rental' => $rental]);
-    }
-
-    public function sendRenewRentalEmail(Rental $rental)
-    {
-        $this->systemMailer->send('MailerBundle:renew-rental', ['rental' => $rental]);
-    }
-
-    public function sendRenewWarningEmail(Rental $rental)
-    {
-        $this->systemMailer->send('MailerBundle:renew-warning', ['rental' => $rental]);
-    }
-
-    public function sendSuspensionWarning(Rental $rental)
-    {
-        $this->systemMailer->send('MailerBundle:suspension-warning', ['rental' => $rental]);
+        $this->systemMailer->send($message, ['rental' => $rental], $locale);
     }
 }

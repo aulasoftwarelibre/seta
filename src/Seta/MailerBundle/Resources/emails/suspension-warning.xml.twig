@@ -3,14 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://christoph-hautzinger.de/schema/system-mail-bundle http://christoph-hautzinger.de/schema/system-mail-bundle/email-1.0.xsd">
     <to name="{{ rental.user.fullname }}">{{ rental.user.email }}</to>
-    <subject locale="es">[SETA] Aviso de suspensión del servicio de préstamo de taquillas</subject>
+    <subject locale="es">[SETA] Aviso de suspensión de préstamo por la taquilla {{ rental.locker.code }}</subject>
     <messageText locale="es" removeIndent="true"><![CDATA[
         Hola {{ rental.user.username }},
 
         Este correo es un recordatorio de la taquilla que tienes tomada en préstamo:
 
         - Número de taquilla: {{ rental.locker.code }}
-        - Fin de préstamo: {{ rental.getEnd }}
+        - Fin de préstamo: {{ rental.endAt | date('d/m/y') }}
 
         Debido a que has sobrepasado la fecha límite en más de una semana se te ha
         suspendido definitivamente del servicio de préstamo de taquillas. Conforme

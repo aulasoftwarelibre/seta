@@ -23,7 +23,11 @@ services:
 
     seta.service.renew:
         class: Seta\RentalBundle\Business\RenewService
-        arguments: [ @doctrine.orm.default_entity_manager, @seta.repository.rental ]
+        arguments:
+            - @doctrine.orm.default_entity_manager
+            - @seta.repository.rental
+            - %seta_core.notifications.reminder%
+            - %seta_core.notifications.renovation%
 
     seta.service.return:
         class: Seta\RentalBundle\Business\ReturnService

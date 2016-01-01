@@ -19,14 +19,13 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Hautzi\SystemMailBundle\HautziSystemMailBundle(),
 
-            new AppBundle\AppBundle(),
-            new Seta\UserBundle\SetaUserBundle(),
+            new Seta\CoreBundle\SetaCoreBundle(),
             new Seta\LockerBundle\SetaLockerBundle(),
+            new Seta\MailerBundle\SetaMailerBundle(),
+            new Seta\PenaltyBundle\SetaPenaltyBundle(),
             new Seta\RentalBundle\SetaRentalBundle(),
             new Seta\ResourceBundle\SetaResourceBundle(),
-            new Seta\PenaltyBundle\SetaPenaltyBundle(),
-            new Seta\MailerBundle\SetaMailerBundle(),
-            new Seta\CoreBundle\SetaCoreBundle(),
+            new Seta\UserBundle\SetaUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

@@ -56,7 +56,8 @@ class CronCommandSpec extends ObjectBehavior
         RentalRepository $rentalRepository
     )
     {
-        $container->getParameter('seta_core.notifications.reminder')->shouldBeCalled();
+        $container->getParameter('seta_core.notifications.reminder')->shouldBeCalled()->willReturn('2 days');
+        $container->getParameter('seta_core.notifications.suspension')->shouldBeCalled()->willReturn('8 days');
         $container->get('seta.repository.rental')->shouldBeCalled()->willReturn($rentalRepository);
         $container->get('seta_mailing')->shouldBeCalled()->willReturn($mailer);
 
@@ -65,7 +66,7 @@ class CronCommandSpec extends ObjectBehavior
             ->willReturn([$rental])
             ->shouldBeCalled()
         ;
-        $mailer->sendRenewWarningEmail($rental)->shouldBeCalled();
+        $mailer->sendEmail($rental, Argument::any())->shouldBeCalled();
 
         $this->setContainer($container);
         $this->run($input, $output);

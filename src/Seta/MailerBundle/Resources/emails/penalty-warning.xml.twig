@@ -10,7 +10,7 @@
         Este correo es un recordatorio de la taquilla que tienes tomada en préstamo:
 
         - Número de taquilla: {{ rental.locker.code }}
-        - Fin de préstamo: {{ rental.getEnd }}
+        - Fin de préstamo: {{ rental.endAt | date('d/m/y') }}
 
         Debido a que has sobrepasado la fecha límite te informamos de que cada día de retraso
         conlleva una sanción de una semana sin poder usar el servicio de préstamos. Por favor,

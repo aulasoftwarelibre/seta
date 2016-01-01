@@ -30,6 +30,13 @@ class User extends BaseUser
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="fullname", type="string", length=255)
+     */
+    private $fullname;
+
+    /**
+     * @var string
      * @ORM\Column(name="nic", type="string", length=255, nullable=false)
      */
     private $nic;
@@ -247,5 +254,29 @@ class User extends BaseUser
     public function getNic()
     {
         return $this->nic;
+    }
+
+    /**
+     * Set fullname
+     *
+     * @param string $fullname
+     *
+     * @return User
+     */
+    public function setFullname($fullname)
+    {
+        $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    /**
+     * Get fullname
+     *
+     * @return string
+     */
+    public function getFullname()
+    {
+        return $this->fullname;
     }
 }

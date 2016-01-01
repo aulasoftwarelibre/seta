@@ -17,10 +17,10 @@ Característica: Renovar alquileres
       | sara@gmail.com  |               |                     |
     Y las siguientes taquillas:
       | código          | estado        | alquilada_a     | desde | hasta | renovable |
-      | 100             | alquilada     | mary@gmail.com  | -1    | +1    | 1         |
-      | 101             | alquilada     | sara@gmail.com  | -7    | +3    | 1         |
-      | 102             | alquilada     | john@gmail.com  | -5    | +2    | 0         |
-      | 103             | alquilada     | luis@gmail.com  | -15   | -8    | 1         |
+      | 100             | alquilada     | mary@gmail.com  | -1    | +1    | sí        |
+      | 101             | alquilada     | sara@gmail.com  | -7    | +3    | sí        |
+      | 102             | alquilada     | john@gmail.com  | -5    | +2    | no        |
+      | 103             | alquilada     | luis@gmail.com  | -15   | -8    | sí        |
 
   Escenario: Renovar una taquilla durante las 48 horas del día de entrega
     Cuando se quiere renovar el alquiler de la taquilla "100"

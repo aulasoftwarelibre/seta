@@ -10,16 +10,22 @@
         Este correo es un recordatorio de la taquilla que tienes tomada en préstamo:
 
         - Número de taquilla: {{ rental.locker.code }}
-        - Fin de préstamo: {{ rental.getEnd }}
+        - Fin de préstamo: {{ rental.endAt | date('d/m/y') }}
 
         Tu préstamo está a punto de terminar. Recuerda entregar la llave y el candado
         antes de que acabe dicho día en la sede del CEEPS o en la Conserjería anexa.
 
+        {% if rental.isRenewable %}
         Si quieres, puedes renovar por otra semana más el préstamo. Para ello puedes
         pasarte por la sede del CEEPS o pulsar el siguiente enlace:
 
         {{ rental.renewCode }}
 
         Sigue las instrucciones de la página y la renovación será automática.
+        {% else %}
+        Debido a la excesiva demanda NO es posible renovar tu préstamo. Recuerda
+        entregar la llave y el candado antes de que acabe dicho día en la sede del
+        CEEPS o en la Conserjería anexa.
+        {% endif %}
     ]]></messageText>
 </email>

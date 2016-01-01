@@ -1,38 +1,4 @@
-ceeps_core:
+seta_core:
     resource: "@SetaCoreBundle/Controller/"
     type:     annotation
     prefix:   /
-
-ceeps_mailer:
-    resource: "@SetaMailerBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-ceeps_penalty:
-    resource: "@SetaPenaltyBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-ceeps_resource:
-    resource: "@SetaResourceBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-rental:
-    resource: "@SetaRentalBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-locker:
-    resource: "@SetaLockerBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-ceeps_user:
-    resource: "@SetaUserBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation

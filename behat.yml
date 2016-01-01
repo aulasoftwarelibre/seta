@@ -9,6 +9,16 @@ default:
             url: http://localhost:1080
             purge_before_scenario: true
     suites:
+        email:
+            contexts:
+                - Seta\CoreBundle\Behat\HookContext
+                - Seta\UserBundle\Behat\UserContext
+                - Seta\LockerBundle\Behat\LockerContext
+                - Seta\RentalBundle\Behat\RentalContext
+                - Seta\MailerBundle\Behat\MailerContext
+                - Behat\MinkExtension\Context\MinkContext
+            filters:
+                tags: "@email"
         rental:
             contexts:
                 - Seta\CoreBundle\Behat\HookContext

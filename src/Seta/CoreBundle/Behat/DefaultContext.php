@@ -4,6 +4,7 @@ namespace Seta\CoreBundle\Behat;
 
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Result\StepResult;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
@@ -12,6 +13,11 @@ use Faker\Generator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
+/**
+ * Class DefaultContext
+ * @package Seta\CoreBundle\Behat
+ * @codeCoverageIgnore
+ */
 class DefaultContext implements Context, KernelAwareContext
 {
     /**

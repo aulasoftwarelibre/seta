@@ -23,6 +23,8 @@ class SetaCoreExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
         $container->setParameter('seta_core.notifications.reminder', $config['notifications']['reminder']);
+        $container->setParameter('seta_core.notifications.suspension', $config['notifications']['suspension']);
+        $container->setParameter('seta_core.notifications.renovation', $config['notifications']['renovation']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');

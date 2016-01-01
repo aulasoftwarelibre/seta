@@ -26,14 +26,19 @@ class PenaltyService implements PenaltyServiceInterface
      * @var PenaltyRepository
      */
     private $penaltyRepository;
+    /**
+     * @var string Tiempo que tiene que pasar sin devolver un préstamo para sancionar al usuario.
+     */
+    private $penalty;
 
     /**
      * PenaltyService constructor.
      */
-    public function __construct(EntityManager $manager, PenaltyRepository $penaltyRepository)
+    public function __construct(EntityManager $manager, PenaltyRepository $penaltyRepository, $penalty)
     {
         $this->manager = $manager;
         $this->penaltyRepository = $penaltyRepository;
+        $this->penalty = new \DateTime("-".$penalty);
     }
 
     /**
@@ -92,7 +97,7 @@ class PenaltyService implements PenaltyServiceInterface
         }
         $diff = $from->diff($until)->days + 1;
 
-        if ($diff > 7) {
+        if ($from > $this->penalty) {
             $end = new \DateTime('next year september 1 midnight');
         } else {
             $time = $diff * 7;
