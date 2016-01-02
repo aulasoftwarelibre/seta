@@ -6,10 +6,12 @@ use Seta\LockerBundle\Entity\Locker;
 use Seta\PenaltyBundle\Entity\Penalty;
 use Seta\PenaltyBundle\Repository\PenaltyRepository;
 use Seta\RentalBundle\Entity\Rental;
+use Seta\RentalBundle\Exception\NotExpiredRentalException;
 use Seta\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class PenaltyServiceSpec extends ObjectBehavior
 {
@@ -21,12 +23,14 @@ class PenaltyServiceSpec extends ObjectBehavior
         User $user
     )
     {
-        $this->beConstructedWith($manager, $penaltyRepository);
+        $days_before_penalty = 8;
+        $this->beConstructedWith($manager, $penaltyRepository, $days_before_penalty);
 
         $locker->getCode()->willReturn("100");
         
         $rental->getUser()->willReturn($user);
         $rental->getLocker()->willReturn($locker);
+        $rental->getDaysLate()->willReturn(2);
     }
 
     function it_is_initializable()
@@ -64,7 +68,6 @@ class PenaltyServiceSpec extends ObjectBehavior
         User $user
     )
     {
-        $rental->getEndAt()->willReturn(new \DateTime('-1 days 23:59:59'));
         $end = $this->calculatePenalty($rental);
 
         $rental->getLocker()->shouldBeCalled();
@@ -87,9 +90,22 @@ class PenaltyServiceSpec extends ObjectBehavior
         Rental $rental
     )
     {
-        $end = new \DateTime('-1 days 23:59:59');
-        $rental->getEndAt()->shouldBeCalled()->willReturn($end);
+        $rental->getDaysLate()->shouldBeCalled();
 
-        $this->calculatePenalty($rental)->shouldBeLike(new \DateTime('7 days midnight'));
+        $this->calculatePenalty($rental)->shouldBeLike(new \DateTime('14 days midnight'));
+    }
+
+    function it_can_calculate_season_penalty($rental)
+    {
+        $rental->getDaysLate()->shouldBeCalled()->willReturn(8);
+
+        $this->calculatePenalty($rental)->shouldBeLike(Penalty::getEndSeasonPenalty());
+    }
+
+    function it_cannot_calculate_not_expired_rental($rental)
+    {
+        $rental->getDaysLate()->shouldBeCalled()->willReturn(0);
+
+        $this->shouldThrow(NotExpiredRentalException::class)->duringCalculatePenalty($rental);
     }
 }

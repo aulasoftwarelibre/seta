@@ -111,7 +111,7 @@ class Rental
      */
     public function setStartAt($startAt)
     {
-        $this->startAt = $startAt;
+        $this->startAt = clone $startAt;
 
         return $this;
     }
@@ -135,8 +135,8 @@ class Rental
      */
     public function setEndAt($endAt)
     {
-        $endAt->setTime(23, 59, 59);
-        $this->endAt = $endAt;
+        $this->endAt = clone $endAt;
+        $this->endAt->setTime(0, 0, 0);
 
         return $this;
     }
@@ -158,13 +158,43 @@ class Rental
      */
     public function getDaysLeft()
     {
-        $now = new \DateTime('now');
+        $now = new \DateTime('today');
 
-        if ($now > $this->getEndAt()) {
+        $diff = $now->diff($this->getEndAt());
+
+        if ($diff->invert) {
             return 0;
         }
 
-        return $now->diff($this->getEndAt())->days;
+        return $diff->days;
+    }
+
+    /**
+     * Get days late
+     *
+     * @return int
+     */
+    public function getDaysLate()
+    {
+        $now = new \DateTime('today');
+
+        $diff = $now->diff($this->getEndAt());
+
+        if (!$diff->invert) {
+            return 0;
+        }
+
+        return $diff->days;
+    }
+
+    /**
+     * Get if rental is expired
+     *
+     * @return bool
+     */
+    public function getIsExpired()
+    {
+        return new \DateTime('today') > $this->getEndAt();
     }
 
     /**

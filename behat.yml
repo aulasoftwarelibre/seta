@@ -5,9 +5,7 @@ default:
                 comment: [ 'magenta' ]
     extensions:
         Behat\Symfony2Extension: ~
-        Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
-            url: http://localhost:1080
-            purge_before_scenario: true
+        Sgomez\Behat\SwiftMailerExtension: ~
     suites:
         email:
             contexts:
@@ -16,7 +14,6 @@ default:
                 - Seta\LockerBundle\Behat\LockerContext
                 - Seta\RentalBundle\Behat\RentalContext
                 - Seta\MailerBundle\Behat\MailerContext
-                - Behat\MinkExtension\Context\MinkContext
             filters:
                 tags: "@email"
         rental:

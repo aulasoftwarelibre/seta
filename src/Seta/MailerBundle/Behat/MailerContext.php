@@ -9,8 +9,8 @@
 namespace Seta\MailerBundle\Behat;
 
 
-use Alex\MailCatcher\Behat\MailCatcherContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Sgomez\Behat\SwiftMailerExtension\Behat\SwiftMailerContext;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -21,12 +21,12 @@ use Symfony\Component\HttpKernel\KernelInterface;
  * @package Seta\MailerBundle\Behat
  * @codeCoverageIgnore
  */
-class MailerContext extends MailCatcherContext implements KernelAwareContext
+class MailerContext extends SwiftMailerContext implements KernelAwareContext
 {
     /**
      * @var KernelInterface
      */
-    private $kernel;
+    protected $kernel;
 
     /**
      * @When /^se envía un correo de aviso de renovación con (\d+) días de antelación$/

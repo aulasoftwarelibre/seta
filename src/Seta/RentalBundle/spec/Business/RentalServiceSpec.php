@@ -19,20 +19,22 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RentalServiceSpec extends ObjectBehavior
 {
     function let(
         EntityManager $manager,
+        EventDispatcherInterface $dispatcher,
         RentalRepository $rentalRepository,
         LockerRepository $lockerRepository,
-        QueueRepository $queueRepository,
         User $user,
         Rental $rental,
         Locker $locker
     )
     {
-        $this->beConstructedWith($manager, $rentalRepository, $lockerRepository, $queueRepository);
+        $days_length_rental = 7;
+        $this->beConstructedWith($manager, $dispatcher, $lockerRepository, $rentalRepository, $days_length_rental);
         $user->getLockers()->willReturn(new ArrayCollection());
         $user->getIsPenalized()->willReturn(false);
         $user->getQueue()->willReturn(null);
@@ -111,10 +113,7 @@ class RentalServiceSpec extends ObjectBehavior
 
     function it_cannot_rent_without_free_lockers(
         User $user,
-        Queue $queue,
-        EntityManager $manager,
-        LockerRepository $lockerRepository,
-        QueueRepository $queueRepository
+        LockerRepository $lockerRepository
     )
     {
         $lockerRepository->findOneFreeLocker()->shouldBeCalled()->willThrow(NotFreeLockerException::class);

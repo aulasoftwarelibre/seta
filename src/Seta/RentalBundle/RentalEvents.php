@@ -6,10 +6,13 @@
  * Time: 13:03
  */
 
-namespace Seta\RentalBundle\Event;
+namespace Seta\RentalBundle;
 
-
-class RentalEvents
+/**
+ * Class RentalEvents
+ * @package Seta\RentalBundle\Event
+ */
+final class RentalEvents
 {
     /**
      * Evento que controla que una nueva taquilla ha sido prestada

@@ -27,19 +27,19 @@ class CronCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $time = $this->getContainer()->getParameter('seta_core.notifications.reminder');
-        $on = new \DateTime($time);
+        $time = $this->getContainer()->getParameter('seta.notifications.days_before_renovation');
+        $on = new \DateTime($time." days midnight");
         $output->write("Enviando mensajes de renovación... ");
         $total = $this->sendReminderEmail(Message::RENEW_WARNING_MESSAGE, $on);
         $output->writeln("Hecho: [${total}].");
 
-        $on = new \DateTime("yesterday");
+        $on = new \DateTime("yesterday midnight");
         $output->write("Enviando mensajes de caducidad... ");
         $total = $this->sendReminderEmail(Message::PENALTY_WARNING_MESSAGE, $on);
         $output->writeln("Hecho: [${total}].");
 
-        $time = $this->getContainer()->getParameter('seta_core.notifications.suspension');
-        $on = new \DateTime("-".$time);
+        $time = $this->getContainer()->getParameter('seta.notifications.days_before_suspension');
+        $on = new \DateTime("-".$time."days midnight");
         $output->write("Enviando mensajes de suspensión... ");
         $this->sendReminderEmail(Message::SUSPENSION_WARNING_MESSAGE, $on);
         $output->writeln("Hecho: [${total}].");

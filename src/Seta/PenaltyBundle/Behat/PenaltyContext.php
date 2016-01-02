@@ -72,8 +72,8 @@ class PenaltyContext extends DefaultContext
 
         /** @var Penalty $penalty */
         $penalty = $user->getPenalties()->current();
-        $nextCourse = new \DateTime('next year august 31');
+        $endSeason = Penalty::getEndSeasonPenalty();
 
-        \PHPUnit_Framework_Assert::assertGreaterThanOrEqual($nextCourse, $penalty->getEndAt());
+        \PHPUnit_Framework_Assert::assertGreaterThanOrEqual($endSeason, $penalty->getEndAt());
     }
 }

@@ -40,9 +40,9 @@ class RentalSpec extends ObjectBehavior
 
     function its_end_date_is_mutable()
     {
-        $end = new \DateTime('midnight');
+        $end = new \DateTime('now');
         $this->setEndAt($end);
-        $this->getEndAt()->shouldBeLike(new \DateTime('today 23:59:59'));
+        $this->getEndAt()->shouldBeLike(new \DateTime('today'));
     }
     
     function it_has_no_return_date_by_default()
@@ -93,18 +93,50 @@ class RentalSpec extends ObjectBehavior
 
     function it_get_days_left()
     {
-        $end = new \DateTime('5 days');
+        $end = new \DateTime('5 days midnight');
         $this->setEndAt($end);
 
         $this->getDaysLeft()->shouldReturn(5);
     }
     
-    function it_get_zero_days()
+    function it_get_zero_days_left()
     {
-        $end = new \DateTime('-5 days');
+        $end = new \DateTime('-5 days midnight');
         $this->setEndAt($end);
         
         $this->getDaysLeft()->shouldReturn(0);
+    }
+
+    function it_get_days_late()
+    {
+        $end = new \DateTime('-5 days midnight');
+        $this->setEndAt($end);
+
+        $this->getDaysLate()->shouldReturn(5);
+    }
+
+    function it_get_zero_days_late()
+    {
+        $end = new \DateTime('5 days midnight');
+        $this->setEndAt($end);
+
+        $this->getDaysLate()->shouldReturn(0);
+    }
+
+    function it_get_is_not_expired()
+    {
+        $end = new \DateTime('5 days midnight');
+        $this->setEndAt($end);
+
+        $this->getIsExpired()->shouldBe(false);
+    }
+
+    function it_get_is_expired()
+    {
+        $end = new \DateTime('-5 days midnight');
+        $this->setEndAt($end);
+
+        $this->getIsExpired()->shouldBe(true);
     }
 
     function it_has_default_renew_code()

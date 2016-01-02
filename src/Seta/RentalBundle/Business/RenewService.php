@@ -12,11 +12,14 @@ namespace Seta\RentalBundle\Business;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\LockerBundle\Exception\NotRentedLockerException;
 use Seta\RentalBundle\Entity\Rental;
+use Seta\RentalBundle\Event\RentalEvent;
 use Seta\RentalBundle\Exception\ExpiredRentalException;
 use Seta\RentalBundle\Exception\NotRenewableRentalException;
 use Seta\RentalBundle\Exception\TooEarlyRenovationException;
+use Seta\RentalBundle\RentalEvents;
 use Seta\RentalBundle\Repository\RentalRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RenewService
 {
@@ -28,23 +31,41 @@ class RenewService
      * @var EntityManagerInterface
      */
     private $manager;
-    private $reminder;
-    private $renovation;
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
+    /**
+     * @var int
+     */
+    private $days_before_renovation;
+    /**
+     * @var int
+     */
+    private $days_length_rental;
 
     /**
      * RenewService constructor.
+     *
+     * @param EntityManagerInterface $manager
+     * @param EventDispatcherInterface $dispatcher
+     * @param RentalRepositoryInterface $rentalRepository
+     * @param $days_before_renovation int
+     * @param $days_length_rental int
      */
     public function __construct(
         EntityManagerInterface $manager,
+        EventDispatcherInterface $dispatcher,
         RentalRepositoryInterface $rentalRepository,
-        $reminder,
-        $renovation
+        $days_before_renovation,
+        $days_length_rental
     )
     {
         $this->manager = $manager;
+        $this->dispatcher = $dispatcher;
         $this->rentalRepository = $rentalRepository;
-        $this->reminder = $reminder;
-        $this->renovation = $renovation;
+        $this->days_before_renovation = $days_before_renovation;
+        $this->days_length_rental = $days_length_rental;
     }
 
     /**
@@ -63,12 +84,14 @@ class RenewService
 
         $this->checkExpiration($rental);
 
-        $interval = \DateInterval::createFromDateString($this->renovation);
-        $newend = $rental->getEndAt()->add($interval);
-        $rental->setEndAt($newend);
+        $left = $rental->getDaysLeft() + $this->days_length_rental;
+        $rental->setEndAt(new \DateTime($left." days midnight"));
 
         $this->manager->persist($rental);
         $this->manager->flush();
+
+        $event = new RentalEvent($rental);
+        $this->dispatcher->dispatch(RentalEvents::LOCKER_RENEWED, $event);
     }
 
     /**
@@ -86,13 +109,11 @@ class RenewService
             throw new NotRenewableRentalException;
         }
 
-        $limit = new \DateTime('today 23:59:59');
-        if ($limit > $rental->getEndAt()) {
+        if ($rental->getIsExpired()) {
             throw new ExpiredRentalException;
         }
 
-        $limit = new \DateTime($this->reminder);
-        if ($rental->getEndAt() > $limit) {
+        if ($rental->getDaysLeft() > $this->days_before_renovation) {
             throw new TooEarlyRenovationException;
         }
 

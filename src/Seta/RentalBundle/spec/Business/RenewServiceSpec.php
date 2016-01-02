@@ -12,24 +12,28 @@ use Seta\RentalBundle\Repository\RentalRepository;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RenewServiceSpec extends ObjectBehavior
 {
     function let(
         EntityManager $manager,
+        EventDispatcherInterface $dispatcher,
         RentalRepository $rentalRepository,
         Rental $rental,
         Locker $locker
     )
     {
-        $reminder = '2 days';
-        $renovation = '1 week';
-        $this->beConstructedWith($manager, $rentalRepository, $reminder, $renovation);
+        $days_before_renovation = '2';
+        $days_length_rental = '7';
+        $this->beConstructedWith($manager, $dispatcher, $rentalRepository, $days_before_renovation, $days_length_rental);
 
         $locker->getStatus()->willReturn(Locker::RENTED);
 
         $rentalRepository->getCurrentRental($locker)->willReturn($rental);
         $rental->getIsRenewable()->willReturn(true);
+        $rental->getDaysLeft()->willReturn(2);
+        $rental->getIsExpired()->willReturn(false);
     }
 
 
@@ -44,10 +48,7 @@ class RenewServiceSpec extends ObjectBehavior
         EntityManager $manager
     )
     {
-        $end = new \DateTime("1 days 23:59:59");
-        $newEnd = new \DateTime("8 days 23:59:59");
-
-        $rental->getEndAt()->shouldBeCalled()->willReturn($end);
+        $newEnd = new \DateTime("9 days midnight");
         $rental->setEndAt($newEnd)->shouldBeCalled();
 
         $manager->persist($rental)->shouldBeCalled();
@@ -70,8 +71,7 @@ class RenewServiceSpec extends ObjectBehavior
         Locker $locker
     )
     {
-        $end = new \DateTime("2 days 23:59:59");
-        $rental->getEndAt()->shouldBeCalled()->willReturn($end);
+        $rental->getDaysLeft()->shouldBeCalled()->willReturn(3);
 
         $this->shouldThrow(TooEarlyRenovationException::class)->duringRenewLocker($locker);
     }
@@ -91,8 +91,7 @@ class RenewServiceSpec extends ObjectBehavior
         Locker $locker
     )
     {
-        $end = new \DateTime("-1 days 23:59:59");
-        $rental->getEndAt()->shouldBeCalled()->willReturn($end);
+        $rental->getIsExpired()->shouldBeCalled()->willReturn(true);
 
         $this->shouldThrow(ExpiredRentalException::class)->duringRenewLocker($locker);
     }

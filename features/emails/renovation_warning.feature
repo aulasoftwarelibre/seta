@@ -30,7 +30,7 @@ Característica: Envíar correos de renovación
       | 101             | alquilada     | sara@gmail.com  | -7    | -1    | sí        |
       | 102             | alquilada     | john@gmail.com  | -5    | +3    | no        |
     Cuando se envía un correo de aviso de renovación con 2 días de antelación
-    Entonces 1 correos deberían haber sido enviados
+    Entonces 1 correo deberían haber sido enviado
     Cuando abro un correo con asunto "Aviso de sanción de préstamo de la taquilla 101"
     Entonces debería ver "has sobrepasado la fecha límite" en el correo
 

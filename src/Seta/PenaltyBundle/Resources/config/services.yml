@@ -8,4 +8,7 @@ services:
         factory: [ @doctrine, getRepository ]
     seta.service.penalty:
         class: Seta\PenaltyBundle\Business\PenaltyService
-        arguments: [ @doctrine.orm.default_entity_manager, @seta.repository.penalty ]
+        arguments:
+            - '@doctrine.orm.default_entity_manager'
+            - '@seta.repository.penalty'
+            - '%seta.notifications.days_before_suspension%'

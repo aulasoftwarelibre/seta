@@ -3,6 +3,8 @@ services:
 #        class: Seta\RentalBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
 
+    # Repositorios
+
     seta.repository.queue:
         class: Seta\RentalBundle\Repository\QueueRepository
         arguments: [ SetaRentalBundle:Queue ]
@@ -13,22 +15,34 @@ services:
         arguments: [ SetaRentalBundle:Rental ]
         factory: [ @doctrine, getRepository ]
 
+    # Servicios
+
     seta.service.rental:
         class: Seta\RentalBundle\Business\RentalService
         arguments:
             - @doctrine.orm.default_entity_manager
-            - @seta.repository.rental
+            - @event_dispatcher
             - @seta.repository.locker
-            - @seta.repository.queue
+            - @seta.repository.rental
+            - %seta.duration.days_length_rental%
 
     seta.service.renew:
         class: Seta\RentalBundle\Business\RenewService
         arguments:
             - @doctrine.orm.default_entity_manager
+            - @event_dispatcher
             - @seta.repository.rental
-            - %seta_core.notifications.reminder%
-            - %seta_core.notifications.renovation%
+            - %seta.notifications.days_before_renovation%
+            - %seta.duration.days_length_rental%
 
     seta.service.return:
         class: Seta\RentalBundle\Business\ReturnService
         arguments: [ @doctrine.orm.default_entity_manager, @seta.service.penalty, @seta.repository.rental ]
+
+    # Subscribers
+
+    seta_rental.event_listener.mailer_listener:
+        class: Seta\RentalBundle\EventListener\MailerListener
+        arguments: [ @seta_mailing ]
+        tags:
+            - { name: kernel.event_subscriber }

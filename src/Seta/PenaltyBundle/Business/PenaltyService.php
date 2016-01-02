@@ -27,18 +27,21 @@ class PenaltyService implements PenaltyServiceInterface
      */
     private $penaltyRepository;
     /**
-     * @var string Tiempo que tiene que pasar sin devolver un préstamo para sancionar al usuario.
+     * @var string Días a partir del cual el retraso conlleva sanción.
      */
-    private $penalty;
+    private $days_before_suspension;
 
     /**
      * PenaltyService constructor.
+     * @param EntityManager $manager
+     * @param PenaltyRepository $penaltyRepository
+     * @param $days_before_penalty string Días a partir del cual el retraso conlleva sanción
      */
-    public function __construct(EntityManager $manager, PenaltyRepository $penaltyRepository, $penalty)
+    public function __construct(EntityManager $manager, PenaltyRepository $penaltyRepository, $days_before_penalty)
     {
         $this->manager = $manager;
         $this->penaltyRepository = $penaltyRepository;
-        $this->penalty = new \DateTime("-".$penalty);
+        $this->days_before_suspension = $days_before_penalty;
     }
 
     /**
@@ -89,18 +92,16 @@ class PenaltyService implements PenaltyServiceInterface
      */
     public function calculatePenalty(Rental $rental)
     {
-        $until = $rental->getEndAt();
-        $from = new \DateTime('now');
+        $late = $rental->getDaysLate();
 
-        if ($from < $until) {
+        if ($late === 0) {
             throw new NotExpiredRentalException;
         }
-        $diff = $from->diff($until)->days + 1;
 
-        if ($from > $this->penalty) {
-            $end = new \DateTime('next year september 1 midnight');
+        if ($late >= $this->days_before_suspension) {
+            $end = Penalty::getEndSeasonPenalty();
         } else {
-            $time = $diff * 7;
+            $time = $late * 7;
             $end = new \DateTime($time.' days midnight');
         }
 

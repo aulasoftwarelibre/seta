@@ -24,16 +24,28 @@ class Configuration implements ConfigurationInterface
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+        /*
+         seta_core:
+            notification:
+                days_before_renovation: 2
+                days_before_suspension: 8
+            duration:
+                days_length_rental: 7
+         */
 
         $rootNode
             ->children()
-                ->arrayNode('notifications')
+                ->arrayNode('notification')
                     ->children()
-                        ->scalarNode('renovation')->defaultValue('1 week')->end()
-                        ->scalarNode('reminder')->defaultValue('2 days')->end()
-                        ->scalarNode('suspension')->defaultValue('8 days')->end()
+                        ->scalarNode('days_before_renovation')->defaultValue('2')->end()
+                        ->scalarNode('days_before_suspension')->defaultValue('8')->end()
                     ->end()
-                ->end() // notifications
+                ->end() // notification
+                ->arrayNode('duration')
+                    ->children()
+                        ->scalarNode('days_length_rental')->defaultValue('7')->end()
+                    ->end()
+                ->end() // duration
             ->end()
         ;
 

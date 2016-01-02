@@ -15,10 +15,13 @@ use Seta\LockerBundle\Repository\LockerRepository;
 use Seta\PenaltyBundle\Exception\PenalizedUserException;
 use Seta\PenaltyBundle\Exception\TooManyLockersRentedException;
 use Seta\RentalBundle\Entity\Rental;
+use Seta\RentalBundle\Event\RentalEvent;
+use Seta\RentalBundle\RentalEvents;
 use Seta\RentalBundle\Repository\QueueRepository;
 use Seta\RentalBundle\Repository\RentalRepository;
 use Seta\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RentalService
 {
@@ -35,21 +38,35 @@ class RentalService
      */
     private $lockerRepository;
     /**
-     * @var QueueRepository
+     * @var EventDispatcherInterface
      */
-    private $queueRepository;
+    private $dispatcher;
+    /**
+     * @var integer
+     */
+    private $days_length_rental;
 
+    /**
+     * RentalService constructor.
+     * @param EntityManagerInterface $manager
+     * @param EventDispatcherInterface $dispatcher
+     * @param LockerRepository $lockerRepository
+     * @param RentalRepository $rentalRepository
+     * @param integer $days_length_rental
+     */
     public function __construct(
         EntityManagerInterface $manager,
-        RentalRepository $rentalRepository,
+        EventDispatcherInterface $dispatcher,
         LockerRepository $lockerRepository,
-        QueueRepository $queueRepository
+        RentalRepository $rentalRepository,
+        $days_length_rental
     )
     {
         $this->manager = $manager;
-        $this->rentalRepository = $rentalRepository;
+        $this->dispatcher = $dispatcher;
         $this->lockerRepository = $lockerRepository;
-        $this->queueRepository = $queueRepository;
+        $this->rentalRepository = $rentalRepository;
+        $this->days_length_rental = $days_length_rental;
     }
 
     public function rentFirstFreeLocker(User $user)
@@ -78,15 +95,17 @@ class RentalService
 
         $rental->setUser($user);
         $rental->setLocker($locker);
-        $rental->setEndAt(new \DateTime('+7 days'));
+        $rental->setEndAt(new \DateTime($this->days_length_rental." days"));
 
         $locker->setStatus(Locker::RENTED);
         $locker->setOwner($user);
 
         $this->manager->persist($locker);
         $this->manager->persist($rental);
-
         $this->manager->flush();
+
+        $event = new RentalEvent($rental);
+        $this->dispatcher->dispatch(RentalEvents::LOCKER_RENTED, $event);
     }
 
 }

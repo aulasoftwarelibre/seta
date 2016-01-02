@@ -197,4 +197,22 @@ class Penalty
     {
         return $this->rental;
     }
+
+    /**
+     * @param null $today
+     * @return \DateTime
+     */
+    static public function getEndSeasonPenalty($today = null)
+    {
+        if (!$today) {
+            $today = new \DateTime('today');
+        }
+
+        $endSeason = new \DateTime("september 1 midnight");
+        if ($today > $endSeason) {
+            return new \DateTime('next year september 1 midnight');
+        }
+
+        return $endSeason;
+    }
 }

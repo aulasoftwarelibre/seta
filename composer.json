@@ -35,7 +35,7 @@
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "^5.1",
         "henrikbjorn/phpspec-code-coverage": "^2.0",
-        "alexandresalome/mailcatcher": "~1.0"
+        "sgomez/behat-swiftmailer-extension": "*@dev"
     },
     "scripts": {
         "post-install-cmd": [
