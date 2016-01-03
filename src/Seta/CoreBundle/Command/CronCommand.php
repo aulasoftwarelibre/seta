@@ -14,6 +14,7 @@ use Seta\RentalBundle\Entity\Rental;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class CronCommand extends ContainerAwareCommand
 {
@@ -25,8 +26,23 @@ class CronCommand extends ContainerAwareCommand
         ;
     }
 
+    protected function initialize(InputInterface $input, OutputInterface $output)
+    {
+        parent::initialize($input, $output);
+
+        // The mailer service needs the default locale
+        $locale = $this->getContainer()->get('translator')->getLocale();
+
+        // We build a fake request with the default locale
+        $request = new Request();
+        $request->setDefaultLocale($locale);
+
+        $this->getContainer()->get('request_stack')->push($request);
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
         $time = $this->getContainer()->getParameter('seta.notifications.days_before_renovation');
         $on = new \DateTime($time." days midnight");
         $output->write("Enviando mensajes de renovación... ");
