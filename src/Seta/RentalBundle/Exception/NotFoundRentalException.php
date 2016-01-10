@@ -11,5 +11,5 @@ namespace Seta\RentalBundle\Exception;
 
 class NotFoundRentalException extends \RuntimeException
 {
-
+    protected $message = 'El alquiler no existe.';
 }

@@ -14,5 +14,5 @@ namespace Seta\LockerBundle\Exception;
  */
 class NotFreeLockerException extends \RuntimeException
 {
-
+    protected $message = 'No hay taquillas libres.';
 }

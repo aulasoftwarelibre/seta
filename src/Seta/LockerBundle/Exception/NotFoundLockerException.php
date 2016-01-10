@@ -14,5 +14,5 @@ namespace Seta\LockerBundle\Exception;
  */
 class NotFoundLockerException extends \RuntimeException
 {
-
+    protected $message = 'No se ha encontrado la taquilla.';
 }

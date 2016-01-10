@@ -11,5 +11,5 @@ namespace Seta\RentalBundle\Exception;
 
 class NotExpiredRentalException extends \RuntimeException
 {
-
+    protected $message = 'El alquiler no ha caducado.';
 }

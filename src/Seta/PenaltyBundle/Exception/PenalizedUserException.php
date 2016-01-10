@@ -11,4 +11,5 @@ namespace Seta\PenaltyBundle\Exception;
 
 class PenalizedUserException extends \RuntimeException
 {
+    protected $message = 'El usuario está sancionado.';
 }

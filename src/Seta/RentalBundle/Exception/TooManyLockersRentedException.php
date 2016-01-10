@@ -6,10 +6,10 @@
  * Time: 16:27
  */
 
-namespace Seta\PenaltyBundle\Exception;
+namespace Seta\RentalBundle\Exception;
 
 
 class TooManyLockersRentedException extends \RuntimeException
 {
-
+    protected $message = 'El usuario ya tiene una taquilla y no es posible alquilar otra.';
 }

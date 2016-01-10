@@ -15,5 +15,5 @@ namespace Seta\LockerBundle\Exception;
  */
 class BusyLockerException extends \RuntimeException
 {
-
+    protected $message = 'La taquilla ya se encuentra alquilada';
 }

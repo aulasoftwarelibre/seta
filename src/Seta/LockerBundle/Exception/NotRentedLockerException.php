@@ -14,5 +14,5 @@ namespace Seta\LockerBundle\Exception;
  */
 class NotRentedLockerException extends \RuntimeException
 {
-
+    protected $message = 'La taquilla no está alquilada.';
 }

@@ -11,5 +11,5 @@ namespace Seta\RentalBundle\Exception;
 
 class TooEarlyRenovationException extends \RuntimeException
 {
-
+    protected $message = 'Es demasiado pronto para renovar la taquilla';
 }

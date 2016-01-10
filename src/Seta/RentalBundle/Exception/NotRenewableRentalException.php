@@ -11,5 +11,5 @@ namespace Seta\RentalBundle\Exception;
 
 class NotRenewableRentalException extends \RuntimeException
 {
-
+    protected $message = 'Este alquiler está marcado como no renovable.';
 }
