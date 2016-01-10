@@ -1,8 +1,0 @@
-services:
-#    locker.example:
-#        class: Seta\LockerBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
-    seta.repository.locker:
-        class: Seta\LockerBundle\Behat\LockerContext
-        arguments: [ SetaLockerBundle:Locker ]
-        factory: [ @doctrine, getRepository ]

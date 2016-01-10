@@ -1,8 +1,0 @@
-services:
-#    seta_user.example:
-#        class: Seta\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
-    seta.repository.user:
-        class: Seta\UserBundle\Repository\UserRepository
-        arguments: [ SetaUserBundle:User ]
-        factory: [ @doctrine, getRepository ]

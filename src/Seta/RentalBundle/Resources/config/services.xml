@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <!-- Repositories -->
+
+        <service id="seta.repository.rental" class="Seta\RentalBundle\Repository\RentalRepository">
+            <argument>SetaRentalBundle:Rental</argument>
+            <factory service="doctrine" method="getRepository" />
+        </service>
+
+        <service id="seta.repository.queue" class="Seta\RentalBundle\Repository\QueueRepository">
+            <argument>SetaRentalBundle:Queue</argument>
+            <factory service="doctrine" method="getRepository" />
+        </service>
+
+        <!-- Services -->
+
+        <service id="seta.service.rental" class="Seta\RentalBundle\Business\RentalService">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="seta.repository.locker" />
+            <argument type="service" id="seta.repository.rental" />
+            <argument>%seta.duration.days_length_rental%</argument>
+        </service>
+
+        <service id="seta.service.renew" class="Seta\RentalBundle\Business\RenewService">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="seta.repository.rental" />
+            <argument>%seta.notifications.days_before_renovation%</argument>
+            <argument>%seta.duration.days_length_rental%</argument>
+        </service>
+
+        <service id="seta.service.return" class="Seta\RentalBundle\Business\ReturnService">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="seta.service.penalty" />
+            <argument type="service" id="seta.repository.rental" />
+        </service>
+
+        <!-- Subscribers -->
+
+        <service id="seta_rental.event_listener.mailer_listener" class="Seta\RentalBundle\EventListener\MailerListener">
+            <argument type="service" id="seta_mailing" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+    </services>
+
+</container>

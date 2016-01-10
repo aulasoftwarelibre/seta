@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="seta.repository.locker" class="Seta\LockerBundle\Repository\LockerRepository">
+            <argument type="string">SetaLockerBundle:Locker</argument>
+            <factory service="doctrine" method="getRepository" />
+        </service>
+    </services>
+
+</container>

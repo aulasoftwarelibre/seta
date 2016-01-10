@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="seta.repository.penalty" class="Seta\PenaltyBundle\Repository\PenaltyRepository">
+            <argument>SetaPenaltyBundle:Penalty</argument>
+            <factory service="doctrine" method="getRepository" />
+        </service>
+
+        <service id="seta.service.penalty" class="Seta\PenaltyBundle\Business\PenaltyService">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="seta.repository.penalty" />
+            <argument type="string">%seta.notifications.days_before_suspension%</argument>
+        </service>
+    </services>
+</container>
