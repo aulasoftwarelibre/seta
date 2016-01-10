@@ -14,8 +14,7 @@ class PenaltyRepositorySpec extends ObjectBehavior
 {
     function let(
         EntityManager $manager,
-        ClassMetadata $metadata,
-        Penalty $penalty
+        ClassMetadata $metadata
     )
     {
         $metadata->beConstructedWith([Penalty::class]);

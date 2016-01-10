@@ -111,7 +111,7 @@ class RentalServiceSpec extends ObjectBehavior
         LockerRepository $lockerRepository
     )
     {
-        $lockerRepository->findOneFreeLocker()->shouldBeCalled()->willThrow(NotFreeLockerException::class);
+        $lockerRepository->findOneFreeLocker()->shouldBeCalled()->willReturn(null);
 
         $this->shouldThrow(NotFreeLockerException::class)->duringRentFirstFreeLocker($user);
     }

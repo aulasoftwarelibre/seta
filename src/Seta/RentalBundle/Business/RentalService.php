@@ -12,6 +12,7 @@ namespace Seta\RentalBundle\Business;
 use Doctrine\ORM\EntityManagerInterface;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\LockerBundle\Exception\BusyLockerException;
+use Seta\LockerBundle\Exception\NotFreeLockerException;
 use Seta\LockerBundle\Repository\LockerRepository;
 use Seta\PenaltyBundle\Exception\PenalizedUserException;
 use Seta\RentalBundle\Exception\TooManyLockersRentedException;
@@ -71,6 +72,10 @@ class RentalService
     public function rentFirstFreeLocker(User $user)
     {
         $locker = $this->lockerRepository->findOneFreeLocker();
+
+        if (!$locker) {
+            throw new NotFreeLockerException;
+        }
 
         $this->rentLocker($user, $locker);
     }
