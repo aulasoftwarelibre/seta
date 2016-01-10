@@ -12,6 +12,9 @@ use Prophecy\Argument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class CronCommandSpec extends ObjectBehavior
 {
@@ -53,13 +56,20 @@ class CronCommandSpec extends ObjectBehavior
         MailService $mailer,
         OutputInterface $output,
         Rental $rental,
-        RentalRepository $rentalRepository
+        RentalRepository $rentalRepository,
+        RequestStack $requestStack,
+        TranslatorInterface $translator
     )
     {
         $container->getParameter('seta.notifications.days_before_renovation')->shouldBeCalled()->willReturn('2');
         $container->getParameter('seta.notifications.days_before_suspension')->shouldBeCalled()->willReturn('8');
         $container->get('seta.repository.rental')->shouldBeCalled()->willReturn($rentalRepository);
         $container->get('seta_mailing')->shouldBeCalled()->willReturn($mailer);
+        $container->get('translator')->shouldBeCalled()->willReturn($translator);
+        $translator->getLocale()->shouldBeCalled()->willReturn('es');
+        $container->get('request_stack')->shouldBeCalled()->willReturn($requestStack);
+        $requestStack->push(Argument::type(Request::class))->shouldBeCalled();
+        
 
         $rentalRepository
             ->getExpireOnDateRentals(Argument::type(\DateTime::class))

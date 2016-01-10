@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="queue")
  * @ORM\Entity(repositoryClass="Seta\RentalBundle\Repository\QueueRepository")
+ * @codeCoverageIgnore
  */
 class Queue
 {

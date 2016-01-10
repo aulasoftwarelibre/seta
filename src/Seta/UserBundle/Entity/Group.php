@@ -38,12 +38,11 @@ class Group extends BaseGroup
      */
     protected $users;
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
+    public function __construct($name, array $roles)
     {
-        $this->id = $id;
+        parent::__construct($name, $roles);
+
+        $this->users = new ArrayCollection();
     }
 
     /**

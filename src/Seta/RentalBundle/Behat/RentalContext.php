@@ -34,7 +34,10 @@ class RentalContext extends DefaultContext
         if (!$locker) {
             throw new \Exception('Locker not found: ' . $code);
         }
-        $this->getContainer()->get('seta.service.return')->returnLocker($locker);
+
+        $rental = $this->getRepository('rental')->getCurrentRental($locker);
+
+        $this->getContainer()->get('seta.service.return')->returnRental($rental);
     }
 
     /**
@@ -48,8 +51,10 @@ class RentalContext extends DefaultContext
             throw new \Exception('Locker not found: ' . $code);
         }
 
+        $rental = $this->getRepository('rental')->getCurrentRental($locker);
+
         try {
-            $this->getContainer()->get('seta.service.renew')->renewLocker($locker);
+            $this->getContainer()->get('seta.service.renew')->renewRental($rental);
         } catch(NotRenewableRentalException $e) {
         } catch(ExpiredRentalException $e) {
         } catch(TooEarlyRenovationException $e) {

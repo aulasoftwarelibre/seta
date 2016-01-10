@@ -2,16 +2,16 @@
 
 namespace spec\Seta\RentalBundle\Business;
 
-use Seta\LockerBundle\Entity\Locker;
-use Seta\LockerBundle\Exception\NotRentedLockerException;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\RentalBundle\Exception\ExpiredRentalException;
-use Seta\RentalBundle\Exception\NotRenewableRentalException;
-use Seta\RentalBundle\Exception\TooEarlyRenovationException;
-use Seta\RentalBundle\Repository\RentalRepository;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Seta\RentalBundle\Entity\Rental;
+use Seta\RentalBundle\Event\RentalEvent;
+use Seta\RentalBundle\Exception\ExpiredRentalException;
+use Seta\RentalBundle\Exception\FinishedRentalException;
+use Seta\RentalBundle\Exception\NotRenewableRentalException;
+use Seta\RentalBundle\Exception\TooEarlyRenovationException;
+use Seta\RentalBundle\RentalEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RenewServiceSpec extends ObjectBehavior
@@ -19,21 +19,17 @@ class RenewServiceSpec extends ObjectBehavior
     function let(
         EntityManager $manager,
         EventDispatcherInterface $dispatcher,
-        RentalRepository $rentalRepository,
-        Rental $rental,
-        Locker $locker
+        Rental $rental
     )
     {
         $days_before_renovation = '2';
         $days_length_rental = '7';
-        $this->beConstructedWith($manager, $dispatcher, $rentalRepository, $days_before_renovation, $days_length_rental);
+        $this->beConstructedWith($manager, $dispatcher, $days_before_renovation, $days_length_rental);
 
-        $locker->getStatus()->willReturn(Locker::RENTED);
-
-        $rentalRepository->getCurrentRental($locker)->willReturn($rental);
         $rental->getIsRenewable()->willReturn(true);
         $rental->getDaysLeft()->willReturn(2);
         $rental->getIsExpired()->willReturn(false);
+        $rental->getReturnAt()->willReturn(null);
     }
 
 
@@ -44,55 +40,56 @@ class RenewServiceSpec extends ObjectBehavior
 
     function it_can_renew_a_rental(
         Rental $rental,
-        Locker $locker,
-        EntityManager $manager
+        EntityManager $manager,
+        EventDispatcherInterface $dispatcher
     )
     {
+        $rental->getReturnAt()->shouldBeCalled();
+
         $newEnd = new \DateTime("9 days midnight");
         $rental->setEndAt($newEnd)->shouldBeCalled();
 
         $manager->persist($rental)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 
-        $this->renewLocker($locker);
+        $dispatcher->dispatch(RentalEvents::LOCKER_RENEWED, Argument::type(RentalEvent::class))->shouldBeCalled();
+
+        $this->renewRental($rental);
     }
     
-    function it_cannot_renew_a_not_rented_locker(
-        Locker $locker
+    function it_cannot_renew_a_returned_rental(
+        Rental $rental
     )
     {
-        $locker->getStatus()->shouldBeCalled()->willReturn(Locker::AVAILABLE);
+        $rental->getReturnAt()->shouldBeCalled()->willReturn(new \DateTime());
         
-        $this->shouldThrow(NotRentedLockerException::class)->duringRenewLocker($locker);
+        $this->shouldThrow(FinishedRentalException::class)->duringRenewRental($rental);
     }
 
     function it_cannot_renew_a_rental_too_early(
-        Rental $rental,
-        Locker $locker
+        Rental $rental
     )
     {
         $rental->getDaysLeft()->shouldBeCalled()->willReturn(3);
 
-        $this->shouldThrow(TooEarlyRenovationException::class)->duringRenewLocker($locker);
+        $this->shouldThrow(TooEarlyRenovationException::class)->duringRenewRental($rental);
     }
 
     function it_cannot_renew_blocked_rentals(
-        Rental $rental,
-        Locker $locker
+        Rental $rental
     )
     {
         $rental->getIsRenewable()->shouldBeCalled()->willReturn(false);
 
-        $this->shouldThrow(NotRenewableRentalException::class)->duringRenewLocker($locker);
+        $this->shouldThrow(NotRenewableRentalException::class)->duringRenewRental($rental);
     }
 
     function it_cannot_renew_expired_rental(
-        Rental $rental,
-        Locker $locker
+        Rental $rental
     )
     {
         $rental->getIsExpired()->shouldBeCalled()->willReturn(true);
 
-        $this->shouldThrow(ExpiredRentalException::class)->duringRenewLocker($locker);
+        $this->shouldThrow(ExpiredRentalException::class)->duringRenewRental($rental);
     }
 }

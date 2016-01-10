@@ -14,6 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Penalty
 {
+    const ACTIVE = 'penalty.active';
+    const DONE = 'penalty.done';
+
     /**
      * @var int
      *
@@ -26,23 +29,30 @@ class Penalty
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="start_at", type="datetime")
+     * @ORM\Column(type="datetime")
      */
     private $startAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_at", type="datetime")
+     * @ORM\Column(type="datetime")
      */
     private $endAt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(type="text")
      */
     private $comment;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $status;
 
     /**
      * @var User
@@ -66,6 +76,7 @@ class Penalty
     public function __construct()
     {
         $this->startAt = new \DateTime('now');
+        $this->status = self::ACTIVE;
     }
 
     /**
@@ -209,10 +220,34 @@ class Penalty
         }
 
         $endSeason = new \DateTime("september 1 midnight");
-        if ($today > $endSeason) {
+        if ($today >= $endSeason) {
             return new \DateTime('next year september 1 midnight');
         }
 
         return $endSeason;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Penalty
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

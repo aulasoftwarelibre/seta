@@ -31,7 +31,6 @@
         <service id="seta.service.renew" class="Seta\RentalBundle\Business\RenewService">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="seta.repository.rental" />
             <argument>%seta.notifications.days_before_renovation%</argument>
             <argument>%seta.duration.days_length_rental%</argument>
         </service>
@@ -40,7 +39,6 @@
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="seta.service.penalty" />
-            <argument type="service" id="seta.repository.rental" />
         </service>
 
         <!-- Subscribers -->

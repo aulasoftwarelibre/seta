@@ -9,6 +9,7 @@
 namespace Seta\RentalBundle\Business;
 
 
+use Doctrine\ORM\EntityManagerInterface;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\LockerBundle\Exception\BusyLockerException;
 use Seta\LockerBundle\Repository\LockerRepository;
@@ -19,7 +20,6 @@ use Seta\RentalBundle\Event\RentalEvent;
 use Seta\RentalBundle\RentalEvents;
 use Seta\RentalBundle\Repository\RentalRepository;
 use Seta\UserBundle\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RentalService

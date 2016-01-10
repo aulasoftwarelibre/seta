@@ -3,6 +3,7 @@
 namespace spec\Seta\LockerBundle\Entity;
 
 use Seta\LockerBundle\Entity\Locker;
+use Seta\RentalBundle\Entity\Queue;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
@@ -77,4 +78,14 @@ class LockerSpec extends ObjectBehavior
         $this->__toString()->shouldBe('1000A');
     }
 
+    function it_has_no_default_queue()
+    {
+        $this->getQueue()->shouldBe(null);
+    }
+
+    function its_queue_is_mutable(Queue $queue)
+    {
+        $this->setQueue($queue);
+        $this->getQueue()->shouldBe($queue);
+    }
 }

@@ -5,7 +5,7 @@ default:
                 comment: [ 'magenta' ]
     extensions:
         Behat\Symfony2Extension: ~
-        Sgomez\Behat\SwiftMailerExtension: ~
+        Sgomez\DebugSwiftMailerBundle\ServiceContainer\Extension: ~
     suites:
         email:
             contexts:

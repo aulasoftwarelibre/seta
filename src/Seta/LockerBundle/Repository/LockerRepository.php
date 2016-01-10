@@ -30,10 +30,6 @@ class LockerRepository extends EntityRepository
 
         $locker = $qb->getQuery()->getOneOrNullResult();
 
-        if (!$locker) {
-            throw new NotFreeLockerException;
-        }
-
         return $locker;
     }
 }
