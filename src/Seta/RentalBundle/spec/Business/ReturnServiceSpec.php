@@ -10,18 +10,20 @@ use Seta\RentalBundle\Repository\RentalRepository;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ReturnServiceSpec extends ObjectBehavior
 {
     function let(
         EntityManager $manager,
+        EventDispatcherInterface $dispatcher,
         PenaltyService $penaltyService,
         RentalRepository $rentalRepository,
         Locker $locker,
         Rental $rental
     )
     {
-        $this->beConstructedWith($manager, $penaltyService, $rentalRepository);
+        $this->beConstructedWith($manager, $dispatcher, $penaltyService, $rentalRepository);
 
         $locker->getStatus()->willReturn(Locker::RENTED);
 

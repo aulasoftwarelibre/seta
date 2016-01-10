@@ -70,4 +70,11 @@ class LockerSpec extends ObjectBehavior
         $this->setOwner($user);
         $this->getOwner()->shouldReturn($user);
     }
+
+    function it_can_cast_to_string()
+    {
+        $this->setCode('1000A');
+        $this->__toString()->shouldBe('1000A');
+    }
+
 }

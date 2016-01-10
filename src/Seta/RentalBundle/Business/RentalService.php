@@ -13,11 +13,10 @@ use Seta\LockerBundle\Entity\Locker;
 use Seta\LockerBundle\Exception\BusyLockerException;
 use Seta\LockerBundle\Repository\LockerRepository;
 use Seta\PenaltyBundle\Exception\PenalizedUserException;
-use Seta\PenaltyBundle\Exception\TooManyLockersRentedException;
+use Seta\RentalBundle\Exception\TooManyLockersRentedException;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Event\RentalEvent;
 use Seta\RentalBundle\RentalEvents;
-use Seta\RentalBundle\Repository\QueueRepository;
 use Seta\RentalBundle\Repository\RentalRepository;
 use Seta\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -82,11 +81,11 @@ class RentalService
             throw new PenalizedUserException();
         }
 
-        if ($locker->getOwner()) {
+        if ($locker->getStatus() != Locker::AVAILABLE) {
             throw new BusyLockerException();
         }
 
-        if ($user->getLockers()->count() > 0) {
+        if ($user->getLocker()) {
             throw new TooManyLockersRentedException();
         }
 

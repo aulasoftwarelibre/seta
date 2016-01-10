@@ -73,24 +73,17 @@ class UserSpec extends ObjectBehavior
         $this->getPenalties()->shouldHaveCount(0);
     }
 
-    function it_has_no_lockers_by_default()
+    function it_has_no_locker_by_default()
     {
-        $this->getLockers()->shouldHaveCount(0);
+        $this->getLocker()->shouldBe(null);
     }
 
-    function it_can_add_a_locker(Locker $locker)
+    function it_can_set_a_locker(Locker $locker)
     {
-        $this->addLocker($locker);
-        $this->getLockers()->shouldHaveCount(1);
+        $this->setLocker($locker);
+        $this->getLocker()->shouldBe($locker);
     }
 
-    function it_can_remove_a_locker(Locker $locker)
-    {
-        $this->addLocker($locker);
-        $this->removeLocker($locker);
-        $this->getLockers()->shouldHaveCount(0);
-    }
-    
     function it_has_no_queue_by_default()
     {
         $this->getQueue()->shouldReturn(null);        

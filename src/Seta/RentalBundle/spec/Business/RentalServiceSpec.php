@@ -5,17 +5,12 @@ namespace spec\Seta\RentalBundle\Business;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\LockerBundle\Exception\BusyLockerException;
 use Seta\LockerBundle\Exception\NotFreeLockerException;
-use Seta\LockerBundle\Exception\NotRentedLockerException;
 use Seta\LockerBundle\Repository\LockerRepository;
-use Seta\PenaltyBundle\Business\PenaltyService;
 use Seta\PenaltyBundle\Exception\PenalizedUserException;
-use Seta\PenaltyBundle\Exception\TooManyLockersRentedException;
-use Seta\RentalBundle\Entity\Queue;
+use Seta\RentalBundle\Exception\TooManyLockersRentedException;
 use Seta\RentalBundle\Entity\Rental;
-use Seta\RentalBundle\Repository\QueueRepository;
 use Seta\RentalBundle\Repository\RentalRepository;
 use Seta\UserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -35,12 +30,12 @@ class RentalServiceSpec extends ObjectBehavior
     {
         $days_length_rental = 7;
         $this->beConstructedWith($manager, $dispatcher, $lockerRepository, $rentalRepository, $days_length_rental);
-        $user->getLockers()->willReturn(new ArrayCollection());
+        $user->getLocker()->willReturn(null);
         $user->getIsPenalized()->willReturn(false);
         $user->getQueue()->willReturn(null);
 
         $locker->getOwner()->willReturn(null);
-        $locker->getStatus()->willReturn(Locker::RENTED);
+        $locker->getStatus()->willReturn(Locker::AVAILABLE);
 
         $rentalRepository->getCurrentRental($locker)->willReturn($rental);
         $rental->getIsRenewable()->willReturn(true);
@@ -106,7 +101,7 @@ class RentalServiceSpec extends ObjectBehavior
         Locker $locker
     )
     {
-        $locker->getOwner()->willReturn(new User());
+        $locker->getStatus()->willReturn(Locker::RENTED);
 
         $this->shouldThrow(BusyLockerException::class)->duringRentLocker($user, $locker);
     }
@@ -133,12 +128,10 @@ class RentalServiceSpec extends ObjectBehavior
 
     function it_cannot_rent_two_lockers_to_the_same_user(
         User $user,
-        Locker $locker,
-        ArrayCollection $collection
+        Locker $locker
     )
     {
-        $user->getLockers()->willReturn($collection);
-        $collection->count()->willReturn(1);
+        $user->getLocker()->willReturn($locker);
 
         $this->shouldThrow(TooManyLockersRentedException::class)->duringRentLocker($user, $locker);
     }

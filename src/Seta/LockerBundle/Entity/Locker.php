@@ -2,15 +2,20 @@
 
 namespace Seta\LockerBundle\Entity;
 
+use Seta\RentalBundle\Entity\Queue;
 use Seta\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * Locker
  *
  * @ORM\Table(name="locker")
  * @ORM\Entity(repositoryClass="Seta\LockerBundle\Repository\LockerRepository")
+ * @UniqueEntity(fields={"code"})
  */
 class Locker
 {
@@ -52,10 +57,16 @@ class Locker
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Seta\UserBundle\Entity\User", inversedBy="lockers")
+     * @ORM\OneToOne(targetEntity="Seta\UserBundle\Entity\User", inversedBy="locker")
      * @ORM\JoinColumn(nullable=true)
      */
     private $owner;
+
+    /**
+     * @var Queue
+     * @ORM\OneToOne(targetEntity="Seta\RentalBundle\Entity\Queue", mappedBy="locker")
+     */
+    private $queue;
 
     /**
      * Locker constructor.
@@ -65,7 +76,6 @@ class Locker
         $this->rentals = new ArrayCollection();
         $this->status = Locker::AVAILABLE;
     }
-
 
     /**
      * Get id
@@ -181,5 +191,39 @@ class Locker
     public function getOwner()
     {
         return $this->owner;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set queue
+     *
+     * @param \Seta\RentalBundle\Entity\Queue $queue
+     *
+     * @return Locker
+     */
+    public function setQueue(\Seta\RentalBundle\Entity\Queue $queue = null)
+    {
+        $this->queue = $queue;
+
+        return $this;
+    }
+
+    /**
+     * Get queue
+     *
+     * @return \Seta\RentalBundle\Entity\Queue
+     */
+    public function getQueue()
+    {
+        return $this->queue;
     }
 }

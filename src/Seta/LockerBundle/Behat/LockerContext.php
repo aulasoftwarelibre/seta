@@ -52,7 +52,7 @@ class LockerContext extends DefaultContext
 
                 $start = new \DateTime($item['desde'] . ' days');
                 $end = new \DateTime($item['hasta'] . ' days');
-                $renewable = $item['renovable'] ?? 'sí';
+                $renewable = isset($item['renovable']) ? $item['renovable'] : 'sí';
                 /** @var Rental $rental */
                 $rental = $this->getRepository('rental')->createNew();
                 $rental->setStartAt($start);
@@ -150,7 +150,7 @@ class LockerContext extends DefaultContext
             throw new \Exception('User not found: ' . $username);
         }
 
-        \PHPUnit_Framework_Assert::assertCount((int) $numLockers, $user->getLockers());
+        \PHPUnit_Framework_Assert::assertNotNull($user->getLocker());
     }
 
     /**
@@ -202,6 +202,6 @@ class LockerContext extends DefaultContext
             throw new \Exception('User not found: ' . $username);
         }
 
-        \PHPUnit_Framework_Assert::assertEquals(0, $user->getLockers()->count());
+        \PHPUnit_Framework_Assert::assertNull($user->getLocker());
     }
 }

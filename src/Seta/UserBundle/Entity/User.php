@@ -37,7 +37,7 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="nic", type="string", length=255, nullable=false)
+     * @ORM\Column(name="nic", type="string", length=255, nullable=true)
      */
     private $nic;
 
@@ -58,9 +58,9 @@ class User extends BaseUser
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Seta\LockerBundle\Entity\Locker", mappedBy="owner")
+     * @ORM\OneToOne(targetEntity="Seta\LockerBundle\Entity\Locker", mappedBy="owner")
      */
-    private $lockers;
+    private $locker;
 
     /**
      * @var Queue
@@ -70,16 +70,23 @@ class User extends BaseUser
     private $queue;
 
     /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="Seta\UserBundle\Entity\Group", inversedBy="users")
+     */
+    protected $groups;
+
+    /**
      * User constructor.
      */
     public function __construct()
     {
         parent::__construct();
 
-        $this->rentals = new ArrayCollection();
-        $this->penalties = new ArrayCollection();
-        $this->lockers = new ArrayCollection();
+        $this->groups = new ArrayCollection();
         $this->isPenalized = false;
+        $this->penalties = new ArrayCollection();
+        $this->rentals = new ArrayCollection();
     }
 
     /**
@@ -175,40 +182,6 @@ class User extends BaseUser
     }
 
     /**
-     * Add locker
-     *
-     * @param \Seta\LockerBundle\Entity\Locker $locker
-     *
-     * @return User
-     */
-    public function addLocker(\Seta\LockerBundle\Entity\Locker $locker)
-    {
-        $this->lockers[] = $locker;
-
-        return $this;
-    }
-
-    /**
-     * Remove locker
-     *
-     * @param \Seta\LockerBundle\Entity\Locker $locker
-     */
-    public function removeLocker(\Seta\LockerBundle\Entity\Locker $locker)
-    {
-        $this->lockers->removeElement($locker);
-    }
-
-    /**
-     * Get lockers
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLockers()
-    {
-        return $this->lockers;
-    }
-
-    /**
      * Set queue
      *
      * @param \Seta\RentalBundle\Entity\Queue $queue
@@ -278,5 +251,29 @@ class User extends BaseUser
     public function getFullname()
     {
         return $this->fullname;
+    }
+
+    /**
+     * Set locker
+     *
+     * @param \Seta\LockerBundle\Entity\Locker $locker
+     *
+     * @return User
+     */
+    public function setLocker(\Seta\LockerBundle\Entity\Locker $locker = null)
+    {
+        $this->locker = $locker;
+
+        return $this;
+    }
+
+    /**
+     * Get locker
+     *
+     * @return \Seta\LockerBundle\Entity\Locker
+     */
+    public function getLocker()
+    {
+        return $this->locker;
     }
 }

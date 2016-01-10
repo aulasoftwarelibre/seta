@@ -14,6 +14,7 @@ use Seta\LockerBundle\Exception\NotRentedLockerException;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Event\RentalEvent;
 use Seta\RentalBundle\Exception\ExpiredRentalException;
+use Seta\RentalBundle\Exception\FinishedRentalException;
 use Seta\RentalBundle\Exception\NotRenewableRentalException;
 use Seta\RentalBundle\Exception\TooEarlyRenovationException;
 use Seta\RentalBundle\RentalEvents;
@@ -66,6 +67,29 @@ class RenewService
         $this->rentalRepository = $rentalRepository;
         $this->days_before_renovation = $days_before_renovation;
         $this->days_length_rental = $days_length_rental;
+    }
+
+    /**
+     * Renueva el alquiler
+     *
+     * @param Rental $rental
+     */
+    public function renewRental(Rental $rental)
+    {
+       if ($rental->getReturnAt())  {
+           throw new FinishedRentalException;
+       }
+
+        $this->checkExpiration($rental);
+
+        $left = $rental->getDaysLeft() + $this->days_length_rental;
+        $rental->setEndAt(new \DateTime($left." days midnight"));
+
+        $this->manager->persist($rental);
+        $this->manager->flush();
+
+        $event = new RentalEvent($rental);
+        $this->dispatcher->dispatch(RentalEvents::LOCKER_RENEWED, $event);
     }
 
     /**
