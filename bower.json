@@ -1,0 +1,17 @@
+{
+  "name": "seta",
+  "version": "1.0.0",
+  "authors": [
+    "Sergio Gómez <sergio@uco.es>"
+  ],
+  "description": "Servicio de Taquillas [SETA]",
+  "keywords": [
+    "symfony2",
+    "ceeps"
+  ],
+  "license": "MIT",
+  "homepage": "https://twitter.com/sgomez",
+  "dependencies": {
+    "admin-lte": ">=2.2"
+  }
+}

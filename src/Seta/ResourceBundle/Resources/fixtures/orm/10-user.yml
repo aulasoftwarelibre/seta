@@ -1,0 +1,17 @@
+\Seta\UserBundle\Entity\User:
+    user_seta:
+        username: seta
+        fullname: Super User
+        nic: 00000001A
+        email: seta@domain.local
+        plainPassword: secret
+        enabled: true
+        groups: [@group_admin]
+    user_user0{1..9}:
+        username: user0<current()>
+        fullname: <name()>
+        nic: <bothify('########?')>
+        email: <email()>
+        plainPassword: secret
+        enabled: true
+        groups: [@group_user]

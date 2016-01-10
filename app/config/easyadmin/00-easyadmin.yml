@@ -1,0 +1,10 @@
+easy_admin:
+    site_name: '[SETA] Taquillas'
+    formats:
+        datetime: 'd/m/Y'
+        number: '%d'
+    design:
+        form_theme: 'vertical'
+        assets:
+            css:
+                - 'bundles/setaresource/css/seta.css'

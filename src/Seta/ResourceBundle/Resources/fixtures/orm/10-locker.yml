@@ -1,0 +1,3 @@
+Seta\LockerBundle\Entity\Locker:
+    locker{1..9}:
+        code: 000<current()>

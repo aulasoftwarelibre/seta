@@ -1,0 +1,25 @@
+easy_admin:
+    entities:
+        Locker:
+            class: Seta\LockerBundle\Entity\Locker
+            label: app.menu.lockers
+            disabled_actions: ['edit']
+            list:
+                actions:
+                    - { name: 'show', icon: 'eye', label: '' }
+                    - { name: 'locker_toogle_status', type: 'route', icon: 'lock', label: '' }
+                fields:
+                    - { property: 'code', label: 'label.code' }
+                    - { property: 'status', label: 'label.status', template: 'status', trans: true}
+                    - { property: 'owner', label: 'label.owner' }
+            show:
+                fields:
+                    - { property: 'code', label: 'label.code' }
+                    - { property: 'status', label: 'label.status', template: 'status', trans: true}
+                    - { property: 'owner', label: 'label.owner' }
+            form:
+                fields:
+                    - { property: 'code', label: 'label.code' }
+            templates:
+                label_null: 'easy_admin/Locker/label_free.html.twig'
+                label_status: 'easy_admin/Locker/status.html.twig'

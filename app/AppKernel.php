@@ -16,8 +16,13 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
+            new Ceeps\UserBundle\CeepsUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Hautzi\SystemMailBundle\HautziSystemMailBundle(),
+            new PDias\SamlBundle\SamlBundle(),
+            new SC\DatetimepickerBundle\SCDatetimepickerBundle(),
+            new Sgomez\DebugSwiftMailerBundle\SgomezDebugSwiftMailerBundle(),
 
             new Seta\CoreBundle\SetaCoreBundle(),
             new Seta\LockerBundle\SetaLockerBundle(),

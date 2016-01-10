@@ -1,0 +1,61 @@
+Delete: Borrar
+Enabled: Activo
+Is penalized: Sancionado
+Locked: Bloqueado
+Locker: Taquilla
+Penalty: Sanción
+Rental: Alquiler
+Taquilla: Taquilla
+User: Usuario
+
+app.action.list_rental: Gestionar
+app.action.locker_toogle_status: Bloquear/Desbloquear
+app.action.new_rental: Alquilar
+app.action.renew_rental: Renovar
+app.action.return_rental: Devolver
+
+app.menu.lockers: Taquillas
+app.menu.penalties: Sanciones
+app.menu.rentals: Alquileres
+app.menu.users: Usuarios
+
+label.branch: Rama
+label.code: Código
+label.comment: Comentario
+label.degree: Titulación
+label.domains: Dominios
+label.email: Correo
+label.enabled: Activo
+label.end_at: Fecha fin
+label.file: Fichero
+label.fullname: Nombre completo
+label.groups: Grupos
+label.is_renewable: ¿Renovable?
+label.lastLogin: Último acceso
+label.locked: Bloqueado
+label.locker: Taquilla
+label.name: Nombre
+label.nic: Identificación
+label.owner: Usada por
+label.password: Contraseña
+label.penalized: Sancionado
+label.practice: Práctico
+label.rental: Alquiler
+label.rentals: Alquileres
+label.return_at: Fecha entrega
+label.season: Convocatoria
+label.start_at: Fecha inicio
+label.status: Estado
+label.subject: Asignatura
+label.syllabus: Plan de estudios
+label.university: Universidad
+label.user: Usuario
+label.username: Usuario
+label.year: Año
+
+locker.available: Disponible
+locker.unavailable: Fuera de servicio
+locker.rented: Alquilada
+locker.reserved: Reservada
+penalty.active: Activa
+penalty.done: Terminada

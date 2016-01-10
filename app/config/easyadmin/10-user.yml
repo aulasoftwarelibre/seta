@@ -1,0 +1,44 @@
+easy_admin:
+    entities:
+        User:
+            class: Seta\UserBundle\Entity\User
+            label: app.menu.users
+            disabled_actions: ['delete']
+            list:
+                actions:
+                    - { name: 'show', icon: 'eye', label: '' }
+                    - { name: 'edit', icon: 'pencil', label: '' }
+                    - { name: 'user_new_rent', type: 'route', label: 'app.action.new_rental' }
+                    - { name: 'user_list_rent', type: 'route', label: 'app.action.list_rental' }
+                fields:
+                    - { property: 'username', label: 'label.username' }
+                    - { property: 'fullname', label: 'label.fullname' }
+                    - { property: 'locker', label: 'label.locker' }
+                    - { property: 'isPenalized', type: 'boolean', label: 'label.penalized' }
+                    - { property: 'enabled', type: 'toggle', label: 'label.enabled' }
+                    - { property: 'locked', type: 'toggle', label: 'label.locked' }
+            form:
+                fields:
+                    - { property: 'username', label: 'label.username' }
+                    - { property: 'fullname', label: 'label.fullname' }
+                    - { property: 'nic', label: 'label.nic' }
+                    - { property: 'email', type: 'email', label: 'label.email' }
+                    - { property: 'plainPassword', type: 'password', label: 'label.password', help: 'help.password' }
+                    - { property: 'groups', label: 'label.groups' }
+                    - { property: 'enabled', type: 'checkbox', label: 'label.enabled' }
+                    - { property: 'locked', type: 'checkbox', label: 'label.locked' }
+                    - { property: 'isPenalized', type: 'checkbox', label: 'label.penalized' }
+            show:
+                fields:
+                    - { property: 'fullname', label: 'label.fullname' }
+                    - { property: 'nic', label: 'label.nic' }
+                    - { property: 'username', label: 'label.username' }
+                    - { property: 'email', label: 'label.email' }
+                    - { property: 'locker', label: 'label.locker' }
+                    - { property: 'isPenalized', type: 'toggle', label: 'label.penalized' }
+                    - { property: 'enabled', type: 'toggle', label: 'label.enabled' }
+                    - { property: 'locked', type: 'toggle', label: 'label.locked' }
+                    - { property: 'roles' }
+                    - { property: 'rentals', template: 'rentals', label: 'label.rentals' }
+            templates:
+                label_null: 'easy_admin/Locker/label_free.html.twig'

@@ -1,0 +1,18 @@
+.label-active,
+.label-available {
+    background-color: #5cb85c;
+}
+.label-rented {
+    background-color: #5bc0de;
+}
+.label-reserved {
+    background-color: #f0ad4e;
+}
+.label-done,
+.label-unavailable {
+    background-color: #d9534f;
+}
+
+.glyphicon{display:inline-block;font:normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.glyphicon-arrow-left:before{content:"\f060"}
+.glyphicon-arrow-right:before{content:"\f061"}

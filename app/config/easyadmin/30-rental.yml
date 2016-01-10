@@ -1,0 +1,34 @@
+easy_admin:
+    entities:
+        Rental:
+            class: Seta\RentalBundle\Entity\Rental
+            label: app.menu.rentals
+            disabled_actions: [ 'new', 'delete']
+            list:
+                actions:
+#                    - '-edit'
+                    - '-show'
+                    - { name: 'rental_renew', type: 'route', label: 'app.action.renew_rental' }
+                    - { name: 'rental_return', type: 'route', label: 'app.action.return_rental' }
+                fields:
+                    - { property: 'user', label: 'label.owner' }
+                    - { property: 'locker', label: 'label.locker' }
+                    - { property: 'startAt', label: 'label.start_at' }
+                    - { property: 'endAt', label: 'label.end_at' }
+                    - { property: 'returnAt', label: 'label.return_at' }
+                    - { property: 'isRenewable', type: 'toggle', label: 'label.is_renewable' }
+            form:
+                fields:
+                    - { property: 'user', label: 'label.owner', type_options: { disabled: true } }
+                    - { property: 'locker', label: 'label.locker', type_options: { disabled: true } }
+                    - { property: 'endAt', type: 'date', label: 'label.end_at' }
+                    - { property: 'isRenewable', type: 'checkbox', label: 'label.is_renewable' }
+            show:
+                fields:
+                    - { property: 'user', label: 'label.owner' }
+                    - { property: 'locker', label: 'label.locker' }
+                    - { property: 'startAt', label: 'label.start_at' }
+                    - { property: 'endAt', label: 'label.end_at' }
+                    - { property: 'returnAt', label: 'label.return_at' }
+                    - { property: 'isRenewable', type: 'toggle', label: 'label.is_renewable' }
+

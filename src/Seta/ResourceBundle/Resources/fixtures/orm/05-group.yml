@@ -1,0 +1,5 @@
+\Seta\UserBundle\Entity\Group:
+    group_admin:
+        __construct: ['Administradores', ['ROLE_SUPER_ADMIN','ROLE_ADMIN']]
+    group_user:
+        __construct: ['Usuarios', ['ROLE_USER']]

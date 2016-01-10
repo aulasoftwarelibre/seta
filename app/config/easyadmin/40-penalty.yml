@@ -1,0 +1,25 @@
+easy_admin:
+    entities:
+        Penalty:
+            class: Seta\PenaltyBundle\Entity\Penalty
+            label: app.menu.penalties
+            disabled_actions: ['delete']
+            list:
+                fields:
+                    - { property: 'user', label: 'label.user' }
+                    - { property: 'rental', label: 'label.rental' }
+                    - { property: 'startAt', label: 'label.start_at' }
+                    - { property: 'endAt', label: 'label.end_at' }
+                    - { property: 'status', label: 'label.status', template: 'status', trans: true}
+            show:
+                fields:
+                    - { property: 'user', label: 'label.owner' }
+                    - { property: 'rental.startAt', type: 'datetime', label: 'label.penalty_start_at' }
+                    - { property: 'startAt', label: 'label.penalty_start_at' }
+                    - { property: 'endAt', label: 'label.penalty_end_at' }
+                    - { property: 'comment', label: 'label.comment' }
+            form:
+                fields:
+                    - { property: 'user', label: 'label.user' }
+                    - { property: 'endAt', type: 'collot_datetime', label: 'label.end_at', type_options: { pickerOptions: { format: 'dd/mm/yyyy', minView: 'month', weekStart: 1, autoclose: true } } }
+                    - { property: 'comment', label: 'label.comment' }

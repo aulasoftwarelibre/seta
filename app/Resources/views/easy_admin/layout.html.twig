@@ -1,0 +1,28 @@
+{% extends "@EasyAdmin/default/layout.html.twig" %}
+
+{% trans_default_domain "EasyAdminBundle" %}
+
+{% block header_footer %}
+    {% if app.user %}
+    <div id="header-security">
+        <p>
+            <small><i class="fa fa-lock"></i> <span>{{ 'header.logged_in_as'|trans }}</span></small>
+            {{ app.user.username|default('Unnamed User') }} <a class="btn btn-xs" href="{{ path("fos_user_security_logout") }}">{{ 'header.logout' | trans }}</a>
+        </p>
+    </div>
+    {% endif %}
+{% endblock header_footer %}
+
+{% block head_stylesheets %}
+    {{ parent() }}
+    {% if form is defined %}
+        {{ form_stylesheet(form) }}
+    {% endif %}
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
+    {% if form is defined %}
+    {{ form_javascript(form) }}
+    {% endif %}
+{% endblock %}

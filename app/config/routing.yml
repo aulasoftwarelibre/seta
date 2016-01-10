@@ -1,4 +1,15 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+ceeps_userbundle:
+    resource: "@CeepsUserBundle/Resources/config/routing.yml"
+
+easy_admin_bundle:
+    resource: "@SetaCoreBundle/Controller/Backend/AdminController.php"
+    type:     annotation
+    prefix:   /admin
+
 seta_core:
-    resource: "@SetaCoreBundle/Controller/"
+    resource: "@SetaCoreBundle/Controller/Frontend/"
     type:     annotation
     prefix:   /
