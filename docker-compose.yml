@@ -1,0 +1,32 @@
+application:
+    build: docker/code
+    volumes:
+        - .:/var/www/symfony
+        - ./docker/logs/symfony:/var/www/symfony/app/logs
+        - ./docker/etc/parameters.yml:/etc/credentials/seta.yml
+        - ../simplesamlphp:/var/simplesamlphp
+    tty: true
+php:
+    build: docker/php-fpm
+    expose:
+        - 9001:9001
+    volumes_from:
+        - application
+    external_links:
+        - db
+    extra_hosts:
+      - 'seta.docker:172.17.42.1'
+    environment:
+      - SYMFONY_ENV=dev
+    restart: always
+nginx:
+    build: docker/nginx
+    ports:
+        - 80:80
+    links:
+        - php
+    volumes_from:
+        - application
+    volumes:
+        - ./docker/logs/nginx/:/var/log/nginx
+    restart: always
