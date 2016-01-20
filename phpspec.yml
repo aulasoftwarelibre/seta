@@ -1,6 +1,9 @@
 formatter.name: pretty
 extensions:
     - PhpSpec\Extension\CodeCoverageExtension
+code_coverage:
+  output:
+    html: var/coverage
 suites:
     CoreBundle:
         namespace: Seta\CoreBundle

@@ -6,9 +6,6 @@ imports:
     - { resource: easyadmin/ }
     - { resource: /etc/credentials/seta.yml, ignore_errors: true }
 
-sc_datetimepicker:
-    picker: ~
-
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
@@ -35,8 +32,10 @@ framework:
     session:
         # handler_id set to null will use default session handler from php.ini
         handler_id:  ~
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
     http_method_override: true
+    assets: ~
 
 # Twig Configuration
 twig:

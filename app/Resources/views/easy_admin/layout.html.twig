@@ -12,17 +12,3 @@
     </div>
     {% endif %}
 {% endblock header_footer %}
-
-{% block head_stylesheets %}
-    {{ parent() }}
-    {% if form is defined %}
-        {{ form_stylesheet(form) }}
-    {% endif %}
-{% endblock %}
-
-{% block body_javascript %}
-    {{ parent() }}
-    {% if form is defined %}
-    {{ form_javascript(form) }}
-    {% endif %}
-{% endblock %}

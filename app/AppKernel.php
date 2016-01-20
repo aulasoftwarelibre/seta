@@ -7,7 +7,7 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Hautzi\SystemMailBundle\HautziSystemMailBundle(),
             new PDias\SamlBundle\SamlBundle(),
-            new SC\DatetimepickerBundle\SCDatetimepickerBundle(),
             new Sgomez\DebugSwiftMailerBundle\SgomezDebugSwiftMailerBundle(),
 
             new Seta\CoreBundle\SetaCoreBundle(),
@@ -31,9 +30,9 @@ class AppKernel extends Kernel
             new Seta\RentalBundle\SetaRentalBundle(),
             new Seta\ResourceBundle\SetaResourceBundle(),
             new Seta\UserBundle\SetaUserBundle(),
-        );
+        ];
 
-        if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
+        if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
@@ -42,6 +41,21 @@ class AppKernel extends Kernel
         }
 
         return $bundles;
+    }
+
+    public function getRootDir()
+    {
+        return __DIR__;
+    }
+
+    public function getCacheDir()
+    {
+        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
+    }
+
+    public function getLogDir()
+    {
+        return dirname(__DIR__).'/var/logs';
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)

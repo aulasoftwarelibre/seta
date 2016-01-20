@@ -21,5 +21,5 @@ easy_admin:
             form:
                 fields:
                     - { property: 'user', label: 'label.user' }
-                    - { property: 'endAt', type: 'collot_datetime', label: 'label.end_at', type_options: { pickerOptions: { format: 'dd/mm/yyyy', minView: 'month', weekStart: 1, autoclose: true } } }
+                    - { property: 'endAt', type: 'datetime', label: 'label.end_at' }
                     - { property: 'comment', label: 'label.comment' }

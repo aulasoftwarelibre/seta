@@ -22,4 +22,3 @@ parameters:
     saml_service_provider: ~
     saml_autoload_path: ~
     saml_authentication_field: ~
-
