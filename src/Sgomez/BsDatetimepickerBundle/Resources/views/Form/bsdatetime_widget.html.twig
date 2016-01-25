@@ -1,0 +1,30 @@
+{% block bsdatetime_widget %}
+    {{ block("form_widget_simple") }}
+    <script type="text/javascript" src="{{ asset('bundles/easyadmin/javascript/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ bsdatetimepicker_js_path(js_path) }}"></script>
+    {% if config.language is defined %}
+        <script type="text/javascript" src="{{ bsdatetimepicker_locale_path(base_path, config.language) }}" charset="UTF-8"></script>
+    {% endif %}
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $field = $('#{% if widget != "single_text" %}datepicker_{% endif %}{{ id }}');
+            $field.datetimepicker({{ config|json_encode|raw }});
+        });
+    </script>
+{% endblock %}
+
+{% block bsdate_widget %}
+    {{ block("form_widget_simple") }}
+    <script type="text/javascript" src="{{ asset('bundles/easyadmin/javascript/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ bsdatetimepicker_js_path(js_path) }}"></script>
+    {% if config.language is defined %}
+        <script type="text/javascript" src="{{ bsdatetimepicker_locale_path(base_path, config.language) }}" charset="UTF-8"></script>
+    {% endif %}
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $field = $('#{% if widget != "single_text" %}datepicker_{% endif %}{{ id }}');
+            $field.datetimepicker({{ config|json_encode|raw }});
+        });
+    </script>
+{% endblock %}
+

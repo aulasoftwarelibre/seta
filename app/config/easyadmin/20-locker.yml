@@ -8,6 +8,7 @@ easy_admin:
                 actions:
                     - { name: 'show', icon: 'eye', label: '' }
                     - { name: 'locker_toogle_status', type: 'route', icon: 'lock', label: '' }
+                    - '-delete'
                 fields:
                     - { property: 'code', label: 'label.code' }
                     - { property: 'status', label: 'label.status', template: 'status', trans: true}
@@ -17,6 +18,8 @@ easy_admin:
                     - { property: 'code', label: 'label.code' }
                     - { property: 'status', label: 'label.status', template: 'status', trans: true}
                     - { property: 'owner', label: 'label.owner' }
+                actions:
+                    - 'delete'
             form:
                 fields:
                     - { property: 'code', label: 'label.code' }
