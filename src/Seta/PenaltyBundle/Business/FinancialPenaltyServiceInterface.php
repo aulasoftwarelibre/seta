@@ -9,11 +9,12 @@
  */
 
 
-namespace Seta\PenaltyBundle\Repository;
+namespace Seta\PenaltyBundle\Business;
 
 
-use Seta\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Seta\UserBundle\Entity\User;
 
-class TimePenaltyRepository extends EntityRepository
+interface FinancialPenaltyServiceInterface
 {
+    public function penalizeUser(User $user, $amount, $comment);
 }

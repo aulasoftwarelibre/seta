@@ -38,7 +38,7 @@
         <service id="seta.service.return" class="Seta\RentalBundle\Business\ReturnService">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="seta.service.penalty" />
+            <argument type="service" id="seta.service.time_penalty" />
         </service>
 
         <!-- Subscribers -->

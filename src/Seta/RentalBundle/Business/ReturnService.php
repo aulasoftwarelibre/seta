@@ -11,7 +11,7 @@ namespace Seta\RentalBundle\Business;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Seta\LockerBundle\Entity\Locker;
-use Seta\PenaltyBundle\Business\PenaltyServiceInterface;
+use Seta\PenaltyBundle\Business\TimePenaltyServiceInterface;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Event\RentalEvent;
 use Seta\RentalBundle\Exception\FinishedRentalException;
@@ -25,7 +25,7 @@ class ReturnService
      */
     private $manager;
     /**
-     * @var PenaltyServiceInterface
+     * @var TimePenaltyServiceInterface
      */
     private $penaltyService;
     /**
@@ -40,7 +40,7 @@ class ReturnService
     public function __construct(
         EntityManagerInterface $manager,
         EventDispatcherInterface $dispatcher,
-        PenaltyServiceInterface $penaltyService
+        TimePenaltyServiceInterface $penaltyService
     )
     {
         $this->manager = $manager;

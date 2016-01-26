@@ -11,7 +11,7 @@ namespace Seta\PenaltyBundle\Business;
 
 use Seta\RentalBundle\Entity\Rental;
 
-interface PenaltyServiceInterface
+interface TimePenaltyServiceInterface
 {
     public function penalizeRental(Rental $rental);
 }

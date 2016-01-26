@@ -16,7 +16,7 @@ use Seta\RentalBundle\Exception\NotExpiredRentalException;
 use Seta\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 
-class TimePenaltyService implements PenaltyServiceInterface
+class TimePenaltyService implements TimePenaltyServiceInterface
 {
     /**
      * @var EntityManager
@@ -56,7 +56,10 @@ class TimePenaltyService implements PenaltyServiceInterface
         $user->setIsPenalized(true);
 
         /** @var TimePenalty $penalty */
-        $penalty = $this->penaltyRepository->createFromData($user, $end, $comment);
+        $penalty = $this->penaltyRepository->createNew();
+        $penalty->setUser($user);
+        $penalty->setEndAt($end);
+        $penalty->setComment($comment);
 
         $this->manager->persist($user);
         $this->manager->persist($penalty);
@@ -77,7 +80,11 @@ class TimePenaltyService implements PenaltyServiceInterface
         $user->setIsPenalized(true);
 
         /** @var TimePenalty $penalty */
-        $penalty = $this->penaltyRepository->createFromData($user, $end, $comment, $rental);
+        $penalty = $this->penaltyRepository->createNew();
+        $penalty->setUser($user);
+        $penalty->setEndAt($end);
+        $penalty->setComment($comment);
+        $penalty->setRental($rental);
 
         $this->manager->persist($user);
         $this->manager->persist($penalty);

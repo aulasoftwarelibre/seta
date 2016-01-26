@@ -20,7 +20,12 @@
             <factory service="doctrine" method="getRepository" />
         </service>
 
-        <service id="seta.service.penalty" class="Seta\PenaltyBundle\Business\TimePenaltyService">
+        <service id="seta.service.financial_penalty" class="Seta\PenaltyBundle\Business\FinancialPenaltyService">
+            <argument id="doctrine.orm.default_entity_manager" type="service"/>
+            <argument id="seta.repository.financial_penalty" type="service"/>
+        </service>
+
+        <service id="seta.service.time_penalty" class="Seta\PenaltyBundle\Business\TimePenaltyService">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="seta.repository.time_penalty" />
             <argument type="string">%seta.notifications.days_before_suspension%</argument>

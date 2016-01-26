@@ -35,7 +35,7 @@ class UserContext extends DefaultContext
                 $end = new \DateTime($row['dias_sancion'].' days 23:59:59');
                 $comment = $row['comentario'];
 
-                $this->getService('seta.service.penalty')->penalizeUser($user, $end, $comment);
+                $this->getService('seta.service.time_penalty')->penalizeUser($user, $end, $comment);
             }
             $this->getEntityManager()->persist($user);
         }
