@@ -8,8 +8,8 @@ easy_admin:
                 fields:
                     - { property: 'user', label: 'label.user' }
                     - { property: 'rental', label: 'label.rental' }
-                    - { property: 'startAt', label: 'label.start_at' }
-                    - { property: 'endAt', label: 'label.end_at' }
+                    - { property: 'startAt', type: 'date', label: 'label.start_at' }
+                    - { property: 'endAt', type: 'date', label: 'label.end_at' }
                     - { property: 'status', label: 'label.status', template: 'status', trans: true}
             show:
                 fields:
@@ -21,5 +21,5 @@ easy_admin:
             form:
                 fields:
                     - { property: 'user', label: 'label.user' }
-                    - { property: 'endAt', type: 'datetime', label: 'label.end_at' }
+                    - { property: 'endAt', type: 'Sgomez\BsDatetimepickerBundle\Form\Type\BsDateType', label: 'label.end_at', type_options: { config: { 'weekStart': 1 } } }
                     - { property: 'comment', label: 'label.comment' }

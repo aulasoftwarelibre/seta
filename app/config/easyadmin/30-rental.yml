@@ -21,7 +21,7 @@ easy_admin:
                 fields:
                     - { property: 'user', label: 'label.owner', type_options: { disabled: true } }
                     - { property: 'locker', label: 'label.locker', type_options: { disabled: true } }
-                    - { property: 'endAt', type: 'Sgomez\BsDatetimepickerBundle\Form\Type\BsDateType', label: 'label.end_at', type_options: { config: { 'language': 'es', 'weekStart': 1 } } }
+                    - { property: 'endAt', type: 'Sgomez\BsDatetimepickerBundle\Form\Type\BsDateType', label: 'label.end_at', type_options: { config: { 'weekStart': 1 } } }
                     - { property: 'isRenewable', type: 'text', label: 'label.is_renewable' }
             show:
                 fields:
