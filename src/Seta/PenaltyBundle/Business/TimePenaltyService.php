@@ -9,21 +9,21 @@
 namespace Seta\PenaltyBundle\Business;
 
 
-use Seta\PenaltyBundle\Entity\Penalty;
-use Seta\PenaltyBundle\Repository\PenaltyRepository;
+use Seta\PenaltyBundle\Entity\TimePenalty;
+use Seta\PenaltyBundle\Repository\TimePenaltyRepository;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Exception\NotExpiredRentalException;
 use Seta\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 
-class PenaltyService implements PenaltyServiceInterface
+class TimePenaltyService implements PenaltyServiceInterface
 {
     /**
      * @var EntityManager
      */
     private $manager;
     /**
-     * @var PenaltyRepository
+     * @var TimePenaltyRepository
      */
     private $penaltyRepository;
     /**
@@ -34,10 +34,10 @@ class PenaltyService implements PenaltyServiceInterface
     /**
      * PenaltyService constructor.
      * @param EntityManager $manager
-     * @param PenaltyRepository $penaltyRepository
+     * @param TimePenaltyRepository $penaltyRepository
      * @param $days_before_penalty string Días a partir del cual el retraso conlleva sanción
      */
-    public function __construct(EntityManager $manager, PenaltyRepository $penaltyRepository, $days_before_penalty)
+    public function __construct(EntityManager $manager, TimePenaltyRepository $penaltyRepository, $days_before_penalty)
     {
         $this->manager = $manager;
         $this->penaltyRepository = $penaltyRepository;
@@ -55,7 +55,7 @@ class PenaltyService implements PenaltyServiceInterface
     {
         $user->setIsPenalized(true);
 
-        /** @var Penalty $penalty */
+        /** @var TimePenalty $penalty */
         $penalty = $this->penaltyRepository->createFromData($user, $end, $comment);
 
         $this->manager->persist($user);
@@ -76,7 +76,7 @@ class PenaltyService implements PenaltyServiceInterface
         $user = $rental->getUser();
         $user->setIsPenalized(true);
 
-        /** @var Penalty $penalty */
+        /** @var TimePenalty $penalty */
         $penalty = $this->penaltyRepository->createFromData($user, $end, $comment, $rental);
 
         $this->manager->persist($user);
@@ -99,7 +99,7 @@ class PenaltyService implements PenaltyServiceInterface
         }
 
         if ($late >= $this->days_before_suspension) {
-            $end = Penalty::getEndSeasonPenalty();
+            $end = TimePenalty::getEndSeasonPenalty();
         } else {
             $time = $late * 7;
             $end = new \DateTime($time.' days midnight');

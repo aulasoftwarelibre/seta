@@ -10,7 +10,7 @@ namespace Seta\PenaltyBundle\Behat;
 
 
 use Seta\CoreBundle\Behat\DefaultContext;
-use Seta\PenaltyBundle\Entity\Penalty;
+use Seta\PenaltyBundle\Entity\TimePenalty;
 use Seta\UserBundle\Entity\User;
 
 /**
@@ -49,7 +49,7 @@ class PenaltyContext extends DefaultContext
 
         $this->getEntityManager()->refresh($user);
 
-        /** @var Penalty $penalty */
+        /** @var TimePenalty $penalty */
         $penalty = $user->getPenalties()->current();
         $diff = $penalty->getEndAt()->diff(new \DateTime('today'))->days;
 
@@ -70,9 +70,9 @@ class PenaltyContext extends DefaultContext
 
         $this->getEntityManager()->refresh($user);
 
-        /** @var Penalty $penalty */
+        /** @var TimePenalty $penalty */
         $penalty = $user->getPenalties()->current();
-        $endSeason = Penalty::getEndSeasonPenalty();
+        $endSeason = TimePenalty::getEndSeasonPenalty();
 
         \PHPUnit_Framework_Assert::assertGreaterThanOrEqual($endSeason, $penalty->getEndAt());
     }

@@ -10,9 +10,19 @@
             <factory service="doctrine" method="getRepository" />
         </service>
 
-        <service id="seta.service.penalty" class="Seta\PenaltyBundle\Business\PenaltyService">
+        <service id="seta.repository.time_penalty" class="Seta\PenaltyBundle\Repository\TimePenaltyRepository">
+            <argument>SetaPenaltyBundle:TimePenalty</argument>
+            <factory service="doctrine" method="getRepository" />
+        </service>
+
+        <service id="seta.repository.financial_penalty" class="Seta\PenaltyBundle\Repository\FinancialPenaltyRepository">
+            <argument>SetaPenaltyBundle:FinancialPenalty</argument>
+            <factory service="doctrine" method="getRepository" />
+        </service>
+
+        <service id="seta.service.penalty" class="Seta\PenaltyBundle\Business\TimePenaltyService">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-            <argument type="service" id="seta.repository.penalty" />
+            <argument type="service" id="seta.repository.time_penalty" />
             <argument type="string">%seta.notifications.days_before_suspension%</argument>
         </service>
     </services>

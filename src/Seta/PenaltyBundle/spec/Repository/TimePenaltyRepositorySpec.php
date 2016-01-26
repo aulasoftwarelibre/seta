@@ -6,18 +6,18 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Seta\PenaltyBundle\Entity\Penalty;
+use Seta\PenaltyBundle\Entity\TimePenalty;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\UserBundle\Entity\User;
 
-class PenaltyRepositorySpec extends ObjectBehavior
+class TimePenaltyRepositorySpec extends ObjectBehavior
 {
     function let(
         EntityManager $manager,
         ClassMetadata $metadata
     )
     {
-        $metadata->beConstructedWith([Penalty::class]);
+        $metadata->beConstructedWith([TimePenalty::class]);
 
         $this->beConstructedWith($manager, $metadata);
 
@@ -25,7 +25,7 @@ class PenaltyRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\PenaltyBundle\Repository\PenaltyRepository');
+        $this->shouldHaveType('Seta\PenaltyBundle\Repository\TimePenaltyRepository');
     }
 
     function it_should_extend_from_repository_class()

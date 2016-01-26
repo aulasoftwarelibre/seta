@@ -2,10 +2,7 @@
 
 namespace Seta\PenaltyBundle\Repository;
 
-use Seta\PenaltyBundle\Entity\Penalty;
-use Seta\RentalBundle\Entity\Rental;
 use Seta\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Seta\UserBundle\Entity\User;
 
 /**
  * PenaltyRepository
@@ -15,26 +12,5 @@ use Seta\UserBundle\Entity\User;
  */
 class PenaltyRepository extends EntityRepository
 {
-    /**
-     * Crea una nueva instancia de sanción
-     *
-     * @param User $user
-     * @param \DateTime $end
-     * @param $comment
-     * @param Rental|null $rental
-     * @return Penalty
-     */
-    public function createFromData(User $user, \DateTime $end, $comment, Rental $rental = null)
-    {
-        /** @var Penalty $penalty */
-        $penalty = $this->createNew();
-        $penalty->setComment($comment);
-        $penalty->setEndAt($end);
-        $penalty->setUser($user);
-        if ($rental) {
-            $penalty->setRental($rental);
-        }
 
-        return $penalty;
-    }
 }

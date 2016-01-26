@@ -3,7 +3,7 @@
 namespace spec\Seta\RentalBundle\Business;
 
 use Seta\LockerBundle\Entity\Locker;
-use Seta\PenaltyBundle\Business\PenaltyService;
+use Seta\PenaltyBundle\Business\TimePenaltyService;
 use Seta\RentalBundle\Entity\Rental;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
@@ -18,7 +18,7 @@ class ReturnServiceSpec extends ObjectBehavior
     function let(
         EntityManager $manager,
         EventDispatcherInterface $dispatcher,
-        PenaltyService $penaltyService,
+        TimePenaltyService $penaltyService,
         Locker $locker,
         Rental $rental
     )
@@ -71,7 +71,7 @@ class ReturnServiceSpec extends ObjectBehavior
         Rental $rental,
         EntityManager $manager,
         EventDispatcherInterface $dispatcher,
-        PenaltyService $penaltyService
+        TimePenaltyService $penaltyService
     )
     {
         $rental->getEndAt()->shouldBeCalled()->willReturn(new \DateTime('yesterday'));

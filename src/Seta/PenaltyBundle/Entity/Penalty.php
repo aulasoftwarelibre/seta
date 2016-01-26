@@ -10,9 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
  * Penalty
  *
  * @ORM\Table(name="penalty")
+ * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\Entity(repositoryClass="Seta\PenaltyBundle\Repository\PenaltyRepository")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"time" = "TimePenalty", "financial" = "FinancialPenalty"})
  */
-class Penalty
+abstract class Penalty
 {
     const ACTIVE = 'penalty.active';
     const DONE = 'penalty.done';
@@ -24,35 +27,21 @@ class Penalty
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(type="datetime")
-     */
-    private $startAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(type="datetime")
-     */
-    private $endAt;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text")
      */
-    private $comment;
+    protected $comment;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string")
      */
-    private $status;
+    protected $status;
 
     /**
      * @var User
@@ -60,7 +49,7 @@ class Penalty
      * @ORM\ManyToOne(targetEntity="Seta\UserBundle\Entity\User", inversedBy="penalties", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    protected $user;
 
     /**
      * @var Rental
@@ -68,14 +57,13 @@ class Penalty
      * @ORM\OneToOne(targetEntity="Seta\RentalBundle\Entity\Rental", inversedBy="penalty", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private $rental;
+    protected $rental;
 
     /**
      * Penalty constructor.
      */
     public function __construct()
     {
-        $this->startAt = new \DateTime('now');
         $this->status = self::ACTIVE;
     }
 
@@ -87,54 +75,6 @@ class Penalty
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set startAt
-     *
-     * @param \DateTime $startAt
-     *
-     * @return Penalty
-     */
-    public function setStartAt($startAt)
-    {
-        $this->startAt = $startAt;
-
-        return $this;
-    }
-
-    /**
-     * Get startAt
-     *
-     * @return \DateTime
-     */
-    public function getStartAt()
-    {
-        return $this->startAt;
-    }
-
-    /**
-     * Set endAt
-     *
-     * @param \DateTime $endAt
-     *
-     * @return Penalty
-     */
-    public function setEndAt($endAt)
-    {
-        $this->endAt = $endAt;
-
-        return $this;
-    }
-
-    /**
-     * Get endAt
-     *
-     * @return \DateTime
-     */
-    public function getEndAt()
-    {
-        return $this->endAt;
     }
 
     /**
@@ -207,24 +147,6 @@ class Penalty
     public function getRental()
     {
         return $this->rental;
-    }
-
-    /**
-     * @param null $today
-     * @return \DateTime
-     */
-    static public function getEndSeasonPenalty($today = null)
-    {
-        if (!$today) {
-            $today = new \DateTime('today');
-        }
-
-        $endSeason = new \DateTime("september 1 midnight");
-        if ($today >= $endSeason) {
-            return new \DateTime('next year september 1 midnight');
-        }
-
-        return $endSeason;
     }
 
     /**

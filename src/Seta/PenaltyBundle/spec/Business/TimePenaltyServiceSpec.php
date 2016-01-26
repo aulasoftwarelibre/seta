@@ -2,29 +2,28 @@
 
 namespace spec\Seta\PenaltyBundle\Business;
 
-use Seta\LockerBundle\Entity\Locker;
-use Seta\PenaltyBundle\Entity\Penalty;
-use Seta\PenaltyBundle\Repository\PenaltyRepository;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\RentalBundle\Exception\NotExpiredRentalException;
-use Seta\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Seta\LockerBundle\Entity\Locker;
+use Seta\PenaltyBundle\Entity\TimePenalty;
+use Seta\PenaltyBundle\Repository\TimePenaltyRepository;
+use Seta\RentalBundle\Entity\Rental;
+use Seta\RentalBundle\Exception\NotExpiredRentalException;
+use Seta\UserBundle\Entity\User;
 
-class PenaltyServiceSpec extends ObjectBehavior
+class TimePenaltyServiceSpec extends ObjectBehavior
 {
     function let(
         EntityManager $manager,
-        PenaltyRepository $penaltyRepository,
+        TimePenaltyRepository $timePenaltyRepository,
         Locker $locker,
         Rental $rental,
         User $user
     )
     {
         $days_before_penalty = 8;
-        $this->beConstructedWith($manager, $penaltyRepository, $days_before_penalty);
+        $this->beConstructedWith($manager, $timePenaltyRepository, $days_before_penalty);
 
         $locker->getCode()->willReturn("100");
         
@@ -35,14 +34,14 @@ class PenaltyServiceSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\PenaltyBundle\Business\PenaltyService');
+        $this->shouldHaveType('Seta\PenaltyBundle\Business\TimePenaltyService');
     }
 
     function it_can_add_a_penalty(
         User $user,
-        Penalty $penalty,
+        TimePenalty $penalty,
         EntityManager $manager,
-        PenaltyRepository $penaltyRepository
+        TimePenaltyRepository $timePenaltyRepository
     )
     {
         $end = new \DateTime('+7 days');
@@ -50,7 +49,7 @@ class PenaltyServiceSpec extends ObjectBehavior
 
         $user->setIsPenalized(true)->shouldBeCalled();
 
-        $penaltyRepository->createFromData($user, $end, $comment)->willReturn($penalty);
+        $timePenaltyRepository->createFromData($user, $end, $comment)->willReturn($penalty);
 
         $manager->persist($user)->shouldBeCalled();
         $manager->persist($penalty)->shouldBeCalled();
@@ -62,8 +61,8 @@ class PenaltyServiceSpec extends ObjectBehavior
     function it_can_add_a_penalty_from_a_rent(
         EntityManager $manager,
         Locker $locker,
-        Penalty $penalty,
-        PenaltyRepository $penaltyRepository,
+        TimePenalty $penalty,
+        TimePenaltyRepository $timePenaltyRepository,
         Rental $rental,
         User $user
     )
@@ -77,7 +76,7 @@ class PenaltyServiceSpec extends ObjectBehavior
         $rental->getUser()->shouldBeCalled();
         $user->setIsPenalized(true)->shouldBeCalled();
 
-        $penaltyRepository->createFromData($user, $end, $comment, $rental)->shouldBeCalled()->willReturn($penalty);
+        $timePenaltyRepository->createFromData($user, $end, $comment, $rental)->shouldBeCalled()->willReturn($penalty);
 
         $manager->persist($user)->shouldBeCalled();
         $manager->persist($penalty)->shouldBeCalled();
@@ -99,7 +98,7 @@ class PenaltyServiceSpec extends ObjectBehavior
     {
         $rental->getDaysLate()->shouldBeCalled()->willReturn(8);
 
-        $this->calculatePenalty($rental)->shouldBeLike(Penalty::getEndSeasonPenalty());
+        $this->calculatePenalty($rental)->shouldBeLike(TimePenalty::getEndSeasonPenalty());
     }
 
     function it_cannot_calculate_not_expired_rental($rental)
