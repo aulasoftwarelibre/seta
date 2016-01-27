@@ -8,13 +8,10 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\PenaltyBundle\Repository;
-
 
 use Seta\ResourceBundle\Doctrine\ORM\EntityRepository;
 
 class FinancialPenaltyRepository extends EntityRepository
 {
-
 }

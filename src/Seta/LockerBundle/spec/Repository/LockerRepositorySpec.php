@@ -13,29 +13,28 @@ use Prophecy\Argument;
 
 class LockerRepositorySpec extends ObjectBehavior
 {
-    function let(EntityManager $manager, ClassMetadata $metadata)
+    public function let(EntityManager $manager, ClassMetadata $metadata)
     {
         $this->beConstructedWith($manager, $metadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Seta\LockerBundle\Repository\LockerRepository');
     }
 
-    function it_should_extend_from_repository_class()
+    public function it_should_extend_from_repository_class()
     {
         $this->shouldHaveType('Seta\ResourceBundle\Doctrine\ORM\EntityRepository');
     }
-    
-    function it_finds_a_free_locker(
+
+    public function it_finds_a_free_locker(
         AbstractQuery $query,
         EntityManager $manager,
         Expr $expr,
         Locker $locker,
         QueryBuilder $builder
-    )
-    {
+    ) {
         $manager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->expr()->shouldBeCalled()->willReturn($expr);
         $expr->eq('l.status', ':enabled')->shouldBeCalled()->willReturn($expr);

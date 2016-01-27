@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 27/12/15
- * Time: 01:45
+ * Time: 01:45.
  */
-
 namespace Seta\PenaltyBundle\Behat;
-
 
 use Seta\CoreBundle\Behat\DefaultContext;
 use Seta\LockerBundle\Entity\Locker;
@@ -16,8 +14,8 @@ use Seta\PenaltyBundle\Entity\TimePenalty;
 use Seta\UserBundle\Entity\User;
 
 /**
- * Class PenaltyContext
- * @package Seta\PenaltyBundle\Behat
+ * Class PenaltyContext.
+ *
  * @codeCoverageIgnore
  */
 class PenaltyContext extends DefaultContext
@@ -32,7 +30,7 @@ class PenaltyContext extends DefaultContext
         /** @var User $user */
         $user = $this->getRepository('user')->findOneBy(['username' => $username]);
         if (!$user) {
-            throw new \Exception('User not found: ' . $username);
+            throw new \Exception('User not found: '.$username);
         }
 
         \PHPUnit_Framework_Assert::assertFalse($user->getIsPenalized());
@@ -46,7 +44,7 @@ class PenaltyContext extends DefaultContext
         /** @var User $user */
         $user = $this->getRepository('user')->findOneBy(['username' => $username]);
         if (!$user) {
-            throw new \Exception('User not found: ' . $username);
+            throw new \Exception('User not found: '.$username);
         }
         \PHPUnit_Framework_Assert::assertTrue($user->getIsPenalized());
 
@@ -67,7 +65,7 @@ class PenaltyContext extends DefaultContext
         /** @var User $user */
         $user = $this->getRepository('user')->findOneBy(['username' => $username]);
         if (!$user) {
-            throw new \Exception('User not found: ' . $username);
+            throw new \Exception('User not found: '.$username);
         }
         \PHPUnit_Framework_Assert::assertTrue($user->getIsPenalized());
 
@@ -76,7 +74,7 @@ class PenaltyContext extends DefaultContext
         $penalties = $user->getPenalties();
         $endSeason = TimePenalty::getEndSeasonPenalty();
 
-        foreach($penalties as $penalty) {
+        foreach ($penalties as $penalty) {
             if ($penalty instanceof TimePenalty) {
                 if ($penalty->getRental()->getLocker()->getCode() == $code) {
                     \PHPUnit_Framework_Assert::assertGreaterThanOrEqual($endSeason, $penalty->getEndAt());
@@ -97,7 +95,7 @@ class PenaltyContext extends DefaultContext
         /** @var User $user */
         $user = $this->getRepository('user')->findOneBy(['username' => $username]);
         if (!$user) {
-            throw new \Exception('User not found: ' . $username);
+            throw new \Exception('User not found: '.$username);
         }
         \PHPUnit_Framework_Assert::assertTrue($user->getIsPenalized());
 
@@ -105,7 +103,7 @@ class PenaltyContext extends DefaultContext
 
         $penalties = $user->getPenalties();
 
-        foreach($penalties as $penalty) {
+        foreach ($penalties as $penalty) {
             if ($penalty instanceof FinancialPenalty) {
                 if ($penalty->getRental()->getLocker()->getCode() == $code) {
                     \PHPUnit_Framework_Assert::assertEquals($this->amount, $penalty->getAmmount());
@@ -118,7 +116,6 @@ class PenaltyContext extends DefaultContext
         throw new \Exception('FinancialPenalty not found.');
     }
 
-
     /**
      * @When /^la taquilla "([^"]*)" no es devuelta y se rompe el candado$/
      */
@@ -127,14 +124,13 @@ class PenaltyContext extends DefaultContext
         /** @var Locker $locker */
         $locker = $this->getRepository('locker')->findOneBy(['code' => $code]);
         if (!$locker) {
-            throw new \Exception('Locker not found: ' . $code);
+            throw new \Exception('Locker not found: '.$code);
         }
 
         $rental = $this->getRepository('rental')->getCurrentRental($locker);
 
         $this->getContainer()->get('seta.service.return')->returnRental($rental);
         $this->getContainer()->get('seta.service.financial_penalty')->penalizeRental($rental, $this->amount);
-
     }
 
     /**

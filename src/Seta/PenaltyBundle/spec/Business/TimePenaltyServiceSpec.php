@@ -17,31 +17,30 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class TimePenaltyServiceSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         EventDispatcherInterface $dispatcher,
         ObjectManager $manager,
         TimePenaltyRepository $timePenaltyRepository,
         Locker $locker,
         Rental $rental,
         User $user
-    )
-    {
+    ) {
         $days_before_penalty = 8;
         $this->beConstructedWith($manager, $timePenaltyRepository, $dispatcher, $days_before_penalty);
 
-        $locker->getCode()->willReturn("100");
-        
+        $locker->getCode()->willReturn('100');
+
         $rental->getUser()->willReturn($user);
         $rental->getLocker()->willReturn($locker);
         $rental->getDaysLate()->willReturn(2);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Seta\PenaltyBundle\Business\TimePenaltyService');
     }
 
-    function it_can_add_a_penalty_from_a_rent(
+    public function it_can_add_a_penalty_from_a_rent(
         EventDispatcherInterface $dispatcher,
         ObjectManager $manager,
         Locker $locker,
@@ -49,13 +48,12 @@ class TimePenaltyServiceSpec extends ObjectBehavior
         TimePenaltyRepository $timePenaltyRepository,
         Rental $rental,
         User $user
-    )
-    {
+    ) {
         $end = $this->calculatePenalty($rental);
 
         $rental->getLocker()->shouldBeCalled();
         $locker->getCode()->shouldBeCalled();
-        $comment = "Bloqueo automático por retraso al entregar la taquilla 100";
+        $comment = 'Bloqueo automático por retraso al entregar la taquilla 100';
 
         $rental->getUser()->shouldBeCalled();
 
@@ -73,23 +71,22 @@ class TimePenaltyServiceSpec extends ObjectBehavior
         $this->penalizeRental($rental);
     }
 
-    function it_can_calculate_penalty(
+    public function it_can_calculate_penalty(
         Rental $rental
-    )
-    {
+    ) {
         $rental->getDaysLate()->shouldBeCalled();
 
         $this->calculatePenalty($rental)->shouldBeLike(new \DateTime('14 days midnight'));
     }
 
-    function it_can_calculate_season_penalty($rental)
+    public function it_can_calculate_season_penalty($rental)
     {
         $rental->getDaysLate()->shouldBeCalled()->willReturn(8);
 
         $this->calculatePenalty($rental)->shouldBeLike(TimePenalty::getEndSeasonPenalty());
     }
 
-    function it_cannot_calculate_not_expired_rental($rental)
+    public function it_cannot_calculate_not_expired_rental($rental)
     {
         $rental->getDaysLate()->shouldBeCalled()->willReturn(0);
 

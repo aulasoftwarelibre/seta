@@ -8,16 +8,13 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sgomez\BsDatetimepickerBundle\DependencyInjection\Compiler;
-
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class FormCompilerPass implements CompilerPassInterface
 {
-
     /**
      * You can modify the container here before it is dumped to PHP code.
      *
@@ -31,7 +28,7 @@ class FormCompilerPass implements CompilerPassInterface
             $container->setParameter(
                 'twig.form.resources',
                 array_merge(
-                    array('SgomezBsDatetimepickerBundle:Form:bsdatetime_widget.html.twig'),
+                    ['SgomezBsDatetimepickerBundle:Form:bsdatetime_widget.html.twig'],
                     $container->getParameter('twig.form.resources')
                 )
             );

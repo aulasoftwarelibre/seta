@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 25/12/15
- * Time: 15:34
+ * Time: 15:34.
  */
-
 namespace Seta\PenaltyBundle\Business;
-
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Seta\PenaltyBundle\Entity\TimePenalty;
@@ -39,8 +37,9 @@ class TimePenaltyService implements PenalizeRentalInterface
 
     /**
      * PenaltyService constructor.
-     * @param ObjectManager $manager
-     * @param TimePenaltyRepository $penaltyRepository
+     *
+     * @param ObjectManager            $manager
+     * @param TimePenaltyRepository    $penaltyRepository
      * @param EventDispatcherInterface $dispatcher
      * @param $days_before_penalty string Días a partir del cual el retraso conlleva sanción
      */
@@ -49,8 +48,7 @@ class TimePenaltyService implements PenalizeRentalInterface
         TimePenaltyRepository $penaltyRepository,
         EventDispatcherInterface $dispatcher,
         $days_before_penalty
-    )
-    {
+    ) {
         $this->manager = $manager;
         $this->penaltyRepository = $penaltyRepository;
         $this->dispatcher = $dispatcher;
@@ -58,14 +56,14 @@ class TimePenaltyService implements PenalizeRentalInterface
     }
 
     /**
-     * Crea y calcula una nueva sanción a través de los datos de un alquiler
+     * Crea y calcula una nueva sanción a través de los datos de un alquiler.
      *
      * @param Rental $rental
      */
     public function penalizeRental(Rental $rental)
     {
         $end = $this->calculatePenalty($rental);
-        $comment = "Bloqueo automático por retraso al entregar la taquilla " . $rental->getLocker()->getCode();
+        $comment = 'Bloqueo automático por retraso al entregar la taquilla '.$rental->getLocker()->getCode();
 
         /** @var TimePenalty $penalty */
         $penalty = $this->penaltyRepository->createNew();
@@ -84,9 +82,10 @@ class TimePenaltyService implements PenalizeRentalInterface
     }
 
     /**
-     * Calcula la fecha de finalización de la sanción
+     * Calcula la fecha de finalización de la sanción.
      *
      * @param Rental $rental
+     *
      * @return \DateTime
      */
     public function calculatePenalty(Rental $rental)
@@ -94,7 +93,7 @@ class TimePenaltyService implements PenalizeRentalInterface
         $late = $rental->getDaysLate();
 
         if ($late === 0) {
-            throw new NotExpiredRentalException;
+            throw new NotExpiredRentalException();
         }
 
         if ($late >= $this->days_before_suspension) {

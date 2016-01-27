@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 25/12/15
- * Time: 09:57
+ * Time: 09:57.
  */
-
 namespace Seta\RentalBundle\Business;
-
 
 use Doctrine\ORM\EntityManagerInterface;
 use Seta\LockerBundle\Entity\Locker;
@@ -42,17 +40,18 @@ class RentalService
      */
     private $dispatcher;
     /**
-     * @var integer
+     * @var int
      */
     private $days_length_rental;
 
     /**
      * RentalService constructor.
-     * @param EntityManagerInterface $manager
+     *
+     * @param EntityManagerInterface   $manager
      * @param EventDispatcherInterface $dispatcher
-     * @param LockerRepository $lockerRepository
-     * @param RentalRepository $rentalRepository
-     * @param integer $days_length_rental
+     * @param LockerRepository         $lockerRepository
+     * @param RentalRepository         $rentalRepository
+     * @param int                      $days_length_rental
      */
     public function __construct(
         EntityManagerInterface $manager,
@@ -60,8 +59,7 @@ class RentalService
         LockerRepository $lockerRepository,
         RentalRepository $rentalRepository,
         $days_length_rental
-    )
-    {
+    ) {
         $this->manager = $manager;
         $this->dispatcher = $dispatcher;
         $this->lockerRepository = $lockerRepository;
@@ -74,7 +72,7 @@ class RentalService
         $locker = $this->lockerRepository->findOneFreeLocker();
 
         if (!$locker) {
-            throw new NotFreeLockerException;
+            throw new NotFreeLockerException();
         }
 
         return $this->rentLocker($user, $locker);
@@ -99,7 +97,7 @@ class RentalService
 
         $rental->setUser($user);
         $rental->setLocker($locker);
-        $rental->setEndAt(new \DateTime($this->days_length_rental." days"));
+        $rental->setEndAt(new \DateTime($this->days_length_rental.' days'));
 
         $locker->setStatus(Locker::RENTED);
         $locker->setOwner($user);
@@ -113,5 +111,4 @@ class RentalService
 
         return $rental;
     }
-
 }

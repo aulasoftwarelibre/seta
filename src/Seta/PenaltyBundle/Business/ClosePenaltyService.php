@@ -8,9 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\PenaltyBundle\Business;
-
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Seta\PenaltyBundle\Entity\Penalty;
@@ -31,7 +29,8 @@ class ClosePenaltyService implements ClosePenaltyInterface
 
     /**
      * ClosePenaltyService constructor.
-     * @param ObjectManager $manager
+     *
+     * @param ObjectManager            $manager
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(ObjectManager $manager, EventDispatcherInterface $dispatcher)

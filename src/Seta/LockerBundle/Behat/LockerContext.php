@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 20/12/15
- * Time: 19:25
+ * Time: 19:25.
  */
-
 namespace Seta\LockerBundle\Behat;
-
 
 use Behat\Gherkin\Node\TableNode;
 use Seta\CoreBundle\Behat\DefaultContext;
@@ -17,8 +15,8 @@ use Seta\RentalBundle\Entity\Rental;
 use Seta\UserBundle\Entity\User;
 
 /**
- * Class LockerContext
- * @package Seta\LockerBundle\Behat
+ * Class LockerContext.
+ *
  * @codeCoverageIgnore
  */
 class LockerContext extends DefaultContext
@@ -47,11 +45,11 @@ class LockerContext extends DefaultContext
                 $username = $item['alquilada_a'];
                 $user = $this->getRepository('user')->findOneBy(['username' => $username]);
                 if (!$user) {
-                    throw new \Exception('User not found: ' . $username);
+                    throw new \Exception('User not found: '.$username);
                 }
 
-                $start = new \DateTime($item['desde'] . ' days');
-                $end = new \DateTime($item['hasta'] . ' days');
+                $start = new \DateTime($item['desde'].' days');
+                $end = new \DateTime($item['hasta'].' days');
                 $renewable = isset($item['renovable']) ? $item['renovable'] : 'sí';
                 /** @var Rental $rental */
                 $rental = $this->getRepository('rental')->createNew();
@@ -86,7 +84,7 @@ class LockerContext extends DefaultContext
     {
         $user = $this->getRepository('user')->findOneBy(['username' => $username]);
         if (!$user) {
-            throw new \Exception('User not found: ' . $username);
+            throw new \Exception('User not found: '.$username);
         }
         $this->getEntityManager()->refresh($user);
 
@@ -101,12 +99,12 @@ class LockerContext extends DefaultContext
     {
         $locker = $this->getRepository('locker')->findOneBy(['code' => $code]);
         if (!$locker) {
-            throw new \Exception('Locker not found: ' . $code);
+            throw new \Exception('Locker not found: '.$code);
         }
 
         try {
             $this->getContainer()->get('seta.service.rental')->rentLocker($this->current_user, $locker);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
         }
     }
 
@@ -119,11 +117,10 @@ class LockerContext extends DefaultContext
         /** @var Locker $locker */
         $locker = $this->getRepository('locker')->findOneBy(['code' => $code]);
         if (!$locker) {
-            throw new \Exception('Locker not found: ' . $code);
+            throw new \Exception('Locker not found: '.$code);
         }
         \PHPUnit_Framework_Assert::assertEquals($this->status[$status], $locker->getStatus());
     }
-
 
     /**
      * @When /^la taquilla "([^"]*)" tiene el estado "([^"]*)" por "([^"]*)"$/
@@ -133,7 +130,7 @@ class LockerContext extends DefaultContext
         /** @var Locker $locker */
         $locker = $this->getRepository('locker')->findOneBy(['code' => $code]);
         if (!$locker) {
-            throw new \Exception('Locker not found: ' . $code);
+            throw new \Exception('Locker not found: '.$code);
         }
         \PHPUnit_Framework_Assert::assertEquals($this->status[$status], $locker->getStatus());
         \PHPUnit_Framework_Assert::assertEquals($username, $locker->getOwner()->getUsername());
@@ -147,7 +144,7 @@ class LockerContext extends DefaultContext
     {
         $user = $this->getRepository('user')->findOneBy(['username' => $username]);
         if (!$user) {
-            throw new \Exception('User not found: ' . $username);
+            throw new \Exception('User not found: '.$username);
         }
 
         \PHPUnit_Framework_Assert::assertNotNull($user->getLocker());
@@ -185,7 +182,7 @@ class LockerContext extends DefaultContext
         /** @var User $user */
         $user = $this->getRepository('user')->findOneBy(['username' => $username]);
         if (!$user) {
-            throw new \Exception('User not found: ' . $username);
+            throw new \Exception('User not found: '.$username);
         }
 
         \PHPUnit_Framework_Assert::assertNotEmpty($user->getQueue());
@@ -199,7 +196,7 @@ class LockerContext extends DefaultContext
         /** @var User $user */
         $user = $this->getRepository('user')->findOneBy(['username' => $username]);
         if (!$user) {
-            throw new \Exception('User not found: ' . $username);
+            throw new \Exception('User not found: '.$username);
         }
 
         \PHPUnit_Framework_Assert::assertNull($user->getLocker());

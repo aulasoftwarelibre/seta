@@ -18,7 +18,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RentalServiceSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         EntityManager $manager,
         EventDispatcherInterface $dispatcher,
         RentalRepository $rentalRepository,
@@ -26,8 +26,7 @@ class RentalServiceSpec extends ObjectBehavior
         User $user,
         Rental $rental,
         Locker $locker
-    )
-    {
+    ) {
         $days_length_rental = 7;
         $this->beConstructedWith($manager, $dispatcher, $lockerRepository, $rentalRepository, $days_length_rental);
         $user->getLocker()->willReturn(null);
@@ -41,19 +40,18 @@ class RentalServiceSpec extends ObjectBehavior
         $rental->getIsRenewable()->willReturn(true);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Seta\RentalBundle\Business\RentalService');
     }
 
-    function it_can_rent_a_locker(
+    public function it_can_rent_a_locker(
         User $user,
         Locker $locker,
         Rental $rental,
         EntityManager $manager,
         RentalRepository $rentalRepository
-    )
-    {
+    ) {
         $rentalRepository->createNew()->willReturn($rental);
 
         $rental->setUser($user)->shouldBeCalled();
@@ -69,16 +67,15 @@ class RentalServiceSpec extends ObjectBehavior
 
         $this->rentLocker($user, $locker);
     }
-    
-    function it_can_rent_any_free_locker(
+
+    public function it_can_rent_any_free_locker(
         User $user,
         Locker $locker,
         Rental $rental,
         EntityManager $manager,
         RentalRepository $rentalRepository,
         LockerRepository $lockerRepository
-    )
-    {
+    ) {
         $rentalRepository->createNew()->willReturn($rental);
         $lockerRepository->findOneFreeLocker()->shouldBeCalled()->willReturn($locker);
 
@@ -96,41 +93,37 @@ class RentalServiceSpec extends ObjectBehavior
         $this->rentFirstFreeLocker($user);
     }
 
-    function it_cannot_rent_busy_locker(
+    public function it_cannot_rent_busy_locker(
         User $user,
         Locker $locker
-    )
-    {
+    ) {
         $locker->getStatus()->willReturn(Locker::RENTED);
 
         $this->shouldThrow(BusyLockerException::class)->duringRentLocker($user, $locker);
     }
 
-    function it_cannot_rent_without_free_lockers(
+    public function it_cannot_rent_without_free_lockers(
         User $user,
         LockerRepository $lockerRepository
-    )
-    {
+    ) {
         $lockerRepository->findOneFreeLocker()->shouldBeCalled()->willReturn(null);
 
         $this->shouldThrow(NotFreeLockerException::class)->duringRentFirstFreeLocker($user);
     }
 
-    function it_cannot_rent_to_penalized_users(
+    public function it_cannot_rent_to_penalized_users(
         User $user,
         Locker $locker
-    )
-    {
+    ) {
         $user->getIsPenalized()->willReturn(true);
-        
+
         $this->shouldThrow(PenalizedUserException::class)->duringRentLocker($user, $locker);
     }
 
-    function it_cannot_rent_two_lockers_to_the_same_user(
+    public function it_cannot_rent_two_lockers_to_the_same_user(
         User $user,
         Locker $locker
-    )
-    {
+    ) {
         $user->getLocker()->willReturn($locker);
 
         $this->shouldThrow(TooManyLockersRentedException::class)->duringRentLocker($user, $locker);

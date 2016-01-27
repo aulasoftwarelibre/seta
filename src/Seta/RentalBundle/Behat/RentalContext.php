@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 27/12/15
- * Time: 15:06
+ * Time: 15:06.
  */
-
 namespace Seta\RentalBundle\Behat;
-
 
 use Seta\CoreBundle\Behat\DefaultContext;
 use Seta\LockerBundle\Entity\Locker;
@@ -18,8 +16,8 @@ use Seta\RentalBundle\Exception\TooEarlyRenovationException;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
- * Class RentalContext
- * @package Seta\RentalBundle\Behat
+ * Class RentalContext.
+ *
  * @codeCoverageIgnore
  */
 class RentalContext extends DefaultContext
@@ -32,7 +30,7 @@ class RentalContext extends DefaultContext
         /** @var Locker $locker */
         $locker = $this->getRepository('locker')->findOneBy(['code' => $code]);
         if (!$locker) {
-            throw new \Exception('Locker not found: ' . $code);
+            throw new \Exception('Locker not found: '.$code);
         }
 
         $rental = $this->getRepository('rental')->getCurrentRental($locker);
@@ -48,17 +46,17 @@ class RentalContext extends DefaultContext
         /** @var Locker $locker */
         $locker = $this->getRepository('locker')->findOneBy(['code' => $code]);
         if (!$locker) {
-            throw new \Exception('Locker not found: ' . $code);
+            throw new \Exception('Locker not found: '.$code);
         }
 
         $rental = $this->getRepository('rental')->getCurrentRental($locker);
 
         try {
             $this->getContainer()->get('seta.service.renew')->renewRental($rental);
-        } catch(NotRenewableRentalException $e) {
-        } catch(ExpiredRentalException $e) {
-        } catch(TooEarlyRenovationException $e) {
-        } catch(Exception $e) {
+        } catch (NotRenewableRentalException $e) {
+        } catch (ExpiredRentalException $e) {
+        } catch (TooEarlyRenovationException $e) {
+        } catch (Exception $e) {
             throw $e;
         }
     }
@@ -70,7 +68,7 @@ class RentalContext extends DefaultContext
     {
         $locker = $this->getRepository('locker')->findOneBy(['code' => $code]);
         if (!$locker) {
-            throw new \Exception('Locker not found: ' . $code);
+            throw new \Exception('Locker not found: '.$code);
         }
         /** @var Rental $rental */
         $rental = $this->getRepository('rental')->getCurrentRental($locker);
@@ -86,7 +84,7 @@ class RentalContext extends DefaultContext
         /** @var Locker $locker */
         $locker = $this->getRepository('locker')->findOneBy(['code' => $code]);
         if (!$locker) {
-            throw new \Exception('Locker not found: ' . $code);
+            throw new \Exception('Locker not found: '.$code);
         }
         /** @var Rental $rental */
         $rental = $this->getRepository('rental')->getCurrentRental($locker);

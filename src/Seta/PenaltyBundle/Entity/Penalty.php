@@ -7,7 +7,7 @@ use Seta\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Penalty
+ * Penalty.
  *
  * @ORM\Table(name="penalty")
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -68,7 +68,7 @@ abstract class Penalty
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -78,7 +78,7 @@ abstract class Penalty
     }
 
     /**
-     * Set comment
+     * Set comment.
      *
      * @param string $comment
      *
@@ -92,7 +92,7 @@ abstract class Penalty
     }
 
     /**
-     * Get comment
+     * Get comment.
      *
      * @return string
      */
@@ -102,7 +102,7 @@ abstract class Penalty
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \Seta\UserBundle\Entity\User $user
      *
@@ -116,7 +116,7 @@ abstract class Penalty
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Seta\UserBundle\Entity\User
      */
@@ -126,7 +126,7 @@ abstract class Penalty
     }
 
     /**
-     * Set rental
+     * Set rental.
      *
      * @param \Seta\RentalBundle\Entity\Rental $rental
      *
@@ -140,7 +140,7 @@ abstract class Penalty
     }
 
     /**
-     * Get rental
+     * Get rental.
      *
      * @return \Seta\RentalBundle\Entity\Rental
      */
@@ -150,7 +150,7 @@ abstract class Penalty
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -164,7 +164,7 @@ abstract class Penalty
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -174,9 +174,9 @@ abstract class Penalty
     }
 
     /**
-     * Set status as DONE
+     * Set status as DONE.
      */
-    function close()
+    public function close()
     {
         $this->setStatus(self::DONE);
     }

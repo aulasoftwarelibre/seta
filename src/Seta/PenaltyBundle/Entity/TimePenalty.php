@@ -10,12 +10,10 @@
 
 namespace Seta\PenaltyBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class TimePenalty
- * @package Seta\PenaltyBundle\Entity
+ * Class TimePenalty.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Seta\PenaltyBundle\Repository\TimePenaltyRepository")
@@ -47,15 +45,16 @@ class TimePenalty extends Penalty
 
     /**
      * @param null $today
+     *
      * @return \DateTime
      */
-    static public function getEndSeasonPenalty($today = null)
+    public static function getEndSeasonPenalty($today = null)
     {
         if (!$today) {
             $today = new \DateTime('today');
         }
 
-        $endSeason = new \DateTime("september 1 midnight");
+        $endSeason = new \DateTime('september 1 midnight');
         if ($today >= $endSeason) {
             return new \DateTime('next year september 1 midnight');
         }
@@ -64,7 +63,7 @@ class TimePenalty extends Penalty
     }
 
     /**
-     * Set startAt
+     * Set startAt.
      *
      * @param \DateTime $startAt
      *
@@ -78,7 +77,7 @@ class TimePenalty extends Penalty
     }
 
     /**
-     * Get startAt
+     * Get startAt.
      *
      * @return \DateTime
      */
@@ -88,7 +87,7 @@ class TimePenalty extends Penalty
     }
 
     /**
-     * Set endAt
+     * Set endAt.
      *
      * @param \DateTime $endAt
      *
@@ -102,7 +101,7 @@ class TimePenalty extends Penalty
     }
 
     /**
-     * Get endAt
+     * Get endAt.
      *
      * @return \DateTime
      */

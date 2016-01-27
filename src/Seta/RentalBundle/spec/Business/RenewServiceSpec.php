@@ -16,12 +16,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RenewServiceSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         EntityManager $manager,
         EventDispatcherInterface $dispatcher,
         Rental $rental
-    )
-    {
+    ) {
         $days_before_renovation = '2';
         $days_length_rental = '7';
         $this->beConstructedWith($manager, $dispatcher, $days_before_renovation, $days_length_rental);
@@ -32,21 +31,19 @@ class RenewServiceSpec extends ObjectBehavior
         $rental->getReturnAt()->willReturn(null);
     }
 
-
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Seta\RentalBundle\Business\RenewService');
     }
 
-    function it_can_renew_a_rental(
+    public function it_can_renew_a_rental(
         Rental $rental,
         EntityManager $manager,
         EventDispatcherInterface $dispatcher
-    )
-    {
+    ) {
         $rental->getReturnAt()->shouldBeCalled();
 
-        $newEnd = new \DateTime("9 days midnight");
+        $newEnd = new \DateTime('9 days midnight');
         $rental->setEndAt($newEnd)->shouldBeCalled();
 
         $manager->persist($rental)->shouldBeCalled();
@@ -56,38 +53,34 @@ class RenewServiceSpec extends ObjectBehavior
 
         $this->renewRental($rental);
     }
-    
-    function it_cannot_renew_a_returned_rental(
+
+    public function it_cannot_renew_a_returned_rental(
         Rental $rental
-    )
-    {
+    ) {
         $rental->getReturnAt()->shouldBeCalled()->willReturn(new \DateTime());
-        
+
         $this->shouldThrow(FinishedRentalException::class)->duringRenewRental($rental);
     }
 
-    function it_cannot_renew_a_rental_too_early(
+    public function it_cannot_renew_a_rental_too_early(
         Rental $rental
-    )
-    {
+    ) {
         $rental->getDaysLeft()->shouldBeCalled()->willReturn(3);
 
         $this->shouldThrow(TooEarlyRenovationException::class)->duringRenewRental($rental);
     }
 
-    function it_cannot_renew_blocked_rentals(
+    public function it_cannot_renew_blocked_rentals(
         Rental $rental
-    )
-    {
+    ) {
         $rental->getIsRenewable()->shouldBeCalled()->willReturn(false);
 
         $this->shouldThrow(NotRenewableRentalException::class)->duringRenewRental($rental);
     }
 
-    function it_cannot_renew_expired_rental(
+    public function it_cannot_renew_expired_rental(
         Rental $rental
-    )
-    {
+    ) {
         $rental->getIsExpired()->shouldBeCalled()->willReturn(true);
 
         $this->shouldThrow(ExpiredRentalException::class)->duringRenewRental($rental);

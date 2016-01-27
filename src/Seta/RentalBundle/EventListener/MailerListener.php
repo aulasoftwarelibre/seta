@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 01/01/16
- * Time: 21:31
+ * Time: 21:31.
  */
-
 namespace Seta\RentalBundle\EventListener;
-
 
 use Seta\MailerBundle\Business\MailService;
 use Seta\MailerBundle\Business\Message;
@@ -24,6 +22,7 @@ class MailerListener implements EventSubscriberInterface
 
     /**
      * MailerListener constructor.
+     *
      * @param MailService $mailService
      */
     public function __construct(MailService $mailService)

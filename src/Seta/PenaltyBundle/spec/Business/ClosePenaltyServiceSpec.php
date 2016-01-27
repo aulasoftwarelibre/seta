@@ -13,30 +13,28 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ClosePenaltyServiceSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         ObjectManager $manager,
         EventDispatcherInterface $dispatcher
-    )
-    {
+    ) {
         $this->beConstructedWith($manager, $dispatcher);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Seta\PenaltyBundle\Business\ClosePenaltyService');
     }
-    
-    function it_has_close_penalty_inteface()
+
+    public function it_has_close_penalty_inteface()
     {
         $this->shouldHaveType(ClosePenaltyInterface::class);
     }
 
-    function it_closes_penalty(
+    public function it_closes_penalty(
         ObjectManager $manager,
         Penalty $penalty,
         EventDispatcherInterface $dispatcher
-    )
-    {
+    ) {
         $penalty->close()->shouldBeCalled();
         $manager->persist($penalty)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();

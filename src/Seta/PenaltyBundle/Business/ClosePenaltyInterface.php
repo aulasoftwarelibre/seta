@@ -8,9 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\PenaltyBundle\Business;
-
 
 use Seta\PenaltyBundle\Entity\Penalty;
 

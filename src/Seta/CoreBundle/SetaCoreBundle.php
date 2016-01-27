@@ -5,8 +5,8 @@ namespace Seta\CoreBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class SetaCoreBundle
- * @package Seta\CoreBundle
+ * Class SetaCoreBundle.
+ *
  * @codeCoverageIgnore
  */
 class SetaCoreBundle extends Bundle

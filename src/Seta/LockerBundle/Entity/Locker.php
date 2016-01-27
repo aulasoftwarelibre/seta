@@ -7,11 +7,9 @@ use Seta\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
- * Locker
+ * Locker.
  *
  * @ORM\Table(name="locker")
  * @ORM\Entity(repositoryClass="Seta\LockerBundle\Repository\LockerRepository")
@@ -74,11 +72,11 @@ class Locker
     public function __construct()
     {
         $this->rentals = new ArrayCollection();
-        $this->status = Locker::AVAILABLE;
+        $this->status = self::AVAILABLE;
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -88,7 +86,7 @@ class Locker
     }
 
     /**
-     * Set code
+     * Set code.
      *
      * @param string $code
      *
@@ -102,7 +100,7 @@ class Locker
     }
 
     /**
-     * Get code
+     * Get code.
      *
      * @return string
      */
@@ -112,7 +110,7 @@ class Locker
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -126,7 +124,7 @@ class Locker
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -136,7 +134,7 @@ class Locker
     }
 
     /**
-     * Add rental
+     * Add rental.
      *
      * @param \Seta\RentalBundle\Entity\Rental $rental
      *
@@ -150,7 +148,7 @@ class Locker
     }
 
     /**
-     * Remove rental
+     * Remove rental.
      *
      * @param \Seta\RentalBundle\Entity\Rental $rental
      */
@@ -160,7 +158,7 @@ class Locker
     }
 
     /**
-     * Get rentals
+     * Get rentals.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -170,7 +168,7 @@ class Locker
     }
 
     /**
-     * Set owner
+     * Set owner.
      *
      * @param \Seta\UserBundle\Entity\User $owner
      *
@@ -184,7 +182,7 @@ class Locker
     }
 
     /**
-     * Get owner
+     * Get owner.
      *
      * @return \Seta\UserBundle\Entity\User
      */
@@ -194,7 +192,7 @@ class Locker
     }
 
     /**
-     * Get code
+     * Get code.
      *
      * @return string
      */
@@ -204,7 +202,7 @@ class Locker
     }
 
     /**
-     * Set queue
+     * Set queue.
      *
      * @param \Seta\RentalBundle\Entity\Queue $queue
      *
@@ -218,7 +216,7 @@ class Locker
     }
 
     /**
-     * Get queue
+     * Get queue.
      *
      * @return \Seta\RentalBundle\Entity\Queue
      */

@@ -7,7 +7,7 @@ use Seta\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Queue
+ * Queue.
  *
  * @ORM\Table(name="queue")
  * @ORM\Entity(repositoryClass="Seta\RentalBundle\Repository\QueueRepository")
@@ -73,7 +73,7 @@ class Queue
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -83,7 +83,7 @@ class Queue
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -97,7 +97,7 @@ class Queue
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -107,7 +107,7 @@ class Queue
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \Seta\UserBundle\Entity\User $user
      *
@@ -121,7 +121,7 @@ class Queue
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Seta\UserBundle\Entity\User
      */
@@ -131,7 +131,7 @@ class Queue
     }
 
     /**
-     * Set confirmedAt
+     * Set confirmedAt.
      *
      * @param \DateTime $confirmedAt
      *
@@ -145,7 +145,7 @@ class Queue
     }
 
     /**
-     * Get confirmedAt
+     * Get confirmedAt.
      *
      * @return \DateTime
      */
@@ -155,7 +155,7 @@ class Queue
     }
 
     /**
-     * Set status
+     * Set status.
      *
      * @param string $status
      *
@@ -169,7 +169,7 @@ class Queue
     }
 
     /**
-     * Get status
+     * Get status.
      *
      * @return string
      */
@@ -179,7 +179,7 @@ class Queue
     }
 
     /**
-     * Set locker
+     * Set locker.
      *
      * @param \Seta\LockerBundle\Entity\Locker $locker
      *
@@ -193,7 +193,7 @@ class Queue
     }
 
     /**
-     * Get locker
+     * Get locker.
      *
      * @return \Seta\LockerBundle\Entity\Locker
      */

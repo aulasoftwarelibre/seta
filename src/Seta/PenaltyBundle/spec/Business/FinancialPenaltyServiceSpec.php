@@ -7,7 +7,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\PenaltyBundle\Entity\FinancialPenalty;
-use Seta\PenaltyBundle\Entity\Penalty;
 use Seta\PenaltyBundle\Event\PenaltyEvent;
 use Seta\PenaltyBundle\PenaltyEvents;
 use Seta\PenaltyBundle\Repository\FinancialPenaltyRepository;
@@ -19,30 +18,28 @@ class FinancialPenaltyServiceSpec extends ObjectBehavior
 {
     private $amount = 2.0;
 
-    function let(
+    public function let(
         EventDispatcherInterface $dispatcher,
         ObjectManager $manager,
         FinancialPenaltyRepository $penaltyRepository,
         Locker $locker,
         Rental $rental,
         User $user
-    )
-    {
+    ) {
         $this->beConstructedWith($manager, $penaltyRepository, $dispatcher, $this->amount);
 
-        $locker->getCode()->willReturn("100");
+        $locker->getCode()->willReturn('100');
 
         $rental->getUser()->willReturn($user);
         $rental->getLocker()->willReturn($locker);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Seta\PenaltyBundle\Business\FinancialPenaltyService');
     }
 
-
-    function it_can_add_a_penalty_from_a_rent(
+    public function it_can_add_a_penalty_from_a_rent(
         EventDispatcherInterface $dispatcher,
         ObjectManager $manager,
         Locker $locker,
@@ -50,11 +47,10 @@ class FinancialPenaltyServiceSpec extends ObjectBehavior
         FinancialPenaltyRepository $penaltyRepository,
         Rental $rental,
         User $user
-    )
-    {
+    ) {
         $rental->getLocker()->shouldBeCalled();
         $locker->getCode()->shouldBeCalled();
-        $comment = "Penalización automática por retraso al entregar la taquilla 100";
+        $comment = 'Penalización automática por retraso al entregar la taquilla 100';
 
         $rental->getUser()->shouldBeCalled();
 
@@ -71,5 +67,4 @@ class FinancialPenaltyServiceSpec extends ObjectBehavior
 
         $this->penalizeRental($rental);
     }
-
 }

@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 30/12/15
- * Time: 17:22
+ * Time: 17:22.
  */
-
 namespace Seta\MailerBundle\Behat;
-
 
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Sgomez\DebugSwiftMailerBundle\Behat\SwiftMailerContext;
@@ -17,8 +15,8 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Class MailerContext
- * @package Seta\MailerBundle\Behat
+ * Class MailerContext.
+ *
  * @codeCoverageIgnore
  */
 class MailerContext extends SwiftMailerContext implements KernelAwareContext
@@ -37,7 +35,7 @@ class MailerContext extends SwiftMailerContext implements KernelAwareContext
         $application->setAutoExit(false);
 
         $input = new ArrayInput([
-           'command' => 'seta:cron:run'
+           'command' => 'seta:cron:run',
         ]);
 
         $output = new NullOutput();

@@ -8,16 +8,14 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\PenaltyBundle\Business;
-
 
 use Seta\RentalBundle\Entity\Rental;
 
 interface PenalizeRentalInterface
 {
     /**
-     * Create a penalty
+     * Create a penalty.
      *
      * @param Rental $rental
      */

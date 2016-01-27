@@ -8,9 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sgomez\BsDatetimepickerBundle\Templating;
-
 
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\Templating\Helper\Helper;
@@ -64,7 +62,7 @@ class BsDatetimepickerHelper extends Helper
      */
     public function renderLocalePath($basePath, $locale)
     {
-        $localePath = sprintf("%s/js/locales/bootstrap-datetimepicker.%s.js", $basePath, $locale);
+        $localePath = sprintf('%s/js/locales/bootstrap-datetimepicker.%s.js', $basePath, $locale);
 
         return $this->packages->getUrl($localePath);
     }

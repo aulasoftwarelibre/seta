@@ -8,9 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\UserBundle\EventListener;
-
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -56,7 +54,7 @@ class PenaltyListener implements EventSubscriberInterface
         $user = $event->getPenalty()->getUser();
         $criteria = Criteria::create()->where(Criteria::expr()->eq('status', Penalty::ACTIVE));
 
-        if ($user->getPenalties()->matching($criteria)->count() === 0 ) {
+        if ($user->getPenalties()->matching($criteria)->count() === 0) {
             $user->setIsPenalized(false);
 
             $this->manager->persist($user);

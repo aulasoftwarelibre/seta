@@ -16,22 +16,22 @@ use Prophecy\Argument;
 
 class RentalRepositorySpec extends ObjectBehavior
 {
-    function let(EntityManager $manager, ClassMetadata $metadata)
+    public function let(EntityManager $manager, ClassMetadata $metadata)
     {
         $this->beConstructedWith($manager, $metadata);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Seta\RentalBundle\Repository\RentalRepository');
     }
 
-    function it_should_extend_from_repository_class()
+    public function it_should_extend_from_repository_class()
     {
         $this->shouldHaveType('Seta\ResourceBundle\Doctrine\ORM\EntityRepository');
     }
 
-    function it_finds_current_locker_rental(
+    public function it_finds_current_locker_rental(
         Locker $locker,
         Rental $rental,
         User $user,
@@ -39,8 +39,7 @@ class RentalRepositorySpec extends ObjectBehavior
         QueryBuilder $builder,
         AbstractQuery $query,
         Expr $expr
-    )
-    {
+    ) {
         $locker->getOwner()->shouldBeCalled()->willReturn($user);
 
         $manager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
@@ -64,14 +63,13 @@ class RentalRepositorySpec extends ObjectBehavior
         $this->getCurrentRental($locker);
     }
 
-    function it_finds_expire_on_rentals(
+    public function it_finds_expire_on_rentals(
         ArrayCollection $rentals,
         EntityManager $manager,
         QueryBuilder $builder,
         AbstractQuery $query,
         Expr $expr
-    )
-    {
+    ) {
         $on = new \DateTime('now');
 
         $manager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
@@ -92,5 +90,4 @@ class RentalRepositorySpec extends ObjectBehavior
 
         $this->getExpireOnDateRentals($on);
     }
-
 }

@@ -15,14 +15,13 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ReturnServiceSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         EntityManager $manager,
         EventDispatcherInterface $dispatcher,
         TimePenaltyService $penaltyService,
         Locker $locker,
         Rental $rental
-    )
-    {
+    ) {
         $this->beConstructedWith($manager, $dispatcher, $penaltyService);
 
         $rental->getIsRenewable()->willReturn(true);
@@ -30,18 +29,17 @@ class ReturnServiceSpec extends ObjectBehavior
         $rental->getReturnAt()->willReturn(null);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Seta\RentalBundle\Business\ReturnService');
     }
 
-    function it_can_return_a_locker_before_due_date(
+    public function it_can_return_a_locker_before_due_date(
         Locker $locker,
         Rental $rental,
         EntityManager $manager,
         EventDispatcherInterface $dispatcher
-    )
-    {
+    ) {
         $rental->getEndAt()->shouldBeCalled()->willReturn(new \DateTime('tomorrow'));
         $rental->setReturnAt(Argument::type(\DateTime::class))->shouldBeCalled();
 
@@ -57,23 +55,21 @@ class ReturnServiceSpec extends ObjectBehavior
         $this->returnRental($rental);
     }
 
-    function it_cannot_return_a_returned_rental(
+    public function it_cannot_return_a_returned_rental(
         Rental $rental
-    )
-    {
+    ) {
         $rental->getReturnAt()->shouldBeCalled()->willReturn(new \DateTime());
 
         $this->shouldThrow(FinishedRentalException::class)->duringReturnRental($rental);
     }
 
-    function it_can_return_a_locker_after_due_date(
+    public function it_can_return_a_locker_after_due_date(
         Locker $locker,
         Rental $rental,
         EntityManager $manager,
         EventDispatcherInterface $dispatcher,
         TimePenaltyService $penaltyService
-    )
-    {
+    ) {
         $rental->getEndAt()->shouldBeCalled()->willReturn(new \DateTime('yesterday'));
         $rental->setReturnAt(Argument::type(\DateTime::class))->shouldBeCalled();
 

@@ -8,9 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sgomez\BsDatetimepickerBundle\Form\Type;
-
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -105,28 +103,28 @@ class BsDateTimeType extends AbstractType
                 $config[$name] = $value->format('Y-m-d H:i:s');
             }
         }
-        $view->vars = array_replace($view->vars, array(
+        $view->vars = array_replace($view->vars, [
             'config' => $config,
-        ));
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'widget'            => 'single_text',
-            'base_path'         => $this->basePath,
-            'css_path'          => $this->cssPath,
-            'js_path'           => $this->jsPath,
-            'date_format'       => 'dd/MM/yyyy H:i',
-            'format'            =>  "yyyy-MM-dd HH:mm",
-            'config'            => [],
+            'widget' => 'single_text',
+            'base_path' => $this->basePath,
+            'css_path' => $this->cssPath,
+            'js_path' => $this->jsPath,
+            'date_format' => 'dd/MM/yyyy H:i',
+            'format' => 'yyyy-MM-dd HH:mm',
+            'config' => [],
         ]);
 
         $allowedTypes = [
-            'base_path'         => 'string',
-            'css_path'          => 'string',
-            'js_path'           => 'string',
-            'config'            => 'array',
+            'base_path' => 'string',
+            'css_path' => 'string',
+            'js_path' => 'string',
+            'config' => 'array',
         ];
 
         foreach ($allowedTypes as $option => $types) {
@@ -143,6 +141,4 @@ class BsDateTimeType extends AbstractType
     {
         return 'bsdatetime';
     }
-
-
 }

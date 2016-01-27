@@ -8,9 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\PenaltyBundle\Business;
-
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Seta\PenaltyBundle\Entity\FinancialPenalty;
@@ -42,18 +40,17 @@ class FinancialPenaltyService implements PenalizeRentalInterface
     /**
      * FinancialPenaltyService constructor.
      *
-     * @param ObjectManager $manager
+     * @param ObjectManager              $manager
      * @param FinancialPenaltyRepository $penaltyRepository
-     * @param EventDispatcherInterface $dispatcher
-     * @param float $amount
+     * @param EventDispatcherInterface   $dispatcher
+     * @param float                      $amount
      */
     public function __construct(
         ObjectManager $manager,
         FinancialPenaltyRepository $penaltyRepository,
         EventDispatcherInterface $dispatcher,
         $amount
-    )
-    {
+    ) {
         $this->manager = $manager;
         $this->penaltyRepository = $penaltyRepository;
         $this->dispatcher = $dispatcher;
@@ -65,7 +62,7 @@ class FinancialPenaltyService implements PenalizeRentalInterface
      */
     public function penalizeRental(Rental $rental)
     {
-        $comment = "Penalización automática por retraso al entregar la taquilla " . $rental->getLocker()->getCode();
+        $comment = 'Penalización automática por retraso al entregar la taquilla '.$rental->getLocker()->getCode();
 
         /** @var FinancialPenalty $penalty */
         $penalty = $this->penaltyRepository->createNew();

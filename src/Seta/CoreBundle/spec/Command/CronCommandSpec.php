@@ -18,24 +18,23 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class CronCommandSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         Locker $locker,
         Rental $rental,
         User $user
-    )
-    {
+    ) {
         // $this->beConstructedWith();
         $rental->getUser()->willReturn($user);
         $rental->getLocker()->willReturn($locker);
         $rental->getIsRenewable()->willReturn(true);
 
-        $locker->getCode()->willReturn("100");
+        $locker->getCode()->willReturn('100');
 
         $user->getEmail()->willReturn('client@gmail.com');
         $user->getUsername()->willReturn('client@gmail.com');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Seta\CoreBundle\Command\CronCommand');
     }
@@ -59,8 +58,7 @@ class CronCommandSpec extends ObjectBehavior
         RentalRepository $rentalRepository,
         RequestStack $requestStack,
         TranslatorInterface $translator
-    )
-    {
+    ) {
         $container->getParameter('seta.notifications.days_before_renovation')->shouldBeCalled()->willReturn('2');
         $container->getParameter('seta.notifications.days_before_suspension')->shouldBeCalled()->willReturn('8');
         $container->get('seta.repository.rental')->shouldBeCalled()->willReturn($rentalRepository);
@@ -69,7 +67,6 @@ class CronCommandSpec extends ObjectBehavior
         $translator->getLocale()->shouldBeCalled()->willReturn('es');
         $container->get('request_stack')->shouldBeCalled()->willReturn($requestStack);
         $requestStack->push(Argument::type(Request::class))->shouldBeCalled();
-        
 
         $rentalRepository
             ->getExpireOnDateRentals(Argument::type(\DateTime::class))

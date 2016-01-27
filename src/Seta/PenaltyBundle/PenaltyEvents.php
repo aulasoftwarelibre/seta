@@ -8,19 +8,17 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\PenaltyBundle;
-
 
 final class PenaltyEvents
 {
     /**
-     * Evento que se lanza cuando se crea una penalización
+     * Evento que se lanza cuando se crea una penalización.
      */
     const PENALTY_CREATED = 'seta.penalty.created';
 
     /**
-     * Evento que se lanza cuando se cierra una penalización
+     * Evento que se lanza cuando se cierra una penalización.
      */
     const PENALTY_CLOSED = 'seta.penalty.closed';
 }

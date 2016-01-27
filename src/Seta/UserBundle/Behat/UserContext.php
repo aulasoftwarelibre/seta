@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 20/12/15
- * Time: 18:56
+ * Time: 18:56.
  */
-
 namespace Seta\UserBundle\Behat;
-
 
 use Behat\Gherkin\Node\TableNode;
 use Seta\CoreBundle\Behat\DefaultContext;
@@ -31,7 +29,7 @@ class UserContext extends DefaultContext
             $user->setUsername($row['email']);
             $user->setEmail($row['email']);
             $user->setPlainPassword('secret');
-            $user->setNic($this->faker->unique()->bothify("########?"));
+            $user->setNic($this->faker->unique()->bothify('########?'));
             $user->setFullname($this->faker->name);
             if ($row['dias_sancion']) {
                 $end = new \DateTime($row['dias_sancion'].' days midnight');

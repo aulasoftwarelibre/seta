@@ -8,17 +8,15 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\UserBundle\Entity;
-
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\Group as BaseGroup;
 
 /**
- * Class Group
- * @package Seta\UserBundle\Entity
+ * Class Group.
+ *
  * @ORM\Entity()
  * @ORM\Table(name="fos_group")
  */
@@ -46,7 +44,7 @@ class Group extends BaseGroup
     }
 
     /**
-     * Add user
+     * Add user.
      *
      * @param \Seta\UserBundle\Entity\User $user
      *
@@ -60,7 +58,7 @@ class Group extends BaseGroup
     }
 
     /**
-     * Remove user
+     * Remove user.
      *
      * @param \Seta\UserBundle\Entity\User $user
      */
@@ -70,7 +68,7 @@ class Group extends BaseGroup
     }
 
     /**
-     * Get users
+     * Get users.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -80,11 +78,11 @@ class Group extends BaseGroup
     }
 
     /**
-     * Get group name
+     * Get group name.
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         return $this->name;
     }

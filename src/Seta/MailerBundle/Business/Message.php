@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 31/12/15
- * Time: 04:17
+ * Time: 04:17.
  */
-
 namespace Seta\MailerBundle\Business;
-
 
 final class Message
 {

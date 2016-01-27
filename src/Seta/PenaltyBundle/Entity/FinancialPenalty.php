@@ -8,15 +8,12 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\PenaltyBundle\Entity;
-
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class FinancialPenalty
- * @package Seta\PenaltyBundle\Entity
+ * Class FinancialPenalty.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Seta\PenaltyBundle\Repository\FinancialPenaltyRepository")
@@ -31,7 +28,7 @@ class FinancialPenalty extends Penalty
     private $ammount;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_paid", type="boolean")
      */
@@ -46,9 +43,8 @@ class FinancialPenalty extends Penalty
         $this->isPaid = false;
     }
 
-
     /**
-     * Set ammount
+     * Set ammount.
      *
      * @param float $ammount
      *
@@ -62,7 +58,7 @@ class FinancialPenalty extends Penalty
     }
 
     /**
-     * Get ammount
+     * Get ammount.
      *
      * @return float
      */
@@ -72,9 +68,9 @@ class FinancialPenalty extends Penalty
     }
 
     /**
-     * Set isPaid
+     * Set isPaid.
      *
-     * @param boolean $isPaid
+     * @param bool $isPaid
      *
      * @return FinancialPenalty
      */
@@ -86,9 +82,9 @@ class FinancialPenalty extends Penalty
     }
 
     /**
-     * Get isPaid
+     * Get isPaid.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsPaid()
     {
@@ -98,7 +94,7 @@ class FinancialPenalty extends Penalty
     /**
      * {@inheritdoc}
      */
-    function close()
+    public function close()
     {
         parent::close();
 

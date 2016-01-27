@@ -2,7 +2,6 @@
 
 namespace Seta\UserBundle\Entity;
 
-
 use Seta\RentalBundle\Entity\Queue;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,7 +21,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_penalized", type="boolean", nullable=false)
      */
@@ -90,7 +89,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add rental
+     * Add rental.
      *
      * @param \Seta\RentalBundle\Entity\Rental $rental
      *
@@ -104,7 +103,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove rental
+     * Remove rental.
      *
      * @param \Seta\RentalBundle\Entity\Rental $rental
      */
@@ -114,7 +113,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get rentals
+     * Get rentals.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -124,7 +123,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add penalty
+     * Add penalty.
      *
      * @param \Seta\PenaltyBundle\Entity\Penalty $penalty
      *
@@ -138,7 +137,7 @@ class User extends BaseUser
     }
 
     /**
-     * Remove penalty
+     * Remove penalty.
      *
      * @param \Seta\PenaltyBundle\Entity\Penalty $penalty
      *
@@ -152,7 +151,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get penalties
+     * Get penalties.
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
@@ -162,9 +161,9 @@ class User extends BaseUser
     }
 
     /**
-     * Set isPenalized
+     * Set isPenalized.
      *
-     * @param boolean $isPenalized
+     * @param bool $isPenalized
      *
      * @return User
      */
@@ -176,9 +175,9 @@ class User extends BaseUser
     }
 
     /**
-     * Get isPenalized
+     * Get isPenalized.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIsPenalized()
     {
@@ -186,7 +185,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set queue
+     * Set queue.
      *
      * @param \Seta\RentalBundle\Entity\Queue $queue
      *
@@ -200,7 +199,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get queue
+     * Get queue.
      *
      * @return \Seta\RentalBundle\Entity\Queue
      */
@@ -210,7 +209,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set nic
+     * Set nic.
      *
      * @param string $nic
      *
@@ -224,7 +223,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get nic
+     * Get nic.
      *
      * @return string
      */
@@ -234,7 +233,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set fullname
+     * Set fullname.
      *
      * @param string $fullname
      *
@@ -248,7 +247,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get fullname
+     * Get fullname.
      *
      * @return string
      */
@@ -258,7 +257,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set locker
+     * Set locker.
      *
      * @param \Seta\LockerBundle\Entity\Locker $locker
      *
@@ -272,7 +271,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get locker
+     * Get locker.
      *
      * @return \Seta\LockerBundle\Entity\Locker
      */

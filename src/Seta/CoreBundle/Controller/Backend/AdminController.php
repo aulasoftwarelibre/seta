@@ -8,7 +8,6 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\CoreBundle\Controller\Backend;
 
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
@@ -38,6 +37,7 @@ class AdminController extends BaseAdminController
 
     /**
      * @param Request $request
+     *
      * @return Response
      * @Route("/dashboard", name="admin_dashboard")
      */
@@ -47,9 +47,10 @@ class AdminController extends BaseAdminController
     }
 
     /**
-     * Asigna una taquilla libre a un usuario
+     * Asigna una taquilla libre a un usuario.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("user-new-rent", name="user_new_rent")
      */
@@ -65,7 +66,7 @@ class AdminController extends BaseAdminController
             try {
                 $this->get('seta.service.rental')->rentFirstFreeLocker($user);
                 $this->addFlash('success', 'Nueva taquilla asignada');
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 $this->addFlash('danger', $e->getMessage());
             }
         }
@@ -75,19 +76,20 @@ class AdminController extends BaseAdminController
 
     /**
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("user-list-rent", name="user_list_rent")
      */
     public function userListRent(Request $request)
     {
-
         return $this->redirectToAction($request);
     }
 
     /**
-     * Cambia el estado de una taquilla
+     * Cambia el estado de una taquilla.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("locker-toogle-status", name="locker_toogle_status")
      */
@@ -116,9 +118,10 @@ class AdminController extends BaseAdminController
     }
 
     /**
-     * Renueva un alquiler
+     * Renueva un alquiler.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("rental-renew", name="rental_renew")
      */
@@ -135,7 +138,7 @@ class AdminController extends BaseAdminController
         try {
             $this->get('seta.service.renew')->renewRental($rental);
             $this->addFlash('success', 'La taquilla ha sido renovada');
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->addFlash('danger', $e->getMessage());
         }
 
@@ -143,9 +146,10 @@ class AdminController extends BaseAdminController
     }
 
     /**
-     * Devuelve un alquiler
+     * Devuelve un alquiler.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("rental-return", name="rental_return")
      */
@@ -162,7 +166,7 @@ class AdminController extends BaseAdminController
         try {
             $this->get('seta.service.return')->returnRental($rental);
             $this->addFlash('success', 'La taquilla ha sido devuelta');
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->addFlash('danger', $e->getMessage());
         }
 
@@ -170,9 +174,10 @@ class AdminController extends BaseAdminController
     }
 
     /**
-     * Vuelve al listado del tipo de entidad que está en uso
+     * Vuelve al listado del tipo de entidad que está en uso.
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     protected function redirectToAction(Request $request, $action = 'list')
@@ -189,20 +194,20 @@ class AdminController extends BaseAdminController
      */
     protected function initialize(Request $request)
     {
-        if (!$request->query->has('sortDirection') || !in_array(strtoupper($request->query->get('sortDirection')), array('ASC', 'DESC'))) {
+        if (!$request->query->has('sortDirection') || !in_array(strtoupper($request->query->get('sortDirection')), ['ASC', 'DESC'])) {
             $request->query->set('sortDirection', 'ASC');
         }
 
         return parent::initialize($request);
     }
 
-
     /**
-     * Lista los préstamos activos
+     * Lista los préstamos activos.
      *
      * @param $entityClass
      * @param $sortDirection
      * @param null $sortField
+     *
      * @return \Doctrine\ORM\QueryBuilder
      */
     protected function createRentalListQueryBuilder($entityClass, $sortDirection, $sortField = null)
@@ -214,11 +219,12 @@ class AdminController extends BaseAdminController
     }
 
     /**
-     * Busca entra los préstamos activos
+     * Busca entra los préstamos activos.
      *
      * @param $entityClass
      * @param $searchQuery
      * @param array $searchableFields
+     *
      * @return \Doctrine\ORM\QueryBuilder
      */
     protected function createRentalSearchQueryBuilder($entityClass, $searchQuery, array $searchableFields)
@@ -230,10 +236,7 @@ class AdminController extends BaseAdminController
             ->orWhere($queryBuilder->expr()->like('user.username', ':fuzzy_query'))
             ->orWhere($queryBuilder->expr()->like('locker.code', ':fuzzy_query'))
             ->andWhere($queryBuilder->expr()->isNull('entity.returnAt'));
-        ;
 
         return $queryBuilder;
     }
-
-
 }

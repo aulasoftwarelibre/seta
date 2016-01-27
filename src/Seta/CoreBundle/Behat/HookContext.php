@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 29/12/15
- * Time: 19:53
+ * Time: 19:53.
  */
-
 namespace Seta\CoreBundle\Behat;
-
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
@@ -16,8 +14,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Class HookContext
- * @package Seta\CoreBundle\Behat
+ * Class HookContext.
+ *
  * @codeCoverageIgnore
  */
 class HookContext implements Context, KernelAwareContext

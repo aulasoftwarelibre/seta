@@ -3,18 +3,16 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 25/12/15
- * Time: 13:47
+ * Time: 13:47.
  */
-
 namespace Seta\ResourceBundle\Doctrine\ORM;
-
 
 use Doctrine\ORM\EntityRepository as BaseEntityRepository;
 
 class EntityRepository extends BaseEntityRepository
 {
     /**
-     * Return a new instance of current entity
+     * Return a new instance of current entity.
      *
      * @return object
      * @codeCoverageIgnore
@@ -27,7 +25,7 @@ class EntityRepository extends BaseEntityRepository
     }
 
     /**
-     * Return QueryBuilder
+     * Return QueryBuilder.
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
@@ -37,7 +35,7 @@ class EntityRepository extends BaseEntityRepository
     }
 
     /**
-     * Return Alias
+     * Return Alias.
      *
      * @return string
      */

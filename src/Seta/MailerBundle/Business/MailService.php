@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 29/12/15
- * Time: 12:13
+ * Time: 12:13.
  */
-
 namespace Seta\MailerBundle\Business;
-
 
 use Seta\RentalBundle\Entity\Rental;
 use Hautzi\SystemMailBundle\SystemMailer\SystemMailer;

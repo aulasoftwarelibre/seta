@@ -8,7 +8,7 @@ use Seta\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Rental
+ * Rental.
  *
  * @ORM\Table(name="rental")
  * @ORM\Entity(repositoryClass="Seta\RentalBundle\Repository\RentalRepository")
@@ -93,7 +93,7 @@ class Rental
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -103,7 +103,7 @@ class Rental
     }
 
     /**
-     * Set startAt
+     * Set startAt.
      *
      * @param \DateTime $startAt
      *
@@ -117,7 +117,7 @@ class Rental
     }
 
     /**
-     * Get startAt
+     * Get startAt.
      *
      * @return \DateTime
      */
@@ -127,7 +127,7 @@ class Rental
     }
 
     /**
-     * Set endAt
+     * Set endAt.
      *
      * @param \DateTime $endAt
      *
@@ -142,7 +142,7 @@ class Rental
     }
 
     /**
-     * Get endAt
+     * Get endAt.
      *
      * @return \DateTime
      */
@@ -152,7 +152,7 @@ class Rental
     }
 
     /**
-     * Get days left
+     * Get days left.
      *
      * @return int
      */
@@ -170,7 +170,7 @@ class Rental
     }
 
     /**
-     * Get days late
+     * Get days late.
      *
      * @return int
      */
@@ -188,7 +188,7 @@ class Rental
     }
 
     /**
-     * Get if rental is expired
+     * Get if rental is expired.
      *
      * @return bool
      */
@@ -198,7 +198,7 @@ class Rental
     }
 
     /**
-     * Set returnAt
+     * Set returnAt.
      *
      * @param \DateTime $returnAt
      *
@@ -212,7 +212,7 @@ class Rental
     }
 
     /**
-     * Get returnAt
+     * Get returnAt.
      *
      * @return \DateTime
      */
@@ -222,9 +222,9 @@ class Rental
     }
 
     /**
-     * Set isRenewable
+     * Set isRenewable.
      *
-     * @param boolean $isRenewable
+     * @param bool $isRenewable
      *
      * @return Rental
      */
@@ -236,7 +236,7 @@ class Rental
     }
 
     /**
-     * Get isRenewable
+     * Get isRenewable.
      *
      * @return bool
      */
@@ -246,7 +246,7 @@ class Rental
     }
 
     /**
-     * Set locker
+     * Set locker.
      *
      * @param \Seta\LockerBundle\Entity\Locker $locker
      *
@@ -260,7 +260,7 @@ class Rental
     }
 
     /**
-     * Get locker
+     * Get locker.
      *
      * @return \Seta\LockerBundle\Entity\Locker
      */
@@ -270,7 +270,7 @@ class Rental
     }
 
     /**
-     * Set user
+     * Set user.
      *
      * @param \Seta\UserBundle\Entity\User $user
      *
@@ -284,7 +284,7 @@ class Rental
     }
 
     /**
-     * Get user
+     * Get user.
      *
      * @return \Seta\UserBundle\Entity\User
      */
@@ -294,7 +294,7 @@ class Rental
     }
 
     /**
-     * Set penalty
+     * Set penalty.
      *
      * @param \Seta\PenaltyBundle\Entity\Penalty $penalty
      *
@@ -308,7 +308,7 @@ class Rental
     }
 
     /**
-     * Get penalty
+     * Get penalty.
      *
      * @return \Seta\PenaltyBundle\Entity\Penalty
      */
@@ -318,19 +318,19 @@ class Rental
     }
 
     /**
-     * Genera un nuevo código de renovación
+     * Genera un nuevo código de renovación.
      *
      * @return Rental
      */
     private function generateNewCode()
     {
-        $this->renewCode = preg_replace("#[+/]#", "-", base64_encode(openssl_random_pseudo_bytes(30)));
+        $this->renewCode = preg_replace('#[+/]#', '-', base64_encode(openssl_random_pseudo_bytes(30)));
 
         return $this;
     }
 
     /**
-     * Set renewCode
+     * Set renewCode.
      *
      * @param string $renewCode
      *
@@ -344,7 +344,7 @@ class Rental
     }
 
     /**
-     * Get renewCode
+     * Get renewCode.
      *
      * @return string
      */

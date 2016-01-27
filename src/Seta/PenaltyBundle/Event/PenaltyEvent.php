@@ -8,9 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Seta\PenaltyBundle\Event;
-
 
 use Seta\PenaltyBundle\Entity\Penalty;
 use Symfony\Component\EventDispatcher\Event;
@@ -24,6 +22,7 @@ class PenaltyEvent extends Event
 
     /**
      * PenaltyEvent constructor.
+     *
      * @param Penalty $penalty
      */
     public function __construct(Penalty $penalty)
@@ -32,7 +31,7 @@ class PenaltyEvent extends Event
     }
 
     /**
-     * Get Penalty
+     * Get Penalty.
      *
      * @return Penalty
      */

@@ -3,18 +3,16 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 29/12/15
- * Time: 19:42
+ * Time: 19:42.
  */
-
 namespace Seta\RentalBundle\Behat;
-
 
 use Seta\CoreBundle\Behat\DefaultContext;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Class SearchRentalContext
- * @package Seta\RentalBundle\Behat
+ * Class SearchRentalContext.
+ *
  * @codeCoverageIgnore
  */
 class SearchRentalContext extends DefaultContext

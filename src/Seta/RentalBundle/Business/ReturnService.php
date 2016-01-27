@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 28/12/15
- * Time: 11:27
+ * Time: 11:27.
  */
-
 namespace Seta\RentalBundle\Business;
-
 
 use Doctrine\ORM\EntityManagerInterface;
 use Seta\LockerBundle\Entity\Locker;
@@ -33,7 +31,6 @@ class ReturnService
      */
     private $dispatcher;
 
-
     /**
      * ReturnService constructor.
      */
@@ -41,22 +38,21 @@ class ReturnService
         EntityManagerInterface $manager,
         EventDispatcherInterface $dispatcher,
         PenalizeRentalInterface $penaltyService
-    )
-    {
+    ) {
         $this->manager = $manager;
         $this->dispatcher = $dispatcher;
         $this->penaltyService = $penaltyService;
     }
 
     /**
-     * Return a Rental
+     * Return a Rental.
      *
      * @param Rental $rental
      */
     public function returnRental(Rental $rental)
     {
         if ($rental->getReturnAt()) {
-            throw new FinishedRentalException;
+            throw new FinishedRentalException();
         }
 
         $now = new \DateTime('now');

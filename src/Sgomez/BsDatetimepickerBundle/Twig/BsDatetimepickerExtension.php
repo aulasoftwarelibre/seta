@@ -8,9 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sgomez\BsDatetimepickerBundle\Twig;
-
 
 use Sgomez\BsDatetimepickerBundle\Templating\BsDatetimepickerHelper;
 
@@ -31,13 +29,13 @@ class BsDatetimepickerExtension extends \Twig_Extension
 
     public function getFunctions()
     {
-        $options = [ 'is_safe' => [ 'html' ] ];
+        $options = ['is_safe' => ['html']];
 
-        return array(
-            new \Twig_SimpleFunction('bsdatetimepicker_css_path', array($this, 'renderCssPath'), $options),
-            new \Twig_SimpleFunction('bsdatetimepicker_js_path', array($this, 'renderJsPath'), $options),
-            new \Twig_SimpleFunction('bsdatetimepicker_locale_path', array($this, 'renderLocalePath'), $options),
-        );
+        return [
+            new \Twig_SimpleFunction('bsdatetimepicker_css_path', [$this, 'renderCssPath'], $options),
+            new \Twig_SimpleFunction('bsdatetimepicker_js_path', [$this, 'renderJsPath'], $options),
+            new \Twig_SimpleFunction('bsdatetimepicker_locale_path', [$this, 'renderLocalePath'], $options),
+        ];
     }
 
     public function renderCssPath($cssPath)

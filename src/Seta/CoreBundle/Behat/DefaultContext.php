@@ -2,9 +2,7 @@
 
 namespace Seta\CoreBundle\Behat;
 
-
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Result\StepResult;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
@@ -15,8 +13,8 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * Class DefaultContext
- * @package Seta\CoreBundle\Behat
+ * Class DefaultContext.
+ *
  * @codeCoverageIgnore
  */
 class DefaultContext implements Context, KernelAwareContext
@@ -94,7 +92,7 @@ class DefaultContext implements Context, KernelAwareContext
     }
 
     /**
-     * Dispatch an event
+     * Dispatch an event.
      *
      * @param $eventName
      * @param Event $event

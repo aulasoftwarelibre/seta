@@ -8,9 +8,7 @@
  * file that was distributed with this source code.
  */
 
-
 namespace Sgomez\BsDatetimepickerBundle\Form\Type;
-
 
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormInterface;
@@ -27,9 +25,9 @@ class BsDateType extends BsDateTimeType
         $config['minView'] = 2;
         $config['format'] = 'yyyy-mm-dd';
 
-        $view->vars = array_replace($view->vars, array(
+        $view->vars = array_replace($view->vars, [
             'config' => $config,
-        ));
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -37,11 +35,10 @@ class BsDateType extends BsDateTimeType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'date_format'       => 'dd/MM/yyyy',
-            'format'            =>  "yyyy-MM-dd",
+            'date_format' => 'dd/MM/yyyy',
+            'format' => 'yyyy-MM-dd',
         ]);
     }
-
 
     public function getParent()
     {

@@ -3,11 +3,9 @@
  * Created by PhpStorm.
  * User: sergio
  * Date: 28/12/15
- * Time: 04:09
+ * Time: 04:09.
  */
-
 namespace Seta\RentalBundle\Business;
-
 
 use Doctrine\ORM\EntityManagerInterface;
 use Seta\RentalBundle\Entity\Rental;
@@ -41,7 +39,7 @@ class RenewService
     /**
      * RenewService constructor.
      *
-     * @param EntityManagerInterface $manager
+     * @param EntityManagerInterface   $manager
      * @param EventDispatcherInterface $dispatcher
      * @param $days_before_renovation int
      * @param $days_length_rental int
@@ -51,8 +49,7 @@ class RenewService
         EventDispatcherInterface $dispatcher,
         $days_before_renovation,
         $days_length_rental
-    )
-    {
+    ) {
         $this->manager = $manager;
         $this->dispatcher = $dispatcher;
         $this->days_before_renovation = $days_before_renovation;
@@ -60,20 +57,20 @@ class RenewService
     }
 
     /**
-     * Renueva el alquiler
+     * Renueva el alquiler.
      *
      * @param Rental $rental
      */
     public function renewRental(Rental $rental)
     {
-       if ($rental->getReturnAt())  {
-           throw new FinishedRentalException;
-       }
+        if ($rental->getReturnAt()) {
+            throw new FinishedRentalException();
+        }
 
         $this->checkExpiration($rental);
 
         $left = $rental->getDaysLeft() + $this->days_length_rental;
-        $rental->setEndAt(new \DateTime($left." days midnight"));
+        $rental->setEndAt(new \DateTime($left.' days midnight'));
 
         $this->manager->persist($rental);
         $this->manager->flush();
@@ -83,10 +80,12 @@ class RenewService
     }
 
     /**
-     * Check if the rental can be renovated
+     * Check if the rental can be renovated.
      *
      * @param $rental
-     * @return boolean Always 'true' or Exception
+     *
+     * @return bool Always 'true' or Exception
+     *
      * @throws NotRenewableRentalException
      * @throws ExpiredRentalException
      * @throws TooEarlyRenovationException
@@ -94,15 +93,15 @@ class RenewService
     private function checkExpiration(Rental $rental)
     {
         if (!$rental->getIsRenewable()) {
-            throw new NotRenewableRentalException;
+            throw new NotRenewableRentalException();
         }
 
         if ($rental->getIsExpired()) {
-            throw new ExpiredRentalException;
+            throw new ExpiredRentalException();
         }
 
         if ($rental->getDaysLeft() > $this->days_before_renovation) {
-            throw new TooEarlyRenovationException;
+            throw new TooEarlyRenovationException();
         }
 
         return true;
