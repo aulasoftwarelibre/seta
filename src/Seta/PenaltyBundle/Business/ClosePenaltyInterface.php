@@ -12,9 +12,14 @@
 namespace Seta\PenaltyBundle\Business;
 
 
-use Seta\UserBundle\Entity\User;
+use Seta\PenaltyBundle\Entity\Penalty;
 
-interface FinancialPenaltyServiceInterface
+interface ClosePenaltyInterface
 {
-    public function penalizeUser(User $user, $amount, $comment);
+    /**
+     * @param Penalty $penalty
+     *
+     * @return mixed
+     */
+    public function closePenalty(Penalty $penalty);
 }

@@ -141,16 +141,20 @@ class User extends BaseUser
      * Remove penalty
      *
      * @param \Seta\PenaltyBundle\Entity\Penalty $penalty
+     *
+     * @return User
      */
     public function removePenalty(\Seta\PenaltyBundle\Entity\Penalty $penalty)
     {
         $this->penalties->removeElement($penalty);
+
+        return $this;
     }
 
     /**
      * Get penalties
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getPenalties()
     {

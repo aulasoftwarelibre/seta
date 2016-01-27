@@ -12,71 +12,73 @@
 namespace Seta\PenaltyBundle\Business;
 
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 use Seta\PenaltyBundle\Entity\FinancialPenalty;
+use Seta\PenaltyBundle\Event\PenaltyEvent;
+use Seta\PenaltyBundle\PenaltyEvents;
 use Seta\PenaltyBundle\Repository\FinancialPenaltyRepository;
 use Seta\RentalBundle\Entity\Rental;
-use Seta\UserBundle\Entity\User;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class FinancialPenaltyService implements FinancialPenaltyServiceInterface
+class FinancialPenaltyService implements PenalizeRentalInterface
 {
     /**
-     * @var EntityManager
+     * @var ObjectManager
      */
     private $manager;
     /**
      * @var FinancialPenaltyRepository
      */
     private $penaltyRepository;
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $dispatcher;
+    /**
+     * @var
+     */
+    private $amount;
 
     /**
      * FinancialPenaltyService constructor.
-     * @param EntityManager $manager
+     *
+     * @param ObjectManager $manager
      * @param FinancialPenaltyRepository $penaltyRepository
+     * @param EventDispatcherInterface $dispatcher
+     * @param float $amount
      */
-    public function __construct(EntityManager $manager, FinancialPenaltyRepository $penaltyRepository)
+    public function __construct(
+        ObjectManager $manager,
+        FinancialPenaltyRepository $penaltyRepository,
+        EventDispatcherInterface $dispatcher,
+        $amount
+    )
     {
         $this->manager = $manager;
         $this->penaltyRepository = $penaltyRepository;
+        $this->dispatcher = $dispatcher;
+        $this->amount = $amount;
     }
 
     /**
-     * @param User $user
-     * @param $amount
+     * @param Rental $rental
      */
-    public function penalizeUser(User $user, $amount, $comment)
-    {
-        $user->setIsPenalized(true);
-
-        /** @var FinancialPenalty $penalty */
-        $penalty = $this->penaltyRepository->createNew();
-
-        $penalty->setUser($user);
-        $penalty->setAmmount($amount);
-        $penalty->setComment($comment);
-
-        $this->manager->persist($user);
-        $this->manager->persist($penalty);
-        $this->manager->flush();
-    }
-
-    public function penalizeRental(Rental $rental, $amount)
+    public function penalizeRental(Rental $rental)
     {
         $comment = "Penalización automática por retraso al entregar la taquilla " . $rental->getLocker()->getCode();
 
-        $user = $rental->getUser();
-        $user->setIsPenalized(true);
-
         /** @var FinancialPenalty $penalty */
         $penalty = $this->penaltyRepository->createNew();
 
-        $penalty->setUser($user);
-        $penalty->setAmmount($amount);
+        $penalty->setUser($rental->getUser());
+        $penalty->setAmmount($this->amount);
         $penalty->setComment($comment);
         $penalty->setRental($rental);
 
-        $this->manager->persist($user);
         $this->manager->persist($penalty);
         $this->manager->flush();
+
+        $event = new PenaltyEvent($penalty);
+        $this->dispatcher->dispatch(PenaltyEvents::PENALTY_CREATED, $event);
     }
 }

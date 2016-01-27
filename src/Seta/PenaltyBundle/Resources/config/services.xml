@@ -5,6 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+
         <service id="seta.repository.penalty" class="Seta\PenaltyBundle\Repository\PenaltyRepository">
             <argument>SetaPenaltyBundle:Penalty</argument>
             <factory service="doctrine" method="getRepository" />
@@ -21,14 +22,23 @@
         </service>
 
         <service id="seta.service.financial_penalty" class="Seta\PenaltyBundle\Business\FinancialPenaltyService">
-            <argument id="doctrine.orm.default_entity_manager" type="service"/>
-            <argument id="seta.repository.financial_penalty" type="service"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="seta.repository.financial_penalty"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="string">%seta.penalty.amount%</argument>
         </service>
 
         <service id="seta.service.time_penalty" class="Seta\PenaltyBundle\Business\TimePenaltyService">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="seta.repository.time_penalty" />
+            <argument type="service" id="event_dispatcher" />
             <argument type="string">%seta.notifications.days_before_suspension%</argument>
         </service>
+
+        <service id="seta.service.close_penalty" class="Seta\PenaltyBundle\Business\ClosePenaltyService">
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="event_dispatcher" />
+        </service>
+
     </services>
 </container>

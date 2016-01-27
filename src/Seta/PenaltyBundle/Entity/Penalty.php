@@ -172,4 +172,12 @@ abstract class Penalty
     {
         return $this->status;
     }
+
+    /**
+     * Set status as DONE
+     */
+    function close()
+    {
+        $this->setStatus(self::DONE);
+    }
 }

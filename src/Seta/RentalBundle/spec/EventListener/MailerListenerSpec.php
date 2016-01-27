@@ -8,7 +8,6 @@ use Seta\MailerBundle\Business\MailService;
 use Seta\MailerBundle\Business\Message;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Event\RentalEvent;
-use Seta\RentalBundle\RentalEvents;
 
 class MailerListenerSpec extends ObjectBehavior
 {

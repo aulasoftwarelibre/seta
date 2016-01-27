@@ -94,4 +94,14 @@ class FinancialPenalty extends Penalty
     {
         return $this->isPaid;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    function close()
+    {
+        parent::close();
+
+        $this->setIsPaid(true);
+    }
 }

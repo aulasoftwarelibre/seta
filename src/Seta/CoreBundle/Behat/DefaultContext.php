@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityRepository;
 use Faker\Factory;
 use Faker\Generator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -92,4 +93,16 @@ class DefaultContext implements Context, KernelAwareContext
         return $this->kernel->getContainer();
     }
 
+    /**
+     * Dispatch an event
+     *
+     * @param $eventName
+     * @param Event $event
+     *
+     * @return Event
+     */
+    protected function dispatch($eventName, Event $event)
+    {
+        return $this->getContainer()->get('event_dispatcher')->dispatch($eventName, $event);
+    }
 }

@@ -23,6 +23,7 @@ class SetaCoreExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+        $container->setParameter('seta.penalty.amount', $config['penalty']['amount']);
         $container->setParameter('seta.notifications.days_before_renovation', $config['notification']['days_before_renovation']);
         $container->setParameter('seta.notifications.days_before_suspension', $config['notification']['days_before_suspension']);
         $container->setParameter('seta.duration.days_length_rental', $config['duration']['days_length_rental']);

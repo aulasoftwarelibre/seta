@@ -90,4 +90,11 @@ class FinancialPenaltySpec extends ObjectBehavior
         $this->setIsPaid(true);
         $this->getIsPaid()->shouldBe(true);
     }
+
+    function it_closes_the_penalty()
+    {
+        $this->close();
+        $this->getStatus()->shouldBe(Penalty::DONE);
+        $this->getIsPaid()->shouldBe(true);
+    }
 }

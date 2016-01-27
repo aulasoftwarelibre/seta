@@ -5,10 +5,17 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+
         <service id="seta.repository.user" class="Seta\UserBundle\Repository\UserRepository">
             <argument type="string">SetaUserBundle:User</argument>
             <factory service="doctrine" method="getRepository" />
         </service>
+
+        <service id="seta_user.event_listener.penalty_listener" class="Seta\UserBundle\EventListener\PenaltyListener">
+            <argument type="service" id="fos_user.entity_manager"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
     </services>
 
 </container>

@@ -21,11 +21,10 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('seta_core');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
         /*
          seta_core:
+            penalty:
+                amount: 2.0
             notification:
                 days_before_renovation: 2
                 days_before_suspension: 8
@@ -35,6 +34,11 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->arrayNode('penalty')
+                    ->children()
+                        ->floatNode('amount')->defaultValue('2.0')->end()
+                    ->end()
+                ->end() // penalty
                 ->arrayNode('notification')
                     ->children()
                         ->scalarNode('days_before_renovation')->defaultValue('2')->end()

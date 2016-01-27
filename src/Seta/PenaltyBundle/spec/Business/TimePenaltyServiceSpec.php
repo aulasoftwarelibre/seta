@@ -2,20 +2,24 @@
 
 namespace spec\Seta\PenaltyBundle\Business;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\PenaltyBundle\Entity\TimePenalty;
+use Seta\PenaltyBundle\Event\PenaltyEvent;
+use Seta\PenaltyBundle\PenaltyEvents;
 use Seta\PenaltyBundle\Repository\TimePenaltyRepository;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Exception\NotExpiredRentalException;
 use Seta\UserBundle\Entity\User;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class TimePenaltyServiceSpec extends ObjectBehavior
 {
     function let(
-        EntityManager $manager,
+        EventDispatcherInterface $dispatcher,
+        ObjectManager $manager,
         TimePenaltyRepository $timePenaltyRepository,
         Locker $locker,
         Rental $rental,
@@ -23,7 +27,7 @@ class TimePenaltyServiceSpec extends ObjectBehavior
     )
     {
         $days_before_penalty = 8;
-        $this->beConstructedWith($manager, $timePenaltyRepository, $days_before_penalty);
+        $this->beConstructedWith($manager, $timePenaltyRepository, $dispatcher, $days_before_penalty);
 
         $locker->getCode()->willReturn("100");
         
@@ -37,32 +41,9 @@ class TimePenaltyServiceSpec extends ObjectBehavior
         $this->shouldHaveType('Seta\PenaltyBundle\Business\TimePenaltyService');
     }
 
-    function it_can_add_a_penalty(
-        User $user,
-        TimePenalty $penalty,
-        EntityManager $manager,
-        TimePenaltyRepository $timePenaltyRepository
-    )
-    {
-        $end = new \DateTime('+7 days');
-        $comment = "Test";
-
-        $user->setIsPenalized(true)->shouldBeCalled();
-
-        $timePenaltyRepository->createNew()->shouldBeCalled()->willReturn($penalty);
-        $penalty->setUser($user)->shouldBeCalled();
-        $penalty->setEndAt($end)->shouldBeCalled();
-        $penalty->setComment($comment)->shouldBeCalled();
-
-        $manager->persist($user)->shouldBeCalled();
-        $manager->persist($penalty)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
-
-        $this->penalizeUser($user, $end, $comment);
-    }
-
     function it_can_add_a_penalty_from_a_rent(
-        EntityManager $manager,
+        EventDispatcherInterface $dispatcher,
+        ObjectManager $manager,
         Locker $locker,
         TimePenalty $penalty,
         TimePenaltyRepository $timePenaltyRepository,
@@ -77,7 +58,6 @@ class TimePenaltyServiceSpec extends ObjectBehavior
         $comment = "Bloqueo automático por retraso al entregar la taquilla 100";
 
         $rental->getUser()->shouldBeCalled();
-        $user->setIsPenalized(true)->shouldBeCalled();
 
         $timePenaltyRepository->createNew()->shouldBeCalled()->willReturn($penalty);
         $penalty->setUser($user)->shouldBeCalled();
@@ -85,9 +65,10 @@ class TimePenaltyServiceSpec extends ObjectBehavior
         $penalty->setComment($comment)->shouldBeCalled();
         $penalty->setRental($rental)->shouldBeCalled();
 
-        $manager->persist($user)->shouldBeCalled();
         $manager->persist($penalty)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
+
+        $dispatcher->dispatch(PenaltyEvents::PENALTY_CREATED, Argument::type(PenaltyEvent::class))->shouldBeCalled();
 
         $this->penalizeRental($rental);
     }

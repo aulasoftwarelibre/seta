@@ -11,6 +11,9 @@ namespace Seta\UserBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Seta\CoreBundle\Behat\DefaultContext;
+use Seta\PenaltyBundle\Entity\TimePenalty;
+use Seta\PenaltyBundle\Event\PenaltyEvent;
+use Seta\PenaltyBundle\PenaltyEvents;
 use Seta\UserBundle\Entity\User;
 
 /**
@@ -31,11 +34,18 @@ class UserContext extends DefaultContext
             $user->setNic($this->faker->unique()->bothify("########?"));
             $user->setFullname($this->faker->name);
             if ($row['dias_sancion']) {
-                $start = new \DateTime('now');
-                $end = new \DateTime($row['dias_sancion'].' days 23:59:59');
+                $end = new \DateTime($row['dias_sancion'].' days midnight');
                 $comment = $row['comentario'];
 
-                $this->getService('seta.service.time_penalty')->penalizeUser($user, $end, $comment);
+                $penalty = new TimePenalty();
+                $penalty->setUser($user);
+                $penalty->setEndAt($end);
+                $penalty->setComment($comment);
+
+                $this->getEntityManager()->persist($penalty);
+                $this->getEntityManager()->flush();
+
+                $this->dispatch(PenaltyEvents::PENALTY_CREATED, new PenaltyEvent($penalty));
             }
             $this->getEntityManager()->persist($user);
         }

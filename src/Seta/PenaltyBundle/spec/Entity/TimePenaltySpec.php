@@ -102,4 +102,10 @@ class TimePenaltySpec extends ObjectBehavior
     {
         $this->getEndSeasonPenalty(new \DateTime("september 1"))->shouldBeLike(new \DateTime("next year september 1 midnight"));
     }
+
+    function it_closes_the_penalty()
+    {
+        $this->close();
+        $this->getStatus()->shouldBe(Penalty::DONE);
+    }
 }

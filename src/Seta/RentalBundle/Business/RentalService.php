@@ -77,7 +77,7 @@ class RentalService
             throw new NotFreeLockerException;
         }
 
-        $this->rentLocker($user, $locker);
+        return $this->rentLocker($user, $locker);
     }
 
     public function rentLocker(User $user, Locker $locker)
@@ -110,6 +110,8 @@ class RentalService
 
         $event = new RentalEvent($rental);
         $this->dispatcher->dispatch(RentalEvents::LOCKER_RENTED, $event);
+
+        return $rental;
     }
 
 }

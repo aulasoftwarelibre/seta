@@ -1,4 +1,6 @@
 seta_core:
+    penalty:
+        amount: 2.0
     notification:
         days_before_renovation: 2
         days_before_suspension: 8
