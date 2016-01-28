@@ -32,7 +32,8 @@
         "friendsofsymfony/user-bundle"          : "~2.0@dev",
         "hautzi/system-mail-bundle"             : "dev-fix-request-stack",
         "pdias/saml-bundle"                     : "dev-master",
-        "javiereguiluz/easyadmin-bundle"        : "dev-master"
+        "javiereguiluz/easyadmin-bundle"        : "dev-master",
+        "craue/config-bundle": "~1.4"
     },
     "require-dev": {
         "sensio/generator-bundle"               : "^3.0",

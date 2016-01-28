@@ -1,0 +1,11 @@
+
+section.penalty: Parámetros de las penalizaciones
+section.rental: Parámetros del alquiler (en días)
+
+seta.penalty.amount: Penalización por rotura de candado (en euros)
+seta.notifications.days_before_renovation: Días de antelación como máximo para renovar
+seta.notifications.days_before_suspension: Días de retraso para suspender la cuenta totalmente
+seta.duration.days_length_rental: Duración por defecto del alquiler
+
+modify_settings: Grabar cambios
+settings_changed: Cambios guardados

@@ -1,0 +1,18 @@
+Craue\ConfigBundle\Entity\Setting:
+    penalty_amount:
+        name: seta.penalty.amount
+        value: 2.0
+        section: section.penalty
+    notification_days_before_renovation:
+        name: seta.notifications.days_before_renovation
+        value: 2
+        section: section.rental
+    notification_days_before_suspension:
+        name: seta.notifications.days_before_suspension
+        value: 8
+        section: section.rental
+    rental_duration:
+        name: seta.duration.days_length_rental
+        value: 7
+        section: section.rental
+

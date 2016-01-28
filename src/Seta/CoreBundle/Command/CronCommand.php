@@ -40,7 +40,7 @@ class CronCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $time = $this->getContainer()->getParameter('seta.notifications.days_before_renovation');
+        $time = $this->getContainer()->get('craue_config')->get('seta.notifications.days_before_renovation');
         $on = new \DateTime($time.' days midnight');
         $output->write('Enviando mensajes de renovación... ');
         $total = $this->sendReminderEmail(Message::RENEW_WARNING_MESSAGE, $on);
@@ -51,7 +51,7 @@ class CronCommand extends ContainerAwareCommand
         $total = $this->sendReminderEmail(Message::PENALTY_WARNING_MESSAGE, $on);
         $output->writeln("Hecho: [${total}].");
 
-        $time = $this->getContainer()->getParameter('seta.notifications.days_before_suspension');
+        $time = $this->getContainer()->get('craue_config')->get('seta.notifications.days_before_suspension');
         $on = new \DateTime('-'.$time.'days midnight');
         $output->write('Enviando mensajes de suspensión... ');
         $this->sendReminderEmail(Message::SUSPENSION_WARNING_MESSAGE, $on);

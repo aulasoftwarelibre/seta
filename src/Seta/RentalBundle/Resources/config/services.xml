@@ -25,14 +25,14 @@
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="seta.repository.locker" />
             <argument type="service" id="seta.repository.rental" />
-            <argument>%seta.duration.days_length_rental%</argument>
+            <argument type="expression">service('craue_config').get('seta.duration.days_length_rental')</argument>
         </service>
 
         <service id="seta.service.renew" class="Seta\RentalBundle\Business\RenewService">
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <argument type="service" id="event_dispatcher" />
-            <argument>%seta.notifications.days_before_renovation%</argument>
-            <argument>%seta.duration.days_length_rental%</argument>
+            <argument type="expression">service('craue_config').get('seta.notifications.days_before_renovation')</argument>
+            <argument type="expression">service('craue_config').get('seta.duration.days_length_rental')</argument>
         </service>
 
         <service id="seta.service.return" class="Seta\RentalBundle\Business\ReturnService">

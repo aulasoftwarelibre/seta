@@ -4,6 +4,10 @@ fos_user:
 ceeps_userbundle:
     resource: "@CeepsUserBundle/Resources/config/routing.yml"
 
+craue_config_settings:
+  resource: "@CraueConfigBundle/Resources/config/routing/settings.xml"
+  prefix: /admin/settings
+
 easy_admin_bundle:
     resource: "@SetaCoreBundle/Controller/Backend/AdminController.php"
     type:     annotation

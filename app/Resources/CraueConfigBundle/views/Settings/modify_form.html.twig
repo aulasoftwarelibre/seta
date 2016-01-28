@@ -1,0 +1,38 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+{{ form_start(form, {'attr': {'class': 'edit-form'}}) }}
+	{{ form_errors(form) }}
+
+	<div class="row">
+		{% for section in sections | craue_sortSections %}
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				{% if section is not empty %}
+				<div class="box-header with-border">
+					{{ section | trans({}, 'CraueConfigBundle') }}
+				</div>
+				{% endif %}
+				<div class="box-body">
+					{% for setting in form.settings if setting.section.vars.value == section %}
+
+						<div class="form-group field-text">
+							{{ form_row(setting.name) }}
+							{{ form_row(setting.section) }}
+							{{ form_row(setting.value, {
+								'label': setting.name.vars.value | trans({}, 'CraueConfigBundle'),
+							}) }}
+						</div>
+
+					{% endfor %}
+				</div>
+			</div>
+
+		</div>
+		{% endfor %}
+	</div>
+
+	{{ form_rest(form) }}
+
+	<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> {{ 'modify_settings' | trans({}, 'CraueConfigBundle') }}</button>
+{{ form_end(form) }}

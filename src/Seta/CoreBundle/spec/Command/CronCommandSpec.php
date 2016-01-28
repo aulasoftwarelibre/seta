@@ -2,6 +2,7 @@
 
 namespace spec\Seta\CoreBundle\Command;
 
+use Craue\ConfigBundle\Util\Config;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\MailerBundle\Business\MailService;
 use Seta\RentalBundle\Entity\Rental;
@@ -51,6 +52,7 @@ class CronCommandSpec extends ObjectBehavior
 
     public function it_send_emails(
         ContainerInterface $container,
+        Config $config,
         InputInterface $input,
         MailService $mailer,
         OutputInterface $output,
@@ -59,8 +61,9 @@ class CronCommandSpec extends ObjectBehavior
         RequestStack $requestStack,
         TranslatorInterface $translator
     ) {
-        $container->getParameter('seta.notifications.days_before_renovation')->shouldBeCalled()->willReturn('2');
-        $container->getParameter('seta.notifications.days_before_suspension')->shouldBeCalled()->willReturn('8');
+        $container->get('craue_config')->shouldBeCalled()->willReturn($config);
+        $config->get('seta.notifications.days_before_renovation')->shouldBeCalled()->willReturn('2');
+        $config->get('seta.notifications.days_before_suspension')->shouldBeCalled()->willReturn('8');
         $container->get('seta.repository.rental')->shouldBeCalled()->willReturn($rentalRepository);
         $container->get('seta_mailing')->shouldBeCalled()->willReturn($mailer);
         $container->get('translator')->shouldBeCalled()->willReturn($translator);
