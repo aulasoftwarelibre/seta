@@ -13,6 +13,7 @@ namespace Seta\PenaltyBundle\Business;
 use Doctrine\Common\Persistence\ObjectManager;
 use Seta\PenaltyBundle\Entity\Penalty;
 use Seta\PenaltyBundle\Event\PenaltyEvent;
+use Seta\PenaltyBundle\Exception\PenaltyDoneException;
 use Seta\PenaltyBundle\PenaltyEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -44,6 +45,10 @@ class ClosePenaltyService implements ClosePenaltyInterface
      */
     public function closePenalty(Penalty $penalty)
     {
+        if ($penalty->getStatus() === Penalty::DONE) {
+            throw new PenaltyDoneException;
+        }
+
         $penalty->close();
         $this->manager->persist($penalty);
         $this->manager->flush();

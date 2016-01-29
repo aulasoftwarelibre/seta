@@ -5,6 +5,9 @@ easy_admin:
             label: app.menu.penalties
             disabled_actions: ['delete']
             list:
+                actions:
+                    - 'edit'
+                    - { name: 'penalty_close', type: 'route', label: 'app.action.penalty_close' }
                 fields:
                     - { property: 'user', label: 'label.user' }
                     - { property: 'rental', label: 'label.rental' }

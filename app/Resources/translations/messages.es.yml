@@ -11,6 +11,7 @@ User: Usuario
 app.action.list_rental: Gestionar
 app.action.locker_toogle_status: Bloquear/Desbloquear
 app.action.new_rental: Alquilar
+app.action.penalty_close: Cerrar
 app.action.renew_rental: Renovar
 app.action.return_rental: Devolver
 

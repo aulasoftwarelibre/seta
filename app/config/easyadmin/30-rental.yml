@@ -11,11 +11,10 @@ easy_admin:
                     - { name: 'rental_renew', type: 'route', label: 'app.action.renew_rental' }
                     - { name: 'rental_return', type: 'route', label: 'app.action.return_rental' }
                 fields:
-                    - { property: 'user', label: 'label.owner' }
                     - { property: 'locker', label: 'label.locker' }
+                    - { property: 'user', label: 'label.owner' }
                     - { property: 'startAt', label: 'label.start_at' }
                     - { property: 'endAt', label: 'label.end_at' }
-                    - { property: 'returnAt', label: 'label.return_at' }
                     - { property: 'isRenewable', type: 'toggle', label: 'label.is_renewable' }
             form:
                 fields:

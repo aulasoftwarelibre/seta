@@ -15,8 +15,6 @@ easy_admin:
                     - { property: 'fullname', label: 'label.fullname' }
                     - { property: 'locker', label: 'label.locker' }
                     - { property: 'isPenalized', type: 'boolean', label: 'label.penalized' }
-                    - { property: 'enabled', type: 'toggle', label: 'label.enabled' }
-                    - { property: 'locked', type: 'toggle', label: 'label.locked' }
             form:
                 fields:
                     - { property: 'username', label: 'label.username' }
@@ -25,7 +23,6 @@ easy_admin:
                     - { property: 'email', type: 'email', label: 'label.email' }
                     - { property: 'plainPassword', type: 'password', label: 'label.password', help: 'help.password' }
                     - { property: 'groups', label: 'label.groups' }
-                    - { property: 'enabled', type: 'checkbox', label: 'label.enabled' }
                     - { property: 'locked', type: 'checkbox', label: 'label.locked' }
                     - { property: 'isPenalized', type: 'checkbox', label: 'label.penalized' }
             show:

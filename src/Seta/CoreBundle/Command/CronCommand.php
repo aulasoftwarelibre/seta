@@ -8,6 +8,7 @@
 namespace Seta\CoreBundle\Command;
 
 use Seta\MailerBundle\Business\Message;
+use Seta\PenaltyBundle\Entity\Penalty;
 use Seta\RentalBundle\Entity\Rental;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -67,5 +68,14 @@ class CronCommand extends ContainerAwareCommand
         }
 
         return count($rentals);
+    }
+
+    private function checkPendingPenalties()
+    {
+        $penalties = $this->getContainer()->get('seta.repository.time_penalty')->findExpiredPenalties();
+        /** @var Penalty $penalty */
+        foreach ($penalties as $penalty) {
+            $this->getContainer()->get('seta.service.close_penalty')->closePenalty($penalty);
+        }
     }
 }

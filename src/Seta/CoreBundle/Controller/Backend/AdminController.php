@@ -12,6 +12,7 @@ namespace Seta\CoreBundle\Controller\Backend;
 
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 use Seta\LockerBundle\Entity\Locker;
+use Seta\PenaltyBundle\Entity\Penalty;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
@@ -166,6 +167,34 @@ class AdminController extends BaseAdminController
         try {
             $this->get('seta.service.return')->returnRental($rental);
             $this->addFlash('success', 'La taquilla ha sido devuelta');
+        } catch (\Exception $e) {
+            $this->addFlash('danger', $e->getMessage());
+        }
+
+        return $this->redirectToAction($request);
+    }
+
+    /**
+     * Cierra una sanción
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("penalty-close", name="penalty_close")
+     */
+    public function penaltyClose(Request $request)
+    {
+        $id = $request->query->get('id');
+        /** @var Penalty $penalty */
+        $penalty = $this->get('seta.repository.penalty')->find($id);
+
+        if (!$penalty) {
+            throw $this->createNotFoundException('La sanción indicada no existe.');
+        }
+
+        try {
+            $this->get('seta.service.close_penalty')->closePenalty($penalty);
+            $this->addFlash('success', 'La sanción se ha cerrado');
         } catch (\Exception $e) {
             $this->addFlash('danger', $e->getMessage());
         }
