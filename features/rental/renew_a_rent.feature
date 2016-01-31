@@ -9,18 +9,24 @@ Característica: Renovar alquileres
   - Una taquilla que ya haya caducado no puede ser renovada
 
   Antecedentes:
-    Dados los siguientes usuarios:
-      | email           | dias_sancion  | comentario          |
-      | john@gmail.com  |               |                     |
-      | luis@gmail.com  | +7            | Entrega con retraso |
-      | mary@gmail.com  |               |                     |
-      | sara@gmail.com  |               |                     |
+    Dados los siguientes centros:
+      | nombre                                  | código    | activo  |
+      | Escuela Politécnica Superior de Córdoba | epsc      | sí      |
+      | Facultad de Ciencias                    | ciencias  | no      |
+    Y los siguientes usuarios:
+      | email           | centro        |
+      | john@gmail.com  | epsc          |
+      | luis@gmail.com  | epsc          |
+      | mary@gmail.com  | epsc          |
+      | sara@gmail.com  | epsc          |
+      | anna@gmail.com  | ciencias      |
     Y las siguientes taquillas:
       | código          | estado        | alquilada_a     | desde | hasta | renovable |
       | 100             | alquilada     | mary@gmail.com  | -1    | +1    | sí        |
       | 101             | alquilada     | sara@gmail.com  | -7    | +3    | sí        |
       | 102             | alquilada     | john@gmail.com  | -5    | +2    | no        |
       | 103             | alquilada     | luis@gmail.com  | -15   | -8    | sí        |
+      | 104             | alquilada     | anna@gmail.com  | -1    | +1    | sí        |
 
   Escenario: Renovar una taquilla durante las 48 horas del día de entrega
     Cuando se quiere renovar el alquiler de la taquilla "100"
@@ -38,4 +44,13 @@ Característica: Renovar alquileres
     Cuando se quiere renovar el alquiler de la taquilla "103"
     Entonces el alquiler de la taquilla "103" ha caducado
 
+  Escenario: Renovar una taquilla de un usuario sancionado
+    Dado las siguientes sanciones de tiempo:
+      | usuario         | dias_sancion  |
+      | mary@gmail.com  | 7             |
+    Cuando se quiere renovar el alquiler de la taquilla "100"
+    Entonces el alquiler de la taquilla "100" caducará dentro de 1 días
 
+  Escenario: Renovar una taquilla de un centro bloqueado
+    Cuando se quiere renovar el alquiler de la taquilla "104"
+    Entonces el alquiler de la taquilla "104" caducará dentro de 1 días

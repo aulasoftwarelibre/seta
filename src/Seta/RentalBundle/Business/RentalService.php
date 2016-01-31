@@ -12,6 +12,7 @@ use Seta\LockerBundle\Entity\Locker;
 use Seta\LockerBundle\Exception\BusyLockerException;
 use Seta\LockerBundle\Exception\NotFreeLockerException;
 use Seta\LockerBundle\Repository\LockerRepository;
+use Seta\PenaltyBundle\Exception\PenalizedFacultyException;
 use Seta\PenaltyBundle\Exception\PenalizedUserException;
 use Seta\RentalBundle\Exception\TooManyLockersRentedException;
 use Seta\RentalBundle\Entity\Rental;
@@ -82,6 +83,10 @@ class RentalService
     {
         if ($user->getIsPenalized()) {
             throw new PenalizedUserException();
+        }
+
+        if ($user->getFaculty()->getIsEnabled() === false) {
+            throw new PenalizedFacultyException();
         }
 
         if ($locker->getStatus() != Locker::AVAILABLE) {

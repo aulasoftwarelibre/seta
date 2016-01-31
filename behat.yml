@@ -31,6 +31,7 @@ default:
                 - Seta\UserBundle\Behat\UserContext
                 - Seta\LockerBundle\Behat\LockerContext
                 - Seta\RentalBundle\Behat\RentalContext
+                - Seta\PenaltyBundle\Behat\PenaltyContext
             filters:
                 tags: "@rent_a_locker"
         return_a_locker:

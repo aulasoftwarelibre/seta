@@ -3,12 +3,16 @@
 Característica: Buscar préstamos
 
   Antecedentes:
-    Dados los siguientes usuarios:
-      | email           | dias_sancion  | comentario          |
-      | john@gmail.com  |               |                     |
-      | luis@gmail.com  | +7            | Entrega con retraso |
-      | mary@gmail.com  |               |                     |
-      | sara@gmail.com  |               |                     |
+    Dados los siguientes centros:
+      | nombre                                  | código    | activo  |
+      | Escuela Politécnica Superior de Córdoba | epsc      | sí      |
+      | Facultad de Ciencias                    | ciencias  | no      |
+    Y los siguientes usuarios:
+      | email           | centro        |
+      | john@gmail.com  | epsc          |
+      | luis@gmail.com  | epsc          |
+      | mary@gmail.com  | epsc          |
+      | sara@gmail.com  | ciencias      |
     Y las siguientes taquillas:
       | código          | estado        | alquilada_a     | desde | hasta | renovable |
       | 100             | alquilada     | mary@gmail.com  | -1    | +1    | sí        |

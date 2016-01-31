@@ -8,6 +8,8 @@
 namespace Seta\RentalBundle\Business;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Seta\PenaltyBundle\Exception\PenalizedFacultyException;
+use Seta\PenaltyBundle\Exception\PenalizedUserException;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Event\RentalEvent;
 use Seta\RentalBundle\Exception\ExpiredRentalException;
@@ -60,6 +62,8 @@ class RenewService
      * Renueva el alquiler.
      *
      * @param Rental $rental
+     *
+     * @return Rental
      */
     public function renewRental(Rental $rental)
     {
@@ -67,31 +71,14 @@ class RenewService
             throw new FinishedRentalException();
         }
 
-        $this->checkExpiration($rental);
+        if ($rental->getUser()->getIsPenalized()) {
+            throw new PenalizedUserException();
+        }
 
-        $left = $rental->getDaysLeft() + $this->days_length_rental;
-        $rental->setEndAt(new \DateTime($left.' days midnight'));
+        if ($rental->getUser()->getFaculty()->getIsEnabled() === false) {
+            throw new PenalizedFacultyException();
+        }
 
-        $this->manager->persist($rental);
-        $this->manager->flush();
-
-        $event = new RentalEvent($rental);
-        $this->dispatcher->dispatch(RentalEvents::LOCKER_RENEWED, $event);
-    }
-
-    /**
-     * Check if the rental can be renovated.
-     *
-     * @param $rental
-     *
-     * @return bool Always 'true' or Exception
-     *
-     * @throws NotRenewableRentalException
-     * @throws ExpiredRentalException
-     * @throws TooEarlyRenovationException
-     */
-    private function checkExpiration(Rental $rental)
-    {
         if (!$rental->getIsRenewable()) {
             throw new NotRenewableRentalException();
         }
@@ -104,6 +91,15 @@ class RenewService
             throw new TooEarlyRenovationException();
         }
 
-        return true;
+        $left = $rental->getDaysLeft() + $this->days_length_rental;
+        $rental->setEndAt(new \DateTime($left.' days midnight'));
+
+        $this->manager->persist($rental);
+        $this->manager->flush();
+
+        $event = new RentalEvent($rental);
+        $this->dispatcher->dispatch(RentalEvents::LOCKER_RENEWED, $event);
+
+        return $rental;
     }
 }

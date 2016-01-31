@@ -4,10 +4,10 @@ namespace spec\Seta\PenaltyBundle\Business;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Seta\PenaltyBundle\Business\ClosePenaltyInterface;
 use Seta\PenaltyBundle\Entity\Penalty;
 use Seta\PenaltyBundle\Event\PenaltyEvent;
+use Seta\PenaltyBundle\Exception\PenaltyDoneException;
 use Seta\PenaltyBundle\PenaltyEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -15,9 +15,12 @@ class ClosePenaltyServiceSpec extends ObjectBehavior
 {
     public function let(
         ObjectManager $manager,
+        Penalty $penalty,
         EventDispatcherInterface $dispatcher
     ) {
         $this->beConstructedWith($manager, $dispatcher);
+
+        $penalty->getStatus()->willReturn(Penalty::ACTIVE);
     }
 
     public function it_is_initializable()
@@ -40,8 +43,16 @@ class ClosePenaltyServiceSpec extends ObjectBehavior
         $manager->flush()->shouldBeCalled();
 
         $event = new PenaltyEvent($penalty->getWrappedObject());
-        $dispatcher->dispatch(PenaltyEvents::PENALTY_CLOSED, Argument::type(PenaltyEvent::class))->shouldBeCalled();
+        $dispatcher->dispatch(PenaltyEvents::PENALTY_CLOSED, $event)->shouldBeCalled();
 
         $this->closePenalty($penalty);
+    }
+
+    public function it_cannot_closes_penalty_twice(
+        Penalty $penalty
+    ) {
+        $penalty->getStatus()->willReturn(Penalty::DONE);
+
+        $this->shouldThrow(PenaltyDoneException::class)->duringClosePenalty($penalty);
     }
 }

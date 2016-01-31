@@ -79,6 +79,7 @@ class User extends BaseUser
      * @var Faculty
      *
      * @ORM\ManyToOne(targetEntity="Seta\UserBundle\Entity\Faculty", inversedBy="students")
+     * @ORM\JoinColumn(nullable=false)
      */
     protected $faculty;
 
@@ -288,7 +289,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set faculty
+     * Set faculty.
      *
      * @param \Seta\UserBundle\Entity\Faculty $faculty
      *
@@ -302,7 +303,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get faculty
+     * Get faculty.
      *
      * @return \Seta\UserBundle\Entity\Faculty
      */

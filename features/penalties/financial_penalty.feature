@@ -10,9 +10,12 @@ Característica: Crear sanciones económicas
   - Debe indicar la cantidad por la que se sanciona
 
   Antecedentes:
-    Dados los siguientes usuarios:
-      | email           | dias_sancion  | comentario          |
-      | mary@gmail.com  |               |                     |
+    Dados los siguientes centros:
+      | nombre                                  | código    | activo  |
+      | Escuela Politécnica Superior de Córdoba | epsc      | sí      |
+    Y los siguientes usuarios:
+      | email           | centro        |
+      | mary@gmail.com  | epsc          |
     Y las siguientes taquillas:
       | código          | estado        | alquilada_a     | desde | hasta |
       | 100             | alquilada     | mary@gmail.com  | -15   | -8    |

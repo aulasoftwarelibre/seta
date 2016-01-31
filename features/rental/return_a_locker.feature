@@ -10,11 +10,15 @@ Característica: Devolver una taquilla
   - Si la taquilla tiene más de siete días de retraso la sanción es por todo el curso
 
   Antecedentes:
-    Dados los siguientes usuarios:
-      | email           | dias_sancion  | comentario          |
-      | john@gmail.com  |               |                     |
-      | luis@gmail.com  |               |                     |
-      | mary@gmail.com  |               |                     |
+    Dados los siguientes centros:
+      | nombre                                  | código    | activo  |
+      | Escuela Politécnica Superior de Córdoba | epsc      | sí      |
+      | Facultad de Ciencias                    | ciencias  | no      |
+    Y los siguientes usuarios:
+      | email           | centro        |
+      | john@gmail.com  | epsc          |
+      | luis@gmail.com  | epsc          |
+      | mary@gmail.com  | epsc          |
     Y las siguientes taquillas:
       | código          | estado        | alquilada_a     | desde | hasta |
       | 100             | disponible    |                 |       |       |

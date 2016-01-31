@@ -7,10 +7,13 @@
  */
 namespace Seta\PenaltyBundle\Behat;
 
+use Behat\Gherkin\Node\TableNode;
 use Seta\CoreBundle\Behat\DefaultContext;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\PenaltyBundle\Entity\FinancialPenalty;
 use Seta\PenaltyBundle\Entity\TimePenalty;
+use Seta\PenaltyBundle\Event\PenaltyEvent;
+use Seta\PenaltyBundle\PenaltyEvents;
 use Seta\UserBundle\Entity\User;
 
 /**
@@ -139,5 +142,32 @@ class PenaltyContext extends DefaultContext
     public function laSanciónPorNoDevolverElCandadoDeEuros($amount)
     {
         $this->amount = $amount;
+    }
+
+    /**
+     * @When /^las siguientes sanciones de tiempo:$/
+     */
+    public function lasSiguientesSanciones(TableNode $table)
+    {
+        foreach ($table->getHash() as $row) {
+            $user = $this->getEntityManager()->getRepository('SetaUserBundle:User')->findOneBy(['email' => $row['usuario']]);
+            if (!$user) {
+                throw new \Exception('Usuario no encontrado: '.$row['usuario']);
+            }
+
+            $end = new \DateTime($row['dias_sancion'].' days midnight');
+            $comment = 'Sanción automática';
+
+            $penalty = new TimePenalty();
+            $penalty->setUser($user);
+            $penalty->setEndAt($end);
+            $penalty->setComment($comment);
+
+            $this->getEntityManager()->persist($penalty);
+
+            $this->dispatch(PenaltyEvents::PENALTY_CREATED, new PenaltyEvent($penalty));
+        }
+
+        $this->getEntityManager()->flush();
     }
 }

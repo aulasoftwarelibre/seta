@@ -9,9 +9,7 @@ namespace Seta\UserBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Seta\CoreBundle\Behat\DefaultContext;
-use Seta\PenaltyBundle\Entity\TimePenalty;
-use Seta\PenaltyBundle\Event\PenaltyEvent;
-use Seta\PenaltyBundle\PenaltyEvents;
+use Seta\UserBundle\Entity\Faculty;
 use Seta\UserBundle\Entity\User;
 
 /**
@@ -31,21 +29,31 @@ class UserContext extends DefaultContext
             $user->setPlainPassword('secret');
             $user->setNic($this->faker->unique()->bothify('########?'));
             $user->setFullname($this->faker->name);
-            if ($row['dias_sancion']) {
-                $end = new \DateTime($row['dias_sancion'].' days midnight');
-                $comment = $row['comentario'];
 
-                $penalty = new TimePenalty();
-                $penalty->setUser($user);
-                $penalty->setEndAt($end);
-                $penalty->setComment($comment);
-
-                $this->getEntityManager()->persist($penalty);
-                $this->getEntityManager()->flush();
-
-                $this->dispatch(PenaltyEvents::PENALTY_CREATED, new PenaltyEvent($penalty));
+            $faculty = $this->getEntityManager()->getRepository('SetaUserBundle:Faculty')->findOneBy(['slug' => $row['centro']]);
+            if (!$faculty) {
+                throw new \Exception('Facultad no encontrada: '.$row['centro']);
             }
+            $user->setFaculty($faculty);
+
             $this->getEntityManager()->persist($user);
+        }
+
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @When /^los siguientes centros:$/
+     */
+    public function losSiguientesCentros(TableNode $table)
+    {
+        foreach ($table->getHash() as $row) {
+            $faculty = new Faculty();
+            $faculty->setName($row['nombre']);
+            $faculty->setSlug($row['código']);
+            $faculty->setIsEnabled($row['activo'] === 'sí');
+
+            $this->getEntityManager()->persist($faculty);
         }
 
         $this->getEntityManager()->flush();

@@ -10,11 +10,19 @@ Característica: Alquilar taquillas
   - Si no hay taquillas libres se incluye al usuario en una lista de espera
 
   Antecedentes:
-    Dados los siguientes usuarios:
-      | email           | dias_sancion  | comentario          |
-      | john@gmail.com  |               |                     |
-      | luis@gmail.com  | +7            | Entrega con retraso |
-      | mary@gmail.com  |               |                     |
+    Dados los siguientes centros:
+      | nombre                                  | código    | activo  |
+      | Escuela Politécnica Superior de Córdoba | epsc      | sí      |
+      | Facultad de Ciencias                    | ciencias  | no      |
+    Y los siguientes usuarios:
+      | email           | centro        |
+      | john@gmail.com  | epsc          |
+      | luis@gmail.com  | epsc          |
+      | mary@gmail.com  | epsc          |
+      | anna@gmail.com  | ciencias      |
+    Y las siguientes sanciones de tiempo:
+      | usuario         | dias_sancion  |
+      | luis@gmail.com  | 7             |
     Y las siguientes taquillas:
       | código          | estado        | alquilada_a     | desde | hasta |
       | 100             | disponible    |                 |       |       |
@@ -51,3 +59,9 @@ Característica: Alquilar taquillas
     Y que "john@gmail.com" quiere alquilar una taquilla
     Cuando se le asigna una taquilla libre
     Entonces el usuario "john@gmail.com" no tiene ninguna taquilla asignada
+
+  Escenario: Alquilar una taquilla por miembros de centros bloqueados
+    Dado que "anna@gmail.com" quiere alquilar una taquilla
+    Cuando se le intenta asignar la taquilla "100"
+    Entonces la taquilla "100" continúa con el estado "disponible"
+    Y el usuario "anna@gmail.com" no tiene ninguna taquilla asignada

@@ -7,10 +7,13 @@ Característica: Envíar correos de renovación
   - Los préstamos no renovables no incluyen URL de renovación
 
   Antecedentes:
-    Dados los siguientes usuarios:
-      | email           | dias_sancion  | comentario          |
-      | john@gmail.com  |               |                     |
-      | sara@gmail.com  |               |                     |
+    Dados los siguientes centros:
+      | nombre                                  | código    | activo  |
+      | Escuela Politécnica Superior de Córdoba | epsc      | sí      |
+    Y los siguientes usuarios:
+      | email           | centro        |
+      | john@gmail.com  | epsc          |
+      | sara@gmail.com  | epsc          |
 
   Escenario: Correo de aviso con renovación
     Dadas las siguientes taquillas:

@@ -4,7 +4,8 @@ namespace spec\Seta\RentalBundle\Business;
 
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Seta\PenaltyBundle\Exception\PenalizedFacultyException;
+use Seta\PenaltyBundle\Exception\PenalizedUserException;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Event\RentalEvent;
 use Seta\RentalBundle\Exception\ExpiredRentalException;
@@ -12,23 +13,34 @@ use Seta\RentalBundle\Exception\FinishedRentalException;
 use Seta\RentalBundle\Exception\NotRenewableRentalException;
 use Seta\RentalBundle\Exception\TooEarlyRenovationException;
 use Seta\RentalBundle\RentalEvents;
+use Seta\UserBundle\Entity\Faculty;
+use Seta\UserBundle\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RenewServiceSpec extends ObjectBehavior
 {
+    const DAYS_BEFORE_RENOVATION = 2;
+    const DAYS_LENGTH_RENTAL = 7;
+
     public function let(
         EntityManager $manager,
         EventDispatcherInterface $dispatcher,
-        Rental $rental
+        Faculty $faculty,
+        Rental $rental,
+        User $user
     ) {
-        $days_before_renovation = '2';
-        $days_length_rental = '7';
-        $this->beConstructedWith($manager, $dispatcher, $days_before_renovation, $days_length_rental);
+        $this->beConstructedWith($manager, $dispatcher, self::DAYS_BEFORE_RENOVATION, self::DAYS_LENGTH_RENTAL);
 
         $rental->getIsRenewable()->willReturn(true);
         $rental->getDaysLeft()->willReturn(2);
         $rental->getIsExpired()->willReturn(false);
         $rental->getReturnAt()->willReturn(null);
+        $rental->getUser()->willReturn($user);
+
+        $user->getIsPenalized()->willReturn(false);
+        $user->getFaculty()->willReturn($faculty);
+
+        $faculty->getIsEnabled()->willReturn(true);
     }
 
     public function it_is_initializable()
@@ -37,19 +49,18 @@ class RenewServiceSpec extends ObjectBehavior
     }
 
     public function it_can_renew_a_rental(
-        Rental $rental,
         EntityManager $manager,
-        EventDispatcherInterface $dispatcher
+        EventDispatcherInterface $dispatcher,
+        Rental $rental
     ) {
-        $rental->getReturnAt()->shouldBeCalled();
-
         $newEnd = new \DateTime('9 days midnight');
         $rental->setEndAt($newEnd)->shouldBeCalled();
 
         $manager->persist($rental)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 
-        $dispatcher->dispatch(RentalEvents::LOCKER_RENEWED, Argument::type(RentalEvent::class))->shouldBeCalled();
+        $event = new RentalEvent($rental->getWrappedObject());
+        $dispatcher->dispatch(RentalEvents::LOCKER_RENEWED, $event)->shouldBeCalled();
 
         $this->renewRental($rental);
     }
@@ -60,6 +71,24 @@ class RenewServiceSpec extends ObjectBehavior
         $rental->getReturnAt()->shouldBeCalled()->willReturn(new \DateTime());
 
         $this->shouldThrow(FinishedRentalException::class)->duringRenewRental($rental);
+    }
+
+    public function it_cannot_renew_a_penalized_user(
+        Rental $rental,
+        User $user
+    ) {
+        $user->getIsPenalized()->shouldBeCalled()->willReturn(true);
+
+        $this->shouldThrow(PenalizedUserException::class)->duringRenewRental($rental);
+    }
+
+    public function it_cannot_renew_a_disabled_faculty(
+        Faculty $faculty,
+        Rental $rental
+    ) {
+        $faculty->getIsEnabled()->shouldBeCalled()->willReturn(false);
+
+        $this->shouldThrow(PenalizedFacultyException::class)->duringRenewRental($rental);
     }
 
     public function it_cannot_renew_a_rental_too_early(

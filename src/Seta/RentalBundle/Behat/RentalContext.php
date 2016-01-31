@@ -9,6 +9,8 @@ namespace Seta\RentalBundle\Behat;
 
 use Seta\CoreBundle\Behat\DefaultContext;
 use Seta\LockerBundle\Entity\Locker;
+use Seta\PenaltyBundle\Exception\PenalizedFacultyException;
+use Seta\PenaltyBundle\Exception\PenalizedUserException;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Exception\ExpiredRentalException;
 use Seta\RentalBundle\Exception\NotRenewableRentalException;
@@ -56,6 +58,8 @@ class RentalContext extends DefaultContext
         } catch (NotRenewableRentalException $e) {
         } catch (ExpiredRentalException $e) {
         } catch (TooEarlyRenovationException $e) {
+        } catch (PenalizedFacultyException $e) {
+        } catch (PenalizedUserException $e) {
         } catch (Exception $e) {
             throw $e;
         }

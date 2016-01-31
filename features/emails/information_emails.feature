@@ -9,9 +9,12 @@ Característica: Enviar correos informativos
   - Se ha renovado un prestado
 
   Antecedentes:
-    Dados los siguientes usuarios:
-      | email           | dias_sancion  | comentario          |
-      | sara@gmail.com  |               |                     |
+    Dados los siguientes centros:
+      | nombre                                  | código    | activo  |
+      | Escuela Politécnica Superior de Córdoba | epsc      | sí      |
+    Y los siguientes usuarios:
+      | email           | centro        |
+      | sara@gmail.com  | epsc          |
 
   Escenario: Correo de información con préstamo
     Dadas las siguientes taquillas:

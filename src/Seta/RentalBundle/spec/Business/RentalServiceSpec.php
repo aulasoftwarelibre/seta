@@ -6,10 +6,12 @@ use Seta\LockerBundle\Entity\Locker;
 use Seta\LockerBundle\Exception\BusyLockerException;
 use Seta\LockerBundle\Exception\NotFreeLockerException;
 use Seta\LockerBundle\Repository\LockerRepository;
+use Seta\PenaltyBundle\Exception\PenalizedFacultyException;
 use Seta\PenaltyBundle\Exception\PenalizedUserException;
 use Seta\RentalBundle\Exception\TooManyLockersRentedException;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Repository\RentalRepository;
+use Seta\UserBundle\Entity\Faculty;
 use Seta\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
@@ -21,6 +23,7 @@ class RentalServiceSpec extends ObjectBehavior
     public function let(
         EntityManager $manager,
         EventDispatcherInterface $dispatcher,
+        Faculty $faculty,
         RentalRepository $rentalRepository,
         LockerRepository $lockerRepository,
         User $user,
@@ -32,6 +35,9 @@ class RentalServiceSpec extends ObjectBehavior
         $user->getLocker()->willReturn(null);
         $user->getIsPenalized()->willReturn(false);
         $user->getQueue()->willReturn(null);
+        $user->getFaculty()->willReturn($faculty);
+
+        $faculty->getIsEnabled()->willReturn(true);
 
         $locker->getOwner()->willReturn(null);
         $locker->getStatus()->willReturn(Locker::AVAILABLE);
@@ -69,6 +75,7 @@ class RentalServiceSpec extends ObjectBehavior
     }
 
     public function it_can_rent_any_free_locker(
+        Faculty $faculty,
         User $user,
         Locker $locker,
         Rental $rental,
@@ -118,6 +125,16 @@ class RentalServiceSpec extends ObjectBehavior
         $user->getIsPenalized()->willReturn(true);
 
         $this->shouldThrow(PenalizedUserException::class)->duringRentLocker($user, $locker);
+    }
+
+    public function it_cannot_rent_to_disabled_faculties(
+        Faculty $faculty,
+        Locker $locker,
+        User $user
+    ) {
+        $faculty->getIsEnabled()->willReturn(false);
+
+        $this->shouldThrow(PenalizedFacultyException::class)->duringRentLocker($user, $locker);
     }
 
     public function it_cannot_rent_two_lockers_to_the_same_user(
