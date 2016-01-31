@@ -7,6 +7,7 @@
         plainPassword: secret
         enabled: true
         groups: ["@group_admin"]
+        faculty: "@eps"
     user_user0{1..9}:
         username: user0<current()>
         fullname: <name()>
@@ -15,3 +16,4 @@
         plainPassword: secret
         enabled: true
         groups: ["@group_user"]
+        faculty: "@eps"

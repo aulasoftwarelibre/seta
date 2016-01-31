@@ -11,8 +11,9 @@ easy_admin:
                 - 'bundles/setaresource/css/seta.css'
                 - 'bundles/sgomezbsdatetimepicker/css/bootstrap-datetimepicker.min.css'
         menu:
-            - { label: 'User', icon: 'user', entity: 'User' }
-            - { label: 'Locker', icon: 'archive', entity: 'Locker' }
-            - { label: 'Rental', icon: 'calendar-o', entity: 'Rental' }
-            - { label: 'Penalty', icon: 'lock', entity: 'Penalty' }
-            - { label: 'Settings', route: 'craue_config_settings_modify', icon: 'cogs' }
+            - { entity: 'User', icon: 'user', params: { sortDirection: 'ASC' } }
+            - { entity: 'Faculty', icon: 'bank', params: { sortDirection: 'ASC' } }
+            - { entity: 'Locker', icon: 'archive', params: { sortDirection: 'ASC' } }
+            - { entity: 'Rental', icon: 'calendar-o', params: { sortDirection: 'ASC' } }
+            - { entity: 'Penalty', icon: 'lock' }
+            - { label: 'app.menu.settings', icon: 'cogs', route: 'craue_config_settings_modify' }

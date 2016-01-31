@@ -6,8 +6,8 @@ easy_admin:
             disabled_actions: ['edit']
             list:
                 actions:
-                    - { name: 'show', icon: 'eye', label: '' }
-                    - { name: 'locker_toogle_status', type: 'route', icon: 'lock', label: '' }
+                    - { name: 'show', icon: 'eye' }
+                    - { name: 'locker_toogle_status', type: 'route', icon: 'lock', label: 'app.action.block_locker' }
                     - '-delete'
                 fields:
                     - { property: 'code', label: 'label.code' }

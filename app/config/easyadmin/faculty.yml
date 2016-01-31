@@ -1,0 +1,24 @@
+easy_admin:
+    entities:
+        Faculty:
+            class: Seta\UserBundle\Entity\Faculty
+            label: app.menu.faculties
+            disabled_actions: ['delete']
+            list:
+                actions:
+                    - { name: 'edit', icon: 'edit' }
+                    - { name: 'show', icon: 'eye' }
+                fields:
+                    - { property: 'name', label: 'label.name' }
+                    - { property: 'slug', label: 'label.slug' }
+                    - { property: 'isEnabled', type: 'toggle', label: 'label.enabled' }
+            form:
+                fields:
+                    - { property: 'name', label: 'label.name' }
+                    - { property: 'slug', label: 'label.slug' }
+            show:
+                fields:
+                    - { property: 'name', label: 'label.name' }
+                    - { property: 'slug', label: 'label.slug' }
+                    - { property: 'isEnabled', type: 'toggle', label: 'label.enabled' }
+                    - { property: 'students', label: 'label.students' }

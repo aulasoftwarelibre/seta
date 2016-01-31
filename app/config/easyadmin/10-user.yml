@@ -20,8 +20,8 @@ easy_admin:
                     - { property: 'username', label: 'label.username' }
                     - { property: 'fullname', label: 'label.fullname' }
                     - { property: 'nic', label: 'label.nic' }
+                    - { property: 'faculty', label: 'label.faculty' }
                     - { property: 'email', type: 'email', label: 'label.email' }
-                    - { property: 'plainPassword', type: 'password', label: 'label.password', help: 'help.password' }
                     - { property: 'groups', label: 'label.groups' }
                     - { property: 'locked', type: 'checkbox', label: 'label.locked' }
                     - { property: 'isPenalized', type: 'checkbox', label: 'label.penalized' }

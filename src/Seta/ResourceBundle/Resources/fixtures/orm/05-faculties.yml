@@ -1,0 +1,9 @@
+\Seta\UserBundle\Entity\Faculty:
+    eps:
+        name: Escuela Politécnica Superior de Córdoba
+        slug: eps
+        isEnabled: true
+    etsiam:
+        name: Escuela Técnica Superior de Ingenieros Agrónomos y de Montes
+        slug: etsiam
+        isEnabled: true

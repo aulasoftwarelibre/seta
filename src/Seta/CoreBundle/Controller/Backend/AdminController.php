@@ -219,18 +219,6 @@ class AdminController extends BaseAdminController
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function initialize(Request $request)
-    {
-        if (!$request->query->has('sortDirection') || !in_array(strtoupper($request->query->get('sortDirection')), ['ASC', 'DESC'])) {
-            $request->query->set('sortDirection', 'ASC');
-        }
-
-        return parent::initialize($request);
-    }
-
-    /**
      * Lista los préstamos activos.
      *
      * @param $entityClass

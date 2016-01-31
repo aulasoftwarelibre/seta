@@ -6,10 +6,10 @@ easy_admin:
             disabled_actions: [ 'new', 'delete']
             list:
                 actions:
-#                    - '-edit'
                     - '-show'
-                    - { name: 'rental_renew', type: 'route', label: 'app.action.renew_rental' }
-                    - { name: 'rental_return', type: 'route', label: 'app.action.return_rental' }
+                    - { name: 'edit', icon: 'edit' }
+                    - { name: 'rental_renew', type: 'route', label: 'app.action.renew_rental', icon: 'refresh' }
+                    - { name: 'rental_return', type: 'route', label: 'app.action.return_rental', icon: 'undo' }
                 fields:
                     - { property: 'locker', label: 'label.locker' }
                     - { property: 'user', label: 'label.owner' }

@@ -27,8 +27,6 @@ class CronCommand extends ContainerAwareCommand
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        parent::initialize($input, $output);
-
         // The mailer service needs the default locale
         $locale = $this->getContainer()->get('translator')->getLocale();
 

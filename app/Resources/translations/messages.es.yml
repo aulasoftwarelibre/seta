@@ -5,9 +5,11 @@ Locked: Bloqueado
 Locker: Taquilla
 Penalty: Sanción
 Rental: Alquiler
+Show: Mostrar
 Taquilla: Taquilla
 User: Usuario
 
+app.action.block_locker: Bloquear
 app.action.list_rental: Gestionar
 app.action.locker_toogle_status: Bloquear/Desbloquear
 app.action.new_rental: Alquilar
@@ -15,9 +17,11 @@ app.action.penalty_close: Cerrar
 app.action.renew_rental: Renovar
 app.action.return_rental: Devolver
 
+app.menu.faculties: Facultades
 app.menu.lockers: Taquillas
 app.menu.penalties: Sanciones
 app.menu.rentals: Alquileres
+app.menu.settings: Configuración
 app.menu.users: Usuarios
 
 label.branch: Rama
@@ -45,8 +49,10 @@ label.rental: Alquiler
 label.rentals: Alquileres
 label.return_at: Fecha entrega
 label.season: Convocatoria
+label.slug: Código
 label.start_at: Fecha inicio
 label.status: Estado
+label.students: Estudiantes
 label.subject: Asignatura
 label.syllabus: Plan de estudios
 label.university: Universidad

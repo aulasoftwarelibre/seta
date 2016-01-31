@@ -76,6 +76,13 @@ class User extends BaseUser
     protected $groups;
 
     /**
+     * @var Faculty
+     *
+     * @ORM\ManyToOne(targetEntity="Seta\UserBundle\Entity\Faculty", inversedBy="students")
+     */
+    protected $faculty;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -278,5 +285,29 @@ class User extends BaseUser
     public function getLocker()
     {
         return $this->locker;
+    }
+
+    /**
+     * Set faculty
+     *
+     * @param \Seta\UserBundle\Entity\Faculty $faculty
+     *
+     * @return User
+     */
+    public function setFaculty(\Seta\UserBundle\Entity\Faculty $faculty = null)
+    {
+        $this->faculty = $faculty;
+
+        return $this;
+    }
+
+    /**
+     * Get faculty
+     *
+     * @return \Seta\UserBundle\Entity\Faculty
+     */
+    public function getFaculty()
+    {
+        return $this->faculty;
     }
 }
