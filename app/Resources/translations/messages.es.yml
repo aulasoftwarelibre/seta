@@ -1,5 +1,6 @@
 Delete: Borrar
 Enabled: Activo
+FinancialPenalty: Sanción Económica
 Is penalized: Sancionado
 Locked: Bloqueado
 Locker: Taquilla
@@ -7,6 +8,7 @@ Penalty: Sanción
 Rental: Alquiler
 Show: Mostrar
 Taquilla: Taquilla
+TimePenalty: Sanción Temporal
 User: Usuario
 
 app.action.block_locker: Bloquear
@@ -22,8 +24,11 @@ app.menu.lockers: Taquillas
 app.menu.penalties: Sanciones
 app.menu.rentals: Alquileres
 app.menu.settings: Configuración
+app.menu.time_penalties: Sanciones temporales
+app.menu.financial_penalties: Sanciones económicas
 app.menu.users: Usuarios
 
+label.amount: Cantidad
 label.branch: Rama
 label.code: Código
 label.comment: Comentario
@@ -35,6 +40,7 @@ label.end_at: Fecha fin
 label.file: Fichero
 label.fullname: Nombre completo
 label.groups: Grupos
+label.is_paid: ¿Pagada?
 label.is_renewable: ¿Renovable?
 label.lastLogin: Último acceso
 label.locked: Bloqueado

@@ -34,7 +34,7 @@ class Rental
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="end_at", type="datetime")
+     * @ORM\Column(name="end_at", type="date")
      */
     private $endAt;
 

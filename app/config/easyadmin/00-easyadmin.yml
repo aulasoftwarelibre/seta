@@ -15,5 +15,10 @@ easy_admin:
             - { entity: 'Faculty', icon: 'bank', params: { sortDirection: 'ASC' } }
             - { entity: 'Locker', icon: 'archive', params: { sortDirection: 'ASC' } }
             - { entity: 'Rental', icon: 'calendar-o', params: { sortDirection: 'ASC' } }
-            - { entity: 'Penalty', icon: 'lock' }
+            - label: 'app.menu.penalties'
+              icon: 'lock'
+              children:
+                - { entity: 'TimePenalty', icon: 'clock-o' }
+                - { entity: 'FinancialPenalty', icon: 'eur' }
+
             - { label: 'app.menu.settings', icon: 'cogs', route: 'craue_config_settings_modify' }

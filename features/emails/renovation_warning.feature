@@ -40,9 +40,9 @@ Característica: Envíar correos de renovación
   Escenario: Correo de aviso de suspensión
     Dadas las siguientes taquillas:
       | código          | estado        | alquilada_a     | desde | hasta | renovable |
-      | 101             | alquilada     | sara@gmail.com  | -7    | -8    | sí        |
+      | 101             | alquilada     | sara@gmail.com  | -10   | -8    | sí        |
       | 102             | alquilada     | john@gmail.com  | -5    | +3    | no        |
     Cuando se envía un correo de aviso de renovación con 2 días de antelación
     Entonces 1 correos deberían haber sido enviados
     Cuando abro un correo con asunto "Aviso de suspensión de préstamo por la taquilla 101"
-    Entonces debería ver "has sobrepasado la fecha límite en más de una semana" en el correo
+    Entonces debería ver "se te ha suspendido definitivamente" en el correo

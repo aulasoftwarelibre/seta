@@ -68,15 +68,15 @@ class FinancialPenaltySpec extends ObjectBehavior
         $this->getStatus()->shouldBe(Penalty::DONE);
     }
 
-    public function it_has_no_default_ammount()
+    public function it_has_no_default_amount()
     {
         $this->getAmmount()->shouldBe(null);
     }
 
-    public function it_has_a_mutable_ammount()
+    public function it_has_a_mutable_amount()
     {
-        $this->setAmmount(10.1);
-        $this->getAmmount()->shouldBe(10.1);
+        $this->setAmount(10.1);
+        $this->getAmount()->shouldBe(10.1);
     }
 
     public function it_is_not_paid_by_default()

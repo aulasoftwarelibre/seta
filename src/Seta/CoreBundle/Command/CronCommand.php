@@ -53,7 +53,11 @@ class CronCommand extends ContainerAwareCommand
         $time = $this->getContainer()->get('craue_config')->get('seta.notifications.days_before_suspension');
         $on = new \DateTime('-'.$time.'days midnight');
         $output->write('Enviando mensajes de suspensión... ');
-        $this->sendReminderEmail(Message::SUSPENSION_WARNING_MESSAGE, $on);
+        $total = $this->sendReminderEmail(Message::SUSPENSION_WARNING_MESSAGE, $on);
+        $output->writeln("Hecho: [${total}].");
+
+        $output->write('Cerrando sanciones pendientes... ');
+        $total = $this->checkPendingPenalties();
         $output->writeln("Hecho: [${total}].");
     }
 
@@ -75,5 +79,7 @@ class CronCommand extends ContainerAwareCommand
         foreach ($penalties as $penalty) {
             $this->getContainer()->get('seta.service.close_penalty')->closePenalty($penalty);
         }
+
+        return count($penalties);
     }
 }

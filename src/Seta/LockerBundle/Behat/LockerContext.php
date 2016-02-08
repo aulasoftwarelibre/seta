@@ -49,7 +49,7 @@ class LockerContext extends DefaultContext
                 }
 
                 $start = new \DateTime($item['desde'].' days');
-                $end = new \DateTime($item['hasta'].' days');
+                $end = new \DateTime($item['hasta'].' days midnight');
                 $renewable = isset($item['renovable']) ? $item['renovable'] : 'sí';
                 /** @var Rental $rental */
                 $rental = $this->getRepository('rental')->createNew();

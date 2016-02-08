@@ -68,7 +68,7 @@ class FinancialPenaltyService implements PenalizeRentalInterface
         $penalty = $this->penaltyRepository->createNew();
 
         $penalty->setUser($rental->getUser());
-        $penalty->setAmmount($this->amount);
+        $penalty->setAmount($this->amount);
         $penalty->setComment($comment);
         $penalty->setRental($rental);
 

@@ -109,7 +109,7 @@ class PenaltyContext extends DefaultContext
         foreach ($penalties as $penalty) {
             if ($penalty instanceof FinancialPenalty) {
                 if ($penalty->getRental()->getLocker()->getCode() == $code) {
-                    \PHPUnit_Framework_Assert::assertEquals($this->amount, $penalty->getAmmount());
+                    \PHPUnit_Framework_Assert::assertEquals($this->amount, $penalty->getAmount());
 
                     return true;
                 }

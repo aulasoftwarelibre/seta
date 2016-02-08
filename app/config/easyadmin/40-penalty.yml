@@ -1,9 +1,9 @@
 easy_admin:
     entities:
-        Penalty:
-            class: Seta\PenaltyBundle\Entity\Penalty
-            label: app.menu.penalties
-            disabled_actions: ['delete']
+        TimePenalty:
+            class: Seta\PenaltyBundle\Entity\TimePenalty
+            label: app.menu.time_penalties
+            disabled_actions: ['delete', 'new', 'edit']
             list:
                 actions:
                     - 'edit'
@@ -25,4 +25,24 @@ easy_admin:
                 fields:
                     - { property: 'user', label: 'label.user' }
                     - { property: 'endAt', type: 'Sgomez\BsDatetimepickerBundle\Form\Type\BsDateType', label: 'label.end_at', type_options: { config: { 'weekStart': 1 } } }
+                    - { property: 'comment', label: 'label.comment' }
+        FinancialPenalty:
+            class: Seta\PenaltyBundle\Entity\FinancialPenalty
+            label: app.menu.financial_penalties
+            disabled_actions: ['delete']
+            list:
+                actions:
+                    - 'edit'
+                    - { name: 'penalty_close', type: 'route', label: 'app.action.penalty_close' }
+                fields:
+                    - { property: 'user', label: 'label.user' }
+                    - { property: 'rental', label: 'label.rental' }
+                    - { property: 'amount', label: 'label.amount' }
+                    - { property: 'isPaid', label: 'label.is_paid' }
+                    - { property: 'status', label: 'label.status', template: 'status', trans: true}
+            form:
+                fields:
+                    - { property: 'user', label: 'label.user' }
+                    - { property: 'amount', type: 'money', label: 'label.amount' }
+                    - { property: 'isPaid', label: 'label.is_paid' }
                     - { property: 'comment', label: 'label.comment' }

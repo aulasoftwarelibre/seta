@@ -30,7 +30,7 @@ class TimePenalty extends Penalty
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $endAt;
 
@@ -96,6 +96,7 @@ class TimePenalty extends Penalty
     public function setEndAt($endAt)
     {
         $this->endAt = $endAt;
+        $this->endAt->setTime(0, 0, 0);
 
         return $this;
     }

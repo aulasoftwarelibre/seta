@@ -19,7 +19,11 @@
                 {{ rental.returnAt | date('d/m/Y') }}
             {% endif %}
             </td>
-            <td><span class="label label-info">{{ rental.penalty ? 'SÍ' : 'NO' }}</span> </td>
+            {% if rental.penalty %}
+            <td><span class="label label-danger">SÍ</span> </td>
+            {% else %}
+            <td><span class="label label-success">NO</span> </td>
+            {% endif %}
         </tr>
     {% endfor %}
     </tbody>

@@ -45,7 +45,7 @@ class TimePenaltySpec extends ObjectBehavior
     {
         $now = new \DateTime('now');
         $this->setEndAt($now);
-        $this->getEndAt()->shouldBeLike($now);
+        $this->getEndAt()->shouldBeLike(new \DateTime('today'));
     }
 
     public function it_has_no_default_comment()

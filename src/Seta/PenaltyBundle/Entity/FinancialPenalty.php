@@ -23,9 +23,9 @@ class FinancialPenalty extends Penalty
     /**
      * @var float
      *
-     * @ORM\Column(name="ammount", type="float")
+     * @ORM\Column(name="amount", type="float")
      */
-    private $ammount;
+    private $amount;
 
     /**
      * @var bool
@@ -46,13 +46,13 @@ class FinancialPenalty extends Penalty
     /**
      * Set ammount.
      *
-     * @param float $ammount
+     * @param float $amount
      *
      * @return FinancialPenalty
      */
-    public function setAmmount($ammount)
+    public function setAmount($amount)
     {
-        $this->ammount = $ammount;
+        $this->amount = $amount;
 
         return $this;
     }
@@ -62,9 +62,9 @@ class FinancialPenalty extends Penalty
      *
      * @return float
      */
-    public function getAmmount()
+    public function getAmount()
     {
-        return $this->ammount;
+        return $this->amount;
     }
 
     /**

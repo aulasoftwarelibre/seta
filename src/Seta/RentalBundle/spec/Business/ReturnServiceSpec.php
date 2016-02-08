@@ -40,7 +40,7 @@ class ReturnServiceSpec extends ObjectBehavior
         EntityManager $manager,
         EventDispatcherInterface $dispatcher
     ) {
-        $rental->getEndAt()->shouldBeCalled()->willReturn(new \DateTime('tomorrow'));
+        $rental->getDaysLate()->shouldBeCalled()->willReturn(0);
         $rental->setReturnAt(Argument::type(\DateTime::class))->shouldBeCalled();
 
         $locker->setOwner(null)->shouldBeCalled();
@@ -70,7 +70,7 @@ class ReturnServiceSpec extends ObjectBehavior
         EventDispatcherInterface $dispatcher,
         TimePenaltyService $penaltyService
     ) {
-        $rental->getEndAt()->shouldBeCalled()->willReturn(new \DateTime('yesterday'));
+        $rental->getDaysLate()->shouldBeCalled()->willReturn(1);
         $rental->setReturnAt(Argument::type(\DateTime::class))->shouldBeCalled();
 
         $penaltyService->penalizeRental($rental)->shouldBeCalled();

@@ -55,11 +55,11 @@ class ReturnService
             throw new FinishedRentalException();
         }
 
-        $now = new \DateTime('now');
-        if ($rental->getEndAt() < $now) {
+        if ($rental->getDaysLate() > 0) {
             $this->penaltyService->penalizeRental($rental);
         }
 
+        $now = new \DateTime('now');
         $rental->setReturnAt($now);
 
         $locker = $rental->getLocker();

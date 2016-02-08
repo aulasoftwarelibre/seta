@@ -38,7 +38,7 @@ class RentalSpec extends ObjectBehavior
 
     public function its_end_date_is_mutable()
     {
-        $end = new \DateTime('now');
+        $end = new \DateTime('today');
         $this->setEndAt($end);
         $this->getEndAt()->shouldBeLike(new \DateTime('today'));
     }

@@ -56,7 +56,7 @@ class FinancialPenaltyServiceSpec extends ObjectBehavior
 
         $penaltyRepository->createNew()->shouldBeCalled()->willReturn($penalty);
         $penalty->setUser($user)->shouldBeCalled();
-        $penalty->setAmmount($this->amount)->shouldBeCalled();
+        $penalty->setAmount($this->amount)->shouldBeCalled();
         $penalty->setComment($comment)->shouldBeCalled();
         $penalty->setRental($rental)->shouldBeCalled();
 
