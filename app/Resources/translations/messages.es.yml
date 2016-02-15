@@ -1,5 +1,6 @@
 Delete: Borrar
 Enabled: Activo
+Faculty: Centro
 FinancialPenalty: Sanción Económica
 Is penalized: Sancionado
 Locked: Bloqueado
@@ -12,6 +13,7 @@ TimePenalty: Sanción Temporal
 User: Usuario
 
 app.action.block_locker: Bloquear
+app.action.block_unlocker: Desbloquear
 app.action.list_rental: Gestionar
 app.action.locker_toogle_status: Bloquear/Desbloquear
 app.action.new_rental: Alquilar
@@ -19,7 +21,7 @@ app.action.penalty_close: Cerrar
 app.action.renew_rental: Renovar
 app.action.return_rental: Devolver
 
-app.menu.faculties: Facultades
+app.menu.faculties: Centros
 app.menu.lockers: Taquillas
 app.menu.penalties: Sanciones
 app.menu.rentals: Alquileres
@@ -37,6 +39,7 @@ label.domains: Dominios
 label.email: Correo
 label.enabled: Activo
 label.end_at: Fecha fin
+label.faculty: Centro
 label.file: Fichero
 label.fullname: Nombre completo
 label.groups: Grupos
@@ -46,7 +49,7 @@ label.lastLogin: Último acceso
 label.locked: Bloqueado
 label.locker: Taquilla
 label.name: Nombre
-label.nic: Identificación
+label.nic: Identificación (DNI/NIE/Pasaporte)
 label.owner: Usada por
 label.password: Contraseña
 label.penalized: Sancionado

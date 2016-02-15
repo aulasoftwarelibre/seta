@@ -1,0 +1,39 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% block jumbo %}
+    <div class="ui text container">
+        <h1 class="ui inverted header">
+            Servicio de Taquillas
+        </h1>
+        <h2>Renueva cómodamente tu taquilla.</h2>
+        <a href="#go" class="ui huge primary button">¿Cómo funciona? <i class="right arrow icon"></i></a>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <a name="go"></a>
+    <h4 class="ui horizontal header divider">
+        <a href="#">Paso 1</a>
+    </h4>
+    <h3 class="ui header">Acude al CEEPS a registrarte</h3>
+    <p>Tendrás que firmar las bases de préstamo de taquillas y registrarte para poder usar esta aplicación.</p>
+
+    <h4 class="ui horizontal header divider">
+        <a href="#">Paso 2</a>
+    </h4>
+    <h3 class="ui header">Usa tu taquilla</h3>
+    <p>Una vez que ya estás registrado puede comenzar a usar las taquillas. En el CEEPS se te proporcionará un candado y una llave que son las únicas que pueden ser usadas para bloquear las taquillas.</p>
+
+    <h4 class="ui horizontal header divider">
+        <a href="#">Paso 3</a>
+    </h4>
+    <h3 class="ui header">Renueva tu préstamo</h3>
+    <p>Las taquillas se prestan por el plazo de una semana, pero puedes renovarlas siempre que no haya exceso de demanda. Se te enviará un email cuando el plazo esté a punto de agotarse para que puedas renovar el préstamo desde tu móvil/ordenador sin tener que acudir al CEEPS.</p>
+
+    <h4 class="ui horizontal header divider">
+        <a href="#">Paso 4</a>
+    </h4>
+    <h3 class="ui header">Devuelve tu taquilla</h3>
+    <p>¿No vas a seguir usando la taquilla? Entonces acude al CEEPS a devolver la llave y el candado antes de que cumpla el plazo de devolución.</p>
+
+{% endblock %}

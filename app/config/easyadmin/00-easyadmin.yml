@@ -3,7 +3,7 @@ easy_admin:
     formats:
         date: 'd/m/Y'
         datetime: 'd/m/Y'
-        number: '%d'
+        number: '%2.2f'
     design:
         form_theme: 'vertical'
         assets:

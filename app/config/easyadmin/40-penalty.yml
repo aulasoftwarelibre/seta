@@ -3,7 +3,7 @@ easy_admin:
         TimePenalty:
             class: Seta\PenaltyBundle\Entity\TimePenalty
             label: app.menu.time_penalties
-            disabled_actions: ['delete', 'new', 'edit']
+            disabled_actions: ['delete', 'new']
             list:
                 actions:
                     - 'edit'
@@ -37,12 +37,11 @@ easy_admin:
                 fields:
                     - { property: 'user', label: 'label.user' }
                     - { property: 'rental', label: 'label.rental' }
-                    - { property: 'amount', label: 'label.amount' }
-                    - { property: 'isPaid', label: 'label.is_paid' }
+                    - { property: 'amount', type: 'float', label: 'label.amount' }
+                    - { property: 'isPaid', type: 'boolean', label: 'label.is_paid' }
                     - { property: 'status', label: 'label.status', template: 'status', trans: true}
             form:
                 fields:
                     - { property: 'user', label: 'label.user' }
                     - { property: 'amount', type: 'money', label: 'label.amount' }
-                    - { property: 'isPaid', label: 'label.is_paid' }
                     - { property: 'comment', label: 'label.comment' }

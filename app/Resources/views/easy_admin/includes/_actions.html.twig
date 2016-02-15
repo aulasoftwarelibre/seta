@@ -1,0 +1,25 @@
+<div class="btn-group">
+{% for action in actions %}
+    {% if 'list' == action.name %}
+        {% set action_href = request_parameters.referer is defined ? request_parameters.referer|easyadmin_urldecode : path('easyadmin', request_parameters|merge({ action: 'list' })) %}
+    {% elseif 'method' == action.type %}
+        {% set action_href = path('easyadmin', request_parameters|merge({ action: action.name, id: item_id })) %}
+    {% elseif 'route' == action.type %}
+        {% set action_href = path(action.name, request_parameters|merge({ action: action.name, id: item_id })) %}
+    {% endif %}
+
+    {% if 'penalty_close' == action.name and 'penalty.done' == item.status %}
+    {% elseif 'user_new_rent' == action.name and (item.locker is not empty or item.isPenalized == true) %}
+    {% elseif 'edit' == action.name and item.status is defined and 'penalty.done' == item.status %}
+    {% elseif 'locker_lock' == action.name and item.status != 'locker.available' %}
+    {% elseif 'locker_unlock' == action.name and item.status != 'locker.unavailable' %}
+    {% else %}
+        <a style="margin: 1px" class="btn btn-default {{ action.css_class|default('') }}" href="{{ action_href }}">
+            {%- if action.icon %}<i class="fa fa-{{ action.icon }}"></i> {% endif -%}
+            {%- if action.label is defined and not action.label is empty -%}
+                {{ action.label|trans(trans_parameters|merge({ '%entity_id%': item_id }), 'messages') }}
+            {%- endif -%}
+        </a>
+    {% endif %}
+{% endfor %}
+</div>

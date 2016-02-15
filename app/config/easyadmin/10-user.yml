@@ -6,25 +6,23 @@ easy_admin:
             disabled_actions: ['delete']
             list:
                 actions:
-                    - { name: 'show', icon: 'eye', label: '' }
-                    - { name: 'edit', icon: 'pencil', label: '' }
+                    - { name: 'edit', icon: 'edit' }
+                    - { name: 'show', icon: 'eye' }
                     - { name: 'user_new_rent', type: 'route', label: 'app.action.new_rental' }
-                    - { name: 'user_list_rent', type: 'route', label: 'app.action.list_rental' }
                 fields:
                     - { property: 'username', label: 'label.username' }
                     - { property: 'fullname', label: 'label.fullname' }
+                    - { property: 'faculty', label: 'label.faculty' }
                     - { property: 'locker', label: 'label.locker' }
                     - { property: 'isPenalized', type: 'boolean', label: 'label.penalized' }
             form:
                 fields:
-                    - { property: 'username', label: 'label.username' }
+                    - { property: 'username', label: 'label.username', help: 'help.username' }
                     - { property: 'fullname', label: 'label.fullname' }
                     - { property: 'nic', label: 'label.nic' }
                     - { property: 'faculty', label: 'label.faculty' }
-                    - { property: 'email', type: 'email', label: 'label.email' }
-                    - { property: 'groups', label: 'label.groups' }
-                    - { property: 'locked', type: 'checkbox', label: 'label.locked' }
-                    - { property: 'isPenalized', type: 'checkbox', label: 'label.penalized' }
+                    - { property: 'email', type: 'email', label: 'label.email', help: 'help.email' }
+                    - { property: 'groups', label: 'label.groups', help: 'help.groups' }
             show:
                 fields:
                     - { property: 'fullname', label: 'label.fullname' }

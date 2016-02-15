@@ -44,7 +44,7 @@ class AdminController extends BaseAdminController
      */
     public function dashboardAction(Request $request)
     {
-        return $this->render('default/dashboard.html.twig');
+        return $this->render('backend/default/dashboard.html.twig');
     }
 
     /**
@@ -92,7 +92,8 @@ class AdminController extends BaseAdminController
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("locker-toogle-status", name="locker_toogle_status")
+     * @Route("locker-lock", name="locker_lock")
+     * @Route("locker-unlock", name="locker_unlock")
      */
     public function lockerToogleStatus(Request $request)
     {
@@ -256,4 +257,6 @@ class AdminController extends BaseAdminController
 
         return $queryBuilder;
     }
+
+
 }

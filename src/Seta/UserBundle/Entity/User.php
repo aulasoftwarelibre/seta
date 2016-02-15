@@ -36,7 +36,7 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="nic", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nic", type="string", length=255)
      */
     private $nic;
 
@@ -72,6 +72,7 @@ class User extends BaseUser
      * @var ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Seta\UserBundle\Entity\Group", inversedBy="users")
+     * @ORM\JoinTable(joinColumns={@ORM\JoinColumn(nullable=false)}, inverseJoinColumns={@ORM\JoinColumn(nullable=false)})
      */
     protected $groups;
 

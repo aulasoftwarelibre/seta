@@ -7,7 +7,8 @@ easy_admin:
             list:
                 actions:
                     - { name: 'show', icon: 'eye' }
-                    - { name: 'locker_toogle_status', type: 'route', icon: 'lock', label: 'app.action.block_locker' }
+                    - { name: 'locker_lock', type: 'route', icon: 'lock', label: 'app.action.block_locker' }
+                    - { name: 'locker_unlock', type: 'route', icon: 'unlock', label: 'app.action.block_unlocker' }
                     - '-delete'
                 fields:
                     - { property: 'code', label: 'label.code' }
