@@ -28,9 +28,8 @@ class Builder implements ContainerAwareInterface
         $menu->addChild('Inicio', ['route' => 'homepage'])->setExtra('icon', 'home');
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            $menu->addChild('Histórico', ['route' => 'easyadmin'])->setExtra('icon', 'history');
+            $menu->addChild('Histórico', ['route' => 'history'])->setExtra('icon', 'history');
         }
-
 
         return $menu;
     }
@@ -42,7 +41,7 @@ class Builder implements ContainerAwareInterface
         $menu->addChild('Inicio', ['route' => 'homepage'])->setExtra('icon', 'home');
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-            $menu->addChild('Histórico', ['route' => 'easyadmin'])->setExtra('icon', 'history');
+            $menu->addChild('Histórico', ['route' => 'history'])->setExtra('icon', 'history');
         }
 
 

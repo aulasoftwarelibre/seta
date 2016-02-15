@@ -22,3 +22,4 @@ easy_admin:
                 - { entity: 'FinancialPenalty', icon: 'eur' }
 
             - { label: 'app.menu.settings', icon: 'cogs', route: 'craue_config_settings_modify' }
+            - { label: 'app.menu.logout', icon: 'sign-out', route: 'fos_user_security_logout'}

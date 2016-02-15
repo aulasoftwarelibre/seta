@@ -23,6 +23,7 @@ app.action.return_rental: Devolver
 
 app.menu.faculties: Centros
 app.menu.lockers: Taquillas
+app.menu.logout: Salir
 app.menu.penalties: Sanciones
 app.menu.rentals: Alquileres
 app.menu.settings: Configuración

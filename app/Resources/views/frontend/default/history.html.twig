@@ -1,0 +1,48 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% block jumbo %}
+    <div class="ui text container">
+        <h1 class="ui inverted header">
+            Servicio de Taquillas
+        </h1>
+        <h2>Histórico de alquileres.</h2>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <table class="ui inverted table">
+        <thead>
+        <tr>
+            <th>Taquilla</th>
+            <th>Fecha inicio</th>
+            <th>Fecha entrega</th>
+            <th>Sanción</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for rental in rentals %}
+        <tr>
+            <td>{{ rental.locker }}</td>
+            <td>{{ rental.startAt | date('d/m/y') }}</td>
+            <td>{{ rental.returnAt ? (rental.returnAt | date) : '' }}</td>
+            <td>
+            {% if rental.penalty is not empty %}
+                <span class="ui red label">SÍ</span>
+            {% else %}
+                <span class="ui green label">NO</span>
+            {% endif %}
+            </td>
+        </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No se han alquilado taquillas.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="4">Solo se muestran las diez últimas taquillas.</td>
+        </tr>
+        </tfoot>
+    </table>
+{% endblock %}

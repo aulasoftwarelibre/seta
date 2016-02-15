@@ -42,7 +42,7 @@ security:
                 always_use_default_target_path: true
             logout:
                 path:   /logout
-                target: /login
+                target: /
             anonymous: true
 
     access_control:
