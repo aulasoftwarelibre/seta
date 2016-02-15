@@ -13,14 +13,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $message = \Swift_Message::newInstance()
-            ->setSubject('TEST')
-            ->addTo('decano@gmail.com')
-        ;
-
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..'),
+        return $this->render('frontend/default/index.html.twig', [
         ]);
     }
 }

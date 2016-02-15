@@ -2,8 +2,10 @@
 
 namespace Seta\CoreBundle\DependencyInjection;
 
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Loader;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -24,5 +26,8 @@ class SetaCoreExtension extends Extension
         $container->setParameter('seta.notifications.days_before_renovation', $config['notification']['days_before_renovation']);
         $container->setParameter('seta.notifications.days_before_suspension', $config['notification']['days_before_suspension']);
         $container->setParameter('seta.duration.days_length_rental', $config['duration']['days_length_rental']);
+
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.xml');
     }
 }

@@ -12,6 +12,7 @@
   "license": "MIT",
   "homepage": "https://twitter.com/sgomez",
   "dependencies": {
-    "admin-lte": ">=2.2"
+    "admin-lte": ">=2.2",
+    "semantic": "semantic-ui#^2.1.8"
   }
 }

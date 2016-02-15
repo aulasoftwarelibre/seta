@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Hautzi\SystemMailBundle\HautziSystemMailBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new PDias\SamlBundle\SamlBundle(),
             new Sgomez\DebugSwiftMailerBundle\SgomezDebugSwiftMailerBundle(),
 
