@@ -70,7 +70,7 @@ class FinancialPenaltySpec extends ObjectBehavior
 
     public function it_has_no_default_amount()
     {
-        $this->getAmmount()->shouldBe(null);
+        $this->getAmount()->shouldBe(null);
     }
 
     public function it_has_a_mutable_amount()
