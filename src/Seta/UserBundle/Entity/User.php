@@ -272,7 +272,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get phonenumber
+     * Get phonenumber.
      *
      * @param string $phonenumber
      */
@@ -282,7 +282,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set phonenumber
+     * Set phonenumber.
      *
      * @return string
      */
@@ -340,7 +340,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get Display Name
+     * Get Display Name.
      *
      * @return string
      */
