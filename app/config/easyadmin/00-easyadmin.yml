@@ -11,10 +11,15 @@ easy_admin:
                 - 'bundles/setaresource/css/seta.css'
                 - 'bundles/sgomezbsdatetimepicker/css/bootstrap-datetimepicker.min.css'
         menu:
+            - { label: 'app.menu.new_rental', icon: 'plus', route: 'seta_backend_rental_new' }
             - { entity: 'User', icon: 'user', params: { sortField: 'username', sortDirection: 'ASC' } }
-            - { entity: 'Faculty', icon: 'bank', params: { sortField: 'name', sortDirection: 'ASC' } }
-            - { entity: 'Locker', icon: 'archive', params: { sortField: 'code', sortDirection: 'ASC' } }
             - { entity: 'Rental', icon: 'calendar-o', params: { sortField: 'endAt', sortDirection: 'DESC' } }
+            - label: 'app.menu.organization'
+              icon: 'sitemap'
+              children:
+                - { entity: 'Faculty', icon: 'bank', params: { sortField: 'name', sortDirection: 'ASC' } }
+                - { entity: 'Locker', icon: 'archive', params: { sortField: 'code', sortDirection: 'ASC' } }
+                - { entity: 'Zone', icon: 'map-marker', params: { sortField: 'name', sortDirection: 'ASC' } }
             - label: 'app.menu.penalties'
               icon: 'lock'
               children:

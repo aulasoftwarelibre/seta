@@ -11,6 +11,7 @@ Show: Mostrar
 Taquilla: Taquilla
 TimePenalty: Sanción Temporal
 User: Usuario
+Zone: Zona
 
 app.action.block_locker: Bloquear
 app.action.block_unlocker: Desbloquear
@@ -24,18 +25,22 @@ app.action.return_rental: Devolver
 app.menu.faculties: Centros
 app.menu.lockers: Taquillas
 app.menu.logout: Salir
+app.menu.new_rental: Nuevo alquiler
 app.menu.penalties: Sanciones
 app.menu.rentals: Alquileres
 app.menu.settings: Configuración
 app.menu.time_penalties: Sanciones temporales
 app.menu.financial_penalties: Sanciones económicas
+app.menu.organization: Organización
 app.menu.users: Usuarios
+app.menu.zones: Zonas
 
 label.amount: Cantidad
 label.branch: Rama
 label.code: Código
 label.comment: Comentario
 label.degree: Titulación
+label.description: Descripción
 label.domains: Dominios
 label.email: Correo
 label.enabled: Activo
@@ -61,6 +66,7 @@ label.rentals: Alquileres
 label.return_at: Fecha entrega
 label.season: Convocatoria
 label.slug: Código
+label.submit: Enviar
 label.start_at: Fecha inicio
 label.status: Estado
 label.students: Estudiantes

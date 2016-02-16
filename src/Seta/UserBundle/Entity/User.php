@@ -312,4 +312,14 @@ class User extends BaseUser
     {
         return $this->faculty;
     }
+
+    /**
+     * Get Display Name
+     *
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return sprintf('%s - %s - %s', $this->getNic(), $this->getUsername(), $this->getFullname());
+    }
 }

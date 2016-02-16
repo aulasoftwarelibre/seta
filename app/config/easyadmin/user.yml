@@ -8,7 +8,6 @@ easy_admin:
                 actions:
                     - { name: 'edit', icon: 'edit' }
                     - { name: 'show', icon: 'eye' }
-                    - { name: 'user_new_rent', type: 'route', label: 'app.action.new_rental' }
                 fields:
                     - { property: 'username', label: 'label.username' }
                     - { property: 'fullname', label: 'label.fullname' }

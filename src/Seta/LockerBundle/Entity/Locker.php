@@ -42,8 +42,7 @@ class Locker
     /**
      * @var string
      *
-     * @ORM\Column(name="zone", type="string", length=255)
-     * @Assert\Length(max="1", min="1")
+     * @ORM\ManyToOne(targetEntity="Seta\LockerBundle\Entity\Zone", inversedBy="lockers")
      */
     private $zone;
 
@@ -116,22 +115,6 @@ class Locker
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * @param string $zone
-     */
-    public function setZone($zone)
-    {
-        $this->zone = $zone;
-    }
-
-    /**
-     * @return string
-     */
-    public function getZone()
-    {
-        return $this->zone;
     }
 
     /**
@@ -248,5 +231,29 @@ class Locker
     public function getQueue()
     {
         return $this->queue;
+    }
+
+    /**
+     * Set zone
+     *
+     * @param \Seta\LockerBundle\Entity\Zone $zone
+     *
+     * @return Locker
+     */
+    public function setZone(\Seta\LockerBundle\Entity\Zone $zone = null)
+    {
+        $this->zone = $zone;
+
+        return $this;
+    }
+
+    /**
+     * Get zone
+     *
+     * @return \Seta\LockerBundle\Entity\Zone
+     */
+    public function getZone()
+    {
+        return $this->zone;
     }
 }

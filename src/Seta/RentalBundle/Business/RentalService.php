@@ -9,8 +9,10 @@ namespace Seta\RentalBundle\Business;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Seta\LockerBundle\Entity\Locker;
+use Seta\LockerBundle\Entity\Zone;
 use Seta\LockerBundle\Exception\BusyLockerException;
 use Seta\LockerBundle\Exception\NotFreeLockerException;
+use Seta\LockerBundle\Exception\NotFreeZoneLockerException;
 use Seta\LockerBundle\Repository\LockerRepository;
 use Seta\PenaltyBundle\Exception\PenalizedFacultyException;
 use Seta\PenaltyBundle\Exception\PenalizedUserException;
@@ -73,7 +75,18 @@ class RentalService
         $locker = $this->lockerRepository->findOneFreeLocker();
 
         if (!$locker) {
-            throw new NotFreeLockerException();
+            throw new NotFreeLockerException;
+        }
+
+        return $this->rentLocker($user, $locker);
+    }
+
+    public function rentFirstFreeZoneLocker(User $user, Zone $zone)
+    {
+        $locker = $this->lockerRepository->findOneFreeZoneLocker($zone);
+
+        if (!$locker) {
+            throw new NotFreeZoneLockerException;
         }
 
         return $this->rentLocker($user, $locker);
@@ -82,19 +95,19 @@ class RentalService
     public function rentLocker(User $user, Locker $locker)
     {
         if ($user->getIsPenalized()) {
-            throw new PenalizedUserException();
+            throw new PenalizedUserException;
         }
 
         if ($user->getFaculty()->getIsEnabled() === false) {
-            throw new PenalizedFacultyException();
+            throw new PenalizedFacultyException;
         }
 
         if ($locker->getStatus() != Locker::AVAILABLE) {
-            throw new BusyLockerException();
+            throw new BusyLockerException;
         }
 
         if ($user->getLocker()) {
-            throw new TooManyLockersRentedException();
+            throw new TooManyLockersRentedException;
         }
 
         /** @var Rental $rental */

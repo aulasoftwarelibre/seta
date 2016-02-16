@@ -1,0 +1,21 @@
+easy_admin:
+    entities:
+        Zone:
+            class: Seta\LockerBundle\Entity\Zone
+            label: app.menu.zones
+            disabled_actions: ['delete']
+            list:
+                actions:
+                    - { name: 'show', icon: 'eye' }
+                    - { name: 'edit', icon: 'edit' }
+                fields:
+                    - { property: 'name', label: 'label.name' }
+                    - { property: 'description', label: 'label.description' }
+            show:
+                fields:
+                    - { property: 'name', label: 'label.name' }
+                    - { property: 'description', label: 'label.description' }
+            form:
+                fields:
+                    - { property: 'name', label: 'label.name' }
+                    - { property: 'description', label: 'label.description' }
