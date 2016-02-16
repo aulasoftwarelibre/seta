@@ -56,6 +56,7 @@ class Faculty
     public function __construct()
     {
         $this->students = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->isEnabled = true;
     }
 
     /**
@@ -63,7 +64,7 @@ class Faculty
      *
      * @return string
      */
-    function __toString()
+    public function __toString()
     {
         return $this->getName();
     }
