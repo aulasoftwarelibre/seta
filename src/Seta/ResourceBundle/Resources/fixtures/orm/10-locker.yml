@@ -1,13 +1,13 @@
 Seta\LockerBundle\Entity\Locker:
     locker{1..90}:
         code: <(sprintf("%03d", $fake('current')))>
-        zone: A
+        zone: "@zone_a"
     locker{91..117}:
         code: <(sprintf("%03d", $fake('current')))>
-        zone: B
+        zone: "@zone_b"
     locker{118..171}:
         code: <(sprintf("%03d", $fake('current')))>
-        zone: C
+        zone: "@zone_c"
     locker{172..207}:
         code: <(sprintf("%03d", $fake('current')))>
-        zone: D
+        zone: "@zone_d"

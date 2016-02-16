@@ -320,6 +320,6 @@ class User extends BaseUser
      */
     public function getDisplayName()
     {
-        return sprintf('%s - %s - %s', $this->getFullname(), $this->getNic(), $this->getUsername());
+        return sprintf('%s - %s - %s', $this->getNic(), $this->getUsername(), $this->getFullname());
     }
 }

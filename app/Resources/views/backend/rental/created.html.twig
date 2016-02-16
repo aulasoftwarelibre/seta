@@ -1,0 +1,51 @@
+{% extends 'easy_admin/layout.html.twig' %}
+
+{% block content_title %}Nuevo alquiler{% endblock %}
+
+{% block flash_messages %}
+    {% for type, flashMessages in app.session.flashbag.all() %}
+        {% for flashMessage in flashMessages %}
+            <div class="alert alert-{{ type }}">
+                {{- flashMessage -}}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock flash_messages %}
+
+{% block main %}
+
+    <div class="form-horizontal">
+        <div class="form-group field-string ">
+            <label class="col-sm-2 control-label">
+                Nombre completo
+            </label>
+            <div class="col-sm-10">
+                <div class="form-control">
+                    {{ user.fullname }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group field-string ">
+            <label class="col-sm-2 control-label">
+                Taquilla asignada
+            </label>
+            <div class="col-sm-10">
+                <div class="form-control">
+                    {{ user.locker }}
+                </div>
+            </div>
+        </div>
+        <div class="form-group field-string ">
+            <label class="col-sm-2 control-label">
+                Zona
+            </label>
+            <div class="col-sm-10">
+                <div class="form-control">
+                    {{ user.locker.zone }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

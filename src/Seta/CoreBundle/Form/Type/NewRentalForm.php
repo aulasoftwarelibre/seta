@@ -11,10 +11,9 @@ namespace Seta\CoreBundle\Form\Type;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class NewRentalForm extends AbstractType
 {
@@ -25,15 +24,16 @@ class NewRentalForm extends AbstractType
                 'label' => 'label.user',
                 'class' => 'Seta\UserBundle\Entity\User',
                 'choice_label' => 'displayName',
-                'attr' => ['data-widget' => 'select2']
+                'attr' => ['data-widget' => 'select2'],
+                'required' => true,
+                'constraints' => new Valid(),
             ])
-            ->add('zone', ChoiceType::class, [
+            ->add('zone', EntityType::class, [
                 'label' => 'label.zone',
-                'choices' => ['A' => 'A', 'B' => 'B', 'C' => 'C', 'D' => 'D'],
+                'class' => 'Seta\LockerBundle\Entity\Zone',
                 'expanded' => true,
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'label.submit'
+                'required' => true,
+                'constraints' => new Valid(),
             ])
         ;
     }

@@ -2,24 +2,26 @@
 
 {% extends 'easy_admin/layout.html.twig' %}
 
-{% block content_title %}Dashboard{% endblock %}
+{% block content_title %}Nuevo alquiler{% endblock %}
+
+{% block flash_messages %}
+    {% for type, flashMessages in app.session.flashbag.all() %}
+        {% for flashMessage in flashMessages %}
+            <div class="alert alert-{{ type }}">
+                {{- flashMessage -}}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock flash_messages %}
 
 {% block main %}
 
-    <div class="box box-default">
-        <div class="box-header with-border">
-            <h3 class="box-title">Alquilar</h3>
-        </div>
-        {{ form_start(form) }}
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
-                    {{ form_widget(form) }}
-                </div>
-            </div>
-        </div>
-        {{ form_end(form) }}
-    </div>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">
+        <i class="fa fa-save"></i> Alquilar
+    </button>
+    {{ form_end(form) }}
 
 {% endblock %}
 

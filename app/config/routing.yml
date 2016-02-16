@@ -9,7 +9,7 @@ craue_config_settings:
   prefix: /admin/settings
 
 easy_admin_bundle:
-    resource: "@SetaCoreBundle/Controller/Backend/AdminController.php"
+    resource: "@SetaCoreBundle/Controller/Backend/"
     type:     annotation
     prefix:   /admin
 

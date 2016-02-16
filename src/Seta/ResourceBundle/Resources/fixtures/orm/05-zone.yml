@@ -1,0 +1,3 @@
+Seta\LockerBundle\Entity\Zone:
+    zone_{a,b,c,d}:
+        name: <(strtoupper($fake('current')))>
