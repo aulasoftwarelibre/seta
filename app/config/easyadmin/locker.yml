@@ -25,6 +25,7 @@ easy_admin:
             form:
                 fields:
                     - { property: 'code', label: 'label.code' }
+                    - { property: 'zone', label: 'label.zone', type_options: { required: true } }
             templates:
                 label_null: 'easy_admin/Locker/label_free.html.twig'
                 label_status: 'easy_admin/Locker/status.html.twig'
