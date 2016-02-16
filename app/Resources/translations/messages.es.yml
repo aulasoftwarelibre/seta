@@ -60,6 +60,7 @@ label.nic: Identificación (DNI/NIE/Pasaporte)
 label.owner: Usada por
 label.password: Contraseña
 label.penalized: Sancionado
+label.phonenumber: Teléfono
 label.practice: Práctico
 label.rental: Alquiler
 label.rentals: Alquileres

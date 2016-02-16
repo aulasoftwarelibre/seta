@@ -21,6 +21,7 @@ easy_admin:
                     - { property: 'nic', label: 'label.nic' }
                     - { property: 'faculty', label: 'label.faculty' }
                     - { property: 'email', type: 'email', label: 'label.email', help: 'help.email' }
+                    - { property: 'phonenumber', label: 'label.phonenumber' }
                     - { property: 'groups', label: 'label.groups', help: 'help.groups', type_options: { required: true } }
             show:
                 fields:
@@ -28,6 +29,7 @@ easy_admin:
                     - { property: 'nic', label: 'label.nic' }
                     - { property: 'username', label: 'label.username' }
                     - { property: 'email', label: 'label.email' }
+                    - { property: 'phonenumber', label: 'label.phonenumber' }
                     - { property: 'locker', label: 'label.locker' }
                     - { property: 'isPenalized', type: 'toggle', label: 'label.penalized' }
                     - { property: 'enabled', type: 'toggle', label: 'label.enabled' }

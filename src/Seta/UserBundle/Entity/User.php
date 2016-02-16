@@ -41,6 +41,12 @@ class User extends BaseUser
     private $nic;
 
     /**
+     * @var string
+     * @ORM\Column(name="phonenumber", type="string", length=255)
+     */
+    private $phonenumber;
+
+    /**
      * @var ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="Seta\RentalBundle\Entity\Rental", mappedBy="user")
@@ -263,6 +269,26 @@ class User extends BaseUser
     public function getFullname()
     {
         return $this->fullname;
+    }
+
+    /**
+     * Get phonenumber
+     *
+     * @param string $phonenumber
+     */
+    public function setPhonenumber($phonenumber)
+    {
+        $this->phonenumber = $phonenumber;
+    }
+
+    /**
+     * Set phonenumber
+     *
+     * @return string
+     */
+    public function getPhonenumber()
+    {
+        return $this->phonenumber;
     }
 
     /**
