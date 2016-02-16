@@ -7,6 +7,7 @@ use Seta\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Locker.
@@ -37,6 +38,14 @@ class Locker
      * @ORM\Column(name="code", type="string", length=255, unique=true)
      */
     private $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="zone", type="string", length=255)
+     * @Assert\Length(max="1", min="1")
+     */
+    private $zone;
 
     /**
      * @var string
@@ -107,6 +116,22 @@ class Locker
     public function getCode()
     {
         return $this->code;
+    }
+
+    /**
+     * @param string $zone
+     */
+    public function setZone($zone)
+    {
+        $this->zone = $zone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZone()
+    {
+        return $this->zone;
     }
 
     /**

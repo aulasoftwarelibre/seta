@@ -1,6 +1,6 @@
 \Seta\UserBundle\Entity\User:
     user_seta:
-        username: seta
+        username: cc0gobas
         fullname: Super User
         nic: 00000001A
         email: seta@domain.local

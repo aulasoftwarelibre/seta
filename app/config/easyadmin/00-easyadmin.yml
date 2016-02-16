@@ -11,10 +11,10 @@ easy_admin:
                 - 'bundles/setaresource/css/seta.css'
                 - 'bundles/sgomezbsdatetimepicker/css/bootstrap-datetimepicker.min.css'
         menu:
-            - { entity: 'User', icon: 'user', params: { sortDirection: 'ASC' } }
-            - { entity: 'Faculty', icon: 'bank', params: { sortDirection: 'ASC' } }
-            - { entity: 'Locker', icon: 'archive', params: { sortDirection: 'ASC' } }
-            - { entity: 'Rental', icon: 'calendar-o', params: { sortDirection: 'ASC' } }
+            - { entity: 'User', icon: 'user', params: { sortField: 'username', sortDirection: 'ASC' } }
+            - { entity: 'Faculty', icon: 'bank', params: { sortField: 'name', sortDirection: 'ASC' } }
+            - { entity: 'Locker', icon: 'archive', params: { sortField: 'code', sortDirection: 'ASC' } }
+            - { entity: 'Rental', icon: 'calendar-o', params: { sortField: 'endAt', sortDirection: 'DESC' } }
             - label: 'app.menu.penalties'
               icon: 'lock'
               children:

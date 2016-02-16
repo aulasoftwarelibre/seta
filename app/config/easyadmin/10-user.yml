@@ -22,7 +22,7 @@ easy_admin:
                     - { property: 'nic', label: 'label.nic' }
                     - { property: 'faculty', label: 'label.faculty' }
                     - { property: 'email', type: 'email', label: 'label.email', help: 'help.email' }
-                    - { property: 'groups', label: 'label.groups', help: 'help.groups' }
+                    - { property: 'groups', label: 'label.groups', help: 'help.groups', type_options: { required: true } }
             show:
                 fields:
                     - { property: 'fullname', label: 'label.fullname' }

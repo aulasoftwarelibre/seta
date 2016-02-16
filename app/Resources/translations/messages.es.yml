@@ -49,6 +49,7 @@ label.is_renewable: ¿Renovable?
 label.lastLogin: Último acceso
 label.locked: Bloqueado
 label.locker: Taquilla
+label.zone: Zona
 label.name: Nombre
 label.nic: Identificación (DNI/NIE/Pasaporte)
 label.owner: Usada por

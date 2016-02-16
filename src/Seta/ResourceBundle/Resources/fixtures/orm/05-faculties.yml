@@ -2,8 +2,18 @@
     eps:
         name: Escuela Politécnica Superior de Córdoba
         slug: eps
-        isEnabled: true
     etsiam:
         name: Escuela Técnica Superior de Ingenieros Agrónomos y de Montes
         slug: etsiam
-        isEnabled: true
+    veterinaria:
+        name: Facultad de Veterinaria
+        slug: veterinaria
+    ciencias:
+        name: Facultad de Ciencias
+        slug: ciencias
+    fyl:
+        name: Facultad de Filosofía y Letras
+        slug: fyl
+    fct:
+        name: Facultad de Ciencias del Trabajo
+        slug: fct

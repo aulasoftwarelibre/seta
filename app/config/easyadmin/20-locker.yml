@@ -12,6 +12,7 @@ easy_admin:
                     - '-delete'
                 fields:
                     - { property: 'code', label: 'label.code' }
+                    - { property: 'zone', label: 'label.zone' }
                     - { property: 'status', label: 'label.status', template: 'status', trans: true}
                     - { property: 'owner', label: 'label.owner' }
             show:
