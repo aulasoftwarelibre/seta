@@ -1,9 +1,7 @@
 {% extends "frontend/layout.html.twig" %}
 
 {% set penalized = user.isPenalized %}
-{% set penalized = true %}
 {% set status = penalized == false ? 'Activa' : 'Bloqueada por sanción' %}
-
 
 {% block stylesheets %}
     {{ parent() }}
