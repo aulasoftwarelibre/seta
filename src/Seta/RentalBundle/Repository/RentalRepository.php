@@ -5,6 +5,7 @@ namespace Seta\RentalBundle\Repository;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\RentalBundle\Exception\NotFoundRentalException;
 use Seta\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Seta\UserBundle\Entity\User;
 
 /**
  * RentalRepository.
@@ -16,6 +17,20 @@ use Seta\ResourceBundle\Doctrine\ORM\EntityRepository;
  */
 class RentalRepository extends EntityRepository implements RentalRepositoryInterface
 {
+    public function getLastRentals(User $user, $limit = 10)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->eq('o.user', ':user'))
+            ->orderBy('o.startAt', 'DESC')
+            ->setParameter('user', $user)
+            ->setMaxResults($limit)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
     public function getCurrentRental(Locker $locker)
     {
         $queryBuilder = $this->getQueryBuilder();

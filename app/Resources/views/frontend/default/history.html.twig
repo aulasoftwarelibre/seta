@@ -1,5 +1,10 @@
 {% extends "frontend/layout.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/setaresource/css/short.css') }}"/>
+{% endblock %}
+
 {% block jumbo %}
     <div class="ui text container">
         <h1 class="ui inverted header">
@@ -10,26 +15,26 @@
 {% endblock %}
 
 {% block body %}
-    <table class="ui inverted table">
+    <table class="ui inverted unstackable table">
         <thead>
-        <tr>
+        <tr class="center aligned">
             <th>Taquilla</th>
             <th>Fecha inicio</th>
+            <th>Fecha fin</th>
             <th>Fecha entrega</th>
-            <th>Sanción</th>
         </tr>
         </thead>
         <tbody>
         {% for rental in rentals %}
-        <tr>
+        <tr class="center aligned">
             <td>{{ rental.locker }}</td>
-            <td>{{ rental.startAt | date('d/m/y') }}</td>
-            <td>{{ rental.returnAt ? (rental.returnAt | date) : '' }}</td>
+            <td>{{ rental.startAt | date('d/m') }}</td>
+            <td>{{ rental.endAt | date('d/m') }}</td>
             <td>
             {% if rental.penalty is not empty %}
-                <span class="ui red label">SÍ</span>
+                <span style="color: red;">{{ rental.returnAt ? (rental.returnAt | date('d/m')) : '' }}</span>
             {% else %}
-                <span class="ui green label">NO</span>
+                <span style="color: greenyellow;">{{ rental.returnAt ? (rental.returnAt | date('d/m')) : '' }}</span>
             {% endif %}
             </td>
         </tr>
@@ -41,7 +46,7 @@
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="4">Solo se muestran las diez últimas taquillas.</td>
+            <td colspan="4">Solo se muestran los diez últimos alquileres.</td>
         </tr>
         </tfoot>
     </table>

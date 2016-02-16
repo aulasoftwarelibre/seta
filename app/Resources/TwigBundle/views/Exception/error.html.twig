@@ -1,0 +1,14 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% block title %}
+    Ha ocurrido un error: {{ status_text }}
+{% endblock %}
+
+    {% block  jumbo %}
+    <div class="ui text container">
+        <h1 class="ui inverted header">
+            ¡Ops! Ha ocurrido un error.
+        </h1>
+        <h2>El servidor ha devuelto el error "{{ status_code }} {{ status_text }}"</h2>
+    </div>
+{% endblock %}

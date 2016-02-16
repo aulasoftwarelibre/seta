@@ -2,6 +2,7 @@
 
 namespace Seta\CoreBundle\Controller\Frontend;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,8 +25,36 @@ class DefaultController extends Controller
      */
     public function history(Request $request)
     {
+        $rentals = $this->get('seta.repository.rental')->getLastRentals($this->getUser());
+
         return $this->render('frontend/default/history.html.twig', [
-            'rentals' => $this->getUser()->getRentals(),
+            'rentals' => $rentals,
+        ]);
+    }
+
+    /**
+     * @Route("/renew/{code}", name="renew")
+     * @Method(methods={"GET"})
+     */
+    public function renew(Request $request, $code)
+    {
+        $rental = $this->get('seta.repository.rental')->findOneBy(['renewCode' => $code]);
+
+        if (!$rental) {
+            throw $this->createNotFoundException();
+        }
+
+        $error = null;
+
+        try {
+            $this->get('seta.service.renew')->renewRental($rental);
+        } catch(\Exception $e) {
+            $error = $e->getMessage();
+        }
+
+        return $this->render('frontend/default/renew.html.twig', [
+            'error' => $error,
+            'rental' => $rental,
         ]);
     }
 }

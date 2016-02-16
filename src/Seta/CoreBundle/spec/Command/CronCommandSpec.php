@@ -3,8 +3,10 @@
 namespace spec\Seta\CoreBundle\Command;
 
 use Craue\ConfigBundle\Util\Config;
+use Doctrine\Common\Collections\ArrayCollection;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\MailerBundle\Business\MailService;
+use Seta\PenaltyBundle\Repository\TimePenaltyRepository;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Repository\RentalRepository;
 use Seta\UserBundle\Entity\User;
@@ -20,11 +22,16 @@ use Symfony\Component\Translation\TranslatorInterface;
 class CronCommandSpec extends ObjectBehavior
 {
     public function let(
+        ContainerInterface $container,
+        Config $config,
         Locker $locker,
         Rental $rental,
+        TimePenaltyRepository $timePenaltyRepository,
         User $user
     ) {
-        // $this->beConstructedWith();
+        $container->get('craue_config')->willReturn($config);
+        $container->get('seta.repository.time_penalty')->willReturn($timePenaltyRepository);
+
         $rental->getUser()->willReturn($user);
         $rental->getLocker()->willReturn($locker);
         $rental->getIsRenewable()->willReturn(true);
@@ -51,6 +58,7 @@ class CronCommandSpec extends ObjectBehavior
     }
 
     public function it_send_emails(
+        ArrayCollection $collection,
         ContainerInterface $container,
         Config $config,
         InputInterface $input,
@@ -59,17 +67,20 @@ class CronCommandSpec extends ObjectBehavior
         Rental $rental,
         RentalRepository $rentalRepository,
         RequestStack $requestStack,
+        TimePenaltyRepository $timePenaltyRepository,
         TranslatorInterface $translator
     ) {
-        $container->get('craue_config')->shouldBeCalled()->willReturn($config);
         $config->get('seta.notifications.days_before_renovation')->shouldBeCalled()->willReturn('2');
         $config->get('seta.notifications.days_before_suspension')->shouldBeCalled()->willReturn('8');
         $container->get('seta.repository.rental')->shouldBeCalled()->willReturn($rentalRepository);
         $container->get('seta_mailing')->shouldBeCalled()->willReturn($mailer);
         $container->get('translator')->shouldBeCalled()->willReturn($translator);
+        $timePenaltyRepository->findExpiredPenalties()->shouldBeCalled()->willReturn($collection);
         $translator->getLocale()->shouldBeCalled()->willReturn('es');
         $container->get('request_stack')->shouldBeCalled()->willReturn($requestStack);
         $requestStack->push(Argument::type(Request::class))->shouldBeCalled();
+
+
 
         $rentalRepository
             ->getExpireOnDateRentals(Argument::type(\DateTime::class))

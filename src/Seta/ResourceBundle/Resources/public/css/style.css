@@ -1,10 +1,13 @@
-
 .hidden.menu {
     display: none;
 }
 
 .masthead.segment {
-    min-height: 300px;
+    background-image: url("../images/bg.jpg")!important;
+}
+
+.masthead.segment {
+    min-height: 700px;
     padding: 1em 0em;
 }
 .masthead .logo.item img {
@@ -14,7 +17,7 @@
     margin-left: 0.5em;
 }
 .masthead h1.ui.header {
-    margin-top: 2em;
+    margin-top: 3em;
     margin-bottom: 0em;
     font-size: 4em;
     font-weight: normal;
@@ -22,6 +25,10 @@
 .masthead h2 {
     font-size: 1.7em;
     font-weight: normal;
+}
+
+#topmenu {
+    border-width: 0;
 }
 
 .ui.vertical.stripe {
@@ -53,10 +60,19 @@
 }
 
 .footer.segment {
+    padding: 1em 0em;
 }
 
 .secondary.pointing.menu .toc.item {
     display: none;
+}
+
+@media (min-height: 320px) {
+    .footer.segment { /* Increased specificity for SO snippet priority */
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 700px) {
@@ -65,10 +81,10 @@
     }
     .secondary.pointing.menu .item,
     .secondary.pointing.menu .menu {
-        display: none!important;
+        display: none;
     }
     .secondary.pointing.menu .toc.item {
-        display: block!important;
+        display: block;
     }
     .masthead.segment {
         min-height: 350px;

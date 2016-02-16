@@ -1,0 +1,42 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/setaresource/css/short.css') }}"/>
+{% endblock %}
+
+{% block jumbo %}
+    <div class="ui text container">
+        <h1 class="ui inverted header">
+            Servicio de Taquillas
+        </h1>
+        <h2>Renovación</h2>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    {% if error is not empty %}
+    <div class="ui negative icon message">
+        <i class="ban icon"></i>
+        <div class="content">
+            <div class="header">
+                No ha sido posible renovar la taquilla por el siguiente motivo:
+            </div>
+            <p>{{ error }}</p>
+        </div>
+    </div>
+    {% else %}
+    <div class="ui positive icon message">
+        <i class="thumbs outline up icon"></i>
+        <div class="content">
+            <div class="header">
+                Enhorabuena, su préstamo ha sido renovado.
+            </div>
+            <p>La nueva fecha de entrega es: <strong>{{ rental.endAt|date('d/m/y') }}</strong>. Se le avisará por correo
+            electrónico cuando esté a punto de caducar.</p>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% set penalized = user.isPenalized %}
+{% set penalized = true %}
+{% set status = penalized == false ? 'Activa' : 'Bloqueada por sanción' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/setaresource/css/short.css') }}"/>
+{% endblock %}
+
+{% block jumbo %}
+    <div class="ui text container">
+        <h1 class="ui inverted header">
+            Servicio de Taquillas
+        </h1>
+        <h2>Perfil</h2>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <h4 class="ui top attached header">
+        Datos del perfil
+    </h4>
+    <div class="ui attached segment">
+        <form class="ui form {{ penalized ? 'error':'' }}">
+            <div class="field">
+                <label>Nombre</label>
+                <input type="text" name="fullname" readonly value="{{ user.fullname }}">
+            </div>
+            <div class="field">
+                <label>Correo electrónico</label>
+                <input type="text" name="email" readonly value="{{ user.email }}">
+            </div>
+            <div class="field">
+                <label>Centro</label>
+                <input type="text" name="faculty" readonly value="{{ user.faculty }}">
+            </div>
+            <div class="field">
+                <label>Estado de la cuenta</label>
+                <input type="text" name="faculty" readonly value="{{ status }}">
+            </div>
+
+            <div class="ui error message">
+                <div class="header">Su cuenta se encuentra bloqueada por las siguientes razones:</div>
+                <ul class="list">
+                    {% for penalty in user.penalties if penalty.status == 'penalty.active' %}
+                    <li>{{ penalty.comment }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -180,4 +180,5 @@ abstract class Penalty
     {
         $this->setStatus(self::DONE);
     }
+
 }

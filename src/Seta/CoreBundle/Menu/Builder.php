@@ -29,6 +29,7 @@ class Builder implements ContainerAwareInterface
 
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $menu->addChild('Histórico', ['route' => 'history'])->setExtra('icon', 'history');
+            $menu->addChild('Perfil', ['route' => 'fos_user_profile_show'])->setExtra('icon', 'user');
         }
 
         return $menu;

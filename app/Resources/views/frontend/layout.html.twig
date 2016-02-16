@@ -30,7 +30,7 @@
             </div>
             <div class="item">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="ui red button" href="{{ path('fos_user_security_logout') }}"><i class="sign out icon"></i> Desconectar</a>
+                <a class="ui red button" href="{{ path('fos_user_security_logout') }}"><i class="sign out icon"></i> Salir</a>
             {% else %}
                 <a class="ui primary button" href="{{ path('fos_user_security_login') }}"><i class="sign in icon"></i> Conectar</a>
             {% endif %}
@@ -46,7 +46,7 @@
         <a class="item" href="{{ path('easyadmin') }}"><i class="icon lock"></i> Administrar</a>
     {% endif %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a class="item" href="{{ path('fos_user_security_logout') }}"><i class="sign out icon"></i> Desconectar</a>
+        <a class="item" href="{{ path('fos_user_security_logout') }}"><i class="sign out icon"></i> Salir</a>
     {% else %}
         <a class="item" href="{{ path('fos_user_security_login') }}"><i class="sign in icon"></i> Conectar</a>
     {% endif %}
@@ -56,7 +56,7 @@
 <div class="pusher">
     <div class="ui inverted vertical masthead center aligned segment">
         <div class="ui container">
-            <div class="ui large secondary inverted pointing menu">
+            <div id="topmenu" class="ui large secondary inverted pointing menu">
                 <a class="toc item">
                     <i class="sidebar icon"></i>
                 </a>
@@ -68,7 +68,7 @@
                     <a class="ui inverted button" href="{{ path('easyadmin') }}"><i class="icon lock"></i> Administrar</a>
                 {% endif %}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a class="ui inverted button" href="{{ path('fos_user_security_logout') }}"><i class="sign out icon"></i> Desconectar</a>
+                    <a class="ui inverted button" href="{{ path('fos_user_security_logout') }}"><i class="sign out icon"></i> Salir</a>
                 {% else %}
                     <a class="ui inverted button" href="{{ path('fos_user_security_login') }}"><i class="sign in icon"></i> Conectar</a>
                 {% endif %}
@@ -82,10 +82,11 @@
 
     </div>
 
-
-    <div class="ui vertical stripe segment">
-        <div class="ui text container">
-            {% block body %}{% endblock %}
+    <div class="full height">
+        <div class="ui vertical stripe segment">
+            <div class="ui text container">
+                {% block body %}{% endblock %}
+            </div>
         </div>
     </div>
 
