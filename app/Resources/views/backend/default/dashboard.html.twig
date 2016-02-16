@@ -1,3 +1,42 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
 {% extends 'easy_admin/layout.html.twig' %}
 
 {% block content_title %}Dashboard{% endblock %}
+
+{% block main %}
+
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title">Alquilar</h3>
+        </div>
+        {{ form_start(form) }}
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12">
+                    {{ form_widget(form) }}
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
+
+{% block head_stylesheets %}
+    {{ parent() }}
+user    <link rel="stylesheet" href="{{ asset('bundles/easyadmin/stylesheet/select2-bootstrap.min.css') }}"/>
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
+    <script src="{{ asset("bundles/easyadmin/javascript/select2.full.min.js") }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            // Select2 widget is only enabled for the <select> elements which explicitly ask for it
+            $('#main form select[data-widget="select2"]').select2({
+                theme: 'bootstrap'
+            });
+        });
+    </script>
+{% endblock %}

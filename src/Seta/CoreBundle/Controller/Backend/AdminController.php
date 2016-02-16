@@ -11,6 +11,8 @@
 namespace Seta\CoreBundle\Controller\Backend;
 
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Seta\CoreBundle\Form\Type\NewRentalForm;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\PenaltyBundle\Entity\Penalty;
 use Seta\RentalBundle\Entity\Rental;
@@ -41,10 +43,15 @@ class AdminController extends BaseAdminController
      *
      * @return Response
      * @Route("/dashboard", name="admin_dashboard")
+     * @Method(methods={"GET"})
      */
     public function dashboardAction(Request $request)
     {
-        return $this->render('backend/default/dashboard.html.twig');
+        $form = $this->createForm(NewRentalForm::class);
+
+        return $this->render('backend/default/dashboard.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
