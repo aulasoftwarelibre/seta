@@ -20,7 +20,7 @@
         Si quieres, puedes renovar por otra semana más el préstamo. Para ello puedes
         pasarte por la sede del CEEPS o pulsar el siguiente enlace:
 
-        {{ rental.renewCode }}
+        {{ url('email_renew', {'code': rental.renewCode}) }}
 
         Sigue las instrucciones de la página y la renovación será automática.
         {% else %}

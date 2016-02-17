@@ -34,9 +34,10 @@ class DefaultController extends Controller
 
     /**
      * @Route("/renew/{code}", name="renew")
+     * @Route("/renew/{code}", name="email_renew")
      * @Method(methods={"GET"})
      */
-    public function renew(Request $request, $code)
+    public function emailRenew(Request $request, $code)
     {
         $rental = $this->get('seta.repository.rental')->findOneBy(['renewCode' => $code]);
 
