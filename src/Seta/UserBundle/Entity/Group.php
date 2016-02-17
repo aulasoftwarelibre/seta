@@ -17,7 +17,7 @@ use FOS\UserBundle\Model\Group as BaseGroup;
 /**
  * Class Group.
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Seta\UserBundle\Repository\GroupRepository")
  * @ORM\Table(name="fos_group")
  */
 class Group extends BaseGroup

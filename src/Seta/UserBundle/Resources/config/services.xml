@@ -11,6 +11,11 @@
             <factory service="doctrine" method="getRepository" />
         </service>
 
+        <service id="seta.repository.group" class="Seta\UserBundle\Repository\GroupRepository">
+            <argument type="string">SetaUserBundle:Group</argument>
+            <factory service="doctrine" method="getRepository" />
+        </service>
+
         <service id="seta_user.event_listener.penalty_listener" class="Seta\UserBundle\EventListener\PenaltyListener">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <tag name="kernel.event_subscriber"/>
