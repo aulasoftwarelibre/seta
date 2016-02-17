@@ -56,7 +56,7 @@ label.locked: Bloqueado
 label.locker: Taquilla
 label.zone: Zona
 label.name: Nombre
-label.nic: Identificación (DNI/NIE/Pasaporte)
+label.nic: Identificación
 label.owner: Usada por
 label.password: Contraseña
 label.penalized: Sancionado

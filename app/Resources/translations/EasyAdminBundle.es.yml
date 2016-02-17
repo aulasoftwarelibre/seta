@@ -6,3 +6,4 @@ help.file: Seleccione un fichero para subir
 help.groups: "Los administradores pueden entrar en el backend."
 help.password: Al menos ocho caracteres.
 help.username: "Debe coincidir con el usuario de la Universidad (ej: i02ejemp)"
+help.nic: DNI/NIE/Pasaporte

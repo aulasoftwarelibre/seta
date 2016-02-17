@@ -259,6 +259,7 @@ class AdminController extends BaseAdminController
             ->leftJoin('entity.user', 'user')
             ->leftJoin('entity.locker', 'locker')
             ->orWhere($queryBuilder->expr()->like('user.username', ':fuzzy_query'))
+            ->orWhere($queryBuilder->expr()->like('user.nic', ':fuzzy_query'))
             ->orWhere($queryBuilder->expr()->like('locker.code', ':fuzzy_query'))
             ->andWhere($queryBuilder->expr()->isNull('entity.returnAt'));
 

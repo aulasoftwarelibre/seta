@@ -13,6 +13,7 @@ easy_admin:
                 fields:
                     - { property: 'locker', label: 'label.locker' }
                     - { property: 'user', label: 'label.owner' }
+                    - { property: 'user.nic', label: 'label.nic' }
                     - { property: 'startAt', label: 'label.start_at' }
                     - { property: 'endAt', label: 'label.end_at' }
                     - { property: 'isRenewable', type: 'toggle', label: 'label.is_renewable' }

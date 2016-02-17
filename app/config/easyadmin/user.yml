@@ -18,7 +18,7 @@ easy_admin:
                 fields:
                     - { property: 'username', label: 'label.username', help: 'help.username' }
                     - { property: 'fullname', label: 'label.fullname' }
-                    - { property: 'nic', label: 'label.nic' }
+                    - { property: 'nic', label: 'label.nic', help: 'help.nic' }
                     - { property: 'faculty', label: 'label.faculty' }
                     - { property: 'email', type: 'email', label: 'label.email', help: 'help.email' }
                     - { property: 'phonenumber', label: 'label.phonenumber' }
