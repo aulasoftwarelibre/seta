@@ -18,6 +18,13 @@
             <factory service="doctrine" method="getRepository" />
         </service>
 
+        <!-- Security -->
+
+        <service class="Seta\RentalBundle\Security\Voter\RentalVoter" id="seta_rental.security_voter.rental_voter">
+            <argument>%seta.notifications.days_before_renovation%</argument>
+            <tag name="security.voter"/>
+        </service>
+
         <!-- Services -->
 
         <service id="seta.service.rental" class="Seta\RentalBundle\Business\RentalService">

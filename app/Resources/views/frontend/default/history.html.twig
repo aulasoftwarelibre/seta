@@ -36,6 +36,14 @@
             {% else %}
                 <span style="color: greenyellow;">{{ rental.returnAt ? (rental.returnAt | date('d/m')) : '' }}</span>
             {% endif %}
+            {% if rental.returnAt is empty %}
+                {% if is_granted('rent', rental) %}
+                    <a href="{{ path('renew', {'rental': rental.id}) }}" class="ui positive labeled icon compact button">
+                        <i class="refresh icon"></i>
+                        Renovar
+                    </a>
+                {% endif %}
+            {% endif %}
             </td>
         </tr>
         {% else %}

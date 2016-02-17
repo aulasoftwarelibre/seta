@@ -4,6 +4,7 @@ namespace Seta\CoreBundle\Controller\Frontend;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Seta\RentalBundle\Entity\Rental;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,7 +34,23 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/renew/{code}", name="renew")
+     * @Route("/rental/{rental}/renew", name="renew")
+     * @Security("is_granted('rent', rental)")
+     */
+    public function renew(Request $request, Rental $rental)
+    {
+        try {
+            $this->get('seta.service.renew')->renewRental($rental);
+
+            $this->addFlash('positive', 'Taquilla renovada con éxito.');
+        } catch(\Exception $e) {
+            $this->addFlash('negative', $e->getMessage());
+        }
+
+        return $this->redirectToRoute('history');
+    }
+
+    /**
      * @Route("/renew/{code}", name="email_renew")
      * @Method(methods={"GET"})
      */
