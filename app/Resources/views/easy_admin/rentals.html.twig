@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>{{ 'label.locker' | trans }}</th>
+            <th>{{ 'label.owner' | trans }}</th>
             <th>{{ 'label.start_at' | trans }}</th>
             <th>{{ 'label.end_at' | trans }}</th>
             <th>{{ 'label.return_at' | trans }}</th>
@@ -9,9 +10,11 @@
         </tr>
     </thead>
     <tbody>
-    {% for rental in value %}
+    {% set rentals = value | sort_rental %}
+    {% for rental in rentals %}
         <tr>
             <td>{{ rental.locker }}</td>
+            <td>{{ rental.user }}</td>
             <td>{{ rental.startAt | date('d/m/Y') }}</td>
             <td>{{ rental.endAt | date('d/m/Y') }}</td>
             <td>
@@ -27,4 +30,9 @@
         </tr>
     {% endfor %}
     </tbody>
+    <tfeet>
+        <tr>
+            <td colspan="6">Solo se muestran los diez últimos alquileres</td>
+        </tr>
+    </tfeet>
 </table>

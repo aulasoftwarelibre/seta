@@ -20,6 +20,7 @@ easy_admin:
                     - { property: 'code', label: 'label.code' }
                     - { property: 'status', label: 'label.status', template: 'status', trans: true}
                     - { property: 'owner', label: 'label.owner' }
+                    - { property: 'rentals', template: 'rentals', label: 'label.rentals' }
                 actions:
                     - 'delete'
             form:
