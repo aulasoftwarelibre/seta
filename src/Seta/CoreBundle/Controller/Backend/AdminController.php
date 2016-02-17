@@ -227,6 +227,20 @@ class AdminController extends BaseAdminController
     }
 
     /**
+     * Preconfigura un usuario
+     *
+     * @return User
+     */
+    public function createNewUserEntity()
+    {
+        $user = new User();
+        $group = $this->get('seta.repository.group')->findOneBy(['name' => 'Usuarios']);
+        $user->addGroup($group);
+
+        return $user;
+    }
+
+    /**
      * Lista los préstamos activos.
      *
      * @param $entityClass
