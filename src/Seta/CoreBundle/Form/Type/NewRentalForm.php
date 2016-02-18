@@ -27,6 +27,7 @@ class NewRentalForm extends AbstractType
                 'attr' => ['data-widget' => 'select2'],
                 'required' => true,
                 'constraints' => new Valid(),
+                'placeholder' => 'Selecciona un usuario',
             ])
             ->add('zone', EntityType::class, [
                 'label' => 'label.zone',

@@ -47,11 +47,7 @@ class AdminController extends BaseAdminController
      */
     public function dashboardAction(Request $request)
     {
-        $form = $this->createForm(NewRentalForm::class);
-
-        return $this->render('backend/default/dashboard.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->render('backend/default/dashboard.html.twig');
     }
 
     /**
