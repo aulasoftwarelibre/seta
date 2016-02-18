@@ -1,0 +1,28 @@
+{% extends "frontend/layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/setaresource/css/short.css') }}"/>
+{% endblock %}
+
+{% block jumbo %}
+    <div class="ui text container">
+        <h1 class="ui inverted header">
+            Servicio de Taquillas
+        </h1>
+        <h2>Usuario no registrado</h2>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="ui icon message">
+        <i class="ban icon"></i>
+        <div class="content">
+            <div class="header">
+                Tu usuario no está registrado.
+            </div>
+            <p>Pásate por el CEEPS para darte de alta. Recuerda cerrar el navegador para
+                salir de la sesión completamente si estás en un ordenador público.</p>
+        </div>
+    </div>
+{% endblock %}

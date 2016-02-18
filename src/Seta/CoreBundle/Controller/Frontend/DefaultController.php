@@ -16,8 +16,11 @@ class DefaultController extends Controller
      */
     public function homepage(Request $request)
     {
-        return $this->render('frontend/default/index.html.twig', [
-        ]);
+        if ($this->get('session')->get('openiduco', 'login') === 'notfound') {
+            return $this->render('frontend/default/not_registered.html.twig');
+        }
+
+        return $this->render('frontend/default/index.html.twig');
     }
 
     /**
