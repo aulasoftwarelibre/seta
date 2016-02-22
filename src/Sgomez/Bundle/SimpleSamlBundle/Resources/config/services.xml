@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="sgomez_simplesaml.token_authenticator" class="Sgomez\Bundle\SimpleSamlBundle\Security\TokenAuthenticator">
+            <argument type="service" id="sgomez_simplesaml.auth"/>
+        </service>
+
+        <service id="sgomez_simplesaml.auth" class="Sgomez\Bundle\SimpleSamlBundle\Security\SimpleSamlAuth">
+            <file>/var/simplesamlphp/lib/_autoload.php</file>
+            <argument>openiduco</argument>
+        </service>
+
+    </services>
+
+</container>

@@ -1,6 +1,9 @@
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
+ssp_bundle:
+    resource: "@SimpleSamlBundle/Resources/config/routing.xml"
+
 ceeps_userbundle:
     resource: "@CeepsUserBundle/Resources/config/routing.yml"
 

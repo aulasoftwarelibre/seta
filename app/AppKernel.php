@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new Seta\ResourceBundle\SetaResourceBundle(),
             new Seta\UserBundle\SetaUserBundle(),
             new Sgomez\BsDatetimepickerBundle\SgomezBsDatetimepickerBundle(),
+            new Sgomez\Bundle\SimpleSamlBundle\SimpleSamlBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
