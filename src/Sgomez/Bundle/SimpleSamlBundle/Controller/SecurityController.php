@@ -12,16 +12,25 @@
 namespace Sgomez\Bundle\SimpleSamlBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class SecurityController extends Controller
 {
-    public function connectAction(Request $request)
+    public function loginAction(Request $request)
     {
-        $auth = $this->get('sgomez_simplesaml.auth')->getAuth();
+        $user = $this->getUser();
+        if ($user instanceof UserInterface) {
+            if ($targetPath = $request->getSession()->get('_security.target_path')) {
+                return new RedirectResponse($targetPath);
+            }
 
-        $returnTo = $this->generateUrl('simplesaml_security_check');
-        $url = $auth->getLoginURL($returnTo);
+            return $this->redirectToRoute('homepage');
+        }
+
+        $returnTo = $this->generateUrl('simple_saml_security_check');
+        $url = $this->get('simple_saml.auth')->getLoginUrl($returnTo);
 
         return $this->redirect($url);
     }

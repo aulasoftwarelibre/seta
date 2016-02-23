@@ -1,0 +1,18 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="login-box-body">
+        {% if error %}
+            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+        <p class="login-box-msg">
+            Iniciar sesión con tu usuario de la Universidad.
+        </p>
+
+        <div class="social-auth-links text-center">
+            <a href="{{ path('simple_saml_security_login') }}" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-sign-in"></i> Iniciar sesión con la UCO</a>
+        </div>
+    </div>
+{% endblock %}

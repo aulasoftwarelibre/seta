@@ -4,54 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "516326db64953616f89206e77efdf9f1",
-    "content-hash": "09ea253d5ff3194573815ce42a341008",
+    "hash": "bf21128ab96725469637b99a18f6bc8c",
+    "content-hash": "107eb7e7c46fbfcc5634c94c8657d372",
     "packages": [
-        {
-            "name": "aulasoftwarelibre/ceeps-user-bundle",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aulasoftwarelibre/CeepsUserBundle.git",
-                "reference": "a25ea98ae3011e853390c6eb5d44d78684ddf20b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aulasoftwarelibre/CeepsUserBundle/zipball/a25ea98ae3011e853390c6eb5d44d78684ddf20b",
-                "reference": "a25ea98ae3011e853390c6eb5d44d78684ddf20b",
-                "shasum": ""
-            },
-            "require": {
-                "friendsofsymfony/user-bundle": "~2.0@dev",
-                "pdias/saml-bundle": "dev-master",
-                "symfony/config": "~2.8|~3.0",
-                "symfony/dependency-injection": "~2.8|~3.0",
-                "symfony/http-kernel": "~2.8|~3.0",
-                "symfony/security": "~2.8|~3.0"
-            },
-            "require-dev": {
-                "henrikbjorn/phpspec-code-coverage": "~2.0",
-                "phpspec/phpspec": "~2.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Ceeps\\UserBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sergio Gomez",
-                    "email": "sergio@uco.es"
-                }
-            ],
-            "description": "Bundle de Identificacion del CEEPS",
-            "time": "2016-02-18 06:50:38"
-        },
         {
             "name": "craue/config-bundle",
             "version": "1.4.1",
@@ -1490,50 +1445,6 @@
             "time": "2016-02-06 03:52:05"
         },
         {
-            "name": "pdias/saml-bundle",
-            "version": "dev-master",
-            "target-dir": "PDias/SamlBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pdias/SamlBundle.git",
-                "reference": "0ce7ee07cc6c3358a678f877ac3931bedfc3a4ba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pdias/SamlBundle/zipball/0ce7ee07cc6c3358a678f877ac3931bedfc3a4ba",
-                "reference": "0ce7ee07cc6c3358a678f877ac3931bedfc3a4ba",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.4"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "PDias\\SamlBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Paulo Dias",
-                    "email": "dias.paulo@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "The SamlBundle adds support for SAML 2.0 Service Provider in Symfony2.",
-            "homepage": "https://github.com/pdias/SamlBundle",
-            "keywords": [
-                "saml",
-                "simplesaml",
-                "simplesamlphp"
-            ],
-            "time": "2015-12-31 15:53:17"
-        },
-        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -1625,25 +1536,32 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.12",
+            "version": "v3.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "3e8936fe13aa4086644977d334d8fcd275f50357"
+                "reference": "bf6be511f4f66d368baeb2cab617203d73cccf4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/3e8936fe13aa4086644977d334d8fcd275f50357",
-                "reference": "3e8936fe13aa4086644977d334d8fcd275f50357",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/bf6be511f4f66d368baeb2cab617203d73cccf4e",
+                "reference": "bf6be511f4f66d368baeb2cab617203d73cccf4e",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
+                "symfony/dependency-injection": "~2.3|~3.0",
                 "symfony/framework-bundle": "~2.3|~3.0"
             },
             "require-dev": {
+                "symfony/browser-kit": "~2.3|~3.0",
+                "symfony/dom-crawler": "~2.3|~3.0",
                 "symfony/expression-language": "~2.4|~3.0",
-                "symfony/security-bundle": "~2.4|~3.0"
+                "symfony/finder": "~2.3|~3.0",
+                "symfony/phpunit-bridge": "~2.7|~3.0",
+                "symfony/security-bundle": "~2.4|~3.0",
+                "symfony/twig-bundle": "~2.3|~3.0",
+                "twig/twig": "~1.11|~2.0"
             },
             "suggest": {
                 "symfony/expression-language": "",
@@ -1676,7 +1594,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2015-12-18 17:39:27"
+            "time": "2016-02-12 08:17:23"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -2422,12 +2340,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Behat.git",
-                "reference": "e080d0be50fdeb00ee8df23fb585577ca031a628"
+                "reference": "264dea6cfb667fd63649d61e8c4c0b36f6612164"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Behat/zipball/e080d0be50fdeb00ee8df23fb585577ca031a628",
-                "reference": "e080d0be50fdeb00ee8df23fb585577ca031a628",
+                "url": "https://api.github.com/repos/Behat/Behat/zipball/264dea6cfb667fd63649d61e8c4c0b36f6612164",
+                "reference": "264dea6cfb667fd63649d61e8c4c0b36f6612164",
                 "shasum": ""
             },
             "require": {
@@ -2494,7 +2412,7 @@
                 "symfony",
                 "testing"
             ],
-            "time": "2016-02-15 08:04:47"
+            "time": "2016-02-21 17:31:49"
         },
         {
             "name": "behat/gherkin",
@@ -3547,16 +3465,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.2.8",
+            "version": "5.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "0b2946c107cd2d8f0ec1244edffc37fceed96f5f"
+                "reference": "b12b9c37e382c096b93c3f26e7395775f59a5eea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0b2946c107cd2d8f0ec1244edffc37fceed96f5f",
-                "reference": "0b2946c107cd2d8f0ec1244edffc37fceed96f5f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b12b9c37e382c096b93c3f26e7395775f59a5eea",
+                "reference": "b12b9c37e382c096b93c3f26e7395775f59a5eea",
                 "shasum": ""
             },
             "require": {
@@ -3617,7 +3535,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-02-18 07:45:20"
+            "time": "2016-02-19 11:43:07"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -4298,10 +4216,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "aulasoftwarelibre/ceeps-user-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
         "hautzi/system-mail-bundle": 20,
-        "pdias/saml-bundle": 20,
         "behat/behat": 20,
         "behat/mink": 20,
         "behat/mink-extension": 20,

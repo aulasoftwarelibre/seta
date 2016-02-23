@@ -1,0 +1,4 @@
+simple_saml:
+    authsource: '%simple_saml_auth_source%'
+    path: '%simple_saml_path%'
+    userid_attribute: '%simple_saml_userid_attribute%'
