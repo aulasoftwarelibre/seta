@@ -12,7 +12,6 @@ namespace Seta\CoreBundle\Controller\Backend;
 
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Seta\CoreBundle\Form\Type\NewRentalForm;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\PenaltyBundle\Entity\Penalty;
 use Seta\RentalBundle\Entity\Rental;
@@ -179,7 +178,7 @@ class AdminController extends BaseAdminController
     }
 
     /**
-     * Cierra una sanción
+     * Cierra una sanción.
      *
      * @param Request $request
      *
@@ -223,7 +222,7 @@ class AdminController extends BaseAdminController
     }
 
     /**
-     * Preconfigura un usuario
+     * Preconfigura un usuario.
      *
      * @return User
      */
@@ -275,6 +274,4 @@ class AdminController extends BaseAdminController
 
         return $queryBuilder;
     }
-
-
 }

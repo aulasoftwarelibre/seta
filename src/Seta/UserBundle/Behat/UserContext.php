@@ -29,6 +29,7 @@ class UserContext extends DefaultContext
             $user->setPlainPassword('secret');
             $user->setNic($this->faker->unique()->bothify('########?'));
             $user->setFullname($this->faker->name);
+            $user->setPhonenumber($this->faker->phoneNumber);
 
             $faculty = $this->getEntityManager()->getRepository('SetaUserBundle:Faculty')->findOneBy(['slug' => $row['centro']]);
             if (!$faculty) {

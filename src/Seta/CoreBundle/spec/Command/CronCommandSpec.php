@@ -3,7 +3,6 @@
 namespace spec\Seta\CoreBundle\Command;
 
 use Craue\ConfigBundle\Util\Config;
-use Doctrine\Common\Collections\ArrayCollection;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\MailerBundle\Business\MailService;
 use Seta\PenaltyBundle\Repository\TimePenaltyRepository;
@@ -26,11 +25,13 @@ class CronCommandSpec extends ObjectBehavior
         Config $config,
         Locker $locker,
         Rental $rental,
+        RentalRepository $rentalRepository,
         TimePenaltyRepository $timePenaltyRepository,
         User $user
     ) {
         $container->get('craue_config')->willReturn($config);
         $container->get('seta.repository.time_penalty')->willReturn($timePenaltyRepository);
+        $container->get('seta.repository.rental')->willReturn($rentalRepository);
 
         $rental->getUser()->willReturn($user);
         $rental->getLocker()->willReturn($locker);
@@ -58,7 +59,6 @@ class CronCommandSpec extends ObjectBehavior
     }
 
     public function it_send_emails(
-        ArrayCollection $collection,
         ContainerInterface $container,
         Config $config,
         InputInterface $input,
@@ -72,15 +72,13 @@ class CronCommandSpec extends ObjectBehavior
     ) {
         $config->get('seta.notifications.days_before_renovation')->shouldBeCalled()->willReturn('2');
         $config->get('seta.notifications.days_before_suspension')->shouldBeCalled()->willReturn('8');
-        $container->get('seta.repository.rental')->shouldBeCalled()->willReturn($rentalRepository);
         $container->get('seta_mailing')->shouldBeCalled()->willReturn($mailer);
         $container->get('translator')->shouldBeCalled()->willReturn($translator);
-        $timePenaltyRepository->findExpiredPenalties()->shouldBeCalled()->willReturn($collection);
+        $timePenaltyRepository->findExpiredPenalties()->shouldBeCalled()->willReturn([]);
+        $rentalRepository->getExpireOnDateRentals(Argument::any())->shouldBeCalled()->willReturn([]);
         $translator->getLocale()->shouldBeCalled()->willReturn('es');
         $container->get('request_stack')->shouldBeCalled()->willReturn($requestStack);
         $requestStack->push(Argument::type(Request::class))->shouldBeCalled();
-
-
 
         $rentalRepository
             ->getExpireOnDateRentals(Argument::type(\DateTime::class))
