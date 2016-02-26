@@ -3,16 +3,25 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <div class="login-box-body">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-        <p class="login-box-msg">
-            Iniciar sesión con tu usuario de la Universidad.
-        </p>
+    <p>Selecciona la red a la que quieres conectarte:</p>
 
-        <div class="social-auth-links text-center">
-            <a href="{{ path('simple_saml_security_login') }}" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-sign-in"></i> Iniciar sesión con la UCO</a>
+    <a class="ui red button" href="{{ path('simple_saml_security_login') }}">
+        <i class="sign in icon"></i>
+        Universidad de Córdoba
+    </a>
+{% endblock %}
+
+{% block error %}
+    {% if error %}
+        <div class="ui negative icon message">
+            <i class="ban icon"></i>
+            <div class="content">
+                <div class="header">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <ul class="list">
+                    <li>Compruebe que está dado de alta en la aplicación.</li>
+                    <li>En caso de duda, acuda al CEEPS.</li>
+                </ul>
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}

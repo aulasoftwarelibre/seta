@@ -47,7 +47,9 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        // TODO: Implement loadUserByUsername() method.
+        preg_match('#(?<email>(?<username>[^/]+)@(?<organization>[^/]+))#', $username, $matches);
+
+        return $this->userManager->findUserByUsername($matches['username']);
     }
 
     /**
@@ -81,12 +83,5 @@ class UserProvider implements UserProviderInterface
         $userClass = $this->userManager->getClass();
 
         return $userClass === $class || is_subclass_of($class, $userClass);
-    }
-
-    public function findUserBySamlId($samlId)
-    {
-        preg_match('#(?<email>(?<username>[^/]+)@(?<organization>[^/]+))#', $samlId, $matches);
-
-        return $this->userManager->findUserByUsername($matches['username']);
     }
 }

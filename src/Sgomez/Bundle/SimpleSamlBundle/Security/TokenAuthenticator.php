@@ -42,7 +42,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
      */
     public function start(Request $request, AuthenticationException $authException = null)
     {
-        $route = $this->router->generate('simple_saml_security_login');
+        $route = $this->router->generate('fos_user_security_login');
 
         return new RedirectResponse($route);
     }
@@ -88,7 +88,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
-        $url = $this->router->generate('simple_saml_security_login');
+        $url = $this->router->generate('fos_user_security_login');
 
         return new RedirectResponse($url);
     }

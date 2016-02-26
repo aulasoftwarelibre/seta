@@ -11,6 +11,8 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+        ceeps_userbundle:
+            id: ceeps.saml.backend.fosuser.provider
 
     firewalls:
         dev:
@@ -22,7 +24,7 @@ security:
         main:
             pattern: ^/
             guard:
-                provider: fos_userbundle
+                provider: ceeps_userbundle
                 authenticators:
                     - simple_saml.token_authenticator
             form_login:
