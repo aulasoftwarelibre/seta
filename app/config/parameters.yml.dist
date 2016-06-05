@@ -19,9 +19,7 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     # SimpleSamlPHP Parameters
-    saml_service_provider: ~
-    saml_autoload_path: ~
-    saml_authentication_field: ~
+    simplesamlphp_installation_path: ~
 
     router.request_context.host: localhost
     router.request_context.scheme: http

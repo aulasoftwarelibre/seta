@@ -4,7 +4,7 @@ parameters:
 
 services:
     fos_user.doctrine_registry:
-        alias: doctrine
+        alias: 'doctrine'
 
     fos_user.entity_manager:
-        alias: fos_user.object_manager
+        alias: 'fos_user.object_manager'
