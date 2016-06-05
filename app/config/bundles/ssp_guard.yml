@@ -1,0 +1,6 @@
+ssp_guard:
+    installation_path: '%simplesamlphp_installation_path%'
+    auth_sources:
+        setasp:
+            title: 'Universidad de Córdoba (IDP)'
+            user_id: 'uid'

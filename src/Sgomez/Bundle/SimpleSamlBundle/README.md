@@ -1,3 +1,0 @@
-# SimpleSamlBundle
-
-Working on it...

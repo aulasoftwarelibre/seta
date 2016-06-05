@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Hautzi\SystemMailBundle\HautziSystemMailBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new Sgomez\Bundle\SSPGuardBundle\SSPGuardBundle(),
             new Sgomez\DebugSwiftMailerBundle\SgomezDebugSwiftMailerBundle(),
 
             new Seta\CoreBundle\SetaCoreBundle(),
@@ -31,8 +32,7 @@ class AppKernel extends Kernel
             new Seta\ResourceBundle\SetaResourceBundle(),
             new Seta\UserBundle\SetaUserBundle(),
             new Sgomez\BsDatetimepickerBundle\SgomezBsDatetimepickerBundle(),
-            new Sgomez\Bundle\SimpleSamlBundle\SimpleSamlBundle(),
-            new Sgomez\Bundle\CeepsUserBundle\CeepsUserBundle(),
+            new Uco\Bundle\UserBundle\UcoUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

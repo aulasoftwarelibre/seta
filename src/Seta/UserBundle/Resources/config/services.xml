@@ -21,6 +21,10 @@
             <tag name="kernel.event_subscriber"/>
         </service>
 
+        <service id="seta.user.provider" class="Seta\UserBundle\Security\User\SetaUserProvider">
+            <argument type="service" id="fos_user.user_provider.username"/>
+        </service>
+
     </services>
 
 </container>

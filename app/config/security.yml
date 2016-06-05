@@ -1,50 +1,42 @@
 # app/config/security.yml
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: bcrypt
-        PDias\SamlBundle\Security\User\SamlUser: plaintext
+        FOS\UserBundle\Model\UserInterface: 'bcrypt'
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN:       'ROLE_USER'
+        ROLE_SUPER_ADMIN: 'ROLE_ADMIN'
 
     providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username
-        ceeps_userbundle:
-            id: ceeps.saml.backend.fosuser.provider
+        seta_user_provider:
+            id: 'seta.user.provider'
 
     firewalls:
         dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            pattern:  '^/(_(profiler|wdt)|css|images|js)/'
             security: false
         api:
-            pattern: ^/api/
+            pattern: '^/api/'
             security: false
         main:
-            pattern: ^/
+            pattern: '^/'
             guard:
-                provider: ceeps_userbundle
+                provider: 'seta_user_provider'
                 authenticators:
-                    - simple_saml.token_authenticator
+                    - 'uco.admin.authenticator'
             form_login:
-                provider: fos_userbundle
-                csrf_token_generator: security.csrf.token_manager
-                login_path: /login
-                check_path: /login_check
-                failure_path: /login
-                default_target_path: /
-                use_forward: false
-                use_referer: true
+                always_use_default_target_path: false
+                target_path_parameter:          '_target_path'
             logout:
-                path:   /logout
-                target: /
-            anonymous: true
+                path: '/logout'
+                target: '/'
+            anonymous:   true
+            switch_user: true
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login-simplesaml$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin, role: ROLE_ADMIN }
-        - { path: ^/renew, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/*, role: ROLE_USER }
+        - { path: '^/login$', role: 'IS_AUTHENTICATED_ANONYMOUSLY' }
+        - { path: '^/connect', role: 'IS_AUTHENTICATED_ANONYMOUSLY' }
+        - { path: '^/check', role: 'ROLE_ADMIN' }
+        - { path: '^/admin', role: 'ROLE_ADMIN' }
+        - { path: '^/', role: 'IS_AUTHENTICATED_ANONYMOUSLY' }
+        - { path: '^/*', role: 'ROLE_USER' }
