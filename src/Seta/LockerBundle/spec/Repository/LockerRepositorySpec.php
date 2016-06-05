@@ -37,10 +37,10 @@ class LockerRepositorySpec extends ObjectBehavior
     ) {
         $manager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->expr()->shouldBeCalled()->willReturn($expr);
-        $expr->eq('l.status', ':enabled')->shouldBeCalled()->willReturn($expr);
+        $expr->eq('o.status', ':enabled')->shouldBeCalled()->willReturn($expr);
 
-        $builder->select('l')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'l', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->select('o')->shouldBeCalled()->willReturn($builder);
+        $builder->from(Argument::any(), 'o', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->andWhere($expr)->shouldBeCalled()->willReturn($builder);
         $builder->setParameter('enabled', Locker::AVAILABLE)->shouldBeCalled()->willReturn($builder);
         $builder->setMaxResults(1)->shouldBeCalled()->willReturn($builder);

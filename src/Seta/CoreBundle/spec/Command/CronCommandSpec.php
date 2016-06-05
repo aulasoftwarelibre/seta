@@ -6,6 +6,8 @@ use Craue\ConfigBundle\Util\Config;
 use Doctrine\Common\Collections\ArrayCollection;
 use Seta\LockerBundle\Entity\Locker;
 use Seta\MailerBundle\Business\MailService;
+use Seta\PenaltyBundle\Business\ClosePenaltyService;
+use Seta\PenaltyBundle\Entity\Penalty;
 use Seta\PenaltyBundle\Repository\TimePenaltyRepository;
 use Seta\RentalBundle\Entity\Rental;
 use Seta\RentalBundle\Repository\RentalRepository;
@@ -58,12 +60,13 @@ class CronCommandSpec extends ObjectBehavior
     }
 
     public function it_send_emails(
-        ArrayCollection $collection,
+        ClosePenaltyService $closePenaltyService,
         ContainerInterface $container,
         Config $config,
         InputInterface $input,
         MailService $mailer,
         OutputInterface $output,
+        Penalty $penalty,
         Rental $rental,
         RentalRepository $rentalRepository,
         RequestStack $requestStack,
@@ -75,7 +78,10 @@ class CronCommandSpec extends ObjectBehavior
         $container->get('seta.repository.rental')->shouldBeCalled()->willReturn($rentalRepository);
         $container->get('seta_mailing')->shouldBeCalled()->willReturn($mailer);
         $container->get('translator')->shouldBeCalled()->willReturn($translator);
-        $timePenaltyRepository->findExpiredPenalties()->shouldBeCalled()->willReturn($collection);
+        $container->get('seta.service.close_penalty')->willReturn($closePenaltyService);
+        $timePenaltyRepository->findExpiredPenalties()->shouldBeCalled()->willReturn([$penalty]);
+        $closePenaltyService->closePenalty($penalty);
+
         $translator->getLocale()->shouldBeCalled()->willReturn('es');
         $container->get('request_stack')->shouldBeCalled()->willReturn($requestStack);
         $requestStack->push(Argument::type(Request::class))->shouldBeCalled();
