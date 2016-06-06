@@ -30,9 +30,9 @@
             </div>
             <div class="item">
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a class="ui red button" href="{{ path('fos_user_security_logout') }}"><i class="sign out icon"></i> Salir</a>
+                <a class="ui red button" href="{{ path('logout') }}"><i class="sign out icon"></i> Salir</a>
             {% else %}
-                <a class="ui primary button" href="{{ path('fos_user_security_login') }}"><i class="sign in icon"></i> Conectar</a>
+                <a class="ui primary button" href="{{ path('login') }}"><i class="sign in icon"></i> Conectar</a>
             {% endif %}
             </div>
         </div>
@@ -46,9 +46,9 @@
         <a class="item" href="{{ path('easyadmin') }}"><i class="icon lock"></i> Administrar</a>
     {% endif %}
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a class="item" href="{{ path('fos_user_security_logout') }}"><i class="sign out icon"></i> Salir</a>
+        <a class="item" href="{{ path('logout') }}"><i class="sign out icon"></i> Salir</a>
     {% else %}
-        <a class="item" href="{{ path('fos_user_security_login') }}"><i class="sign in icon"></i> Conectar</a>
+        <a class="item" href="{{ path('login') }}"><i class="sign in icon"></i> Conectar</a>
     {% endif %}
 </div>
 
@@ -68,9 +68,9 @@
                     <a class="ui inverted button" href="{{ path('easyadmin') }}"><i class="icon lock"></i> Administrar</a>
                 {% endif %}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a class="ui inverted button" href="{{ path('fos_user_security_logout') }}"><i class="sign out icon"></i> Salir</a>
+                    <a class="ui inverted button" href="{{ path('logout') }}"><i class="sign out icon"></i> Salir</a>
                 {% else %}
-                    <a class="ui inverted button" href="{{ path('fos_user_security_login') }}"><i class="sign in icon"></i> Conectar</a>
+                    <a class="ui inverted button" href="{{ path('login') }}"><i class="sign in icon"></i> Conectar</a>
                 {% endif %}
                 </div>
             </div>

@@ -8,5 +8,9 @@
         <service id="seta_mailing" class="Seta\MailerBundle\Business\MailService">
             <argument type="service" id="system_mailer" />
         </service>
+
+        <service id="seta.mailer.notification" class="Seta\MailerBundle\Business\SendNotificationService">
+            <argument type="service" id="mailer" />
+        </service>
     </services>
 </container>

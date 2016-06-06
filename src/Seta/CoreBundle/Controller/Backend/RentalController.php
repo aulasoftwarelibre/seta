@@ -12,7 +12,7 @@
 namespace Seta\CoreBundle\Controller\Backend;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Seta\CoreBundle\Form\Type\NewRentalForm;
+use Seta\CoreBundle\Form\NewRentalType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,7 +32,7 @@ class RentalController extends Controller
      */
     public function newRental(Request $request)
     {
-        $form = $this->createForm(NewRentalForm::class, null, [
+        $form = $this->createForm(NewRentalType::class, null, [
             'action' => $this->generateUrl('seta_backend_rental_create'),
             'method' => 'POST',
         ]);
@@ -48,7 +48,7 @@ class RentalController extends Controller
      */
     public function createRental(Request $request)
     {
-        $form = $this->createForm(NewRentalForm::class);
+        $form = $this->createForm(NewRentalType::class);
 
         $form->handleRequest($request);
 

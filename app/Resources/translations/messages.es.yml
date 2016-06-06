@@ -25,6 +25,7 @@ app.action.return_rental: Devolver
 app.menu.faculties: Centros
 app.menu.lockers: Taquillas
 app.menu.logout: Salir
+app.menu.new_email: Enviar mensaje
 app.menu.new_rental: Nuevo alquiler
 app.menu.penalties: Sanciones
 app.menu.rentals: Alquileres
@@ -35,6 +36,9 @@ app.menu.organization: Organización
 app.menu.users: Usuarios
 app.menu.zones: Zonas
 
+choice.email.all: Todos los usuarios
+choice.email.rental: Usuarios con alquiler activo
+
 label.amount: Cantidad
 label.branch: Rama
 label.code: Código
@@ -43,6 +47,9 @@ label.degree: Titulación
 label.description: Descripción
 label.domains: Dominios
 label.email: Correo
+label.email.body: Mensaje
+label.email.subject: Asunto
+label.email.to: Destinatarios
 label.enabled: Activo
 label.end_at: Fecha fin
 label.faculty: Centro
@@ -84,3 +91,5 @@ locker.rented: Alquilada
 locker.reserved: Reservada
 penalty.active: Activa
 penalty.done: Terminada
+
+placeholder.email.to: Seleccione los destinatarios

@@ -12,6 +12,7 @@ easy_admin:
                 - 'bundles/sgomezbsdatetimepicker/css/bootstrap-datetimepicker.min.css'
         menu:
             - { label: 'app.menu.new_rental', icon: 'plus', route: 'seta_backend_rental_new' }
+            - { label: 'app.menu.new_email', icon: 'envelope', route: 'seta_backend_email_new' }
             - { entity: 'User', icon: 'user', params: { sortField: 'username', sortDirection: 'ASC' } }
             - { entity: 'Rental', icon: 'calendar-o', params: { sortField: 'endAt', sortDirection: 'DESC' } }
             - label: 'app.menu.organization'
