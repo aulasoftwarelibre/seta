@@ -22,7 +22,6 @@ class AppKernel extends Kernel
             new Hautzi\SystemMailBundle\HautziSystemMailBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sgomez\Bundle\SSPGuardBundle\SSPGuardBundle(),
-            new Sgomez\DebugSwiftMailerBundle\SgomezDebugSwiftMailerBundle(),
 
             new Seta\CoreBundle\SetaCoreBundle(),
             new Seta\LockerBundle\SetaLockerBundle(),
@@ -41,6 +40,7 @@ class AppKernel extends Kernel
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
             $bundles[] = new Knp\Rad\FixturesLoad\Bundle\FixturesLoadBundle();
+            $bundles[] = new Sgomez\DebugSwiftMailerBundle\SgomezDebugSwiftMailerBundle();
         }
 
         return $bundles;
