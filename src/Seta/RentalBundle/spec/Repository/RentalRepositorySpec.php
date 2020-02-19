@@ -2,9 +2,9 @@
 
 namespace spec\Seta\RentalBundle\Repository;
 
-use Seta\LockerBundle\Entity\Locker;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Locker;
+use App\Entity\Rental;
+use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
@@ -23,7 +23,7 @@ class RentalRepositorySpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\RentalBundle\Repository\RentalRepository');
+        $this->shouldHaveType('App\Repository\RentalRepository');
     }
 
     public function it_should_extend_from_repository_class()

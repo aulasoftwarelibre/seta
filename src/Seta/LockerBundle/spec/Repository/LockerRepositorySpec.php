@@ -2,7 +2,7 @@
 
 namespace spec\Seta\LockerBundle\Repository;
 
-use Seta\LockerBundle\Entity\Locker;
+use App\Entity\Locker;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -20,7 +20,7 @@ class LockerRepositorySpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\LockerBundle\Repository\LockerRepository');
+        $this->shouldHaveType('App\Repository\LockerRepository');
     }
 
     public function it_should_extend_from_repository_class()

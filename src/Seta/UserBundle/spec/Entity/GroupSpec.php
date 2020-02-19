@@ -3,7 +3,7 @@
 namespace spec\Seta\UserBundle\Entity;
 
 use PhpSpec\ObjectBehavior;
-use Seta\UserBundle\Entity\User;
+use App\Entity\User;
 
 class GroupSpec extends ObjectBehavior
 {
@@ -17,7 +17,7 @@ class GroupSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\UserBundle\Entity\Group');
+        $this->shouldHaveType('App\Entity\Group');
     }
 
     public function it_has_no_default_users()

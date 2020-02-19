@@ -3,14 +3,14 @@
 namespace spec\Seta\CoreBundle\Command;
 
 use Craue\ConfigBundle\Util\Config;
-use Seta\LockerBundle\Entity\Locker;
-use Seta\MailerBundle\Business\MailService;
-use Seta\PenaltyBundle\Business\ClosePenaltyService;
-use Seta\PenaltyBundle\Entity\Penalty;
-use Seta\PenaltyBundle\Repository\TimePenaltyRepository;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\RentalBundle\Repository\RentalRepository;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Locker;
+use App\Services\MailService;
+use App\Services\ClosePenaltyService;
+use App\Entity\Penalty;
+use App\Repository\TimePenaltyRepository;
+use App\Entity\Rental;
+use App\Repository\RentalRepository;
+use App\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -47,7 +47,7 @@ class CronCommandSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\CoreBundle\Command\CronCommand');
+        $this->shouldHaveType('App\Command\CronCommand');
     }
 
     public function it_is_a_container_aware_command()

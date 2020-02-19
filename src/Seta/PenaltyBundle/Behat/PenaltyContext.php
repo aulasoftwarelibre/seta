@@ -9,12 +9,12 @@ namespace Seta\PenaltyBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Seta\CoreBundle\Behat\DefaultContext;
-use Seta\LockerBundle\Entity\Locker;
-use Seta\PenaltyBundle\Entity\FinancialPenalty;
-use Seta\PenaltyBundle\Entity\TimePenalty;
-use Seta\PenaltyBundle\Event\PenaltyEvent;
-use Seta\PenaltyBundle\PenaltyEvents;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Locker;
+use App\Entity\FinancialPenalty;
+use App\Entity\TimePenalty;
+use App\Event\PenaltyEvent;
+use App\Events\PenaltyEvents;
+use App\Entity\User;
 
 /**
  * Class PenaltyContext.

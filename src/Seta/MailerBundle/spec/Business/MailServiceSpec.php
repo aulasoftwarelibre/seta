@@ -4,7 +4,7 @@ namespace spec\Seta\MailerBundle\Business;
 
 use Hautzi\SystemMailBundle\SystemMailer\SystemMailer;
 use PhpSpec\ObjectBehavior;
-use Seta\RentalBundle\Entity\Rental;
+use App\Entity\Rental;
 
 class MailServiceSpec extends ObjectBehavior
 {
@@ -16,7 +16,7 @@ class MailServiceSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\MailerBundle\Business\MailService');
+        $this->shouldHaveType('App\Services\MailService');
     }
 
     public function it_send_email(

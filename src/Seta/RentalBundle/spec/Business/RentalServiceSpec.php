@@ -2,17 +2,17 @@
 
 namespace spec\Seta\RentalBundle\Business;
 
-use Seta\LockerBundle\Entity\Locker;
-use Seta\LockerBundle\Exception\BusyLockerException;
-use Seta\LockerBundle\Exception\NotFreeLockerException;
-use Seta\LockerBundle\Repository\LockerRepository;
-use Seta\PenaltyBundle\Exception\PenalizedFacultyException;
-use Seta\PenaltyBundle\Exception\PenalizedUserException;
-use Seta\RentalBundle\Exception\TooManyLockersRentedException;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\RentalBundle\Repository\RentalRepository;
-use Seta\UserBundle\Entity\Faculty;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Locker;
+use App\Exception\BusyLockerException;
+use App\Exception\NotFreeLockerException;
+use App\Repository\LockerRepository;
+use App\Exception\PenalizedFacultyException;
+use App\Exception\PenalizedUserException;
+use App\Exception\TooManyLockersRentedException;
+use App\Entity\Rental;
+use App\Repository\RentalRepository;
+use App\Entity\Faculty;
+use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -48,7 +48,7 @@ class RentalServiceSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\RentalBundle\Business\RentalService');
+        $this->shouldHaveType('App\Services\RentalService');
     }
 
     public function it_can_rent_a_locker(

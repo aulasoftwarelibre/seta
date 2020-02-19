@@ -2,16 +2,16 @@
 
 namespace spec\Seta\RentalBundle\Entity;
 
-use Seta\LockerBundle\Entity\Locker;
-use Seta\PenaltyBundle\Entity\Penalty;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Locker;
+use App\Entity\Penalty;
+use App\Entity\User;
 use PhpSpec\ObjectBehavior;
 
 class RentalSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\RentalBundle\Entity\Rental');
+        $this->shouldHaveType('App\Entity\Rental');
     }
 
     public function it_has_no_id_by_default()

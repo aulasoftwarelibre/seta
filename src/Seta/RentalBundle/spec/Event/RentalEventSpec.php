@@ -3,7 +3,7 @@
 namespace spec\Seta\RentalBundle\Event;
 
 use PhpSpec\ObjectBehavior;
-use Seta\RentalBundle\Entity\Rental;
+use App\Entity\Rental;
 
 class RentalEventSpec extends ObjectBehavior
 {
@@ -14,7 +14,7 @@ class RentalEventSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\RentalBundle\Event\RentalEvent');
+        $this->shouldHaveType('App\Event\RentalEvent');
     }
 
     public function it_has_a_default_rental(Rental $rental)

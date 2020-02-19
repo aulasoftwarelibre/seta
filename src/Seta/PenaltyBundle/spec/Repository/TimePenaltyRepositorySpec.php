@@ -10,7 +10,7 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Seta\PenaltyBundle\Entity\Penalty;
+use App\Entity\Penalty;
 
 class TimePenaltyRepositorySpec extends ObjectBehavior
 {
@@ -21,7 +21,7 @@ class TimePenaltyRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\PenaltyBundle\Repository\TimePenaltyRepository');
+        $this->shouldHaveType('App\Repository\TimePenaltyRepository');
     }
 
     public function it_should_extend_from_repository_class()

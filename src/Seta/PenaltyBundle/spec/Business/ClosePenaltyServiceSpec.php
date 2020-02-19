@@ -4,11 +4,11 @@ namespace spec\Seta\PenaltyBundle\Business;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Seta\PenaltyBundle\Business\ClosePenaltyInterface;
-use Seta\PenaltyBundle\Entity\Penalty;
-use Seta\PenaltyBundle\Event\PenaltyEvent;
-use Seta\PenaltyBundle\Exception\PenaltyDoneException;
-use Seta\PenaltyBundle\PenaltyEvents;
+use App\Services\ClosePenaltyInterface;
+use App\Entity\Penalty;
+use App\Event\PenaltyEvent;
+use App\Exception\PenaltyDoneException;
+use App\Events\PenaltyEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ClosePenaltyServiceSpec extends ObjectBehavior
@@ -25,7 +25,7 @@ class ClosePenaltyServiceSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\PenaltyBundle\Business\ClosePenaltyService');
+        $this->shouldHaveType('App\Services\ClosePenaltyService');
     }
 
     public function it_has_close_penalty_inteface()

@@ -9,10 +9,10 @@ namespace Seta\LockerBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Seta\CoreBundle\Behat\DefaultContext;
-use Seta\LockerBundle\Entity\Locker;
-use Seta\LockerBundle\Exception\NotFreeLockerException;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Locker;
+use App\Exception\NotFreeLockerException;
+use App\Entity\Rental;
+use App\Entity\User;
 
 /**
  * Class LockerContext.

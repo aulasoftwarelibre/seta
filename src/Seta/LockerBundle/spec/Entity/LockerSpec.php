@@ -2,17 +2,17 @@
 
 namespace spec\Seta\LockerBundle\Entity;
 
-use Seta\LockerBundle\Entity\Locker;
-use Seta\RentalBundle\Entity\Queue;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Locker;
+use App\Entity\Queue;
+use App\Entity\Rental;
+use App\Entity\User;
 use PhpSpec\ObjectBehavior;
 
 class LockerSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\LockerBundle\Entity\Locker');
+        $this->shouldHaveType('App\Entity\Locker');
     }
 
     public function it_has_no_id_by_default()

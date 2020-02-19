@@ -4,8 +4,8 @@ namespace spec\Seta\MailerBundle\Business;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Seta\RentalBundle\Repository\RentalRepositoryInterface;
-use Seta\UserBundle\Repository\UserRepository;
+use App\Repository\RentalRepositoryInterface;
+use App\Repository\UserRepository;
 
 class SendNotificationServiceSpec extends ObjectBehavior
 {
@@ -20,7 +20,7 @@ class SendNotificationServiceSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\MailerBundle\Business\SendNotificationService');
+        $this->shouldHaveType('App\Services\SendNotificationService');
     }
 
     function it_send_email_all_users(

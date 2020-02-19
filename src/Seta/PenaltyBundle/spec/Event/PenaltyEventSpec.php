@@ -3,7 +3,7 @@
 namespace spec\Seta\PenaltyBundle\Event;
 
 use PhpSpec\ObjectBehavior;
-use Seta\PenaltyBundle\Entity\Penalty;
+use App\Entity\Penalty;
 use Symfony\Component\EventDispatcher\Event;
 
 class PenaltyEventSpec extends ObjectBehavior
@@ -15,7 +15,7 @@ class PenaltyEventSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\PenaltyBundle\Event\PenaltyEvent');
+        $this->shouldHaveType('App\Event\PenaltyEvent');
     }
 
     public function it_is_an_event()

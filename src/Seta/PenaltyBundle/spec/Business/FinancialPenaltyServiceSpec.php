@@ -5,13 +5,13 @@ namespace spec\Seta\PenaltyBundle\Business;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Seta\LockerBundle\Entity\Locker;
-use Seta\PenaltyBundle\Entity\FinancialPenalty;
-use Seta\PenaltyBundle\Event\PenaltyEvent;
-use Seta\PenaltyBundle\PenaltyEvents;
-use Seta\PenaltyBundle\Repository\FinancialPenaltyRepository;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Locker;
+use App\Entity\FinancialPenalty;
+use App\Event\PenaltyEvent;
+use App\Events\PenaltyEvents;
+use App\Repository\FinancialPenaltyRepository;
+use App\Entity\Rental;
+use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class FinancialPenaltyServiceSpec extends ObjectBehavior
@@ -36,7 +36,7 @@ class FinancialPenaltyServiceSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\PenaltyBundle\Business\FinancialPenaltyService');
+        $this->shouldHaveType('App\Services\FinancialPenaltyService');
     }
 
     public function it_can_add_a_penalty_from_a_rent(

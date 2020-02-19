@@ -2,15 +2,15 @@
 
 namespace spec\Seta\RentalBundle\Business;
 
-use Seta\LockerBundle\Entity\Locker;
-use Seta\PenaltyBundle\Business\TimePenaltyService;
-use Seta\RentalBundle\Entity\Rental;
+use App\Entity\Locker;
+use App\Services\TimePenaltyService;
+use App\Entity\Rental;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Seta\RentalBundle\Event\RentalEvent;
-use Seta\RentalBundle\Exception\FinishedRentalException;
-use Seta\RentalBundle\RentalEvents;
+use App\Event\RentalEvent;
+use App\Exception\FinishedRentalException;
+use App\Events\RentalEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class ReturnServiceSpec extends ObjectBehavior
@@ -31,7 +31,7 @@ class ReturnServiceSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\RentalBundle\Business\ReturnService');
+        $this->shouldHaveType('App\Services\ReturnService');
     }
 
     public function it_can_return_a_locker_before_due_date(

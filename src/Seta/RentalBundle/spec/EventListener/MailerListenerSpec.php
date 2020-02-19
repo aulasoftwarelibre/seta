@@ -3,10 +3,10 @@
 namespace spec\Seta\RentalBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Seta\MailerBundle\Business\MailService;
-use Seta\MailerBundle\Business\Message;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\RentalBundle\Event\RentalEvent;
+use App\Services\MailService;
+use App\Services\Message;
+use App\Entity\Rental;
+use App\Event\RentalEvent;
 
 class MailerListenerSpec extends ObjectBehavior
 {
@@ -22,7 +22,7 @@ class MailerListenerSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\RentalBundle\EventListener\MailerListener');
+        $this->shouldHaveType('App\EventListener\MailerListener');
     }
 
     public function it_has_suscribed_events()

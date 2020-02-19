@@ -3,20 +3,20 @@
 namespace spec\Seta\PenaltyBundle\Entity;
 
 use PhpSpec\ObjectBehavior;
-use Seta\PenaltyBundle\Entity\Penalty;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Penalty;
+use App\Entity\Rental;
+use App\Entity\User;
 
 class TimePenaltySpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\PenaltyBundle\Entity\TimePenalty');
+        $this->shouldHaveType('App\Entity\TimePenalty');
     }
 
     public function it_is_a_penalty()
     {
-        $this->shouldHaveType('Seta\PenaltyBundle\Entity\Penalty');
+        $this->shouldHaveType('App\Entity\Penalty');
     }
 
     public function it_has_no_id_by_default()

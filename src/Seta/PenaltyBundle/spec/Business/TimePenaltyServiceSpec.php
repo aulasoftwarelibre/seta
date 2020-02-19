@@ -5,14 +5,14 @@ namespace spec\Seta\PenaltyBundle\Business;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Seta\LockerBundle\Entity\Locker;
-use Seta\PenaltyBundle\Entity\TimePenalty;
-use Seta\PenaltyBundle\Event\PenaltyEvent;
-use Seta\PenaltyBundle\PenaltyEvents;
-use Seta\PenaltyBundle\Repository\TimePenaltyRepository;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\RentalBundle\Exception\NotExpiredRentalException;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Locker;
+use App\Entity\TimePenalty;
+use App\Event\PenaltyEvent;
+use App\Events\PenaltyEvents;
+use App\Repository\TimePenaltyRepository;
+use App\Entity\Rental;
+use App\Exception\NotExpiredRentalException;
+use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class TimePenaltyServiceSpec extends ObjectBehavior
@@ -37,7 +37,7 @@ class TimePenaltyServiceSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\PenaltyBundle\Business\TimePenaltyService');
+        $this->shouldHaveType('App\Services\TimePenaltyService');
     }
 
     public function it_can_add_a_penalty_from_a_rent(

@@ -9,8 +9,8 @@ namespace Seta\UserBundle\Behat;
 
 use Behat\Gherkin\Node\TableNode;
 use Seta\CoreBundle\Behat\DefaultContext;
-use Seta\UserBundle\Entity\Faculty;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Faculty;
+use App\Entity\User;
 
 /**
  * @codeCoverageIgnore

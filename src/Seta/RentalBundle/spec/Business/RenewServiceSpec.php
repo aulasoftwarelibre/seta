@@ -4,17 +4,17 @@ namespace spec\Seta\RentalBundle\Business;
 
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
-use Seta\PenaltyBundle\Exception\PenalizedFacultyException;
-use Seta\PenaltyBundle\Exception\PenalizedUserException;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\RentalBundle\Event\RentalEvent;
-use Seta\RentalBundle\Exception\ExpiredRentalException;
-use Seta\RentalBundle\Exception\FinishedRentalException;
-use Seta\RentalBundle\Exception\NotRenewableRentalException;
-use Seta\RentalBundle\Exception\TooEarlyRenovationException;
-use Seta\RentalBundle\RentalEvents;
-use Seta\UserBundle\Entity\Faculty;
-use Seta\UserBundle\Entity\User;
+use App\Exception\PenalizedFacultyException;
+use App\Exception\PenalizedUserException;
+use App\Entity\Rental;
+use App\Event\RentalEvent;
+use App\Exception\ExpiredRentalException;
+use App\Exception\FinishedRentalException;
+use App\Exception\NotRenewableRentalException;
+use App\Exception\TooEarlyRenovationException;
+use App\Events\RentalEvents;
+use App\Entity\Faculty;
+use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class RenewServiceSpec extends ObjectBehavior
@@ -45,7 +45,7 @@ class RenewServiceSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\RentalBundle\Business\RenewService');
+        $this->shouldHaveType('App\Services\RenewService');
     }
 
     public function it_can_renew_a_rental(

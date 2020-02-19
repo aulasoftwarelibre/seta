@@ -2,17 +2,17 @@
 
 namespace spec\Seta\UserBundle\Entity;
 
-use Seta\LockerBundle\Entity\Locker;
-use Seta\PenaltyBundle\Entity\Penalty;
-use Seta\RentalBundle\Entity\Queue;
-use Seta\RentalBundle\Entity\Rental;
+use App\Entity\Locker;
+use App\Entity\Penalty;
+use App\Entity\Queue;
+use App\Entity\Rental;
 use PhpSpec\ObjectBehavior;
 
 class UserSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\UserBundle\Entity\User');
+        $this->shouldHaveType('App\Entity\User');
     }
 
     public function it_should_extends_fos_user_model()

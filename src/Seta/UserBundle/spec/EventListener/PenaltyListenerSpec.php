@@ -6,10 +6,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Seta\PenaltyBundle\Entity\Penalty;
-use Seta\PenaltyBundle\Event\PenaltyEvent;
-use Seta\PenaltyBundle\PenaltyEvents;
-use Seta\UserBundle\Entity\User;
+use App\Entity\Penalty;
+use App\Event\PenaltyEvent;
+use App\Events\PenaltyEvents;
+use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class PenaltyListenerSpec extends ObjectBehavior
@@ -28,7 +28,7 @@ class PenaltyListenerSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\UserBundle\EventListener\PenaltyListener');
+        $this->shouldHaveType('App\EventListener\PenaltyListener');
     }
 
     public function it_has_event_suscriber_interface()

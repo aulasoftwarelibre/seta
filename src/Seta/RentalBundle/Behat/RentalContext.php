@@ -8,13 +8,13 @@
 namespace Seta\RentalBundle\Behat;
 
 use Seta\CoreBundle\Behat\DefaultContext;
-use Seta\LockerBundle\Entity\Locker;
-use Seta\PenaltyBundle\Exception\PenalizedFacultyException;
-use Seta\PenaltyBundle\Exception\PenalizedUserException;
-use Seta\RentalBundle\Entity\Rental;
-use Seta\RentalBundle\Exception\ExpiredRentalException;
-use Seta\RentalBundle\Exception\NotRenewableRentalException;
-use Seta\RentalBundle\Exception\TooEarlyRenovationException;
+use App\Entity\Locker;
+use App\Exception\PenalizedFacultyException;
+use App\Exception\PenalizedUserException;
+use App\Entity\Rental;
+use App\Exception\ExpiredRentalException;
+use App\Exception\NotRenewableRentalException;
+use App\Exception\TooEarlyRenovationException;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**

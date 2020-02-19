@@ -2,14 +2,14 @@
 
 namespace spec\Seta\RentalBundle\Entity;
 
-use Seta\UserBundle\Entity\User;
+use App\Entity\User;
 use PhpSpec\ObjectBehavior;
 
 class QueueSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\RentalBundle\Entity\Queue');
+        $this->shouldHaveType('App\Entity\Queue');
     }
 
     public function it_has_no_id_by_default()

@@ -14,7 +14,7 @@ class SendEmailTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Seta\CoreBundle\Form\SendEmailType');
+        $this->shouldHaveType('App\Form\SendEmailType');
     }
     
     function it_is_an_abstract_type()
