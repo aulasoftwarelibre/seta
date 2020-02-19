@@ -28,7 +28,8 @@
         "symfony/web-link": "4.4.*",
         "symfony/yaml": "4.4.*",
         "easycorp/easyadmin-bundle": "^2.3",
-        "knplabs/knp-menu-bundle": "^3.0"
+        "knplabs/knp-menu-bundle": "^3.0",
+        "symfony/webpack-encore-bundle": "^1.7"
     },
     "require-dev": {
         "symfony/debug-pack": "*",
